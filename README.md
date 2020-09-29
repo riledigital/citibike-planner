@@ -1,3 +1,9 @@
+# CitiBike Activity Viewer
+
+The CitiBike Activity Viewer is a web app that shows when a particular CitiBike station is used most often.
+
+---
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
