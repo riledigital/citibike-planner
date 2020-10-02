@@ -21,8 +21,21 @@ function App() {
 
   mapboxgl.accessToken = process.env.REACT_APP_MAPBOX;
 
-  function getVizData(station) {
+  function getVizDataUrl(station) {
     return `${process.env.PUBLIC_URL}/data/${station.station_id}.json`;
+  }
+
+  function fetchVizData(station) {
+    console.log("Fetching vis data... ");
+    fetch(`${process.env.PUBLIC_URL}/data/${station.station_id}.json`)
+      .then((resp) => resp.json())
+      .then((data) => {
+        console.log(`got vis data: ${data.length}`);
+        setVegaData(data);
+      })
+      .catch((error) => {
+        console.log(`Error fetching vis data... ${error}`);
+      });
   }
 
   function getStationStatus(id) {
@@ -81,7 +94,8 @@ function App() {
   }
 
   const handleStationClick = (station) => {
-    setVegaData(getVizData(station));
+    // setVegaData(getVizData(station));
+    fetchVizData(station);
     setCurrentStation(station);
   };
 

@@ -4,21 +4,11 @@ import { VegaLite } from "react-vega";
 import "./Vis.css";
 
 function Vis(props) {
-  //   const visRef = useRef(null);
-  // const spec = {
-  //   height: "container",
-  //   width: "container",
-  //   mark: "bar",
-  //   encoding: {
-  //     x: { field: "a", type: "ordinal" },
-  //     y: { field: "b", type: "quantitative" },
-  //   },
-  //   data: { name: "table" }, // note: vega-lite data attribute is a plain object instead of an array
-  // };
-  let currentHour = props.currentHour;
+  const { currentHour, data } = props;
+  const barData = { table: data };
 
   const spec = {
-    data: { url: props.data },
+    data: { name: "table" },
     height: "container",
     width: "container",
     autosize: {
@@ -31,7 +21,6 @@ function Vis(props) {
 
       axis: {
         domain: false,
-        domainOpacity: 0.4,
         gridOpacity: 0.4,
         labelFont: "Jost",
         labelColor: "white",
@@ -41,6 +30,7 @@ function Vis(props) {
         titleColor: "white",
       },
     },
+    encoding: { axis: { domain: false } },
     background: "transparent",
     layer: [
       {
@@ -49,6 +39,13 @@ function Vis(props) {
           color: "white",
         },
         encoding: {
+          axis: { domain: false },
+          opacity: {
+            condition: {
+              test: `datum['start_hour'] !== ${currentHour}`,
+              value: ".5",
+            },
+          },
           x: {
             type: "ordinal",
             field: "start_hour",
@@ -63,24 +60,6 @@ function Vis(props) {
         },
       },
       {
-        mark: { type: "rule", color: "blue" },
-        data: {
-          values: [
-            {
-              start_hour: currentHour,
-            },
-          ],
-        },
-        encoding: {
-          x: {
-            type: "ordinal",
-            field: "start_hour",
-            title: "Hour",
-          },
-          size: { value: 3 },
-        },
-      },
-      {
         mark: {
           type: "text",
           style: "label",
@@ -89,15 +68,13 @@ function Vis(props) {
           fontWeight: "bold",
         },
         encoding: {
+          axis: { domain: false },
+
           text: {
             type: "quantitative",
             aggregate: "mean",
             field: "sum",
             format: ".0f",
-            color: {
-              condition: { test: "datum['start_hour'] >= 12", value: "#aaa" },
-              value: "#fff",
-            },
           },
           x: {
             type: "ordinal",
@@ -114,7 +91,7 @@ function Vis(props) {
 
   return props.data ? (
     <div className="vis-vl">
-      <VegaLite spec={spec} />
+      <VegaLite spec={spec} data={barData} />
     </div>
   ) : (
     <p>Please click on a station on the map to view the activity details.</p>
