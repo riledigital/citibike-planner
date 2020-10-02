@@ -25,3 +25,27 @@
 .station-info:last-child {
   margin-bottom: 2rem;
 }
+
+/* Layout  */
+.station-status {
+  display: flex;
+}
+.station-status > * {
+  flex-grow: 1;
+}
+
+.station-status-label {
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  margin-top: 0;
+}
+
+.station-counts {
+  font-size: 2rem;
+}
+
+.station-updated {
+  margin-bottom: 1rem;
+}
