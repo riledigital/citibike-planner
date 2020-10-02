@@ -108,21 +108,11 @@ function Vis(props) {
     $schema: "https://vega.github.io/schema/vega-lite/v4.8.1.json",
   };
 
-  // const barData = {
-  //   table: [
-  //     { a: "A", b: 28 },
-  //     { a: "B", b: 55 },
-  //     { a: "C", b: 43 },
-  //     { a: "D", b: 91 },
-  //     { a: "E", b: 81 },
-  //     { a: "F", b: 53 },
-  //     { a: "G", b: 19 },
-  //     { a: "H", b: 87 },
-  //     { a: "I", b: 52 },
-  //   ],
-  // };
-
-  return props.data ? <VegaLite className="vis-vl" spec={spec} /> : <p> .</p>;
+  return props.data ? (
+    <VegaLite className="vis-vl" spec={spec} />
+  ) : (
+    <p>Please click on a station on the map to view the activity details.</p>
+  );
 }
 
 export default Vis;
