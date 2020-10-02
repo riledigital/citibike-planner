@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import mapboxgl from "mapbox-gl";
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
+import localforage from "localforage";
 
 // import Map from "./Map";
 import "./App.css";
@@ -17,20 +18,59 @@ function App() {
   const [currentData, setCurrentData] = useState(null);
   const [vegaData, setVegaData] = useState(null);
   const [stationStatus, setStationStatus] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   mapboxgl.accessToken = process.env.REACT_APP_MAPBOX;
-  // "pk.eyJ1IjoicmlsZWRpZ2l0YWwiLCJhIjoiY2s2bXBpeTBkMHNiYjNrbnF4ZDJuZXA2cSJ9.5OcVXRI0QEUq_U2iP1h4zg";
+
+  function getVizData(station) {
+    return `${process.env.PUBLIC_URL}/data/${station.station_id}.json`;
+  }
+
+  function getStationStatus() {
+    console.log("Attempting to get station status...");
+    const url = "https://gbfs.citibikenyc.com/gbfs/en/station_status.json";
+    let theStationStatus = localforage.getItem("stationStatus");
+    localforage.length().then((numberOfKeys) => {
+      if (numberOfKeys > 0) {
+        console.log("Attempting to load preexisting data from localforage...");
+        setStationStatus(localforage.getItem("stationStatus"));
+      } else {
+        console.log("Fetching new data and caching it to indexedDb...");
+        let allStationsStatus = new Object();
+        fetch(url)
+          .then((resp) => resp.json())
+          .then((data) => {
+            data["data"]["stations"].map((record) => {
+              allStationsStatus[record.station_id] = { ...record };
+              localforage.setItem(record.station_id, { ...record });
+              return record;
+            });
+            setStationStatus(allStationsStatus);
+            localforage.setItem("stationStatus", allStationsStatus);
+            loading ? setLoading(false) : console.log("still loading statuses");
+          });
+      }
+    });
+  }
+
+  function getCurrentTime(hour) {
+    const dt = new Date();
+    let fmt = null;
+    hour
+      ? (fmt = new Intl.DateTimeFormat("en-us", {
+          hour: "numeric",
+          hour12: false,
+        }))
+      : (fmt = new Intl.DateTimeFormat("en-us", {
+          weekday: "long",
+          hour: "numeric",
+          hour12: true,
+        }));
+    return `${fmt.format(dt)}`;
+  }
 
   const handleStationClick = (station) => {
-    setVegaData(`${process.env.PUBLIC_URL}/data/${station.id}.json`);
-    // fetch(url)
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     console.log("Just loaded new vega at " + url);
-    //     console.log(data);
-    //     setCurrentData(data);
-    //   });
-
+    setVegaData(getVizData(station));
     setCurrentStation(station);
   };
 
@@ -84,7 +124,7 @@ function App() {
           map.addImage("custom-marker", data);
           map.addSource("stationSource", {
             type: "geojson",
-            data: `${process.env.PUBLIC_URL}/data/stations.geojson`,
+            data: `${process.env.PUBLIC_URL}/data/all_stations_with_ntas.geojson`,
           });
           // Add a layer showing the places.
 
@@ -99,6 +139,8 @@ function App() {
           });
         }
       );
+      getStationStatus();
+      setLoading(false);
       setMap(map);
       // When a click event occurs on a feature in the places layer, open a popup at the
       // location of the feature, with description HTML from its properties.
@@ -137,7 +179,11 @@ function App() {
       <div className="App-sidebar">
         <h1>CitiBike Activity Viewer</h1>
 
-        <p>When is the best time to take a CitiBike in your area?</p>
+        <p>
+          When is the best time to take a CitiBike in your area? Use this app to
+          find out which Citi Bike stations are free during the start or end of
+          your commute. Or explore stations around the city to plan the
+        </p>
 
         <h3 className="emphasis">Instructions</h3>
         <p className="instructions">
@@ -145,27 +191,24 @@ function App() {
           that shows the ride distribution across all 24 hours of the day.
         </p>
 
-        {currentStation ? (
-          <StationInfo station={currentStation} />
-        ) : (
-          <p>Loading...</p>
-        )}
+        <p>It is {getCurrentTime()}.</p>
 
-        <Vis data={vegaData} />
+        {loading ? (
+          <p>
+            <progress></progress>
+          </p>
+        ) : (
+          <div className="data-viewer">
+            <StationInfo station={currentStation} />
+            <Vis data={vegaData} currentHour={getCurrentTime(true)} />
+          </div>
+        )}
 
         {/* <a
           href={`//app.citibikenyc.com/S6Lr/IBV092JufD?station_id=${currentStation.id}`}
         >
           CHECK OUT IN CITIBIKE APP
         </a> */}
-
-        <p>
-          Data is from{" "}
-          <a href="https://www.citibikenyc.com/system-data">
-            CitiBike System Data
-          </a>
-          .
-        </p>
       </div>
 
       <div id="main-map">
@@ -173,11 +216,15 @@ function App() {
       </div>
 
       <footer className="App-footer">
-        Nulla facilisi. Integer lacinia sollicitudin massa. Cras metus. Sed
-        aliquet risus a tortor. Integer id quam. Morbi mi. Quisque nisl felis,
-        venenatis tristique, dignissim in, ultrices sit amet, augue. Proin
-        sodales libero eget ante. Nulla quam. Aenean laoreet. Vestibulum nisi
-        lectus, commodo ac, facilisis a
+        <p>
+          Data is aggregated from{" "}
+          <a href="https://www.citibikenyc.com/system-data">
+            CitiBike System Data
+          </a>
+          .
+        </p>
+        2020 App created by <a href="https://riledigital.com">Ri Le</a>.{" "}
+        <a href="https://twitter.com/riledigital">@riledigital</a>
       </footer>
     </div>
   );
