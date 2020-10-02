@@ -1,6 +1,6 @@
 import React from "react";
 import { VegaLite } from "react-vega";
-import { isNullOrFalse } from "vega-lite";
+// import { isNullOrFalse } from "vega-lite";
 import "./Vis.css";
 
 function Vis(props) {
@@ -19,8 +19,12 @@ function Vis(props) {
 
   const spec = {
     data: { url: props.data },
-    height: 200,
+    height: "container",
     width: "container",
+    autosize: {
+      type: "fit",
+      contains: "padding",
+    },
     config: {
       mark: { bar: {} },
       title: { titleFont: "Jost", titleFontSize: 16, titleColor: "white" },
@@ -109,7 +113,9 @@ function Vis(props) {
   };
 
   return props.data ? (
-    <VegaLite className="vis-vl" spec={spec} />
+    <div className="vis-vl">
+      <VegaLite spec={spec} />
+    </div>
   ) : (
     <p>Please click on a station on the map to view the activity details.</p>
   );

@@ -14,9 +14,9 @@ function App() {
   const [coords, setCoords] = useState({ lon: -73, lat: 40 });
   const [map, setMap] = useState(null);
   const [currentStation, setCurrentStation] = useState({});
-  const [currentData, setCurrentData] = useState(null);
   const [vegaData, setVegaData] = useState(null);
   const [stationStatus, setStationStatus] = useState(null);
+  const [lastUpdated, setLastUpdated] = useState(null);
   const [loading, setLoading] = useState(true);
 
   mapboxgl.accessToken = process.env.REACT_APP_MAPBOX;
@@ -26,39 +26,39 @@ function App() {
   }
 
   function getStationStatus(id) {
-    let out;
-    localforage.getItem(Number(id)).then((data) => {
-      console.log(`We got ${id} from ${Number(id)}`);
-      out = data;
-    });
-    return out;
+    try {
+      return stationStatus[id];
+    } catch (e) {
+      return `Status not loaded ${e}`;
+    }
   }
 
   function fetchStationStatus() {
+    setLoading(true);
     console.log("Attempting to get station status...");
     const url = "https://gbfs.citibikenyc.com/gbfs/en/station_status.json";
-    let theStationStatus = localforage.getItem("stationStatus");
+
     localforage.length().then((numberOfKeys) => {
-      if (numberOfKeys > 0) {
+      if (false) {
         console.log("Attempting to load preexisting data from localforage...");
         setStationStatus(localforage.getItem("stationStatus"));
       } else {
         console.log("Fetching new data and caching it to indexedDb...");
         let allStationsStatus = new Object();
-        fetch(url)
+        fetch(url, { cache: "force-cache" })
           .then((resp) => resp.json())
           .then((data) => {
             data["data"]["stations"].map((record) => {
               allStationsStatus[record.station_id] = { ...record };
-              localforage.setItem(record.station_id, { ...record });
+              // localforage.setItem(record.station_id, { ...record });
               loading
                 ? setLoading(false)
                 : console.log("still loading statuses");
-
               return record;
             });
             setStationStatus(allStationsStatus);
-            localforage.setItem("stationStatus", allStationsStatus);
+            setLastUpdated(new Date(data["last_updated"] * 1000));
+            localforage.setItem("stationStatus", stationStatus);
           });
       }
     });
@@ -96,6 +96,8 @@ function App() {
   const markerUrl = `${process.env.PUBLIC_URL}/custom_marker.png`;
 
   useEffect(() => {
+    fetchStationStatus();
+
     // Update the document title using the browser API
     // document.title = `Wow we have useEffect working`;
     // loadStationStatus();
@@ -137,30 +139,32 @@ function App() {
 
     // data: "https://data.cityofnewyork.us/resource/mifw-tguq.geojson",
     map.on("load", function () {
-      map.loadImage(
-        "http://docs.mapbox.com/mapbox-gl-js/assets/custom_marker.png",
-        function (error, data) {
-          if (error) throw error;
-          map.addImage("custom-marker", data);
-          map.addSource("stationSource", {
-            type: "geojson",
-            data: `${process.env.PUBLIC_URL}/data/all_stations_with_ntas.geojson`,
-          });
-          // Add a layer showing the places.
+      map.loadImage(`${process.env.PUBLIC_URL}/custom_marker.png`, function (
+        error,
+        data
+      ) {
+        if (error) throw error;
+        map.addImage("custom-marker", data);
+        map.addSource("stationSource", {
+          type: "geojson",
+          data: `${process.env.PUBLIC_URL}/data/all_stations_with_ntas.geojson`,
+        });
+        // Add a layer showing the places.
 
-          map.addLayer({
-            id: "stationLayer",
-            type: "symbol",
-            source: "stationSource",
-            layout: {
-              "icon-image": "custom-marker",
-              "icon-allow-overlap": true,
-            },
-          });
+        map.addLayer({
+          id: "stationLayer",
+          type: "symbol",
+          source: "stationSource",
+          layout: {
+            "icon-image": "custom-marker",
+            "icon-allow-overlap": true,
+          },
+        });
+        if (loading) {
+          setLoading(false);
         }
-      );
-      fetchStationStatus();
-      setLoading(false);
+      });
+
       setMap(map);
       // When a click event occurs on a feature in the places layer, open a popup at the
       // location of the feature, with description HTML from its properties.
@@ -206,12 +210,6 @@ function App() {
           favorite stations are the busiest.
         </p>
 
-        <h3 className="emphasis">Instructions</h3>
-        <p className="instructions">
-          Click on a station on the map. A histogram will appear on the sidebar
-          that shows the ride distribution across all 24 hours of the day.
-        </p>
-
         <p>It is {getCurrentTime()}.</p>
 
         {loading ? (
@@ -223,16 +221,17 @@ function App() {
             <StationInfo
               station={currentStation}
               status={getStationStatus(currentStation.station_id)}
+              lastUpdated={lastUpdated}
             />
             <Vis data={vegaData} currentHour={getCurrentTime(true)} />
           </div>
         )}
 
-        {/* <a
-          href={`//app.citibikenyc.com/S6Lr/IBV092JufD?station_id=${currentStation.id}`}
-        >
-          CHECK OUT IN CITIBIKE APP
-        </a> */}
+        <h3 className="emphasis">Instructions</h3>
+        <p className="instructions">
+          Click on a station on the map. A histogram will appear on the sidebar
+          that shows the ride distribution across all 24 hours of the day.
+        </p>
       </div>
 
       <div id="main-map">
