@@ -6,14 +6,20 @@
 /* Colors */
 
 .App-sidebar {
-  background-color: #ae0046;
+  background-color: #0a2472;
   color: #ffffff;
+}
+
+a {
+  color: #6f72ff;
+  font-weight: 600;
+  text-decoration: none;
 }
 
 /* Typography */
 .App {
   font-family: "Jost";
-  font-size: 16px;
+  font-size: 18px;
 }
 
 h1 {
@@ -25,14 +31,30 @@ h1 {
 }
 
 .instructions {
-  font-size: 0.8rem;
+  /* font-size: 0.8rem; */
+}
+
+.mapboxgl-popup-content {
+  font-family: "Jost";
+  font-size: 1.4rem;
+  line-height: 1.25;
+  padding: 1rem;
+}
+
+.mapboxgl-ctrl-geocoder {
+  font-family: "Jost";
+  /* font-size: 1.1rem; */
 }
 
 /* Layout */
+.mapboxgl-popup-content {
+  background: rgba(255, 255, 255, 0.9);
+}
+
 .App {
   display: grid;
   grid-template-columns: repeat(9, 1fr);
-  grid-gap: 10px;
+  grid-gap: 0px;
   grid-auto-rows: minmax(100px, auto);
 }
 
@@ -106,16 +128,4 @@ h1 {
   to {
     transform: rotate(360deg);
   }
-}
-
-.station-name {
-  margin-bottom: 0;
-}
-.station-id {
-  font-size: 1rem;
-  margin-top: 0;
-}
-
-.station-id::before {
-  content: "#";
 }

@@ -1,0 +1,27 @@
+.station-header {
+  text-align: center;
+}
+.station-info-header {
+  font-size: 1rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 1.1px;
+}
+.station-name {
+  margin-bottom: 0;
+}
+.station-id {
+  font-size: 1rem;
+  margin-top: 0;
+  font-weight: 300;
+}
+.station-id:before {
+  content: "#";
+}
+.station-info {
+  margin: 0;
+}
+
+.station-info:last-child {
+  margin-bottom: 2rem;
+}
