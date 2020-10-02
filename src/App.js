@@ -7,7 +7,6 @@ import localforage from "localforage";
 
 // import Map from "./Map";
 import "./App.css";
-import "./Map.css";
 import Vis from "./Vis";
 import StationInfo from "./StationInfo";
 
@@ -26,7 +25,16 @@ function App() {
     return `${process.env.PUBLIC_URL}/data/${station.station_id}.json`;
   }
 
-  function getStationStatus() {
+  function getStationStatus(id) {
+    let out;
+    localforage.getItem(Number(id)).then((data) => {
+      console.log(`We got ${id} from ${Number(id)}`);
+      out = data;
+    });
+    return out;
+  }
+
+  function fetchStationStatus() {
     console.log("Attempting to get station status...");
     const url = "https://gbfs.citibikenyc.com/gbfs/en/station_status.json";
     let theStationStatus = localforage.getItem("stationStatus");
@@ -43,11 +51,14 @@ function App() {
             data["data"]["stations"].map((record) => {
               allStationsStatus[record.station_id] = { ...record };
               localforage.setItem(record.station_id, { ...record });
+              loading
+                ? setLoading(false)
+                : console.log("still loading statuses");
+
               return record;
             });
             setStationStatus(allStationsStatus);
             localforage.setItem("stationStatus", allStationsStatus);
-            loading ? setLoading(false) : console.log("still loading statuses");
           });
       }
     });
@@ -74,18 +85,6 @@ function App() {
     setCurrentStation(station);
   };
 
-  function loadStationStatus() {
-    fetch("https://gbfs.citibikenyc.com/gbfs/en/station_status.json")
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Successfully loaded station data from CitiBike API.");
-        setStationStatus(map);
-      })
-      .catch((e) => {
-        console.log("Error loading station status.");
-      });
-  }
-
   function handleCoordsChange(event) {
     const target = event.target;
     const value = target.type === "checkbox" ? target.checked : target.value;
@@ -100,12 +99,16 @@ function App() {
     // Update the document title using the browser API
     // document.title = `Wow we have useEffect working`;
     // loadStationStatus();
-
+    const bounds = [
+      [-74.35890197753906, 40.483515047963024],
+      [-73.6907958984375, 40.92285206859968],
+    ];
     const map = new mapboxgl.Map({
       container: mapContainer,
       style: "mapbox://styles/mapbox/streets-v11",
       center: [-73.98, 40.75],
-      zoom: 12,
+      zoom: 14,
+      maxBounds: bounds,
     });
 
     map.addControl(
@@ -114,6 +117,23 @@ function App() {
         mapboxgl: mapboxgl,
       })
     );
+
+    const scale = new mapboxgl.ScaleControl({
+      maxWidth: 80,
+      unit: "imperial",
+    });
+
+    map.addControl(scale);
+
+    const geolocate = new mapboxgl.GeolocateControl({
+      positionOptions: {
+        enableHighAccuracy: true,
+      },
+      trackUserLocation: true,
+    });
+
+    map.addControl(geolocate);
+    map.extGeolocate = geolocate;
 
     // data: "https://data.cityofnewyork.us/resource/mifw-tguq.geojson",
     map.on("load", function () {
@@ -139,7 +159,7 @@ function App() {
           });
         }
       );
-      getStationStatus();
+      fetchStationStatus();
       setLoading(false);
       setMap(map);
       // When a click event occurs on a feature in the places layer, open a popup at the
@@ -181,8 +201,9 @@ function App() {
 
         <p>
           When is the best time to take a CitiBike in your area? Use this app to
-          find out which Citi Bike stations are free during the start or end of
-          your commute. Or explore stations around the city to plan the
+          find out which Citi Bike stations are free during a specific time of
+          day. Or explore stations around the city and find out when your
+          favorite stations are the busiest.
         </p>
 
         <h3 className="emphasis">Instructions</h3>
@@ -199,7 +220,10 @@ function App() {
           </p>
         ) : (
           <div className="data-viewer">
-            <StationInfo station={currentStation} />
+            <StationInfo
+              station={currentStation}
+              status={getStationStatus(currentStation.station_id)}
+            />
             <Vis data={vegaData} currentHour={getCurrentTime(true)} />
           </div>
         )}
