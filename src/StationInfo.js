@@ -47,7 +47,7 @@ const StationInfo = (props) => {
         </div>
         <div className="station-electric station-counts">
           {statusInfo.electric}
-          <p className="station-status-label">Electric</p>
+          <p className="station-status-label">⚡Electric</p>
         </div>
         <div className="station-docks station-counts">
           {statusInfo.docks}
@@ -65,6 +65,9 @@ const StationInfo = (props) => {
             minute: "numeric",
           })}
         </p>
+        <a className="button-open-in-app" href={station.rental_url}>
+          Unlock in Citi Bike App
+        </a>
       </div>
     </div>
   ) : (

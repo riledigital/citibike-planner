@@ -247,7 +247,6 @@ function App() {
       <div id="main-map">
         <div ref={(el) => (mapContainer = el)} className="mapContainer" />;
       </div>
-
       <div className="App-footer">
         <p>
           Data is aggregated from{" "}
