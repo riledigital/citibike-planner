@@ -59,7 +59,15 @@ h1 {
   grid-template-columns: 1fr;
 }
 .App-sidebar {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  align-content: flex-start;
+  flex-direction: column-reverse;
   padding: 2rem;
+}
+
+.App-sidebar-footer {
 }
 
 #main-map {

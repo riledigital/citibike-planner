@@ -5,9 +5,9 @@ import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import localforage from "localforage";
 
-// import Map from "./Map";
 import "./App.css";
 import Vis from "./Vis";
+import Modal from "./Modal";
 import StationInfo from "./StationInfo";
 
 function App() {
@@ -18,8 +18,14 @@ function App() {
   const [stationStatus, setStationStatus] = useState(null);
   const [lastUpdated, setLastUpdated] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [showModal, setShowModal] = useState(true);
 
   mapboxgl.accessToken = process.env.REACT_APP_MAPBOX;
+
+  function toggleModal() {
+    console.log("Toggling modal:");
+    setShowModal(!showModal);
+  }
 
   function getVizDataUrl(station) {
     return `${process.env.PUBLIC_URL}/data/${station.station_id}.json`;
@@ -214,18 +220,8 @@ function App() {
 
   return (
     <div className="App">
+      {showModal ? <Modal toggle={toggleModal} /> : <></>}
       <div className="App-sidebar">
-        <h1>CitiBike Activity Viewer</h1>
-
-        <p>
-          When is the best time to take a CitiBike in your area? Use this app to
-          find out which Citi Bike stations are free during a specific time of
-          day. Or explore stations around the city and find out when your
-          favorite stations are the busiest.
-        </p>
-
-        <p>It is {getCurrentTime()}.</p>
-
         {loading ? (
           <p>
             <progress></progress>
@@ -241,11 +237,10 @@ function App() {
           </div>
         )}
 
-        <h3 className="emphasis">Instructions</h3>
-        <p className="instructions">
-          Click on a station on the map. A histogram will appear on the sidebar
-          that shows the ride distribution across all 24 hours of the day.
-        </p>
+        <footer className="App-sidebar-footer">
+          <button onClick={toggleModal}>Show Instructions</button>
+          <p>It is {getCurrentTime()}.</p>
+        </footer>
       </div>
 
       <div id="main-map">
