@@ -57,7 +57,6 @@ h1 {
 
 .App {
   grid-template-columns: 1fr;
-  grid-template-rows: 2rem 1fr 1fr;
 }
 
 .App-header {
@@ -83,6 +82,12 @@ h1 {
   position: relative;
   top: 0;
   grid-row: 2;
+}
+
+.App-footer {
+  align-self: end;
+  color: white;
+  padding: 1rem;
 }
 
 .mapContainer {
