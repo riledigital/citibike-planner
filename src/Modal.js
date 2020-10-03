@@ -3,8 +3,8 @@ import "./Modal.css";
 const Modal = (props) => {
   const { toggle } = props;
   return (
-    <div class="modal" onClick={toggle}>
-      <div class="modal-content">
+    <div className="modal" onClick={toggle}>
+      <div className="modal-content">
         <h1>CitiBike Activity Viewer</h1>
 
         <p>

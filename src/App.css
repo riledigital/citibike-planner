@@ -57,13 +57,21 @@ h1 {
 
 .App {
   grid-template-columns: 1fr;
+  grid-template-rows: 2rem 1fr 1fr;
 }
+
+.App-header {
+  color: white;
+  padding: 8px;
+}
+
 .App-sidebar {
+  grid-row: 2;
   display: flex;
   justify-content: space-between;
   align-items: stretch;
   align-content: flex-start;
-  flex-direction: column-reverse;
+  flex-direction: column;
   padding: 2rem;
 }
 
@@ -74,6 +82,7 @@ h1 {
   /* grid-row: 1; */
   position: relative;
   top: 0;
+  grid-row: 2;
 }
 
 .mapContainer {
@@ -90,8 +99,8 @@ h1 {
   .App {
     display: grid;
     grid-template-columns: repeat(9, 1fr);
+    grid-template-rows: 2rem 1fr 12rem;
     grid-gap: 0px;
-    grid-auto-rows: minmax(100px, auto);
   }
 
   .App {
@@ -102,7 +111,6 @@ h1 {
   }
 
   .App-header {
-    display: none;
     grid-column: 1/10;
     grid-row: 1;
   }
