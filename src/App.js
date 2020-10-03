@@ -220,6 +220,7 @@ function App() {
 
   return (
     <div className="App">
+      <header className="App-header">Citibike Activity Viewer</header>
       {showModal ? <Modal toggle={toggleModal} /> : <></>}
       <div className="App-sidebar">
         {loading ? (
@@ -237,17 +238,17 @@ function App() {
           </div>
         )}
 
-        <footer className="App-sidebar-footer">
+        <div className="App-sidebar-footer">
           <button onClick={toggleModal}>Show Instructions</button>
           <p>It is {getCurrentTime()}.</p>
-        </footer>
+        </div>
       </div>
 
       <div id="main-map">
         <div ref={(el) => (mapContainer = el)} className="mapContainer" />;
       </div>
 
-      <footer className="App-footer">
+      <div className="App-footer">
         <p>
           Data is aggregated from{" "}
           <a href="https://www.citibikenyc.com/system-data">
@@ -257,7 +258,7 @@ function App() {
         </p>
         2020 App created by <a href="https://riledigital.com">Ri Le</a>.{" "}
         <a href="https://twitter.com/riledigital">@riledigital</a>
-      </footer>
+      </div>
     </div>
   );
 }
