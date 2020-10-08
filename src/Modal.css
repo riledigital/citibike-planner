@@ -18,8 +18,9 @@
 }
 
 .modal-content {
-  background-color: #fefe;
-  height: 50%;
+  border-radius: 8px;
+  background-color: var(--text);
+  /* min-height: 50vh; */
   width: 25rem;
   padding: 2rem;
 }
