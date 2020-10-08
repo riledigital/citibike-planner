@@ -11,7 +11,7 @@ import Modal from "./Modal";
 import StationInfo from "./StationInfo";
 
 function App() {
-  const [coords, setCoords] = useState({ lon: -73, lat: 40 });
+  // const [coords, setCoords] = useState({ lon: -73, lat: 40 });
   const [map, setMap] = useState(null);
   const [currentStation, setCurrentStation] = useState({});
   const [vegaData, setVegaData] = useState(null);
@@ -25,10 +25,6 @@ function App() {
   function toggleModal() {
     console.log("Toggling modal:");
     setShowModal(!showModal);
-  }
-
-  function getVizDataUrl(station) {
-    return `${process.env.PUBLIC_URL}/data/${station.station_id}.json`;
   }
 
   function fetchVizData(station) {
@@ -63,7 +59,7 @@ function App() {
         setStationStatus(localforage.getItem("stationStatus"));
       } else {
         console.log("Fetching new data and caching it to indexedDb...");
-        let allStationsStatus = new Object();
+        let allStationsStatus = {};
         fetch(url, { cache: "force-cache" })
           .then((resp) => resp.json())
           .then((data) => {
@@ -83,36 +79,32 @@ function App() {
     });
   }
 
-  function getCurrentTime(hour) {
+  function getCurrentTime(onlyHours) {
     const dt = new Date();
     let fmt = null;
-    hour
-      ? (fmt = new Intl.DateTimeFormat("en-us", {
-          hour: "numeric",
-          hour12: false,
-        }))
-      : (fmt = new Intl.DateTimeFormat("en-us", {
-          weekday: "long",
+    let opts = onlyHours
+      ? {
           hour: "numeric",
           hour12: true,
-        }));
+        }
+      : {
+          weekday: "long",
+          hour: "numeric",
+          hour12: false,
+        };
+
+    fmt = new Intl.DateTimeFormat("en-us", opts);
+
     return `${fmt.format(dt)}`;
   }
 
   const handleStationClick = (station) => {
-    // setVegaData(getVizData(station));
     fetchVizData(station);
     setCurrentStation(station);
   };
 
-  function handleCoordsChange(event) {
-    const target = event.target;
-    const value = target.type === "checkbox" ? target.checked : target.value;
-    const name = target.name;
-
-    setCoords({ name: value });
-  }
   let mapContainer = React.createRef();
+
   const markerUrl = `${process.env.PUBLIC_URL}/custom_marker.png`;
 
   useEffect(() => {
@@ -127,7 +119,7 @@ function App() {
     ];
     const map = new mapboxgl.Map({
       container: mapContainer,
-      style: "mapbox://styles/mapbox/streets-v11",
+      style: "mapbox://styles/mapbox/light-v10",
       center: [-73.98, 40.75],
       zoom: 14,
       maxBounds: bounds,
@@ -159,10 +151,7 @@ function App() {
 
     // data: "https://data.cityofnewyork.us/resource/mifw-tguq.geojson",
     map.on("load", function () {
-      map.loadImage(`${process.env.PUBLIC_URL}/custom_marker.png`, function (
-        error,
-        data
-      ) {
+      map.loadImage(markerUrl, function (error, data) {
         if (error) throw error;
         map.addImage("custom-marker", data);
         map.addSource("stationSource", {
@@ -211,10 +200,6 @@ function App() {
       handleStationClick(feature);
     });
 
-    map.on("move", () => {
-      // handleMapMouseover(map);
-    });
-
     return () => map.remove();
   }, []);
 
@@ -234,7 +219,7 @@ function App() {
               status={getStationStatus(currentStation.station_id)}
               lastUpdated={lastUpdated}
             />
-            <Vis data={vegaData} currentHour={getCurrentTime(true)} />
+            <Vis data={vegaData} currentHour={new Date().getHours()} />
           </div>
         )}
 

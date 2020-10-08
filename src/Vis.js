@@ -1,6 +1,5 @@
 import React from "react";
 import { VegaLite } from "react-vega";
-// import { isNullOrFalse } from "vega-lite";
 import "./Vis.css";
 
 function Vis(props) {
@@ -24,7 +23,6 @@ function Vis(props) {
         gridOpacity: 0.4,
         labelFont: "Jost",
         labelColor: "white",
-        titleFontSize: 16,
         titleFont: "Jost",
         titleFontSize: 16,
         titleColor: "white",

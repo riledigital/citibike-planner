@@ -1,3 +1,12 @@
+/* Theme options */
+:root {
+  /* background-color: #0a2472; */
+  --bg: #0a2472;
+  --text: white;
+  --links: #6f72ff;
+  --theme-1: var(--links);
+}
+
 .App {
   text-align: left;
   padding: 0;
@@ -6,16 +15,17 @@
 /* Colors */
 
 html {
-  background-color: #0a2472;
+  background: var(--bg);
+  /* background-color: #0a2472; */
 }
 
 .App-sidebar {
-  background-color: #0a2472;
-  color: #ffffff;
+  background: var(--bg);
+  color: var(--text);
 }
 
 a {
-  color: #6f72ff;
+  color: var(--links);
   font-weight: 600;
   text-decoration: none;
 }
@@ -86,7 +96,7 @@ h1 {
 
 .App-footer {
   align-self: end;
-  color: white;
+  color: var(--text);
   padding: 1rem;
 }
 

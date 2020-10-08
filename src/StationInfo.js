@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./StationInfo.css";
 // https://gbfs.citibikenyc.com/gbfs/en/station_status.json
 
@@ -7,7 +7,7 @@ const StationInfo = (props) => {
   let stationNeighborhood;
 
   // Logic for handling null NTA codes
-  if ((station["NTAName"] == "null") | (station.BoroName == "null")) {
+  if ((station["NTAName"] === "null") | (station.BoroName === "null")) {
     stationNeighborhood = "";
   } else {
     stationNeighborhood = (
@@ -33,7 +33,17 @@ const StationInfo = (props) => {
 
   return station.name ? (
     <div className="station-header">
-      <h2 className="station-info-header">Selected CitiBike Station:</h2>
+      <h2 className="station-info-header">Live status</h2>
+      <p className="station-status-label">
+        as of{" "}
+        {lastUpdated.toLocaleDateString("en-us", {
+          year: "numeric",
+          month: "numeric",
+          day: "numeric",
+          hour: "numeric",
+          minute: "numeric",
+        })}
+      </p>
       <h3 className="station-name">
         {station.name}{" "}
         <a href={station.rental_url}>
@@ -47,7 +57,12 @@ const StationInfo = (props) => {
         </div>
         <div className="station-electric station-counts">
           {statusInfo.electric}
-          <p className="station-status-label">⚡Electric</p>
+          <p className="station-status-label">
+            <span role="img" aria-label="electric">
+              ⚡
+            </span>
+            Electric
+          </p>
         </div>
         <div className="station-docks station-counts">
           {statusInfo.docks}
@@ -55,18 +70,8 @@ const StationInfo = (props) => {
         </div>
       </div>
       <div className="station-counts station-updated">
-        <p className="station-status-label">
-          Last updated{" "}
-          {lastUpdated.toLocaleDateString("en-us", {
-            year: "numeric",
-            month: "numeric",
-            day: "numeric",
-            hour: "numeric",
-            minute: "numeric",
-          })}
-        </p>
         <a className="button-open-in-app" href={station.rental_url}>
-          Unlock in Citi Bike App
+          Unlock Citi Bike
         </a>
       </div>
     </div>
