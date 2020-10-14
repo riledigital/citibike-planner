@@ -162,7 +162,7 @@ function App() {
         map.addImage("custom-marker", data);
         map.addSource("stationSource", {
           type: "geojson",
-          data: `${process.env.PUBLIC_URL}/data/all_stations_with_ntas.geojson`,
+          data: `${process.env.PUBLIC_URL}/data/station_info.json`,
         });
         // Add a layer showing the places.
 
