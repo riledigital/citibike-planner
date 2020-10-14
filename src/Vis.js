@@ -51,8 +51,7 @@ function Vis(props) {
           },
           y: {
             type: "quantitative",
-            aggregate: "mean",
-            field: "sum",
+            field: "mean_rides",
             title: "Average count of rides",
           },
         },
