@@ -92,7 +92,7 @@ function Vis(props) {
       <VegaLite spec={spec} data={barData} />
     </div>
   ) : (
-    <p>Please click on a station on the map to view the activity details.</p>
+    <></>
   );
 }
 
