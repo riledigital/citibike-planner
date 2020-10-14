@@ -34,13 +34,19 @@ function App() {
     }
   }
 
+  function extractStationDataHourly(station_id) {
+    console.log(`getting ${station_id}`);
+    console.log(aggData[`${station_id}`]);
+    return aggData[`${station_id}`];
+  }
+
   async function fetchAggData() {
     let aggs = await fetch(
-      `${process.env.PUBLIC_URL}/data/aggs.json`
+      `${process.env.PUBLIC_URL}/data/aggs_by_hour.json`
     ).then((resp) => resp.json());
 
-    console.log(`Got back agg data for ${aggs}`);
-    console.log(aggs);
+    console.log(`Got back agg data for ${aggs.length} stations`);
+    setAggData(aggs);
     return aggs;
   }
 
@@ -125,7 +131,7 @@ function App() {
   const markerUrl = `${process.env.PUBLIC_URL}/custom_marker.png`;
 
   useEffect(() => {
-    setAggData(fetchAggData());
+    fetchAggData();
     fetchStationStatus();
 
     // Update the document title using the browser API
@@ -239,7 +245,7 @@ function App() {
               lastUpdated={lastUpdated}
             />
             <Vis
-              data={aggData[`${currentStation.station_id}`]}
+              data={extractStationDataHourly(currentStation.station_id)}
               currentHour={new Date().getHours()}
             />
           </div>
