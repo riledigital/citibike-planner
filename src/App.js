@@ -9,6 +9,7 @@ import "./App.css";
 import Vis from "./Vis";
 import Modal from "./Modal";
 import StationInfo from "./StationInfo";
+import { styleDefault, activityMarker } from "./MapStyles";
 
 function App() {
   // const [coords, setCoords] = useState({ lon: -73, lat: 40 });
@@ -184,15 +185,7 @@ function App() {
         });
         // Add a layer showing the places.
 
-        map.addLayer({
-          id: "stationLayer",
-          type: "symbol",
-          source: "stationSource",
-          layout: {
-            "icon-image": "custom-marker",
-            "icon-allow-overlap": true,
-          },
-        });
+        map.addLayer(activityMarker);
         if (loading) {
           setLoading(false);
         }

@@ -69,8 +69,7 @@ function Vis(props) {
 
           text: {
             type: "quantitative",
-            aggregate: "mean",
-            field: "sum",
+            field: "mean_rides",
             format: ".0f",
           },
           x: {
@@ -78,7 +77,7 @@ function Vis(props) {
             field: "start_hour",
             title: "Hour",
           },
-          y: { type: "quantitative", aggregate: "mean", field: "sum" },
+          y: { type: "quantitative", field: "mean_rides" },
         },
       },
     ],
