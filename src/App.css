@@ -186,3 +186,8 @@ h1 {
   font-size: 1rem;
   border-radius: 6px;
 }
+
+svg {
+  width: 100%;
+  height: auto;
+}

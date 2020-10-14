@@ -65,3 +65,12 @@
   padding: 6px 16px;
   box-shadow: black 1px 1px 4px;
 }
+
+.loading-illustration {
+  border: 1px solid gray;
+  background-color: var(--text);
+  color: var(--bg);
+  padding: 2rem;
+  border-radius: 8px;
+  text-align: center;
+}

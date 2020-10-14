@@ -1,10 +1,18 @@
 import React from "react";
 import "./Modal.css";
+import { ReactComponent as Bike } from "./images/undraw_bike_ride_7xit.svg";
 const Modal = (props) => {
   const { toggle } = props;
   return (
     <div className="modal" onClick={toggle}>
       <div className="modal-content">
+        <figure>
+          <Bike
+            title="Cycling illustration (Katerina Limpitsouni)"
+            className="svg"
+          />
+        </figure>
+
         <h1>CitiBike Activity Viewer</h1>
 
         <p>

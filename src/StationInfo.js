@@ -1,5 +1,6 @@
 import React from "react";
 import "./StationInfo.css";
+import { ReactComponent as LoadingIllustration } from "./images/undraw_No_data_re_kwbl.svg";
 // https://gbfs.citibikenyc.com/gbfs/en/station_status.json
 
 const StationInfo = ({ station, status, lastUpdated }) => {
@@ -75,7 +76,16 @@ const StationInfo = ({ station, status, lastUpdated }) => {
       </div>
     </div>
   ) : (
-    <p className="loading"></p>
+    <div className="loading">
+      <p>Please click on a station on the map to view the activity details.</p>
+      <figure className="loading-illustration">
+        <LoadingIllustration
+          title="Missing data icon (Katerina Limpitsouni)"
+          style={{ width: "20%" }}
+        />
+        <p>No station selected.</p>
+      </figure>
+    </div>
   );
 };
 export default StationInfo;

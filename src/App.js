@@ -14,6 +14,7 @@ function App() {
   // const [coords, setCoords] = useState({ lon: -73, lat: 40 });
   const [map, setMap] = useState(null);
   const [currentStation, setCurrentStation] = useState({});
+  const [aggData, setAggData] = useState(null);
   const [vegaData, setVegaData] = useState(null);
   const [stationStatus, setStationStatus] = useState(null);
   const [lastUpdated, setLastUpdated] = useState(null);
@@ -31,6 +32,16 @@ function App() {
     } else {
       console.log("Don't close!");
     }
+  }
+
+  async function fetchAggData() {
+    let aggs = await fetch(
+      `${process.env.PUBLIC_URL}/data/aggs.json`
+    ).then((resp) => resp.json());
+
+    console.log(`Got back agg data for ${aggs}`);
+    console.log(aggs);
+    return aggs;
   }
 
   function fetchVizData(station) {
@@ -105,7 +116,7 @@ function App() {
   }
 
   const handleStationClick = (station) => {
-    fetchVizData(station);
+    // fetchVizData(station);
     setCurrentStation(station);
   };
 
@@ -114,6 +125,7 @@ function App() {
   const markerUrl = `${process.env.PUBLIC_URL}/custom_marker.png`;
 
   useEffect(() => {
+    setAggData(fetchAggData());
     fetchStationStatus();
 
     // Update the document title using the browser API
@@ -202,7 +214,8 @@ function App() {
         .setLngLat(coordinates)
         .setHTML(description)
         .addTo(map);
-      console.log(`Moused on ${feature.name}`);
+      console.log(`Moused on ${feature}`);
+      console.log(feature);
       handleStationClick(feature);
     });
 
@@ -225,7 +238,10 @@ function App() {
               status={getStationStatus(currentStation.station_id)}
               lastUpdated={lastUpdated}
             />
-            <Vis data={vegaData} currentHour={new Date().getHours()} />
+            <Vis
+              data={aggData[`${currentStation.station_id}`]}
+              currentHour={new Date().getHours()}
+            />
           </div>
         )}
 
