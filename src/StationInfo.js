@@ -2,17 +2,16 @@ import React from "react";
 import "./StationInfo.css";
 // https://gbfs.citibikenyc.com/gbfs/en/station_status.json
 
-const StationInfo = (props) => {
-  const { station, status, lastUpdated } = props;
+const StationInfo = ({ station, status, lastUpdated }) => {
   let stationNeighborhood;
 
   // Logic for handling null NTA codes
-  if ((station["NTAName"] === "null") | (station.BoroName === "null")) {
+  if ((station["nta_name"] === "null") | (station.BoroName === "null")) {
     stationNeighborhood = "";
   } else {
     stationNeighborhood = (
       <p className="station-info">
-        {station["NTAName"]}, {station["BoroName"]}
+        {station["nta_name"]}, {station["boro_name"]}
       </p>
     );
   }
