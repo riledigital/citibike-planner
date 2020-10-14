@@ -22,9 +22,15 @@ function App() {
 
   mapboxgl.accessToken = process.env.REACT_APP_MAPBOX;
 
-  function toggleModal() {
+  function toggleModal(e) {
     console.log("Toggling modal:");
-    setShowModal(!showModal);
+    console.log(e);
+
+    if (e.target.className === "button" || e.target.className === "modal") {
+      setShowModal(!showModal);
+    } else {
+      console.log("Don't close!");
+    }
   }
 
   function fetchVizData(station) {
@@ -224,7 +230,9 @@ function App() {
         )}
 
         <div className="App-sidebar-footer">
-          <button onClick={toggleModal}>Show Instructions</button>
+          <button className="button" onClick={toggleModal}>
+            Show Instructions
+          </button>
           <p>It is {getCurrentTime()}.</p>
         </div>
       </div>
