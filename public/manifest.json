@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Citibike Trip Planner",
+  "name": "An app for planning your Citibike rides!",
   "icons": [
     {
       "src": "favicon.ico",

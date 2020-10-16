@@ -8,6 +8,8 @@ export const styleDefault = {
   },
 };
 
+export const cmapBlue = [0, "white", 1.0, "blue"];
+
 export const activityMarker = {
   id: "stationLayer",
   type: "circle",
@@ -24,10 +26,7 @@ export const activityMarker = {
       "interpolate-lab",
       ["linear"],
       ["get", "rank_perc"],
-      0,
-      "white",
-      1.0,
-      "blue",
+      ...cmapBlue,
     ],
   },
 };

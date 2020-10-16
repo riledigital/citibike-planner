@@ -10,13 +10,15 @@ import Vis from "./Vis";
 import Modal from "./Modal";
 import StationInfo from "./StationInfo";
 import { styleDefault, activityMarker } from "./MapStyles";
-
+import CircleLegend from "./CircleLegend";
+import Footer from "./Footer";
+import HourBarChart from "./HourBarChart";
 function App() {
   // const [coords, setCoords] = useState({ lon: -73, lat: 40 });
   const [map, setMap] = useState(null);
   const [currentStation, setCurrentStation] = useState({});
   const [aggData, setAggData] = useState(null);
-  const [vegaData, setVegaData] = useState(null);
+  // const [vegaData, setVegaData] = useState(null);
   const [stationStatus, setStationStatus] = useState(null);
   const [lastUpdated, setLastUpdated] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -25,43 +27,26 @@ function App() {
   mapboxgl.accessToken = process.env.REACT_APP_MAPBOX;
 
   function toggleModal(e) {
-    console.log("Toggling modal:");
-    console.log(e);
-
     if (e.target.className === "button" || e.target.className === "modal") {
       setShowModal(!showModal);
     } else {
-      console.log("Don't close!");
     }
   }
 
   function extractStationDataHourly(station_id) {
-    console.log(`getting ${station_id}`);
-    console.log(aggData[`${station_id}`]);
     return aggData[`${station_id}`];
   }
 
   async function fetchAggData() {
+    setLoading(true);
     let aggs = await fetch(
       `${process.env.PUBLIC_URL}/data/aggs_by_hour.json`
     ).then((resp) => resp.json());
 
     console.log(`Got back agg data for ${aggs.length} stations`);
     setAggData(aggs);
+    setLoading(false);
     return aggs;
-  }
-
-  function fetchVizData(station) {
-    console.log("Fetching vis data... ");
-    fetch(`${process.env.PUBLIC_URL}/data/${station.station_id}.json`)
-      .then((resp) => resp.json())
-      .then((data) => {
-        console.log(`got vis data: ${data.length}`);
-        setVegaData(data);
-      })
-      .catch((error) => {
-        console.log(`Error fetching vis data... ${error}`);
-      });
   }
 
   function getStationStatus(id) {
@@ -103,25 +88,6 @@ function App() {
     });
   }
 
-  function getCurrentTime(onlyHours) {
-    const dt = new Date();
-    let fmt = null;
-    let opts = onlyHours
-      ? {
-          hour: "numeric",
-          hour12: true,
-        }
-      : {
-          weekday: "long",
-          hour: "numeric",
-          hour12: false,
-        };
-
-    fmt = new Intl.DateTimeFormat("en-us", opts);
-
-    return `${fmt.format(dt)}`;
-  }
-
   const handleStationClick = (station) => {
     // fetchVizData(station);
     setCurrentStation(station);
@@ -135,19 +101,15 @@ function App() {
     fetchAggData();
     fetchStationStatus();
 
-    // Update the document title using the browser API
-    // document.title = `Wow we have useEffect working`;
-    // loadStationStatus();
-    const bounds = [
-      [-74.35890197753906, 40.483515047963024],
-      [-73.6907958984375, 40.92285206859968],
-    ];
     const map = new mapboxgl.Map({
       container: mapContainer,
       style: "mapbox://styles/mapbox/light-v10",
       center: [-73.98, 40.75],
       zoom: 14,
-      maxBounds: bounds,
+      maxBounds: [
+        [-74.35890197753906, 40.483515047963024],
+        [-73.6907958984375, 40.92285206859968],
+      ],
     });
 
     map.addControl(
@@ -172,7 +134,6 @@ function App() {
     });
 
     map.addControl(geolocate);
-    map.extGeolocate = geolocate;
 
     // data: "https://data.cityofnewyork.us/resource/mifw-tguq.geojson",
     map.on("load", function () {
@@ -190,10 +151,7 @@ function App() {
           setLoading(false);
         }
       });
-
       setMap(map);
-      // When a click event occurs on a feature in the places layer, open a popup at the
-      // location of the feature, with description HTML from its properties.
     });
 
     // "https://docs.mapbox.com/mapbox-gl-js/assets/custom_marker.png",
@@ -237,6 +195,11 @@ function App() {
               status={getStationStatus(currentStation.station_id)}
               lastUpdated={lastUpdated}
             />
+            <HourBarChart
+              data={extractStationDataHourly(currentStation.station_id)}
+              width={400}
+              height={200}
+            />
             <Vis
               data={extractStationDataHourly(currentStation.station_id)}
               currentHour={new Date().getHours()}
@@ -248,24 +211,15 @@ function App() {
           <button className="button" onClick={toggleModal}>
             Show Instructions
           </button>
-          <p>It is {getCurrentTime()}.</p>
+          {/* <p>It is {getCurrentTime()}.</p> */}
+          {/* <CircleLegend /> */}
         </div>
       </div>
 
       <div id="main-map">
         <div ref={(el) => (mapContainer = el)} className="mapContainer" />;
       </div>
-      <div className="App-footer">
-        <p>
-          Data is aggregated from{" "}
-          <a href="https://www.citibikenyc.com/system-data">
-            CitiBike System Data
-          </a>
-          .
-        </p>
-        2020 App created by <a href="https://riledigital.com">Ri Le</a>.{" "}
-        <a href="https://twitter.com/riledigital">@riledigital</a>
-      </div>
+      <Footer />
     </div>
   );
 }

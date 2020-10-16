@@ -9,6 +9,7 @@
   text-transform: uppercase;
   font-weight: 600;
   letter-spacing: 1.1px;
+  padding-bottom: 0;
 }
 .station-name {
   margin-bottom: 0;
