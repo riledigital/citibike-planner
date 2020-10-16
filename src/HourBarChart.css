@@ -1,0 +1,14 @@
+.barchart__hours {
+}
+
+rect {
+  opacity: 0.5;
+}
+
+.current_hour {
+  opacity: 1;
+}
+
+rect:hover {
+  opacity: 0.8;
+}
