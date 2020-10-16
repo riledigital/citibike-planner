@@ -32,16 +32,24 @@ const HourBarChart = ({ data, width, height }) => {
               </title>
             </rect>
             <text
-              fill="black"
-              //   x={`${xScale(d.start_hour)}`}
-              y={yScale(d.mean_rides)}
-              dy=".35em"
+              className="bar-label"
+              fill="white"
+              text-anchor="middle"
+              dx=".5em"
+              dy="-.25em"
             >
               {d.start_hour}
             </text>
-            <text transform="rotate(90)">
-              Average of {d.mean_rides} at hour {d.start_hour}
-            </text>
+            {currentHour === d.start_hour ? (
+              <text
+                className="bar-label"
+                transform="rotate(-90)"
+                dy={width / 20 / 2}
+              >
+                Avg of {d.mean_rides} at
+                {Number.parseFloat(d.start_hour).toFixed(1)}:00
+              </text>
+            ) : null}
           </g>
         ))}
       </svg>
