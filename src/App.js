@@ -20,6 +20,7 @@ function App() {
   const [currentStation, setCurrentStation] = useState({});
   const [aggData, setAggData] = useState(null);
   const [stationStatus, setStationStatus] = useState(null);
+  const [stationGeo, setStationGeo] = useState(null);
   const [lastUpdated, setLastUpdated] = useState(null);
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(true);
@@ -31,26 +32,6 @@ function App() {
       setShowModal(!showModal);
     } else {
     }
-  }
-
-  function extractStationDataHourly(station_id) {
-    try {
-      return aggData[`${station_id}`];
-    } catch (e) {
-      return null;
-    }
-  }
-
-  async function fetchAggData() {
-    setLoading(true);
-    let aggs = await fetch(
-      `${process.env.PUBLIC_URL}/data/aggs_by_hour.json`
-    ).then((resp) => resp.json());
-
-    console.log(`Got back agg data for ${aggs.length} stations`);
-    setAggData(aggs);
-    setLoading(false);
-    return aggs;
   }
 
   function getStationStatus(id) {
@@ -102,8 +83,14 @@ function App() {
   const markerUrl = `${process.env.PUBLIC_URL}/custom_marker.png`;
 
   useEffect(() => {
-    fetchAggData();
-    fetchStationStatus();
+    setLoading(true);
+
+    fetch(`${process.env.PUBLIC_URL}/data/aggs_by_hour.json`)
+      .then((resp) => resp.json())
+      .then((data) => {
+        setAggData(data);
+        setLoading(false);
+      });
 
     const map = new mapboxgl.Map({
       container: mapContainer,
@@ -116,6 +103,34 @@ function App() {
       ],
     });
 
+    fetch(`${process.env.PUBLIC_URL}/data/station_info.geojson`)
+      .then((resp) => resp.json())
+      .then((data) => {
+        setStationGeo(data);
+        // map.getSource("stationSource").setData(stationGeo);
+        console.log(`WE DONE ${null}`);
+        map.on("load", function () {
+          map.loadImage(markerUrl, function (error, img) {
+            if (error) throw error;
+            map.addImage("custom-marker", img);
+            map.addSource("stationSource", {
+              type: "geojson",
+              // Test later?
+              data: data,
+            });
+            // Add a layer showing the places.
+
+            map.addLayer(activityMarker);
+            if (loading) {
+              setLoading(false);
+            }
+          });
+          setMap(map);
+        });
+      })
+      .then(() => {});
+
+    fetchStationStatus();
     map.addControl(
       new MapboxGeocoder({
         accessToken: mapboxgl.accessToken,
@@ -138,25 +153,6 @@ function App() {
     });
 
     map.addControl(geolocate);
-
-    // data: "https://data.cityofnewyork.us/resource/mifw-tguq.geojson",
-    map.on("load", function () {
-      map.loadImage(markerUrl, function (error, data) {
-        if (error) throw error;
-        map.addImage("custom-marker", data);
-        map.addSource("stationSource", {
-          type: "geojson",
-          data: `${process.env.PUBLIC_URL}/data/station_info.json`,
-        });
-        // Add a layer showing the places.
-
-        map.addLayer(activityMarker);
-        if (loading) {
-          setLoading(false);
-        }
-      });
-      setMap(map);
-    });
 
     // "https://docs.mapbox.com/mapbox-gl-js/assets/custom_marker.png",
     map.on("click", "stationLayer", function (e) {
@@ -200,14 +196,14 @@ function App() {
               lastUpdated={lastUpdated}
             />
             <HourBarChart
-              data={extractStationDataHourly(currentStation.station_id)}
+              data={!!aggData ? aggData[currentStation.station_id] : null}
               width={400}
               height={150}
               fill="white"
             />
             {false ? (
               <Vis
-                data={extractStationDataHourly(currentStation.station_id)}
+                data={!!aggData ? aggData[currentStation.station_id] : null}
                 currentHour={new Date().getHours()}
               />
             ) : null}
