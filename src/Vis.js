@@ -87,6 +87,7 @@ function Vis(props) {
 
   return props.data ? (
     <div className="vis-vl">
+      <h3>Average trips per hour</h3>
       <VegaLite spec={spec} data={barData} />
     </div>
   ) : (

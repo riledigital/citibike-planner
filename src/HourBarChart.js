@@ -3,12 +3,12 @@ import React, { useEffect } from "react";
 import { scaleTime, scaleLinear } from "d3-scale";
 import { extent } from "d3-array";
 import { timeParse, timeFormat } from "d3-time-format";
-import "./HourBarChart.css";
+import styles from "./HourBarChart.module.css";
 
 const HourBarChart = ({ data, width = 200, height = 200, fill = "blue" }) => {
   const formatHour = timeFormat("%_I %p");
   const parseTime = timeParse("%H");
-  const margin = { top: 30, right: 15, bottom: 30, left: 30 };
+  const margin = { top: 30, right: 5, bottom: 30, left: 5 };
   const extentOut = data
     ? extent(data, (d) => d.mean_rides + d.mean_rides * 0.25)
     : [0, 100];
@@ -19,12 +19,13 @@ const HourBarChart = ({ data, width = 200, height = 200, fill = "blue" }) => {
     .domain(extentOut)
     .range([height - margin.bottom, margin.top]);
 
-  const padding = 2;
+  const padding = 4;
   const currentHour = new Date().getHours();
   useEffect(() => {});
 
   return !data ? null : (
-    <figure className="barchart__hours">
+    <figure className={styles["barchart__hours"]}>
+      <h3>Average trips per hour</h3>
       <svg viewBox={`0 0 ${width} ${height}`}>
         <text
           class="axisTitle"
@@ -41,17 +42,17 @@ const HourBarChart = ({ data, width = 200, height = 200, fill = "blue" }) => {
           return (
             <g
               class="axis-bottom"
-              transform={`rotate(${45} ${xScale(d.start_hour) - margin.left} ${
-                height - margin.bottom
-              }) translate(${xScale(d.start_hour) - margin.left}, ${
-                height - margin.bottom
-              })`}
+              transform={`
+              translate(${xScale(d.start_hour) - margin.left}, ${
+                height - margin.bottom * 1.65
+              })
+              rotate(${45}) `}
             >
               <text
-                className="axis-bottom"
+                className={styles["axis-bottom"]}
                 fill="white"
                 fontSize="8px"
-                dy="-25px"
+                // dy="-30px"
                 fontFamily="sans-serif"
                 fontWeight="800"
                 text-anchor="left"
@@ -69,7 +70,9 @@ const HourBarChart = ({ data, width = 200, height = 200, fill = "blue" }) => {
               })`}
             >
               <rect
-                className={d.start_hour === currentHour ? "current_hour" : null}
+                className={
+                  styles[d.start_hour === currentHour ? "current_hour" : null]
+                }
                 fill={fill}
                 width={width / 24 - padding}
                 height={`${yScale(0) - yScale(d.mean_rides)}`}
@@ -93,7 +96,7 @@ const HourBarChart = ({ data, width = 200, height = 200, fill = "blue" }) => {
 
               {!!0 && currentHour === d.start_hour ? (
                 <text
-                  className="bar-label"
+                  className={styles["bar-label"]}
                   transform="rotate(-90)"
                   dy={width / 20 / 2}
                 >

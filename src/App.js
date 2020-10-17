@@ -34,8 +34,8 @@ function App() {
     }
   }
 
-  function extractStationDataHourly(station_id) {
-    return aggData[`${station_id}`];
+  async function extractStationDataHourly(station_id) {
+    return await fetchAggData()[`${station_id}`];
   }
 
   async function fetchAggData() {
@@ -202,10 +202,12 @@ function App() {
               height={150}
               fill="white"
             />
-            <Vis
-              data={extractStationDataHourly(currentStation.station_id)}
-              currentHour={new Date().getHours()}
-            />
+            {false ? (
+              <Vis
+                data={extractStationDataHourly(currentStation.station_id)}
+                currentHour={new Date().getHours()}
+              />
+            ) : null}
           </div>
         )}
 
