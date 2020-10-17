@@ -5,6 +5,7 @@ import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import localforage from "localforage";
 
+import "animate.css";
 import "./App.css";
 import Vis from "./Vis";
 import Modal from "./Modal";
@@ -198,7 +199,8 @@ function App() {
             <HourBarChart
               data={extractStationDataHourly(currentStation.station_id)}
               width={400}
-              height={200}
+              height={150}
+              fill="white"
             />
             <Vis
               data={extractStationDataHourly(currentStation.station_id)}
