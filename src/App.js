@@ -34,8 +34,12 @@ function App() {
     }
   }
 
-  async function extractStationDataHourly(station_id) {
-    return await fetchAggData()[`${station_id}`];
+  function extractStationDataHourly(station_id) {
+    try {
+      return aggData[`${station_id}`];
+    } catch (e) {
+      return null;
+    }
   }
 
   async function fetchAggData() {
