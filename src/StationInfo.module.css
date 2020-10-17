@@ -63,6 +63,12 @@
   margin-bottom: 1rem;
 }
 
+.station-bikes,
+.station-electric,
+.station-docks {
+  composes: station-counts;
+}
+
 .loading-illustration {
   border: 1px solid gray;
   background-color: var(--text);

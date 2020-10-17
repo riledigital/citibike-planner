@@ -8,20 +8,23 @@ import styles from "./HourBarChart.module.css";
 const HourBarChart = ({ data, width = 200, height = 200, fill = "blue" }) => {
   const formatHour = timeFormat("%_I %p");
   const parseTime = timeParse("%H");
-  const margin = { top: 30, right: 5, bottom: 30, left: 5 };
-  const extentOut = data
-    ? extent(data, (d) => d.mean_rides + d.mean_rides * 0.25)
-    : [0, 100];
+  const margin = { top: 40, right: 5, bottom: 30, left: 5 };
+  let extentOut = data ? extent(data, (d) => d.mean_rides) : [0, 100];
   const xScale = scaleTime()
     .domain([0, 24])
     .range([margin.left, width - margin.right]);
-  const yScale = scaleLinear()
+  let yScale = scaleLinear()
     .domain(extentOut)
     .range([height - margin.bottom, margin.top]);
 
   const padding = 4;
   const currentHour = new Date().getHours();
-  useEffect(() => {});
+  useEffect(() => {
+    extentOut = data ? extent(data, (d) => d.mean_rides) : [0, 100];
+    yScale = scaleLinear()
+      .domain(extentOut)
+      .range([height - margin.bottom, margin.top]);
+  });
 
   return !data ? null : (
     <figure className={styles["barchart__hours"]}>

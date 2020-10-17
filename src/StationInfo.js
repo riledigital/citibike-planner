@@ -56,11 +56,11 @@ const StationInfo = ({ station, status, lastUpdated }) => {
       </h3>
       {stationNeighborhood}
       <div className={styles["station-status"]}>
-        <div className={styles["station-bikes station-counts"]}>
+        <div className={styles["station-bikes"]}>
           {statusInfo.bikes}{" "}
           <p className={styles["station-status-label"]}>Classic</p>
         </div>
-        <div className={styles["station-electric station-counts"]}>
+        <div className={styles["station-electric"]}>
           {statusInfo.electric}
           <p className={styles["station-status-label"]}>
             <span role="img" aria-label="electric">
@@ -69,7 +69,7 @@ const StationInfo = ({ station, status, lastUpdated }) => {
             Electric
           </p>
         </div>
-        <div className={styles["station-docks station-counts"]}>
+        <div className={styles["station-docks"]}>
           {statusInfo.docks}
           <p className={styles["station-status-label"]}>Docks</p>
         </div>
