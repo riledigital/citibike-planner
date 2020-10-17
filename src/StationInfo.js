@@ -1,6 +1,7 @@
 import React from "react";
-import "./StationInfo.css";
+import styles from "./StationInfo.module.css";
 import { ReactComponent as LoadingIllustration } from "./images/undraw_No_data_re_kwbl.svg";
+import ActionButton from "./ActionButton";
 // https://gbfs.citibikenyc.com/gbfs/en/station_status.json
 
 const StationInfo = ({ station, status, lastUpdated }) => {
@@ -32,57 +33,56 @@ const StationInfo = ({ station, status, lastUpdated }) => {
   console.log(status);
 
   return station.name ? (
-    <div className="station-header">
-      <h2 className="station-info-header">Live status</h2>
-      <p className="station-status-label">
-        as of{" "}
-        {lastUpdated.toLocaleDateString("en-us", {
-          year: "numeric",
-          month: "numeric",
-          day: "numeric",
-          hour: "numeric",
-          minute: "numeric",
-        })}
-      </p>
-      <h3 className="station-name">
+    <div className={styles["station"]}>
+      <div className={styles["info-header"]}>
+        <h2 className={styles["status-title"]}>Live status</h2>
+        <p className={styles["station-status-label"]}>
+          as of{" "}
+          {lastUpdated.toLocaleDateString("en-us", {
+            year: "numeric",
+            month: "numeric",
+            day: "numeric",
+            hour: "numeric",
+            minute: "numeric",
+          })}
+        </p>
+      </div>
+
+      <h3 className={styles["station-name"]}>
         {station.name}{" "}
         <a href={station.rental_url}>
-          <span className="station-id">{station.station_id}</span>
+          <span className={styles["station-id"]}>{station.station_id}</span>
         </a>
       </h3>
       {stationNeighborhood}
-      <div className="station-status">
-        <div className="station-bikes station-counts">
-          {statusInfo.bikes} <p className="station-status-label">Classic</p>
+      <div className={styles["station-status"]}>
+        <div className={styles["station-bikes station-counts"]}>
+          {statusInfo.bikes}{" "}
+          <p className={styles["station-status-label"]}>Classic</p>
         </div>
-        <div className="station-electric station-counts">
+        <div className={styles["station-electric station-counts"]}>
           {statusInfo.electric}
-          <p className="station-status-label">
+          <p className={styles["station-status-label"]}>
             <span role="img" aria-label="electric">
               ⚡
             </span>
             Electric
           </p>
         </div>
-        <div className="station-docks station-counts">
+        <div className={styles["station-docks station-counts"]}>
           {statusInfo.docks}
-          <p className="station-status-label">Docks</p>
+          <p className={styles["station-status-label"]}>Docks</p>
         </div>
       </div>
-      <div className="station-counts station-updated">
-        <a className="button-open-in-app" href={station.rental_url}>
-          Unlock Citi Bike
-        </a>
+      <div className={styles["station-counts station-updated"]}>
+        <ActionButton href={station.rental_url} />
       </div>
     </div>
   ) : (
-    <div className="loading">
+    <div className={styles["loading"]}>
       <p>Please click on a station on the map to view the activity details.</p>
-      <figure className="loading-illustration">
-        <LoadingIllustration
-          title="Missing data icon (Katerina Limpitsouni)"
-          style={{ width: "20%" }}
-        />
+      <figure className={styles["loading-illustration"]}>
+        <LoadingIllustration title="Missing data icon (Katerina Limpitsouni)" />
         <p>No station selected.</p>
       </figure>
     </div>

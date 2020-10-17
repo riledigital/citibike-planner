@@ -1,17 +1,25 @@
-.station-header {
+.station {
   border: 1px solid gray;
   border-radius: 8px;
-  padding: 8px;
   text-align: center;
+  padding: 0.5rem;
 }
-.station-info-header {
-  animation: 10s infinite flash;
+
+.info-header {
+  animation: 12s infinite flash;
+  padding-bottom: 0;
+  /* margin-bottom: 0.25rem; */
+}
+
+.status-title {
   font-size: 1rem;
   text-transform: uppercase;
   font-weight: 600;
   letter-spacing: 1.1px;
-  padding-bottom: 0;
+  margin: 0 0 0 0;
+  padding: 0 0 0.25rem 0;
 }
+
 .station-name {
   margin-bottom: 0;
 }
@@ -53,19 +61,6 @@
 
 .station-updated {
   margin-bottom: 1rem;
-}
-
-.button-open-in-app {
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: 600;
-  font-size: 0.8rem;
-  border-radius: 4px;
-  background: var(--theme-1);
-  border: none;
-  color: var(--text);
-  padding: 6px 16px;
-  box-shadow: black 1px 1px 4px;
 }
 
 .loading-illustration {
