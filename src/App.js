@@ -19,7 +19,6 @@ function App() {
   const [map, setMap] = useState(null);
   const [currentStation, setCurrentStation] = useState({});
   const [aggData, setAggData] = useState(null);
-  // const [vegaData, setVegaData] = useState(null);
   const [stationStatus, setStationStatus] = useState(null);
   const [lastUpdated, setLastUpdated] = useState(null);
   const [loading, setLoading] = useState(true);
