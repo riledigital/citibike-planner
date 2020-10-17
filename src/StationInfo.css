@@ -5,6 +5,7 @@
   text-align: center;
 }
 .station-info-header {
+  animation: 10s infinite flash;
   font-size: 1rem;
   text-transform: uppercase;
   font-weight: 600;
