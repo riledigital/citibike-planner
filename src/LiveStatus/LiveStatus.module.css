@@ -1,3 +1,8 @@
+.heading {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
 .station {
   border: 1px solid gray;
   border-radius: 8px;
@@ -59,8 +64,10 @@
   margin-top: 0;
 }
 
+/* Composed */
 .station-counts {
   font-size: 2rem;
+  text-align: center;
 }
 
 .station-updated {
@@ -72,6 +79,7 @@
 .station-docks {
   composes: station-counts;
 }
+/*  */
 
 .loading-illustration {
   border: 1px solid gray;

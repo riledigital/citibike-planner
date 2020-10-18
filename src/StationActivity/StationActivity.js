@@ -3,13 +3,14 @@ import React, { useEffect } from "react";
 import { scaleTime, scaleLinear } from "d3-scale";
 import { extent } from "d3-array";
 import { timeParse, timeFormat } from "d3-time-format";
-import styles from "./HourBarChart.module.css";
+import styles from "./StationActivity.module.css";
 
 const StationActivity = ({
   data,
   width = 200,
   height = 200,
   fill = "blue",
+  textFill = "white",
 }) => {
   const formatHour = timeFormat("%_I %p");
   const parseTime = timeParse("%H");
@@ -31,7 +32,12 @@ const StationActivity = ({
       .range([height - margin.bottom, margin.top]);
   });
 
-  return !data ? null : (
+  return !data ? (
+    <div>
+      <h3>Average trips per hour</h3>
+      <p>Select a station on the map to view activity trends.</p>
+    </div>
+  ) : (
     <figure className={styles["barchart__hours"]}>
       <h3>Average trips per hour</h3>
       <svg viewBox={`0 0 ${width} ${height}`}>
@@ -41,7 +47,7 @@ const StationActivity = ({
           fontFamily="sans-serif"
           fontSize="12px"
           fontWeight="800"
-          fill="white"
+          fill={textFill}
           transform={`translate(${width / 2} ${height - margin.bottom / 2})`}
         >
           Time of day
@@ -58,7 +64,7 @@ const StationActivity = ({
             >
               <text
                 className={styles["axis-bottom"]}
-                fill="white"
+                fill={textFill}
                 fontSize="8px"
                 // dy="-30px"
                 fontFamily="sans-serif"
@@ -91,10 +97,10 @@ const StationActivity = ({
               </rect>
               <text
                 // className="bar-label"
-                fill="white"
                 text-anchor="middle"
                 dx=".75em"
                 dy="-.25em"
+                fill={textFill}
                 fontSize="8px"
                 fontFamily="sans-serif"
                 fontWeight="800"
