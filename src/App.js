@@ -14,6 +14,7 @@ import { styleDefault, activityMarker } from "./MapStyles";
 import CircleLegend from "./CircleLegend";
 import Footer from "./Footer";
 import HourBarChart from "./HourBarChart";
+import Ranking from "./Ranking";
 function App() {
   // const [coords, setCoords] = useState({ lon: -73, lat: 40 });
   const [map, setMap] = useState(null);
@@ -31,6 +32,17 @@ function App() {
     if (e.target.className === "button" || e.target.className === "modal") {
       setShowModal(!showModal);
     } else {
+    }
+  }
+
+  function getStationRanking(station_id) {
+    let output = stationGeo.features.find(
+      (d) => d.properties.station_id === station_id
+    );
+    try {
+      return output.properties;
+    } catch (e) {
+      console.log("woops no properties? " + e);
     }
   }
 
@@ -84,7 +96,6 @@ function App() {
 
   useEffect(() => {
     setLoading(true);
-
     fetch(`${process.env.PUBLIC_URL}/data/aggs_by_hour.json`)
       .then((resp) => resp.json())
       .then((data) => {
@@ -107,7 +118,7 @@ function App() {
       .then((resp) => resp.json())
       .then((data) => {
         setStationGeo(data);
-        // map.getSource("stationSource").setData(stationGeo);
+        // debugger;
         console.log(`WE DONE ${null}`);
         map.on("load", function () {
           map.loadImage(markerUrl, function (error, img) {
@@ -171,8 +182,8 @@ function App() {
         .setLngLat(coordinates)
         .setHTML(description)
         .addTo(map);
-      console.log(`Moused on ${feature}`);
-      console.log(feature);
+      // console.log(`Moused on ${feature}`);
+      // console.log(feature);
       handleStationClick(feature);
     });
 
@@ -195,6 +206,7 @@ function App() {
               status={getStationStatus(currentStation.station_id)}
               lastUpdated={lastUpdated}
             />
+            <Ranking station={getStationRanking(currentStation.station_id)} />
             <HourBarChart
               data={!!aggData ? aggData[currentStation.station_id] : null}
               width={400}

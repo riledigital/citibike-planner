@@ -58,20 +58,20 @@ const StationInfo = ({ station, status, lastUpdated }) => {
       <div className={styles["station-status"]}>
         <div className={styles["station-bikes"]}>
           {statusInfo.bikes}{" "}
-          <p className={styles["station-status-label"]}>Classic</p>
+          <span className={styles["station-status-label"]}>Classic</span>
         </div>
         <div className={styles["station-electric"]}>
           {statusInfo.electric}
-          <p className={styles["station-status-label"]}>
+          <span className={styles["station-status-label"]}>
             <span role="img" aria-label="electric">
               ⚡
             </span>
             Electric
-          </p>
+          </span>
         </div>
         <div className={styles["station-docks"]}>
           {statusInfo.docks}
-          <p className={styles["station-status-label"]}>Docks</p>
+          <span className={styles["station-status-label"]}>Docks</span>
         </div>
       </div>
       <div className={styles["station-counts station-updated"]}>
@@ -81,8 +81,11 @@ const StationInfo = ({ station, status, lastUpdated }) => {
   ) : (
     <div className={styles["loading"]}>
       <p>Please click on a station on the map to view the activity details.</p>
-      <figure className={styles["loading-illustration"]}>
-        <LoadingIllustration title="Missing data icon (Katerina Limpitsouni)" />
+      <figure className={null}>
+        <LoadingIllustration
+          className={styles["loading-illustration"]}
+          title="Missing data icon (Katerina Limpitsouni)"
+        />
         <p>No station selected.</p>
       </figure>
     </div>

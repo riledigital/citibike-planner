@@ -1,0 +1,13 @@
+.rank-title {
+  display: block;
+  font-family: "Jost";
+  font-size: 0.9rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.text {
+  font-family: "Jost";
+  font-size: 1rem;
+  display: block;
+}
