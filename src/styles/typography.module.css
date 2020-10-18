@@ -1,0 +1,31 @@
+/* Typography */
+a {
+  color: var(--links);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.App {
+  font-family: "Jost";
+  font-size: 18px;
+}
+
+h1 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  line-height: 1.2;
+  margin-top: 0;
+}
+
+.mapboxgl-popup-content {
+  font-family: "Jost";
+  font-size: 1.4rem;
+  line-height: 1.25;
+  padding: 1rem;
+}
+
+.mapboxgl-ctrl-geocoder {
+  font-family: "Jost";
+  /* font-size: 1.1rem; */
+}

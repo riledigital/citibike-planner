@@ -1,10 +1,12 @@
 import React from "react";
-import styles from "./StationInfo.module.css";
-import { ReactComponent as LoadingIllustration } from "./images/undraw_No_data_re_kwbl.svg";
-import ActionButton from "./ActionButton";
+import PropTypes from "prop-types";
+
+import styles from "./LiveStatus.module.css";
+import ActionButton from "../ActionButton";
+import { ReactComponent as LoadingIllustration } from "../images/undraw_No_data_re_kwbl.svg";
 // https://gbfs.citibikenyc.com/gbfs/en/station_status.json
 
-const StationInfo = ({ station, status, lastUpdated }) => {
+const LiveStatus = ({ station, status, lastUpdated }) => {
   let stationNeighborhood;
 
   // Logic for handling null NTA codes
@@ -91,4 +93,10 @@ const StationInfo = ({ station, status, lastUpdated }) => {
     </div>
   );
 };
-export default StationInfo;
+
+LiveStatus.propTypes = {
+  station: PropTypes.object,
+  status: PropTypes.object,
+  lastUpdated: PropTypes.string,
+};
+export default LiveStatus;
