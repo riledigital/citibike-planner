@@ -36,13 +36,14 @@ function App() {
   }
 
   function getStationRanking(station_id) {
-    let output = stationGeo.features.find(
-      (d) => d.properties.station_id === station_id
-    );
     try {
+      let output = stationGeo.features.find(
+        (d) => d.properties.station_id === station_id
+      );
       return output.properties;
     } catch (e) {
-      console.log("woops no properties? " + e);
+      console.error("stationGeo not showing");
+      console.error(e);
     }
   }
 
@@ -50,7 +51,8 @@ function App() {
     try {
       return stationStatus[id];
     } catch (e) {
-      return `Status not loaded ${e}`;
+      console.error("stationGeo not showing");
+      console.error(e);
     }
   }
 
@@ -72,9 +74,7 @@ function App() {
             data["data"]["stations"].map((record) => {
               allStationsStatus[record.station_id] = { ...record };
               // localforage.setItem(record.station_id, { ...record });
-              loading
-                ? setLoading(false)
-                : console.log("still loading statuses");
+              loading ? setLoading(false) : console.log("Loading statuses...");
               return record;
             });
             setStationStatus(allStationsStatus);
@@ -119,7 +119,6 @@ function App() {
       .then((data) => {
         setStationGeo(data);
         // debugger;
-        console.log(`WE DONE ${null}`);
         map.on("load", function () {
           map.loadImage(markerUrl, function (error, img) {
             if (error) throw error;
@@ -182,8 +181,6 @@ function App() {
         .setLngLat(coordinates)
         .setHTML(description)
         .addTo(map);
-      // console.log(`Moused on ${feature}`);
-      // console.log(feature);
       handleStationClick(feature);
     });
 
