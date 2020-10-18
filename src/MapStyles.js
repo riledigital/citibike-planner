@@ -8,7 +8,7 @@ export const styleDefault = {
   },
 };
 
-export const cmapBlue = [0, "white", 1.0, "blue"];
+export const cmapBlue = [0, "blue", 1.0, "white"];
 
 export const activityMarker = {
   id: "stationLayer",
