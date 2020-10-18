@@ -2,43 +2,34 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styles from "./StationHeader.module.css";
-import LoadingIllustration from "../images/undraw_No_data_re_kwbl.svg";
-const StationHeader = ({ station }) => {
-  const { nta_name, boro_name } = station;
+import { ReactComponent as LoadingIllustration } from "./../images/undraw_No_data_re_kwbl.svg";
+const StationHeader = ({ name, station_id, nta_name, boro_name }) => {
   // Logic for handling null NTA codes
 
-  const stationNeighborhood = nta_name ? "" : nta_name;
-  //   if (!station["nta_name"] | !station.BoroName) {
-  //     stationNeighborhood = "";
-  //   } else {
-  //     stationNeighborhood = (
-  //       <p className="station-info">
-  //         {nta_name}, {boro_name}
-  //       </p>
-  //     );
-  //   }
+  const stationNeighborhood = !nta_name ? "" : nta_name;
 
-  return station ? (
+  return name ? (
     <div className={styles.stationHeader}>
       <div className={styles.header}>
-        <h2 className={styles.heading}>{station.name}</h2>
-        <div className={styles.number}>{station.station_id}</div>
+        <h2 className={styles.heading}>{name}</h2>
+        <div className={styles.number}>{station_id}</div>
       </div>
       <div className={styles.nta}>
-        {" "}
-        {/* {station.nta_name} */}
-        {stationNeighborhood}
+        {nta_name}, {boro_name}
       </div>
     </div>
   ) : (
-    <div className={styles["loading"]}>
+    <div className={styles.loading}>
       <p>Please click on a station on the map to view the activity details.</p>
-      <figure className={null}>
+      <figure>
         <LoadingIllustration
-          className={styles["loading-illustration"]}
-          title="Missing data icon (Katerina Limpitsouni)"
+          class={styles.loadingIllustration}
+          alt="Missing data icon by Katerina Limpitsouni"
+          viewBox="0 0 200 200"
+          preserveAspectRatio="xMinYMin meet"
+          width="100%"
+          height="100%"
         />
-        <p>No station selected.</p>
       </figure>
     </div>
   );
