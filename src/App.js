@@ -7,14 +7,16 @@ import localforage from "localforage";
 
 import "animate.css";
 import "./App.css";
-import Vis from "./Vis";
-import Modal from "./Modal";
-import StationInfo from "./StationInfo";
+
+import Modal from "./Modal/Modal";
 import { styleDefault, activityMarker } from "./MapStyles";
 import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
+
+import StationHeader from "./StationHeader/StationHeader";
 import StationActivity from "./StationActivity/StationActivity";
-import Ranking from "./Ranking";
+
+// import Ranking from "./Ranking/Ranking";
 import CircleLegend from "./CircleLegend";
 function App() {
   // const [coords, setCoords] = useState({ lon: -73, lat: 40 });
@@ -87,7 +89,6 @@ function App() {
   }
 
   const handleStationClick = (station) => {
-    // fetchVizData(station);
     setCurrentStation(station);
   };
 
@@ -200,24 +201,19 @@ function App() {
           </p>
         ) : (
           <div className="data-viewer">
-            <StationInfo
+            <StationHeader {...currentStation} />
+            {/* <StationInfo
               station={currentStation}
               status={getStationStatus(currentStation.station_id)}
               lastUpdated={lastUpdated}
-            />
-            <Ranking station={getStationRanking(currentStation.station_id)} />
-            <HourBarChart
+            /> */}
+            {/* <Ranking station={getStationRanking(currentStation.station_id)} /> */}
+            {/* <HourBarChart
               data={!!aggData ? aggData[currentStation.station_id] : null}
               width={400}
               height={150}
               fill="white"
-            />
-            {false ? (
-              <Vis
-                data={!!aggData ? aggData[currentStation.station_id] : null}
-                currentHour={new Date().getHours()}
-              />
-            ) : null}
+            /> */}
           </div>
         )}
 

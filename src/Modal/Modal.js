@@ -1,6 +1,6 @@
 import React from "react";
 import "./Modal.css";
-import { ReactComponent as Bike } from "./images/undraw_bike_ride_7xit.svg";
+import { ReactComponent as Bike } from "./../images/undraw_bike_ride_7xit.svg";
 const Modal = (props) => {
   const { toggle } = props;
   return (
