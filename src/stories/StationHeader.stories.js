@@ -8,7 +8,7 @@ const dataStation = {
   name: "Broadway & W 41 St",
   boro_name: "Manhattan",
   nta_name: "Midtown-Midtown South",
-  rank_perc: 0.6944444444444444,
+  rank_perc: 0.69,
 };
 
 export default {
@@ -20,8 +20,8 @@ const Template = (args) => <StationHeader {...args} />;
 
 export const Loaded = Template.bind({});
 Loaded.args = {
-  station: dataStation,
+  ...dataStation,
 };
 
 export const Loading = Template.bind({});
-Loading.args = { station: {} };
+Loading.args = {};
