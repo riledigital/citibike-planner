@@ -15,6 +15,8 @@ import Footer from "./Footer/Footer";
 
 import StationHeader from "./StationHeader/StationHeader";
 import StationActivity from "./StationActivity/StationActivity";
+import StationPopularity from "./StationPopularity/StationPopularity";
+import LiveStatus from "./LiveStatus/LiveStatus";
 
 // import Ranking from "./Ranking/Ranking";
 import CircleLegend from "./CircleLegend";
@@ -28,6 +30,7 @@ function App() {
   const [lastUpdated, setLastUpdated] = useState(null);
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(true);
+  const [ranking, setRanking] = useState({});
 
   mapboxgl.accessToken = process.env.REACT_APP_MAPBOX;
 
@@ -43,7 +46,8 @@ function App() {
       let output = stationGeo.features.find(
         (d) => d.properties.station_id === station_id
       );
-      return output.properties;
+
+      return { ...output.properties };
     } catch (e) {
       console.error("stationGeo not showing");
       console.error(e);
@@ -202,12 +206,26 @@ function App() {
         ) : (
           <div className="data-viewer">
             <StationHeader {...currentStation} />
+            {ranking ? (
+              <StationPopularity
+                {...getStationRanking(currentStation.station_id)}
+                // rank={ranking.rank}
+                // stations_in_nta={ranking.stations_in_nta}
+                // nta_name={ranking.nta_name}
+              />
+            ) : null}
             {/* <StationInfo
               station={currentStation}
               status={getStationStatus(currentStation.station_id)}
               lastUpdated={lastUpdated}
             /> */}
             {/* <Ranking station={getStationRanking(currentStation.station_id)} /> */}
+            <StationActivity
+              data={!!aggData ? aggData[currentStation.station_id] : null}
+              height={200}
+              fill="white"
+            />
+            <LiveStatus {...getStationStatus(currentStation.station_id)} />
             {/* <HourBarChart
               data={!!aggData ? aggData[currentStation.station_id] : null}
               width={400}
