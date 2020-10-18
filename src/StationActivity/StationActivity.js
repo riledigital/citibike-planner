@@ -5,7 +5,12 @@ import { extent } from "d3-array";
 import { timeParse, timeFormat } from "d3-time-format";
 import styles from "./HourBarChart.module.css";
 
-const HourBarChart = ({ data, width = 200, height = 200, fill = "blue" }) => {
+const StationActivity = ({
+  data,
+  width = 200,
+  height = 200,
+  fill = "blue",
+}) => {
   const formatHour = timeFormat("%_I %p");
   const parseTime = timeParse("%H");
   const margin = { top: 40, right: 5, bottom: 30, left: 5 };
@@ -115,4 +120,4 @@ const HourBarChart = ({ data, width = 200, height = 200, fill = "blue" }) => {
   );
 };
 
-export default HourBarChart;
+export default StationActivity;

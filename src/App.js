@@ -11,10 +11,11 @@ import Vis from "./Vis";
 import Modal from "./Modal";
 import StationInfo from "./StationInfo";
 import { styleDefault, activityMarker } from "./MapStyles";
-import CircleLegend from "./CircleLegend";
-import Footer from "./Footer";
-import HourBarChart from "./HourBarChart";
+import Header from "./Header/Header";
+import Footer from "./Footer/Footer";
+import StationActivity from "./StationActivity/StationActivity";
 import Ranking from "./Ranking";
+import CircleLegend from "./CircleLegend";
 function App() {
   // const [coords, setCoords] = useState({ lon: -73, lat: 40 });
   const [map, setMap] = useState(null);
@@ -189,7 +190,8 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">Citibike Activity Viewer</header>
+      <Header />
+
       {showModal ? <Modal toggle={toggleModal} /> : <></>}
       <div className="App-sidebar">
         {loading ? (
