@@ -31,7 +31,7 @@ const HourBarChart = ({ data, width = 200, height = 200, fill = "blue" }) => {
       <h3>Average trips per hour</h3>
       <svg viewBox={`0 0 ${width} ${height}`}>
         <text
-          class="axisTitle"
+          className="axisTitle"
           text-anchor="middle"
           fontFamily="sans-serif"
           fontSize="12px"
@@ -44,7 +44,7 @@ const HourBarChart = ({ data, width = 200, height = 200, fill = "blue" }) => {
         {data.map((d, idx) => {
           return (
             <g
-              class="axis-bottom"
+              className="axis-bottom"
               transform={`
               translate(${xScale(d.start_hour) - margin.left}, ${
                 height - margin.bottom * 1.65
@@ -58,7 +58,7 @@ const HourBarChart = ({ data, width = 200, height = 200, fill = "blue" }) => {
                 // dy="-30px"
                 fontFamily="sans-serif"
                 fontWeight="800"
-                text-anchor="left"
+                textAnchor="left"
               >
                 {formatHour(parseTime(d.start_hour))}
               </text>
