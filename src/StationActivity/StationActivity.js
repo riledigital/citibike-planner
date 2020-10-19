@@ -39,7 +39,7 @@ const StationActivity = ({
     </div>
   ) : (
     <figure className={styles["barchart__hours"]}>
-      <h3>Average trips per hour</h3>
+      <h3 className={styles.heading}>Average trips per hour</h3>
       <svg viewBox={`0 0 ${width} ${height}`}>
         <text
           className="axisTitle"
