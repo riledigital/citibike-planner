@@ -1,3 +1,7 @@
+.stationHeader {
+  composes: bodyFont from "../styles/typography.module.css";
+}
+
 .header {
   display: flex;
   justify-content: space-between;

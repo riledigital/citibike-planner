@@ -1,4 +1,6 @@
 .modal {
+  composes: bodyFont from "../styles/typography.module.css";
+
   display: flex; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 100; /* Sit on top */
@@ -13,14 +15,19 @@
   justify-content: center;
 }
 
-.modal-visible {
+.modalVisible {
   display: flex;
 }
 
-.modal-content {
+.modalContent {
   border-radius: 8px;
   background-color: var(--text);
   /* min-height: 50vh; */
   width: 25rem;
   padding: 2rem;
+}
+
+.svg {
+  width: 100%;
+  height: auto;
 }

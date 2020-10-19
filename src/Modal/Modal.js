@@ -1,15 +1,16 @@
 import React from "react";
-import "./Modal.css";
+
+import styles from "./Modal.module.css";
 import { ReactComponent as Bike } from "./../images/undraw_bike_ride_7xit.svg";
 const Modal = (props) => {
   const { toggle } = props;
   return (
-    <div className="modal" onClick={toggle}>
-      <div className="modal-content">
+    <div className={styles.modal} onClick={toggle}>
+      <div className={styles.modalContent}>
         <figure>
           <Bike
             title="Cycling illustration (Katerina Limpitsouni)"
-            className="svg"
+            className={styles.svg}
           />
         </figure>
 
