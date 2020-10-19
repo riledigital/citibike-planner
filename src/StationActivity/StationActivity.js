@@ -45,7 +45,7 @@ const StationActivity = ({
           class={styles.axisTitle}
           text-anchor="middle"
           fontFamily="Jost"
-          fontSize="9px"
+          fontSize="8px"
           fontWeight="800"
           fill={textFill}
           transform={`translate(${width / 2} ${height - margin.bottom / 2})`}
@@ -58,17 +58,17 @@ const StationActivity = ({
               className={styles.axisBottom}
               transform={`
               translate(${xScale(d.start_hour) - margin.left}, ${
-                height - margin.bottom * 1.65
+                height - margin.bottom * 1.88
               })
               rotate(${45}) `}
             >
               <text
                 className={styles.axisBottom}
                 fill={textFill}
-                fontSize="8px"
+                fontSize="6px"
                 // dy="-30px"
                 fontFamily="Jost"
-                fontWeight="800"
+                fontWeight="600"
                 text-anchor="left"
               >
                 {formatHour(parseTime(d.start_hour))}
@@ -98,10 +98,10 @@ const StationActivity = ({
               <text
                 className={styles.barLabel}
                 text-anchor="middle"
-                dx=".75em"
+                dx="2.5px"
                 dy="-.25em"
                 fill={textFill}
-                fontSize="8px"
+                fontSize="6px"
                 fontFamily="Jost"
                 fontWeight="800"
               >

@@ -20,8 +20,10 @@ const StationHeader = ({ name, station_id, nta_name, boro_name }) => {
     </div>
   ) : (
     <div className={styles.loading}>
-      <p>Please click on a station on the map to view the activity details.</p>
-      <figure>
+      <p className={styles.message}>
+        Please click on a station on the map to view the activity details.
+      </p>
+      <figure className={styles.figure}>
         <LoadingIllustration
           class={styles.loadingIllustration}
           alt="Missing data icon by Katerina Limpitsouni"

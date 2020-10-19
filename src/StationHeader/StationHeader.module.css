@@ -21,11 +21,34 @@
   content: "#";
 }
 
+.figure {
+  max-width: 50%;
+  margin: auto auto;
+  padding: 1rem;
+  max-height: 4rem;
+  overflow: hidden;
+}
+
 .loadingIllustration {
+  background-color: white;
   display: inline-block;
   position: relative;
   width: 100%;
-  padding-bottom: 100%;
+
+  /* padding: 2rem; */
+  margin: 1rem;
   vertical-align: middle;
-  overflow: hidden;
+  /* overflow: hidden; */
+}
+
+.loading {
+  color: var(--bg);
+  background-color: white;
+  padding: 0.1rem 1rem;
+  border-radius: 6px;
+}
+
+.message {
+  padding: 0;
+  font-family: "Jost";
 }
