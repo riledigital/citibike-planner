@@ -42,10 +42,10 @@ const StationActivity = ({
       <h3 className={styles.heading}>Average trips per hour</h3>
       <svg viewBox={`0 0 ${width} ${height}`}>
         <text
-          className="axisTitle"
+          class={styles.axisTitle}
           text-anchor="middle"
-          fontFamily="sans-serif"
-          fontSize="12px"
+          fontFamily="Jost"
+          fontSize="9px"
           fontWeight="800"
           fill={textFill}
           transform={`translate(${width / 2} ${height - margin.bottom / 2})`}
@@ -55,7 +55,7 @@ const StationActivity = ({
         {data.map((d, idx) => {
           return (
             <g
-              className="axis-bottom"
+              className={styles.axisBottom}
               transform={`
               translate(${xScale(d.start_hour) - margin.left}, ${
                 height - margin.bottom * 1.65
@@ -63,13 +63,13 @@ const StationActivity = ({
               rotate(${45}) `}
             >
               <text
-                className={styles["axis-bottom"]}
+                className={styles.axisBottom}
                 fill={textFill}
                 fontSize="8px"
                 // dy="-30px"
-                fontFamily="sans-serif"
+                fontFamily="Jost"
                 fontWeight="800"
-                textAnchor="left"
+                text-anchor="left"
               >
                 {formatHour(parseTime(d.start_hour))}
               </text>
@@ -96,13 +96,13 @@ const StationActivity = ({
                 </title>
               </rect>
               <text
-                // className="bar-label"
+                className={styles.barLabel}
                 text-anchor="middle"
                 dx=".75em"
                 dy="-.25em"
                 fill={textFill}
                 fontSize="8px"
-                fontFamily="sans-serif"
+                fontFamily="Jost"
                 fontWeight="800"
               >
                 {Number.parseFloat(d.mean_rides).toFixed(0)}

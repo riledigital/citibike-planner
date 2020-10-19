@@ -50,8 +50,8 @@ function App() {
 
       return { ...output.properties };
     } catch (e) {
-      console.error("stationGeo not showing");
-      console.error(e);
+      console.warn("stationGeo not showing");
+      console.warn(e);
     }
   }
 
@@ -94,6 +94,12 @@ function App() {
   }
 
   const handleStationClick = (station) => {
+    const queryElement = document.querySelector("#stationHeader");
+    if (queryElement) {
+      queryElement.scrollIntoView({
+        behavior: "smooth",
+      });
+    }
     setCurrentStation(station);
   };
 
@@ -195,8 +201,8 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
-      <Header />
+    <div className="App" id="stationHeader">
+      <Header toggleModal={toggleModal} />
 
       {showModal ? <Modal toggle={toggleModal} /> : <></>}
 
@@ -237,13 +243,7 @@ function App() {
           </div>
         )}
 
-        <div className="App-sidebar-footer">
-          <button className="button" onClick={toggleModal}>
-            Show Instructions
-          </button>
-          {/* <p>It is {getCurrentTime()}.</p> */}
-          {/* <CircleLegend /> */}
-        </div>
+        <div className="App-sidebar-footer"></div>
       </div>
 
       <div id="main-map">
