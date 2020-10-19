@@ -14,7 +14,8 @@ rect:hover {
   opacity: 0.8;
 }
 
-.bar-label {
+.barLabel {
+  font-family: "Jost";
   font-size: 0.8rem;
   font-weight: 800;
   color: white;
@@ -22,4 +23,12 @@ rect:hover {
 
 .heading {
   composes: fontHeading from "./../styles/typography.module.css";
+}
+
+.axisBottom {
+  font-family: "Jost";
+}
+
+.axisTitle {
+  font-family: "Jost";
 }
