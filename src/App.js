@@ -35,10 +35,11 @@ function App() {
   mapboxgl.accessToken = process.env.REACT_APP_MAPBOX;
 
   function toggleModal(e) {
-    if (e.target.className === "button" || e.target.className === "modal") {
-      setShowModal(!showModal);
-    } else {
-    }
+    setShowModal(!showModal);
+    // if (e.target.className === "button" || e.target.className === "modal") {
+    //   setShowModal(!showModal);
+    // } else {
+    // }
   }
 
   function getStationRanking(station_id) {
@@ -198,6 +199,7 @@ function App() {
       <Header />
 
       {showModal ? <Modal toggle={toggleModal} /> : <></>}
+
       <div className="App-sidebar">
         {loading ? (
           <p>

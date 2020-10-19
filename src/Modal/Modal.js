@@ -4,9 +4,12 @@ import styles from "./Modal.module.css";
 import { ReactComponent as Bike } from "./../images/undraw_bike_ride_7xit.svg";
 const Modal = (props) => {
   const { toggle } = props;
+  const stopPropogation = (e) => {
+    e.stopPropagation();
+  };
   return (
     <div className={styles.modal} onClick={toggle}>
-      <div className={styles.modalContent}>
+      <div className={styles.modalContent} onClick={stopPropogation}>
         <figure>
           <Bike
             title="Cycling illustration (Katerina Limpitsouni)"
