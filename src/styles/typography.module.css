@@ -29,3 +29,16 @@ h1 {
   font-family: "Jost";
   /* font-size: 1.1rem; */
 }
+
+/* This style for all headings */
+.fontHeading {
+  font-family: "Jost";
+  font-weight: bold;
+  text-transform: bold;
+  letter-spacing: 1.2px;
+}
+
+.bodyFont {
+  font-family: "Jost";
+  font-size: rem;
+}
