@@ -16,8 +16,9 @@ rect:hover {
 
 .barLabel {
   font-family: "Jost";
-  font-size: 0.8rem;
+  /* font-size: 0.8rem; */
   font-weight: 800;
+  text-align: center;
   color: white;
 }
 

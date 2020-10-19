@@ -230,7 +230,7 @@ function App() {
             {/* <Ranking station={getStationRanking(currentStation.station_id)} /> */}
             <StationActivity
               data={!!aggData ? aggData[currentStation.station_id] : null}
-              height={200}
+              height={170}
               fill="white"
             />
             <LiveStatus {...getStationStatus(currentStation.station_id)} />
