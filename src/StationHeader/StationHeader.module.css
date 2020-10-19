@@ -8,8 +8,13 @@
 }
 
 .heading {
-  composes: fontHeading from "../styles/typography.module.css";
-  font-size: 1.5rem;
+  /* composes: fontHeading from "../styles/typography.module.css"; */
+  font-family: "Jost";
+  font-size: 1.25rem;
+  line-height: 1.2;
+  letter-spacing: 0px;
+  margin: 0 0 0.5rem 0;
+  padding: 0;
 }
 
 .number::before {

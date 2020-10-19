@@ -34,8 +34,9 @@ h1 {
 .fontHeading {
   font-family: "Jost";
   font-weight: bold;
-  text-transform: bold;
-  letter-spacing: 1.2px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .bodyFont {

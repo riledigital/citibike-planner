@@ -72,10 +72,6 @@
   text-align: center;
 }
 
-.station-updated {
-  margin-bottom: 1rem;
-}
-
 .station-bikes,
 .station-electric,
 .station-docks {
@@ -91,4 +87,14 @@
   border-radius: 8px;
   text-align: center;
   height: 10rem;
+}
+
+.lastUpdated {
+  composes: bodyFont from "./../styles/typography.module.css";
+  font-weight: normal;
+  margin-top: 0.5rem;
+}
+
+p {
+  font-family: "Jost";
 }

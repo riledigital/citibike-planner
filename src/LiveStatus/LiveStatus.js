@@ -22,6 +22,10 @@ const LiveStatus = ({
       docks: num_docks_available,
     };
   }
+
+  const formattedTime = new Date(last_reported * 1000).toLocaleTimeString(
+    "en-US"
+  );
   return station_id ? (
     <>
       <h3 className={styles.heading}>Live Status</h3>
@@ -44,11 +48,14 @@ const LiveStatus = ({
           <span className={styles["station-status-label"]}>Docks</span>
         </div>
       </div>
+      <span className={styles.lastUpdated}>
+        Last updated on {formattedTime}
+      </span>
     </>
   ) : (
     <div className={styles["loading"]}>
-      <p>Please click on a station on the map to view the activity details.</p>
       <p>No station selected.</p>
+      <p>Please click on a station on the map to view the activity details.</p>
     </div>
   );
 };
