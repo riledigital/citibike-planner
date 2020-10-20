@@ -7,6 +7,7 @@ import localforage from "localforage";
 
 import "animate.css";
 import "./App.css";
+import styles from "./styles/buttons.module.css";
 
 import Modal from "./Modal/Modal";
 import { styleDefault, activityMarker } from "./MapStyles";
@@ -230,7 +231,7 @@ function App() {
             {/* <Ranking station={getStationRanking(currentStation.station_id)} /> */}
             <StationActivity
               data={!!aggData ? aggData[currentStation.station_id] : null}
-              height={170}
+              height={200}
               fill="white"
             />
             <LiveStatus {...getStationStatus(currentStation.station_id)} />

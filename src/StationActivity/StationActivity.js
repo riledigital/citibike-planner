@@ -7,34 +7,32 @@ import styles from "./StationActivity.module.css";
 
 const StationActivity = ({
   data,
-  width = 200,
-  height = 200,
+  width = 400,
+  height = 400,
   fill = "blue",
   textFill = "white",
 }) => {
   const formatHour = timeFormat("%_I %p");
   const parseTime = timeParse("%H");
-  const margin = { top: 40, right: 5, bottom: 30, left: 5 };
+  const margin = { top: 10, right: 5, bottom: 35, left: 5 };
   let extentOut = data ? extent(data, (d) => d.mean_rides) : [0, 100];
   const xScale = scaleTime()
-    .domain([0, 24])
+    .domain([6, 24])
     .range([margin.left, width - margin.right]);
   let yScale = scaleLinear()
     .domain(extentOut)
     .range([height - margin.bottom, margin.top]);
 
-  const padding = 4;
+  const padding = 1;
   const currentHour = new Date().getHours();
   useEffect(() => {
     extentOut = data ? extent(data, (d) => d.mean_rides) : [0, 100];
-    yScale = scaleLinear()
-      .domain(extentOut)
-      .range([height - margin.bottom, margin.top]);
+    yScale = scaleLinear().domain(extentOut).range([height, 0]);
   });
 
   return !data ? (
     <div>
-      <h3>Average trips per hour</h3>
+      <h3 className={styles.heading}>Average trips per hour</h3>
       <p>Select a station on the map to view activity trends.</p>
     </div>
   ) : (
@@ -48,79 +46,72 @@ const StationActivity = ({
           fontSize="8px"
           fontWeight="800"
           fill={textFill}
-          transform={`translate(${width / 2} ${height - margin.bottom / 2})`}
+          transform={`translate(${width / 2} ${height - 4})`}
         >
-          Time of day
+          {/* Time of day */}
         </text>
-        {data.map((d, idx) => {
-          return (
-            <g
-              className={styles.axisBottom}
-              transform={`
-              translate(${xScale(d.start_hour) - margin.left}, ${
-                height - margin.bottom * 1.88
-              })
-              rotate(${45}) `}
-            >
-              <text
+        <g className={styles.axisLabels}>
+          {data.map((d, idx) => {
+            return (
+              <g
                 className={styles.axisBottom}
-                fill={textFill}
-                fontSize="6px"
-                // dy="-30px"
-                fontFamily="Jost"
-                fontWeight="600"
-                text-anchor="left"
+                transform={`
+              translate(${xScale(d.start_hour) + margin.left}, ${
+                  height - margin.bottom / 1.2
+                })
+              rotate(${45}) `}
               >
-                {formatHour(parseTime(d.start_hour))}
-              </text>
-            </g>
-          );
-        })}
-        {data.map((d, idx) => (
-          <>
-            <g
-              transform={`translate(${xScale(d.start_hour) - margin.right}, ${
-                yScale(d.mean_rides) - margin.bottom
-              })`}
-            >
-              <rect
-                className={
-                  styles[d.start_hour === currentHour ? "current_hour" : null]
-                }
-                fill={fill}
-                width={width / 24 - padding}
-                height={`${yScale(0) - yScale(d.mean_rides)}`}
-              >
-                <title>
-                  Average of {d.mean_rides} at hour {d.start_hour}
-                </title>
-              </rect>
-              <text
-                className={styles.barLabel}
-                text-anchor="middle"
-                dx="2.5px"
-                dy="-.25em"
-                fill={textFill}
-                fontSize="6px"
-                fontFamily="Jost"
-                fontWeight="800"
-              >
-                {Number.parseFloat(d.mean_rides).toFixed(0)}
-              </text>
-
-              {!!0 && currentHour === d.start_hour ? (
                 <text
-                  className={styles["bar-label"]}
-                  transform="rotate(-90)"
-                  dy={width / 20 / 2}
+                  className={styles.axisBottom}
+                  fill={textFill}
+                  fontSize="9px"
+                  fontFamily="Jost"
+                  fontWeight="600"
+                  text-anchor="left"
                 >
-                  Avg of {Number.parseFloat(d.mean_rides).toFixed(2)} at
-                  {d.start_hour}
+                  {formatHour(parseTime(d.start_hour))}
                 </text>
-              ) : null}
-            </g>
-          </>
-        ))}
+              </g>
+            );
+          })}
+        </g>
+        <g className={styles.bars}>
+          {data.map((d, idx) => (
+            <>
+              <g
+                key={idx}
+                transform={`translate(${xScale(d.start_hour)}, ${yScale(
+                  d.mean_rides
+                )})`}
+              >
+                <rect
+                  className={
+                    styles[d.start_hour === currentHour ? "current_hour" : null]
+                  }
+                  fill={fill}
+                  width={width / 24 - padding}
+                  height={`${height - yScale(d.mean_rides) - margin.bottom}`}
+                >
+                  <title>
+                    Average of {d.mean_rides} at hour {d.start_hour}
+                  </title>
+                </rect>
+                <text
+                  className={styles.barLabel}
+                  text-anchor="left"
+                  dx="3px"
+                  dy="-.25em"
+                  fill={textFill}
+                  fontSize="8px"
+                  fontFamily="Jost"
+                  fontWeight="800"
+                >
+                  {Number.parseFloat(d.mean_rides).toFixed(0)}
+                </text>
+              </g>
+            </>
+          ))}
+        </g>
       </svg>
     </figure>
   );

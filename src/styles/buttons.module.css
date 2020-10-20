@@ -1,0 +1,13 @@
+button {
+  color: white;
+  background-color: var(--button-bg);
+  font-family: "Jost";
+  border: none;
+  padding: 0.5rem;
+  border-radius: 6px;
+}
+
+button:hover {
+  background-color: var(--button-bg-hover);
+  color: black;
+}
