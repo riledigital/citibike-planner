@@ -54,6 +54,7 @@ const StationActivity = ({
           {data.map((d, idx) => {
             return (
               <g
+                key={idx}
                 className={styles.axisBottom}
                 transform={`
               translate(${xScale(d.start_hour) + margin.left}, ${

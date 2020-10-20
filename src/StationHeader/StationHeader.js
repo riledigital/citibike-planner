@@ -25,7 +25,7 @@ const StationHeader = ({ name, station_id, nta_name, boro_name }) => {
       </p>
       <figure className={styles.figure}>
         <LoadingIllustration
-          class={styles.loadingIllustration}
+          className={styles.loadingIllustration}
           alt="Two clipboards; missing data icon by Katerina Limpitsouni"
           viewBox="0 0 647.63626 632.17383"
           preserveAspectRatio="xMinYMin meet"
