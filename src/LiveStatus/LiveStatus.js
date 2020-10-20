@@ -29,7 +29,7 @@ const LiveStatus = ({
   return station_id ? (
     <>
       <h3 className={styles.heading}>Live Status</h3>
-      <div className={styles["station-status"]}>
+      <div className={styles.stationStatus}>
         <div className={styles["station-bikes"]}>
           {statusInfo.bikes}{" "}
           <span className={styles["station-status-label"]}>Classic</span>

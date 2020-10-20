@@ -1,5 +1,5 @@
 .modal {
-  composes: bodyFont from "../styles/typography.module.css";
+  composes: fontBody from "../styles/typography.module.css";
 
   display: flex; /* Hidden by default */
   position: fixed; /* Stay in place */
@@ -27,7 +27,24 @@
   padding: 2rem;
 }
 
-.svg {
-  width: 100%;
-  height: auto;
+.illustration {
+  max-height: 5rem;
+}
+
+.close {
+  float: right;
+}
+
+.instructions {
+  composes: fontBody from "./../styles/typography.module.css";
+}
+
+.heading {
+  composes: fontHeading from "./../styles/typography.module.css";
+}
+
+@media screen and (min-width: 30em) {
+  .illustration {
+    max-height: 10rem;
+  }
 }

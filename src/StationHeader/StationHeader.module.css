@@ -1,5 +1,5 @@
 .stationHeader {
-  composes: bodyFont from "../styles/typography.module.css";
+  composes: fontBody from "../styles/typography.module.css";
 }
 
 .header {
@@ -22,30 +22,26 @@
 }
 
 .figure {
-  max-width: 50%;
-  margin: auto auto;
-  padding: 1rem;
-  max-height: 4rem;
-  overflow: hidden;
+  align-self: center;
 }
 
 .loadingIllustration {
-  background-color: white;
-  display: inline-block;
+  max-height: 10rem;
   position: relative;
-  width: 100%;
-
-  /* padding: 2rem; */
-  margin: 1rem;
-  vertical-align: middle;
-  /* overflow: hidden; */
+  margin: auto;
+  width: auto;
 }
 
 .loading {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: center;
   color: var(--bg);
   background-color: white;
   padding: 0.1rem 1rem;
   border-radius: 6px;
+  margin-bottom: 1rem;
 }
 
 .message {

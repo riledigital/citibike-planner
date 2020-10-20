@@ -2,5 +2,5 @@
   composes: fontHeading from "../styles/typography.module.css";
 }
 .description {
-  composes: bodyFont from "../styles/typography.module.css";
+  composes: fontBody from "../styles/typography.module.css";
 }

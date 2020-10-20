@@ -10,10 +10,21 @@ const Modal = (props) => {
   return (
     <div className={styles.modal} onClick={toggle}>
       <div className={styles.modalContent} onClick={stopPropogation}>
+        <button
+          type="button"
+          className={styles.close}
+          data-dismiss="modal"
+          aria-label="Close"
+          onClick={toggle}
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+
         <figure>
           <Bike
             title="Cycling illustration (Katerina Limpitsouni)"
-            className={styles.svg}
+            className={styles.illustration}
+            viewBox="0 0 800.25287 695.42298"
           />
         </figure>
 
@@ -22,15 +33,18 @@ const Modal = (props) => {
         <p>
           When is the best time to take a CitiBike in your area? Use this app to
           find out which Citi Bike stations are free during a specific time of
-          day. Or explore stations around the city and find out when your
+          day, or explore stations around the city and find out when your
           favorite stations are the busiest.
         </p>
 
-        <h3 className="emphasis">Instructions</h3>
-        <p className="instructions">
+        <h3 className={styles.heading}>Instructions</h3>
+        <p className={styles.instructions}>
           Click on a station on the map. A histogram will appear on the sidebar
           that shows the ride distribution across all 24 hours of the day.
         </p>
+        <div>
+          <button onClick={toggle}>Close</button>
+        </div>
       </div>
     </div>
   );

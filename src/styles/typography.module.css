@@ -37,9 +37,11 @@ h1 {
   font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  margin: 0 0 0.5rem 0;
 }
 
-.bodyFont {
+.fontBody {
   font-family: "Jost";
   font-size: 1rem;
+  margin: 0 0 0.5rem 0;
 }
