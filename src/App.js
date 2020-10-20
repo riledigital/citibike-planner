@@ -214,7 +214,7 @@ function App() {
           </p>
         ) : (
           <div className="data-viewer">
-            <StationHeader {...currentStation} />
+            {stationGeo ? <StationHeader {...currentStation} /> : null}
             {ranking ? (
               <StationPopularity
                 {...getStationRanking(currentStation.station_id)}
@@ -229,12 +229,16 @@ function App() {
               lastUpdated={lastUpdated}
             /> */}
             {/* <Ranking station={getStationRanking(currentStation.station_id)} /> */}
-            <StationActivity
-              data={!!aggData ? aggData[currentStation.station_id] : null}
-              height={200}
-              fill="white"
-            />
-            <LiveStatus {...getStationStatus(currentStation.station_id)} />
+            {aggData ? (
+              <StationActivity
+                data={aggData ? aggData[currentStation.station_id] : null}
+                height={200}
+                fill="white"
+              />
+            ) : null}
+            {stationStatus ? (
+              <LiveStatus {...getStationStatus(currentStation.station_id)} />
+            ) : null}
             {/* <HourBarChart
               data={!!aggData ? aggData[currentStation.station_id] : null}
               width={400}
