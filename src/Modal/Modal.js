@@ -5,13 +5,14 @@ import styles from "./Modal.module.css";
 import { ReactComponent as Bike } from "./../images/undraw_bike_ride_7xit.svg";
 
 const Modal = (props) => {
+  const values = useSpring({ opacity: 1, from: { opacity: 0 } });
   const { toggle } = props;
   const stopPropogation = (e) => {
     e.stopPropagation();
   };
 
   return (
-    <div className={styles.modal} onClick={toggle}>
+    <animated.div style={values} className={styles.modal} onClick={toggle}>
       <div className={styles.modalContent} onClick={stopPropogation}>
         <button
           type="button"
@@ -49,7 +50,7 @@ const Modal = (props) => {
           <button onClick={toggle}>Close</button>
         </div>
       </div>
-    </div>
+    </animated.div>
   );
 };
 
