@@ -5,15 +5,14 @@ import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import localforage from "localforage";
 
-import "animate.css";
 import "./App.css";
 import styles from "./styles/buttons.module.css";
 
-import Modal from "./Modal/Modal";
 import { styleDefault, activityMarker } from "./MapStyles";
 import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
 
+import Modal from "./Modal/Modal";
 import StationHeader from "./StationHeader/StationHeader";
 import StationActivity from "./StationActivity/StationActivity";
 import StationPopularity from "./StationPopularity/StationPopularity";
@@ -21,7 +20,7 @@ import LiveStatus from "./LiveStatus/LiveStatus";
 
 // import Ranking from "./Ranking/Ranking";
 import CircleLegend from "./CircleLegend";
-function App() {
+const App = () => {
   // const [coords, setCoords] = useState({ lon: -73, lat: 40 });
   const [map, setMap] = useState(null);
   const [currentStation, setCurrentStation] = useState({});
@@ -257,6 +256,6 @@ function App() {
       <Footer />
     </div>
   );
-}
+};
 
 export default App;

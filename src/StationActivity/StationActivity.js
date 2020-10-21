@@ -70,7 +70,9 @@ const StationActivity = ({
                   fontWeight="600"
                   text-anchor="left"
                 >
-                  {formatHour(parseTime(d.start_hour))}
+                  {d.start_hour >= 6
+                    ? formatHour(parseTime(d.start_hour))
+                    : null}
                 </text>
               </g>
             );
