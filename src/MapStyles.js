@@ -15,6 +15,7 @@ export const activityMarker = {
   type: "circle",
   source: "stationSource",
   paint: {
+    "circle-stroke-width": 1,
     "circle-radius": {
       base: 1.4,
       stops: [
