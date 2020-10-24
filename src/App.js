@@ -17,6 +17,7 @@ import StationHeader from "./StationHeader/StationHeader";
 import StationActivity from "./StationActivity/StationActivity";
 import StationPopularity from "./StationPopularity/StationPopularity";
 import LiveStatus from "./LiveStatus/LiveStatus";
+import MapLegend from "./MapLegend/MapLegend";
 
 // import Ranking from "./Ranking/Ranking";
 import CircleLegend from "./CircleLegend";
@@ -252,6 +253,9 @@ const App = () => {
 
       <div id="main-map">
         <div ref={(el) => (mapContainer = el)} className="mapContainer" />;
+        <div id="map-legend">
+          <MapLegend />
+        </div>
       </div>
       <Footer />
     </div>

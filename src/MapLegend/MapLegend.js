@@ -2,10 +2,14 @@ import React from "react";
 import { scaleLinear } from "d3-scale";
 import { interpolateHcl, interpolate } from "d3-interpolate";
 import styles from "./MapLegend.module.css";
-const MapLegend = ({ data, width = 120, height = 40 }) => {
+const MapLegend = ({
+  data = [...Array(5).fill()],
+  width = 120,
+  height = 40,
+}) => {
   const legendLabel = {
     fontFamily: "Jost",
-    fontSize: 5,
+    fontSize: 10,
   };
   const color = scaleLinear()
     .domain([0, data.length])
@@ -22,9 +26,10 @@ const MapLegend = ({ data, width = 120, height = 40 }) => {
     right: 20,
   };
   return (
-    <div>
+    <div className={styles.container}>
       <h4 className={styles.heading}>Legend</h4>
       <figure style={{ maxWidth: "100%", margin: "none" }}>
+        <p>Popularity</p>
         <svg viewBox={`0 0 ${width} ${height}`}>
           <g
             transform={`translate(${
@@ -32,7 +37,7 @@ const MapLegend = ({ data, width = 120, height = 40 }) => {
             }, 10)`}
           >
             <text style={legendLabel} text-anchor="middle">
-              Least popular
+              Least
             </text>
           </g>
           <g
@@ -42,7 +47,7 @@ const MapLegend = ({ data, width = 120, height = 40 }) => {
             }, 10)`}
           >
             <text style={legendLabel} text-anchor="middle">
-              Most popular
+              Most
             </text>
           </g>
           {data.map((d, idx) => {

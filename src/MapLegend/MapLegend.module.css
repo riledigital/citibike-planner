@@ -1,7 +1,24 @@
+.container {
+  font-size: 0.9rem;
+  max-width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .heading {
   composes: fontHeading from "./../styles/typography.module.css";
 }
 
 figure {
   margin: 0;
+  padding: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+p {
+  padding: 0;
+  margin: 0;
+  margin-bottom: 0.5rem;
 }

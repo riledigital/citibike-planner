@@ -20,15 +20,22 @@
 }
 
 .modalContent {
+  z-index: 100; /* Sit on top */
+
   border-radius: 8px;
   background-color: var(--text);
   /* min-height: 50vh; */
   width: 25rem;
-  padding: 2rem;
+  padding: 1rem;
+}
+
+svg {
+  z-index: 100;
 }
 
 .illustration {
   max-height: 5rem;
+  z-index: 100;
 }
 
 .close {
