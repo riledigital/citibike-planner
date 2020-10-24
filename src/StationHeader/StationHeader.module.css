@@ -22,11 +22,13 @@
 }
 
 .figure {
+  z-index: 0;
   align-self: center;
 }
 
 .loadingIllustration {
   max-height: 10rem;
+  z-index: 0;
   position: relative;
   margin: auto;
   width: auto;
@@ -47,4 +49,8 @@
 .message {
   padding: 0;
   font-family: "Jost";
+}
+
+svg {
+  z-index: 0;
 }
