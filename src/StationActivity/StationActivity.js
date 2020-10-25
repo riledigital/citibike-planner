@@ -1,17 +1,30 @@
 // https://observablehq.com/@d3/margin-convention
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { scaleTime, scaleLinear } from "d3-scale";
 import { extent } from "d3-array";
 import { timeParse, timeFormat } from "d3-time-format";
+import { useTransition, animated } from "react-spring";
+
 import styles from "./StationActivity.module.css";
 
 const StationActivity = ({
-  data,
+  data = [],
   width = 400,
   height = 400,
   fill = "blue",
   textFill = "white",
 }) => {
+  const [items, setItems] = useState([]);
+
+  const transitions = useTransition(data, (item) => item.start_hour, {
+    from: { opacity: 0 },
+    enter: { opacity: 1 },
+    leave: { opacity: 0 },
+    unique: true,
+    reset: true,
+    trail: 10,
+  });
+
   const formatHour = timeFormat("%_I %p");
   const parseTime = timeParse("%H");
   const margin = { top: 10, right: 5, bottom: 35, left: 5 };
@@ -79,24 +92,27 @@ const StationActivity = ({
           })}
         </g>
         <g className={styles.bars}>
-          {data.map((d, idx) => (
+          {transitions.map(({ item, props, key }) => (
             <>
-              <g
-                key={idx}
-                transform={`translate(${xScale(d.start_hour)}, ${yScale(
-                  d.mean_rides
+              <animated.g
+                key={key}
+                style={props}
+                transform={`translate(${xScale(item.start_hour)}, ${yScale(
+                  item.mean_rides
                 )})`}
               >
                 <rect
                   className={
-                    styles[d.start_hour === currentHour ? "current_hour" : null]
+                    styles[
+                      item.start_hour === currentHour ? "current_hour" : null
+                    ]
                   }
                   fill={fill}
                   width={width / 24 - padding}
-                  height={`${height - yScale(d.mean_rides) - margin.bottom}`}
+                  height={`${height - yScale(item.mean_rides) - margin.bottom}`}
                 >
                   <title>
-                    Average of {d.mean_rides} at hour {d.start_hour}
+                    Average of {item.mean_rides} at hour {item.start_hour}
                   </title>
                 </rect>
                 <text
@@ -109,9 +125,9 @@ const StationActivity = ({
                   fontFamily="Jost"
                   fontWeight="800"
                 >
-                  {Number.parseFloat(d.mean_rides).toFixed(0)}
+                  {Number.parseFloat(item.mean_rides).toFixed(0)}
                 </text>
-              </g>
+              </animated.g>
             </>
           ))}
         </g>
