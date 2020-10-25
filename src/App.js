@@ -205,8 +205,6 @@ const App = () => {
     <div className="App" id="stationHeader">
       <Header toggleModal={toggleModal} />
 
-      {showModal ? <Modal toggle={toggleModal} /> : <></>}
-
       <div className="App-sidebar">
         {loading ? (
           <p>
@@ -248,7 +246,18 @@ const App = () => {
           </div>
         )}
 
-        <div className="App-sidebar-footer"></div>
+        <div className="App-sidebar-footer">
+          <details>
+            <summary>How is popularity calculated?</summary>
+            <p>
+              We rank rides by the average number of trips started at each
+              stations, grouped by Neighborhood Tabulation Areas (NTAs), which
+              were created to predict population counts in New York City at a
+              level finer than Census Tracts. Neighborhoods are loosely defined,
+              but NTA's provide a sufficient rough estimate.
+            </p>
+          </details>
+        </div>
       </div>
 
       <div id="main-map">
@@ -258,6 +267,7 @@ const App = () => {
         </div>
       </div>
       <Footer />
+      {showModal ? <Modal toggle={toggleModal} /> : <></>}
     </div>
   );
 };

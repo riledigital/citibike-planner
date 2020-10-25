@@ -8,7 +8,7 @@ const Modal = (props) => {
   const [show, set] = useState(true);
 
   const transitions = useTransition(show, null, {
-    from: { opacity: 0 },
+    from: { opacity: 0, transform: "translate(0, -100)" },
     enter: { opacity: 1 },
     leave: { opacity: 0 },
   });
