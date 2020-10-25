@@ -204,69 +204,56 @@ const App = () => {
   return (
     <div className="App" id="stationHeader">
       <Header toggleModal={toggleModal} />
-
-      <div className="App-sidebar">
-        {loading ? (
-          <p>
-            <progress></progress>
-          </p>
-        ) : (
-          <div className="data-viewer">
-            {stationGeo ? <StationHeader {...currentStation} /> : null}
-            {ranking ? (
-              <StationPopularity
-                {...getStationRanking(currentStation.station_id)}
-                // rank={ranking.rank}
-                // stations_in_nta={ranking.stations_in_nta}
-                // nta_name={ranking.nta_name}
-              />
-            ) : null}
-            {/* <StationInfo
-              station={currentStation}
-              status={getStationStatus(currentStation.station_id)}
-              lastUpdated={lastUpdated}
-            /> */}
-            {/* <Ranking station={getStationRanking(currentStation.station_id)} /> */}
-            {aggData ? (
-              <StationActivity
-                data={aggData ? aggData[currentStation.station_id] : null}
-                height={200}
-                fill="white"
-              />
-            ) : null}
-            {stationStatus ? (
-              <LiveStatus {...getStationStatus(currentStation.station_id)} />
-            ) : null}
-            {/* <HourBarChart
-              data={!!aggData ? aggData[currentStation.station_id] : null}
-              width={400}
-              height={150}
-              fill="white"
-            /> */}
-          </div>
-        )}
-
-        <div className="App-sidebar-footer">
-          <details>
-            <summary>How is popularity calculated?</summary>
+      <div className="grid-container">
+        <div className="App-sidebar">
+          {loading ? (
             <p>
-              We rank rides by the average number of trips started at each
-              stations, grouped by Neighborhood Tabulation Areas (NTAs), which
-              were created to predict population counts in New York City at a
-              level finer than Census Tracts. Neighborhoods are loosely defined,
-              but NTA's provide a sufficient rough estimate.
+              <progress></progress>
             </p>
-          </details>
-        </div>
-      </div>
+          ) : (
+            <div className="data-viewer">
+              {stationGeo ? <StationHeader {...currentStation} /> : null}
+              {ranking ? (
+                <StationPopularity
+                  {...getStationRanking(currentStation.station_id)}
+                />
+              ) : null}
 
-      <div id="main-map">
-        <div ref={(el) => (mapContainer = el)} className="mapContainer" />;
-        <div id="map-legend">
-          <MapLegend />
+              {aggData ? (
+                <StationActivity
+                  data={aggData ? aggData[currentStation.station_id] : null}
+                  height={200}
+                  fill="white"
+                />
+              ) : null}
+              {stationStatus ? (
+                <LiveStatus {...getStationStatus(currentStation.station_id)} />
+              ) : null}
+            </div>
+          )}
+
+          <div className="App-sidebar-footer">
+            <details>
+              <summary>How is popularity calculated?</summary>
+              <p>
+                We rank rides by the average number of trips started at each
+                stations, grouped by Neighborhood Tabulation Areas (NTAs), which
+                were created to predict population counts in New York City at a
+                level finer than Census Tracts. Neighborhoods are loosely
+                defined, but NTA's provide a sufficient rough estimate.
+              </p>
+            </details>
+          </div>
         </div>
+
+        <div id="main-map">
+          <div ref={(el) => (mapContainer = el)} className="mapContainer" />;
+          <div id="map-legend">
+            <MapLegend />
+          </div>
+        </div>
+        <Footer />
       </div>
-      <Footer />
       {showModal ? <Modal toggle={toggleModal} /> : <></>}
     </div>
   );
