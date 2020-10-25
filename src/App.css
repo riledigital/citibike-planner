@@ -37,13 +37,13 @@ html {
   grid-template-columns: 1fr;
 }
 
-.App-header {
+/* .App-header {
   color: white;
   padding: 8px;
-}
+} */
 
 .App-sidebar {
-  grid-row: 2;
+  /* grid-row: 2; */
   display: flex;
   justify-content: space-between;
   align-items: stretch;
@@ -59,7 +59,7 @@ html {
   /* grid-row: 1; */
   position: relative;
   top: 0;
-  grid-row: 2;
+  /* grid-row: 2; */
 }
 
 .App-footer {
@@ -79,10 +79,17 @@ html {
     animation: App-logo-spin infinite 20s linear;
   }
 
-  .App {
+  .grid-container {
     display: grid;
     grid-template-columns: repeat(9, 1fr);
-    grid-template-rows: 2rem 1fr 12rem;
+    /* grid-template-rows: 2rem 1fr 12rem; */
+    grid-gap: 0px;
+  }
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    /* grid-template-rows: 2rem 1fr 12rem; */
     grid-gap: 0px;
   }
 
@@ -93,10 +100,10 @@ html {
     pointer-events: auto;
   }
 
-  .App-header {
+  /* .App-header {
     grid-column: 1/10;
     grid-row: 1;
-  }
+  } */
 
   .App-sidebar {
     grid-column: 1 / 4;
@@ -104,7 +111,7 @@ html {
 
   .App-footer {
     grid-column: 1 / 10;
-    grid-row: 3;
+    /* grid-row: 3; */
     padding: 2rem;
   }
 
@@ -124,21 +131,6 @@ html {
 /*  */
 @media (prefers-reduced-motion: no-preference) {
 }
-
-/* .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-} */
-
-/* .App-link {
-  color: #61dafb;
-} */
 
 @keyframes App-logo-spin {
   from {
@@ -170,4 +162,9 @@ svg {
   /* border: 1px solid red; */
   background: rgba(255, 255, 255, 0.95);
   padding: 0.5rem;
+}
+
+summary {
+  font-family: "Jost";
+  font-weight: bold;
 }
