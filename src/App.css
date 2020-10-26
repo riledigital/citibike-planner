@@ -6,7 +6,6 @@
   --links: #6f72ff;
   --button-bg: var(--links);
   --button-bg-hover: #c2b9fe;
-
   --theme-1: var(--links);
   --font-main: "Jost", "Futura", sans-serif;
 }
@@ -14,6 +13,7 @@
 .App {
   text-align: left;
   padding: 0;
+  font-family: var(--font-main);
 }
 
 /* Colors */
@@ -49,7 +49,7 @@ html {
   align-items: stretch;
   align-content: flex-start;
   flex-direction: column;
-  padding: 1rem;
+  padding: 0 1rem 0 1rem;
 }
 
 .App-sidebar-footer {

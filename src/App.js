@@ -18,6 +18,7 @@ import StationActivity from "./StationActivity/StationActivity";
 import StationPopularity from "./StationPopularity/StationPopularity";
 import LiveStatus from "./LiveStatus/LiveStatus";
 import MapLegend from "./MapLegend/MapLegend";
+import { Howl, Howler } from "howler";
 
 // import Ranking from "./Ranking/Ranking";
 import CircleLegend from "./CircleLegend";
@@ -108,7 +109,11 @@ const App = () => {
 
   const markerUrl = `${process.env.PUBLIC_URL}/custom_marker.png`;
 
+  const sound = new Howl({
+    src: ["http://en.wikipedia.org/wiki/File:Test_ogg_mp3_48kbps.wav"],
+  });
   useEffect(() => {
+    sound.play();
     setLoading(true);
     fetch(`${process.env.PUBLIC_URL}/data/aggs_by_hour.json`)
       .then((resp) => resp.json())
@@ -241,6 +246,19 @@ const App = () => {
                 were created to predict population counts in New York City at a
                 level finer than Census Tracts. Neighborhoods are loosely
                 defined, but NTA's provide a sufficient rough estimate.
+              </p>
+            </details>
+            <details>
+              <summary>How did you make this?</summary>
+              <p>
+                Data aggregation was performed using Python and the geopandas
+                library. This front-end was built with create-react-app and
+                deployed onto surge.sh. Visualizations were made with a
+                combination of D3 and React, and the map is powered by Mapbox GL
+                JS.{" "}
+                <a href="https://github.com/rl2999/citibike-activity">
+                  The source is available on GitHub.
+                </a>
               </p>
             </details>
           </div>
