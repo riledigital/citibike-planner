@@ -22,7 +22,7 @@ const StationActivity = ({
     leave: { opacity: 0 },
     unique: true,
     reset: true,
-    trail: 10,
+    trail: 20,
   });
 
   const formatHour = timeFormat("%_I %p");
@@ -94,39 +94,42 @@ const StationActivity = ({
         <g className={styles.bars}>
           {transitions.map(({ item, props, key }) => (
             <>
-              <animated.g
-                key={key}
-                style={props}
-                transform={`translate(${xScale(item.start_hour)}, ${yScale(
-                  item.mean_rides
-                )})`}
-              >
-                <rect
-                  className={
-                    styles[
-                      item.start_hour === currentHour ? "current_hour" : null
-                    ]
-                  }
-                  fill={fill}
-                  width={width / 24 - padding}
-                  height={`${height - yScale(item.mean_rides) - margin.bottom}`}
+              <animated.g key={key} style={props}>
+                <g
+                  transform={`translate(${xScale(item.start_hour)}, ${yScale(
+                    item.mean_rides
+                  )})`}
+                  className={styles.svgBar}
                 >
-                  <title>
-                    Average of {item.mean_rides} at hour {item.start_hour}
-                  </title>
-                </rect>
-                <text
-                  className={styles.barLabel}
-                  text-anchor="left"
-                  dx="3px"
-                  dy="-.25em"
-                  fill={textFill}
-                  fontSize="8px"
-                  fontFamily="Jost"
-                  fontWeight="800"
-                >
-                  {Number.parseFloat(item.mean_rides).toFixed(0)}
-                </text>
+                  <rect
+                    className={
+                      styles[
+                        item.start_hour === currentHour ? "current_hour" : null
+                      ]
+                    }
+                    fill={fill}
+                    width={width / 24 - padding}
+                    height={`${
+                      height - yScale(item.mean_rides) - margin.bottom
+                    }`}
+                  >
+                    <title>
+                      Average of {item.mean_rides} at hour {item.start_hour}
+                    </title>
+                  </rect>
+                  <text
+                    className={styles.barLabel}
+                    text-anchor="left"
+                    dx="3px"
+                    dy="-.25em"
+                    fill={textFill}
+                    fontSize="8px"
+                    fontFamily="Jost"
+                    fontWeight="800"
+                  >
+                    {Number.parseFloat(item.mean_rides).toFixed(0)}
+                  </text>
+                </g>
               </animated.g>
             </>
           ))}
