@@ -33,6 +33,8 @@ const Modal = (props) => {
               >
                 <span aria-hidden="true">&times;</span>
               </button>
+              <h1>CitiBike Activity Viewer</h1>
+              <span className={styles.attribution}>By Ri Le</span>
 
               <figure>
                 <Bike
@@ -42,13 +44,13 @@ const Modal = (props) => {
                 />
               </figure>
 
-              <h1>CitiBike Activity Viewer</h1>
-
+              <p className={styles.intro}>
+                When is the best time to take a CitiBike in your area?
+              </p>
               <p>
-                When is the best time to take a CitiBike in your area? Use this
-                app to find out which Citi Bike stations are free during a
-                specific time of day, or explore stations around the city and
-                find out when your favorite stations are the busiest.
+                Use this app to find out which Citi Bike stations are free
+                during a specific time of day, or explore stations around the
+                city and find out when your favorite stations are the busiest.
               </p>
 
               <h3 className={styles.heading}>Instructions</h3>
@@ -58,7 +60,7 @@ const Modal = (props) => {
                 the day.
               </p>
               <div>
-                <button onClick={() => set()}>Close</button>
+                <button onClick={() => set()}>EXPLORE</button>
               </div>
             </div>
           </div>
