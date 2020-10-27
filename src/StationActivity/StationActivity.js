@@ -53,8 +53,8 @@ const StationActivity = ({
       <h3 className={styles.heading}>Average trips per hour</h3>
       <svg viewBox={`0 0 ${width} ${height}`}>
         <text
-          class={styles.axisTitle}
-          text-anchor="middle"
+          className={styles.axisTitle}
+          textAnchor="middle"
           fontFamily="Jost"
           fontSize="8px"
           fontWeight="800"
@@ -81,7 +81,7 @@ const StationActivity = ({
                   fontSize="9px"
                   fontFamily="Jost"
                   fontWeight="600"
-                  text-anchor="left"
+                  textAnchor="left"
                 >
                   {d.start_hour >= 6
                     ? formatHour(parseTime(d.start_hour))
@@ -93,8 +93,8 @@ const StationActivity = ({
         </g>
         <g className={styles.bars}>
           {transitions.map(({ item, props, key }) => (
-            <>
-              <animated.g key={key} style={props}>
+            <React.Fragment key={key}>
+              <animated.g style={props}>
                 <g
                   transform={`translate(${xScale(item.start_hour)}, ${yScale(
                     item.mean_rides
@@ -119,7 +119,7 @@ const StationActivity = ({
                   </rect>
                   <text
                     className={styles.barLabel}
-                    text-anchor="left"
+                    textAnchor="left"
                     dx="3px"
                     dy="-.25em"
                     fill={textFill}
@@ -131,7 +131,7 @@ const StationActivity = ({
                   </text>
                 </g>
               </animated.g>
-            </>
+            </React.Fragment>
           ))}
         </g>
       </svg>

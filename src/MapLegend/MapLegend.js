@@ -36,7 +36,7 @@ const MapLegend = ({
               margin.left + (0 + 0.5) * ((width - margin.right) / data.length)
             }, 10)`}
           >
-            <text style={legendLabel} text-anchor="middle">
+            <text style={legendLabel} textAnchor="middle">
               Least
             </text>
           </g>
@@ -46,7 +46,7 @@ const MapLegend = ({
               (data.length - 1 + 0.5) * ((width - margin.right) / data.length)
             }, 10)`}
           >
-            <text style={legendLabel} text-anchor="middle">
+            <text style={legendLabel} textAnchor="middle">
               Most
             </text>
           </g>
@@ -62,7 +62,7 @@ const MapLegend = ({
                   r={radius}
                   fill={color(idx)}
                   stroke="black"
-                  stroke-width="1px"
+                  strokeWidth="1px"
                 />
               </g>
             );

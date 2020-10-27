@@ -3,7 +3,7 @@
   /* background-color: #0a2472; */
   --bg: #0a2472;
   --text: white;
-  --links: #6f72ff;
+  --links: #c0b8ff;
   --button-bg: var(--links);
   --button-bg-hover: #c2b9fe;
   --theme-1: var(--links);
@@ -65,7 +65,7 @@ html {
 .App-footer {
   align-self: end;
   color: var(--text);
-  padding: 1rem;
+  /* padding: 1rem; */
 }
 
 .mapContainer {
@@ -112,7 +112,7 @@ html {
   .App-footer {
     grid-column: 1 / 10;
     /* grid-row: 3; */
-    padding: 2rem;
+    /* padding: 2rem; */
   }
 
   #main-map {

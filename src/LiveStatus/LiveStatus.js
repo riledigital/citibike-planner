@@ -11,6 +11,7 @@ const LiveStatus = ({
   num_ebikes_available,
   num_docks_available,
   last_reported,
+  rental_url,
 }) => {
   let statusInfo;
   if (!station_id) {
@@ -50,9 +51,11 @@ const LiveStatus = ({
       </div>
       <p className={styles.lastUpdated}>Last updated on {formattedTime}</p>
 
-      <div>
-        <button className={styles.buttonUnlock}>Unlock a bike</button>
-      </div>
+      {/* <div>
+        <a className={styles.buttonUnlock} href={rental_url}>
+          Unlock a bike
+        </a>
+      </div> */}
     </>
   ) : (
     <div className={styles["loading"]}>
