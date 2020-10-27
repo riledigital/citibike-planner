@@ -26,14 +26,6 @@
   align-self: center;
 }
 
-.loadingIllustration {
-  max-height: 10rem;
-  z-index: 0;
-  position: relative;
-  margin: auto;
-  width: auto;
-}
-
 .loading {
   display: flex;
   flex-direction: column;
@@ -41,9 +33,16 @@
   justify-content: center;
   color: var(--bg);
   background-color: white;
-  padding: 0.1rem 1rem;
+  padding: 2rem;
   border-radius: 6px;
   margin-bottom: 1rem;
+}
+.loadingIllustration {
+  max-height: 10rem;
+  z-index: 0;
+  position: relative;
+  margin: auto;
+  width: auto;
 }
 
 .message {

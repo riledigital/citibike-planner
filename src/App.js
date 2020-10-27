@@ -18,7 +18,7 @@ import StationActivity from "./StationActivity/StationActivity";
 import StationPopularity from "./StationPopularity/StationPopularity";
 import LiveStatus from "./LiveStatus/LiveStatus";
 import MapLegend from "./MapLegend/MapLegend";
-import { Howl, Howler } from "howler";
+// import { Howl, Howler } from "howler";
 
 // import Ranking from "./Ranking/Ranking";
 import CircleLegend from "./CircleLegend";
@@ -109,11 +109,7 @@ const App = () => {
 
   const markerUrl = `${process.env.PUBLIC_URL}/custom_marker.png`;
 
-  const sound = new Howl({
-    src: ["http://en.wikipedia.org/wiki/File:Test_ogg_mp3_48kbps.wav"],
-  });
   useEffect(() => {
-    sound.play();
     setLoading(true);
     fetch(`${process.env.PUBLIC_URL}/data/aggs_by_hour.json`)
       .then((resp) => resp.json())
@@ -227,7 +223,7 @@ const App = () => {
               {aggData ? (
                 <StationActivity
                   data={aggData ? aggData[currentStation.station_id] : null}
-                  height={200}
+                  height={150}
                   fill="white"
                 />
               ) : null}
