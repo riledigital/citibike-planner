@@ -19,3 +19,7 @@
   color: white;
   padding: 0.25rem;
 }
+
+button {
+  margin: 0 1rem;
+}
