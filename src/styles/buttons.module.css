@@ -1,5 +1,7 @@
 button {
-  color: white;
+  color: black;
+  font-weight: bold;
+  letter-spacing: 0.5px;
   background-color: var(--button-bg);
   font-family: "Jost";
   border: none;

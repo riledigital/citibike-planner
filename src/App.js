@@ -49,7 +49,6 @@ const App = () => {
       let output = stationGeo.features.find(
         (d) => d.properties.station_id === station_id
       );
-
       return { ...output.properties };
     } catch (e) {
       console.warn("stationGeo not showing");
@@ -214,7 +213,7 @@ const App = () => {
           ) : (
             <div className="data-viewer">
               {stationGeo ? <StationHeader {...currentStation} /> : null}
-              {ranking ? (
+              {ranking && stationGeo ? (
                 <StationPopularity
                   {...getStationRanking(currentStation.station_id)}
                 />
@@ -234,6 +233,9 @@ const App = () => {
           )}
 
           <div className="App-sidebar-footer">
+            <a href="https://member.citibikenyc.com/map/" target="_blank">
+              Go to the Official CitiBike Map
+            </a>
             <details>
               <summary>How is popularity calculated?</summary>
               <p>
@@ -257,6 +259,7 @@ const App = () => {
                 </a>
               </p>
             </details>
+            <Footer />
           </div>
         </div>
 
@@ -266,7 +269,6 @@ const App = () => {
             <MapLegend />
           </div>
         </div>
-        <Footer />
       </div>
       {showModal ? <Modal toggle={toggleModal} /> : <></>}
     </div>
