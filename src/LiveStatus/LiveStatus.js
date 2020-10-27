@@ -48,10 +48,11 @@ const LiveStatus = ({
           <span className={styles["station-status-label"]}>Docks</span>
         </div>
       </div>
-      <div>
-        <button>Unlock a bike</button>
-      </div>
       <p className={styles.lastUpdated}>Last updated on {formattedTime}</p>
+
+      <div>
+        <button className={styles.buttonUnlock}>Unlock a bike</button>
+      </div>
     </>
   ) : (
     <div className={styles["loading"]}>
