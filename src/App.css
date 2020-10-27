@@ -155,13 +155,11 @@ svg {
 #map-legend {
   position: absolute;
   bottom: 5vw;
-
   right: 1vw;
   z-index: 10;
-  max-width: 25vw;
-  /* border: 1px solid red; */
-  background: rgba(255, 255, 255, 0.95);
+  max-width: 15vw;
   padding: 0.5rem;
+  font-size: 0.8rem;
 }
 
 summary {
