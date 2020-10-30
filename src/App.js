@@ -299,7 +299,7 @@ const App = () => {
                 deployed onto surge.sh. Visualizations were made with a
                 combination of D3 and React, and the map is powered by Mapbox GL
                 JS.{" "}
-                <a href="https://github.com/rl2999/citibike-activity">
+                <a href="https://github.com/rl2999/citibike-planner">
                   The source is available on GitHub.
                 </a>
               </p>
