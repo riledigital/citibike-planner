@@ -9,6 +9,7 @@
   padding: 5px;
   color: black;
 }
+
 .header {
   composes: fontHeading from "./../styles/typography.module.css";
   align-items: stretch;
@@ -18,8 +19,4 @@
   /* grid-column: 1/10; */
   color: white;
   padding: 0.25rem;
-}
-
-button {
-  margin: 0 1rem;
 }

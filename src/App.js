@@ -130,13 +130,11 @@ const App = () => {
 
   const scroll = new Howl({
     src: [`${process.env.PUBLIC_URL}/sound/zoom.mp3`],
-    volume: 0.5,
+    volume: 2,
   });
 
   useEffect(() => {
-    if (soundOn) {
-      sfxBike1.play();
-    }
+    sfxBike1.play();
 
     setLoading(true);
     fetch(`${process.env.PUBLIC_URL}/data/aggs_by_hour.json`)
@@ -207,21 +205,13 @@ const App = () => {
 
     map.addControl(geolocate);
 
-    // map.on("mouseover", (e) => {
-    //   if (!scroll.playing) {
-    //     scroll.play();
-    //   }
-    // });
-
     map.on("drag", function (e) {
       if (!scroll.playing()) {
-        scroll.rate(0.5);
         scroll.play();
       }
     });
     map.on("zoom", function (e) {
       if (!scroll.playing()) {
-        scroll.rate(0.5);
         scroll.play();
       }
       // scroll.play();
