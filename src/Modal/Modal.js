@@ -4,7 +4,7 @@ import { useTransition, animated } from "react-spring";
 import styles from "./Modal.module.css";
 import { ReactComponent as Bike } from "./../images/undraw_bike_ride_7xit.svg";
 
-const Modal = (props) => {
+const Modal = ({ toggle, soundOn, toggleSound }) => {
   const [show, set] = useState(true);
 
   const transitions = useTransition(show, null, {
@@ -13,7 +13,7 @@ const Modal = (props) => {
     leave: { opacity: 0 },
   });
 
-  const { toggle } = props;
+  // const { toggle } = props;
   const stopPropogation = (e) => {
     e.stopPropagation();
   };
@@ -59,7 +59,11 @@ const Modal = (props) => {
                 sidebar that shows the ride distribution across all 24 hours of
                 the day.
               </p>
+
               <div>
+                <button onClick={toggleSound}>
+                  Toggle Sound {soundOn ? "Off" : "On"}
+                </button>
                 <button onClick={() => set()}>EXPLORE</button>
               </div>
             </div>

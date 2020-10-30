@@ -33,12 +33,12 @@ const App = () => {
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(true);
   const [ranking, setRanking] = useState({});
-  const [soundOn, setSound] = useState(true);
+  const [soundOn, setSound] = useState(false);
 
   mapboxgl.accessToken = process.env.REACT_APP_MAPBOX;
 
   const pop = new Howl({
-    src: [`${process.env.PUBLIC_URL}/sound/pop-composite.mp3`],
+    src: [`${process.env.PUBLIC_URL}/sound/pop.mp3`],
     onend: function () {
       console.log("Finished!");
     },
@@ -46,6 +46,7 @@ const App = () => {
 
   function toggleModal(e) {
     setShowModal(!showModal);
+
     // if (e.target.className === "button" || e.target.className === "modal") {
     //   setShowModal(!showModal);
     // } else {
@@ -103,9 +104,7 @@ const App = () => {
   }
 
   const handleStationClick = (station) => {
-    if (soundOn) {
-      pop.play();
-    }
+    pop.play();
 
     const queryElement = document.querySelector("#stationHeader");
     if (queryElement) {
@@ -130,7 +129,7 @@ const App = () => {
   });
 
   const scroll = new Howl({
-    src: [`${process.env.PUBLIC_URL}/sound/scroll.mp3`],
+    src: [`${process.env.PUBLIC_URL}/sound/zoom.mp3`],
     volume: 0.5,
   });
 
@@ -326,7 +325,15 @@ const App = () => {
           </div>
         </div>
       </div>
-      {showModal ? <Modal toggle={toggleModal} /> : <></>}
+      {showModal ? (
+        <Modal
+          toggle={toggleModal}
+          soundOn={soundOn}
+          toggleSound={() => setSound(!soundOn)}
+        />
+      ) : (
+        <></>
+      )}
     </div>
   );
 };
