@@ -33,7 +33,7 @@ const Modal = ({ toggle, soundOn, toggleSound }) => {
               >
                 <span aria-hidden="true">&times;</span>
               </button>
-              <h1>CitiBike Activity Viewer</h1>
+              <h1>Citi Bike Planner</h1>
               <span className={styles.attribution}>By Ri Le</span>
 
               <figure>
@@ -44,8 +44,8 @@ const Modal = ({ toggle, soundOn, toggleSound }) => {
                 />
               </figure>
 
-              <p className={styles.intro}>
-                When is the best time to take a CitiBike in your area?
+              <p>
+                When is the best time to take a Citi Bike in your area?
               </p>
               <p>
                 Use this app to find out which Citi Bike stations are free
@@ -58,11 +58,13 @@ const Modal = ({ toggle, soundOn, toggleSound }) => {
                 Click on a station on the map. A histogram will appear on the
                 sidebar that shows the ride distribution across all 24 hours of
                 the day.
+                <small> This is a personal project unaffiliated with Motivate or Citi Bike.</small>
               </p>
+
 
               <div>
                 <button onClick={toggleSound}>
-                  Toggle Sound {soundOn ? "Off" : "On"}
+                  Turn Sound {soundOn ? "Off" : "On"}
                 </button>
                 <button onClick={() => set()}>EXPLORE</button>
               </div>

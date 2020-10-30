@@ -5,11 +5,11 @@ const Header = ({ toggleModal, toggleSound, soundOn }) => {
   return (
     <header className={styles.header}>
       <div className={styles.branding}>
-        <span>Citibike Activity Viewer</span>
+        <span>Citi Bike Planner</span>
       </div>
       <nav className={styles.nav}>
         <button onClick={toggleSound}>
-          Toggle Sound {soundOn ? "Off" : "On"}
+          Turn Sound {soundOn ? "Off" : "On"}
         </button>
         <button className={styles.help} onClick={toggleModal}>
           Help

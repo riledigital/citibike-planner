@@ -5,11 +5,17 @@ button {
   background-color: var(--button-bg);
   font-family: "Jost";
   border: none;
-  padding: 0.5rem;
+  padding: 0.25rem 1rem;
   border-radius: 6px;
+  text-transform: uppercase;
+  margin: 0;
 }
 
 button:hover {
   background-color: var(--button-bg-hover);
   color: black;
+}
+
+button:first-of-type {
+  margin-right: 0.5rem;
 }
