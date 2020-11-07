@@ -219,7 +219,7 @@ const App = () => {
           ) : (
             <div className="data-viewer">
               {stationGeo ? <StationHeader {...currentStation} /> : null}
-              {loading && ranking && stationGeo ? (
+              {!loading && ranking && stationGeo ? (
                 <StationPopularity
                   {...getStationRanking(currentStation.station_id)}
                 />
