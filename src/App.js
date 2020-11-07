@@ -68,23 +68,6 @@ const App = () => {
     }
   }
 
-  const fetchStationStatus = async () => {
-    console.log("Attempting to get station status...");
-    const url = "https://gbfs.citibikenyc.com/gbfs/en/station_status.json";
-    console.log("Fetching new station status data...");
-    let allStationsStatus = {};
-    return fetch(url)
-      .then((resp) => resp.json())
-      .then((data) => {
-        data["data"]["stations"].map((record) => {
-          allStationsStatus[record.station_id] = { ...record };
-          return record;
-        });
-        setStationStatus(allStationsStatus);
-        setLastUpdated(new Date(data["last_updated"] * 1000));
-      });
-  };
-
   const handleStationClick = (station) => {
     pop.play();
     const queryElement = document.querySelector("#stationHeader");
@@ -108,31 +91,6 @@ const App = () => {
       console.log("Finished!");
     },
   });
-
-  const fetchAggData = async () => {
-    let prom = fetch(`${process.env.PUBLIC_URL}/data/aggs_by_hour.json`)
-      .then((resp) => resp.json())
-      .then((data) => {
-        setAggData(data);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-    debugger;
-    return prom;
-  };
-
-  const fetchStationGeo = async () => {
-    return fetch(`${process.env.PUBLIC_URL}/data/station_info.geojson`)
-      .then((resp) => resp.json())
-      .then((data) => {
-        debugger;
-        setStationGeo(data);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  };
 
   const sfxScrolling = new Howl({
     src: [`${process.env.PUBLIC_URL}/sound/zoom.mp3`],
