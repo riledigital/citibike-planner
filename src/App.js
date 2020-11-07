@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import mapboxgl from "mapbox-gl";
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
-import localforage from "localforage";
 
 import "./App.css";
 import styles from "./styles/buttons.module.css";
@@ -46,11 +45,6 @@ const App = () => {
 
   function toggleModal(e) {
     setShowModal(!showModal);
-
-    // if (e.target.className === "button" || e.target.className === "modal") {
-    //   setShowModal(!showModal);
-    // } else {
-    // }
   }
 
   function getStationRanking(station_id) {
@@ -69,43 +63,30 @@ const App = () => {
     try {
       return stationStatus[id];
     } catch (e) {
-      console.error("stationGeo not showing");
+      console.error("Oops, stationStatus not loaded");
       console.error(e);
     }
   }
 
-  function fetchStationStatus() {
-    setLoading(true);
+  const fetchStationStatus = async () => {
     console.log("Attempting to get station status...");
     const url = "https://gbfs.citibikenyc.com/gbfs/en/station_status.json";
-
-    localforage.length().then((numberOfKeys) => {
-      if (false) {
-        console.log("Attempting to load preexisting data from localforage...");
-        setStationStatus(localforage.getItem("stationStatus"));
-      } else {
-        console.log("Fetching new data and caching it to indexedDb...");
-        let allStationsStatus = {};
-        fetch(url, { cache: "force-cache" })
-          .then((resp) => resp.json())
-          .then((data) => {
-            data["data"]["stations"].map((record) => {
-              allStationsStatus[record.station_id] = { ...record };
-              // localforage.setItem(record.station_id, { ...record });
-              loading ? setLoading(false) : console.log("Loading statuses...");
-              return record;
-            });
-            setStationStatus(allStationsStatus);
-            setLastUpdated(new Date(data["last_updated"] * 1000));
-            localforage.setItem("stationStatus", stationStatus);
-          });
-      }
-    });
-  }
+    console.log("Fetching new station status data...");
+    let allStationsStatus = {};
+    return fetch(url)
+      .then((resp) => resp.json())
+      .then((data) => {
+        data["data"]["stations"].map((record) => {
+          allStationsStatus[record.station_id] = { ...record };
+          return record;
+        });
+        setStationStatus(allStationsStatus);
+        setLastUpdated(new Date(data["last_updated"] * 1000));
+      });
+  };
 
   const handleStationClick = (station) => {
     pop.play();
-
     const queryElement = document.querySelector("#stationHeader");
     if (queryElement) {
       queryElement.scrollIntoView({
@@ -118,32 +99,48 @@ const App = () => {
   let mapContainer = React.createRef();
 
   const markerUrl = `${process.env.PUBLIC_URL}/custom_marker.png`;
+
   // sound effects
-  const sfxBike1URL = `${process.env.PUBLIC_URL}/sound/bikes.mp3`;
   const sfxBike1 = new Howl({
-    src: [sfxBike1URL],
+    src: [`${process.env.PUBLIC_URL}/sound/bikes.mp3`],
     volume: 0.15,
     onend: function () {
       console.log("Finished!");
     },
   });
 
-  const scroll = new Howl({
+  const fetchAggData = async () => {
+    let prom = fetch(`${process.env.PUBLIC_URL}/data/aggs_by_hour.json`)
+      .then((resp) => resp.json())
+      .then((data) => {
+        setAggData(data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+    debugger;
+    return prom;
+  };
+
+  const fetchStationGeo = async () => {
+    return fetch(`${process.env.PUBLIC_URL}/data/station_info.geojson`)
+      .then((resp) => resp.json())
+      .then((data) => {
+        debugger;
+        setStationGeo(data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
+  const sfxScrolling = new Howl({
     src: [`${process.env.PUBLIC_URL}/sound/zoom.mp3`],
     volume: 2,
   });
 
   useEffect(() => {
     sfxBike1.play();
-
-    setLoading(true);
-    fetch(`${process.env.PUBLIC_URL}/data/aggs_by_hour.json`)
-      .then((resp) => resp.json())
-      .then((data) => {
-        setAggData(data);
-        setLoading(false);
-      });
-
     const map = new mapboxgl.Map({
       container: mapContainer,
       style: "mapbox://styles/mapbox/light-v10",
@@ -155,66 +152,72 @@ const App = () => {
       ],
     });
 
-    fetch(`${process.env.PUBLIC_URL}/data/station_info.geojson`)
-      .then((resp) => resp.json())
-      .then((data) => {
-        setStationGeo(data);
-        // debugger;
-        map.on("load", function () {
-          map.loadImage(markerUrl, function (error, img) {
-            if (error) throw error;
-            map.addImage("custom-marker", img);
-            map.addSource("stationSource", {
-              type: "geojson",
-              // Test later?
-              data: data,
-            });
-            // Add a layer showing the places.
-
-            map.addLayer(activityMarker);
-            if (loading) {
-              setLoading(false);
-            }
+    setLoading(true);
+    // Async load everything
+    Promise.allSettled([
+      fetch(`${process.env.PUBLIC_URL}/data/aggs_by_hour.json`).then((resp) =>
+        resp.json()
+      ),
+      fetch(
+        `${process.env.PUBLIC_URL}/data/station_info.geojson`
+      ).then((resp) => resp.json()),
+      fetch(
+        "https://gbfs.citibikenyc.com/gbfs/en/station_status.json"
+      ).then((resp) => resp.json()),
+    ]).then((data) => {
+      setAggData(data[0].value);
+      setStationGeo(data[1].value);
+      let allStationsStatus = {};
+      const fetchedData = data[2].value;
+      fetchedData["data"]["stations"].map((record) => {
+        allStationsStatus[record.station_id] = { ...record };
+        return record;
+      });
+      setStationStatus(allStationsStatus);
+      setLastUpdated(new Date(fetchedData["last_updated"] * 1000));
+      setLoading(false);
+      map.on("load", function () {
+        map.loadImage(markerUrl, function (error, img) {
+          if (error) throw error;
+          map.addImage("custom-marker", img);
+          map.addSource("stationSource", {
+            type: "geojson",
+            data: data[1].value,
           });
-          setMap(map);
+          map.addLayer(activityMarker);
         });
-      })
-      .then(() => {});
+        setMap(map);
+        map.addControl(
+          new MapboxGeocoder({
+            accessToken: mapboxgl.accessToken,
+            mapboxgl: mapboxgl,
+          })
+        );
 
-    fetchStationStatus();
-    map.addControl(
-      new MapboxGeocoder({
-        accessToken: mapboxgl.accessToken,
-        mapboxgl: mapboxgl,
-      })
-    );
+        const scale = new mapboxgl.ScaleControl({
+          maxWidth: 80,
+          unit: "imperial",
+        });
 
-    const scale = new mapboxgl.ScaleControl({
-      maxWidth: 80,
-      unit: "imperial",
-    });
-
-    map.addControl(scale);
-
-    const geolocate = new mapboxgl.GeolocateControl({
-      positionOptions: {
-        enableHighAccuracy: true,
-      },
-      trackUserLocation: true,
-    });
-
-    map.addControl(geolocate);
-
-    map.on("drag", function (e) {
-      if (!scroll.playing()) {
-        scroll.play();
-      }
-    });
-    map.on("zoom", function (e) {
-      if (!scroll.playing()) {
-        scroll.play();
-      }
-      // scroll.play();
+        map.addControl(scale);
+        const geolocate = new mapboxgl.GeolocateControl({
+          positionOptions: {
+            enableHighAccuracy: true,
+          },
+          trackUserLocation: true,
+        });
+        map.addControl(geolocate);
+        map.on("drag", function (e) {
+          if (!sfxScrolling.playing()) {
+            sfxScrolling.play();
+          }
+        });
+        map.on("zoom", function (e) {
+          if (!sfxScrolling.playing()) {
+            sfxScrolling.play();
+          }
+        });
+      });
     });
 
     // "https://docs.mapbox.com/mapbox-gl-js/assets/custom_marker.png",
@@ -258,7 +261,7 @@ const App = () => {
           ) : (
             <div className="data-viewer">
               {stationGeo ? <StationHeader {...currentStation} /> : null}
-              {ranking && stationGeo ? (
+              {loading && ranking && stationGeo ? (
                 <StationPopularity
                   {...getStationRanking(currentStation.station_id)}
                 />
@@ -278,7 +281,6 @@ const App = () => {
           )}
 
           <div className="App-sidebar-footer">
-
             <Footer />
           </div>
         </div>
