@@ -36,13 +36,6 @@ const App = () => {
 
   mapboxgl.accessToken = process.env.REACT_APP_MAPBOX;
 
-  const pop = new Howl({
-    src: [`${process.env.PUBLIC_URL}/sound/pop.mp3`],
-    onend: function () {
-      console.log("Finished!");
-    },
-  });
-
   function toggleModal(e) {
     setShowModal(!showModal);
   }
@@ -69,7 +62,7 @@ const App = () => {
   }
 
   const handleStationClick = (station) => {
-    pop.play();
+    sfxClickSound.play();
     const queryElement = document.querySelector("#stationHeader");
     if (queryElement) {
       queryElement.scrollIntoView({
@@ -84,12 +77,13 @@ const App = () => {
   const markerUrl = `${process.env.PUBLIC_URL}/custom_marker.png`;
 
   // sound effects
+  const sfxClickSound = new Howl({
+    src: [`${process.env.PUBLIC_URL}/sound/pop.mp3`],
+  });
+
   const sfxBike1 = new Howl({
     src: [`${process.env.PUBLIC_URL}/sound/bikes.mp3`],
     volume: 0.15,
-    onend: function () {
-      console.log("Finished!");
-    },
   });
 
   const sfxScrolling = new Howl({
