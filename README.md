@@ -2,6 +2,12 @@
 
 The CitiBike Activity Viewer is a web app that shows when a particular CitiBike station is used most often.
 
+# Setup
+
+- Run `nvm use` to use the `.nvmrc` file.
+- Run `yarn` to install all packages
+- `npm run start` to develop
+
 # Build and deploy
 
 `npm run start` starts CRA dev server
