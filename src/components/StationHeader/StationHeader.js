@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import styles from "./StationHeader.module.css";
 import { useTransition, animated } from "react-spring";
-import { ReactComponent as LoadingIllustration } from "./../images/undraw_No_data_re_kwbl.svg";
+import { ReactComponent as LoadingIllustration } from "./undraw_No_data_re_kwbl.svg";
 const StationHeader = ({ name, station_id, nta_name, boro_name }) => {
   // Logic for handling null NTA codes
   const [show, setShow] = useState(false);

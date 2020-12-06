@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useTransition, animated } from "react-spring";
 
 import styles from "./Modal.module.css";
-import { ReactComponent as Bike } from "./../images/undraw_bike_ride_7xit.svg";
+import { ReactComponent as Bike } from "./undraw_bike_ride_7xit.svg";
 
 const Modal = ({ toggle, soundOn, toggleSound }) => {
   const [show, set] = useState(true);
@@ -44,9 +44,7 @@ const Modal = ({ toggle, soundOn, toggleSound }) => {
                 />
               </figure>
 
-              <p>
-                When is the best time to take a Citi Bike in your area?
-              </p>
+              <p>When is the best time to take a Citi Bike in your area?</p>
               <p>
                 Use this app to find out which Citi Bike stations are free
                 during a specific time of day, or explore stations around the
@@ -58,9 +56,12 @@ const Modal = ({ toggle, soundOn, toggleSound }) => {
                 Click on a station on the map. A histogram will appear on the
                 sidebar that shows the ride distribution across all 24 hours of
                 the day.
-                <small> This is a personal project unaffiliated with Motivate or Citi Bike.</small>
+                <small>
+                  {" "}
+                  This is a personal project unaffiliated with Motivate or Citi
+                  Bike.
+                </small>
               </p>
-
 
               <div>
                 <button onClick={toggleSound}>

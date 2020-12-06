@@ -10,7 +10,7 @@
 }
 
 .heading {
-  composes: fontHeading from "./../styles/typography.module.css";
+  /* composes: fontHeading from "./../styles/typography.module.css"; */
   font-size: 0.7rem;
   padding: 0;
   margin: 0;

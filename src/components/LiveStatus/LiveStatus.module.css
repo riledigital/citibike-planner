@@ -1,5 +1,5 @@
 .heading {
-  composes: fontHeading from "./../styles/typography.module.css";
+  /* composes: fontHeading from "./../styles/typography.module.css"; */
   text-transform: uppercase;
   font-weight: bold;
   padding: 0;
@@ -69,7 +69,7 @@
 }
 
 .lastUpdated {
-  composes: fontBody from "./../styles/typography.module.css";
+  /* composes: fontBody from "./../styles/typography.module.css"; */
   font-weight: normal;
   font-size: 0.8rem;
   text-align: center;

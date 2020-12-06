@@ -1,5 +1,5 @@
 .modal {
-  composes: fontBody from "../styles/typography.module.css";
+  /* composes: fontBody from "../../styles/typography.module.css"; */
   align-items: center;
   background-color: rgba(0, 0, 0, 0.4);
   display: flex; /* Hidden by default */
@@ -31,6 +31,8 @@ h1 {
   z-index: 100; /* Sit on top */
   border-radius: 8px;
   background-color: var(--text);
+  top: 0;
+  position: absolute;
   padding: 1rem;
 }
 
@@ -50,7 +52,7 @@ svg {
 .illustration {
   /* max-height: 5rem; */
   /* z-index: 100; */
-
+  max-height: 6rem;
   max-width: 80%;
   padding: 1rem;
 }
@@ -60,11 +62,11 @@ svg {
 }
 
 .instructions {
-  composes: fontBody from "./../styles/typography.module.css";
+  /* composes: fontBody from "./../styles/typography.module.css"; */
 }
 
 .heading {
-  composes: fontHeading from "./../styles/typography.module.css";
+  /* composes: fontHeading from "./../styles/typography.module.css"; */
 }
 
 @media screen and (min-width: 30em) {

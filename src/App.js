@@ -8,19 +8,19 @@ import "./App.css";
 import styles from "./styles/buttons.module.css";
 
 import { styleDefault, activityMarker } from "./MapStyles";
-import Header from "./Header/Header";
-import Footer from "./Footer/Footer";
+import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
 
-import Modal from "./Modal/Modal";
-import StationHeader from "./StationHeader/StationHeader";
-import StationActivity from "./StationActivity/StationActivity";
-import StationPopularity from "./StationPopularity/StationPopularity";
-import LiveStatus from "./LiveStatus/LiveStatus";
-import MapLegend from "./MapLegend/MapLegend";
+import Modal from "./components/Modal/Modal";
+import StationHeader from "./components/StationHeader/StationHeader";
+import StationActivity from "./components/StationActivity/StationActivity";
+import StationPopularity from "./components/StationPopularity/StationPopularity";
+import LiveStatus from "./components/LiveStatus/LiveStatus";
+import MapLegend from "./components/MapLegend/MapLegend";
 import { Howl, Howler } from "howler";
 
 // import Ranking from "./Ranking/Ranking";
-import CircleLegend from "./CircleLegend";
+import CircleLegend from "./components/CircleLegend/CircleLegend";
 const App = () => {
   // const [coords, setCoords] = useState({ lon: -73, lat: 40 });
   const [map, setMap] = useState(null);
