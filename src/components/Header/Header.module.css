@@ -11,7 +11,7 @@
 }
 
 .header {
-  composes: fontHeading from "./../styles/typography.module.css";
+  /* composes: fontHeading from "./../../styles/typography.module.css"; */
   align-items: stretch;
   display: flex;
   flex-direction: row;

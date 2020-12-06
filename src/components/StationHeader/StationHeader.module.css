@@ -1,5 +1,5 @@
 .stationHeader {
-  composes: fontBody from "../styles/typography.module.css";
+  /* composes: fontBody from "../styles/typography.module.css"; */
 }
 
 .header {
