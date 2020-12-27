@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
-import { scaleLinear } from "d3-scale";
-import { interpolateLab } from "d3-interpolate";
+import { interpolateLab, scaleLinear } from "d3";
 const d3 = Object.assign({}, { scaleLinear, interpolateLab });
 
 const CircleLegend = ({ cmap }) => {

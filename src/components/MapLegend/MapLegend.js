@@ -1,6 +1,5 @@
 import React from "react";
-import { scaleLinear } from "d3-scale";
-import { interpolateHcl, interpolate } from "d3-interpolate";
+import { interpolateHcl, interpolate, scaleLinear } from "d3";
 import styles from "./MapLegend.module.css";
 const MapLegend = ({
   data = [...Array(5).fill()],
