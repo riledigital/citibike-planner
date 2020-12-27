@@ -121,6 +121,7 @@ const App = () => {
       setStationGeo(data[1].value);
       let allStationsStatus = {};
       const fetchedData = data[2].value;
+
       fetchedData["data"]["stations"].map((record) => {
         allStationsStatus[record.station_id] = { ...record };
         return record;
