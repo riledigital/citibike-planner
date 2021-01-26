@@ -22,7 +22,6 @@ import { Howl, Howler } from "howler";
 // import Ranking from "./Ranking/Ranking";
 import CircleLegend from "./components/CircleLegend/CircleLegend";
 const App = () => {
-  // const [coords, setCoords] = useState({ lon: -73, lat: 40 });
   const [map, setMap] = useState(null);
   const [currentStation, setCurrentStation] = useState({});
   const [aggData, setAggData] = useState(null);
