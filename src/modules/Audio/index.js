@@ -1,4 +1,4 @@
-import { Howl, Howler } from "howler";
+import { Howl, Howler } from 'howler';
 
 class Audio {
     constructor() {
@@ -9,14 +9,14 @@ class Audio {
                 src: [`${process.env.PUBLIC_URL}/sound/pop.mp3`],
             }),
             sfxBike1: new Howl({
-    src: [`${process.env.PUBLIC_URL}/sound/bikes.mp3`],
-    volume: 0.15,
+                src: [`${process.env.PUBLIC_URL}/sound/bikes.mp3`],
+                volume: 0.15,
             }),
             scrolling: new Howl({
-    src: [`${process.env.PUBLIC_URL}/sound/zoom.mp3`],
+                src: [`${process.env.PUBLIC_URL}/sound/zoom.mp3`],
                 volume: 2
             })
-        }
+        };
 
 
     }
@@ -30,7 +30,7 @@ class Audio {
             }
             return this.SOUNDS[sound].isPlaying();
         } catch (e) {
-            console.error("Sound not found: " + sound);
+            console.error('Sound not found: ' + sound);
         }
     }
 
@@ -40,7 +40,7 @@ class Audio {
     }
 
     mute(state) {
-        this.Howler.mute(state)
+        this.Howler.mute(state);
     }
 
 }
