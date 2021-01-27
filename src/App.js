@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-// import logo from "./logo.svg";
+
 import mapboxgl from "mapbox-gl";
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
@@ -8,19 +8,12 @@ import "./App.css";
 import styles from "./styles/buttons.module.css";
 
 import { styleDefault, activityMarker } from "./MapStyles";
-import Header from "./components/Header/Header";
-import Footer from "./components/Footer/Footer";
 
-import Modal from "./components/Modal/Modal";
-import StationHeader from "./components/StationHeader/StationHeader";
-import StationActivity from "./components/StationActivity/StationActivity";
-import StationPopularity from "./components/StationPopularity/StationPopularity";
-import LiveStatus from "./components/LiveStatus/LiveStatus";
-import MapLegend from "./components/MapLegend/MapLegend";
-import { Howl, Howler } from "howler";
+import {Header, Footer, Modal, CircleLegend, StationHeader,LiveStatus, StationActivity, StationPopularity,MapLegend} from "./components";
+import Audio from "./modules/Audio";
+import { throttle } from "lodash";
 
 // import Ranking from "./Ranking/Ranking";
-import CircleLegend from "./components/CircleLegend/CircleLegend";
 const App = () => {
   const [map, setMap] = useState(null);
   const [currentStation, setCurrentStation] = useState({});
@@ -32,6 +25,7 @@ const App = () => {
   const [showModal, setShowModal] = useState(true);
   const [ranking, setRanking] = useState({});
   const [soundOn, setSound] = useState(false);
+  const [sfx, setSfxManager] = useState(null);
 
   mapboxgl.accessToken = process.env.REACT_APP_MAPBOX;
 
@@ -61,7 +55,6 @@ const App = () => {
   }
 
   const handleStationClick = (station) => {
-    sfxClickSound.play();
     const queryElement = document.querySelector("#stationHeader");
     if (queryElement) {
       queryElement.scrollIntoView({
@@ -75,23 +68,13 @@ const App = () => {
 
   const markerUrl = `${process.env.PUBLIC_URL}/custom_marker.png`;
 
-  // sound effects
-  const sfxClickSound = new Howl({
-    src: [`${process.env.PUBLIC_URL}/sound/pop.mp3`],
-  });
 
-  const sfxBike1 = new Howl({
-    src: [`${process.env.PUBLIC_URL}/sound/bikes.mp3`],
-    volume: 0.15,
-  });
 
-  const sfxScrolling = new Howl({
-    src: [`${process.env.PUBLIC_URL}/sound/zoom.mp3`],
-    volume: 2,
-  });
 
   useEffect(() => {
-    sfxBike1.play();
+    const sfx = new Audio();
+    setSfxManager(sfx);
+    sfx.play('sfxBike1');
     const map = new mapboxgl.Map({
       container: mapContainer,
       style: "mapbox://styles/mapbox/light-v10",
@@ -118,16 +101,21 @@ const App = () => {
     ]).then((data) => {
       setAggData(data[0].value);
       setStationGeo(data[1].value);
+
       let allStationsStatus = {};
       const fetchedData = data[2].value;
 
-      fetchedData["data"]["stations"].map((record) => {
+      fetchedData["data"]["stations"].forEach((record) => {
         allStationsStatus[record.station_id] = { ...record };
         return record;
       });
-      setStationStatus(allStationsStatus);
-      setLastUpdated(new Date(fetchedData["last_updated"] * 1000));
+
       setLoading(false);
+      setStationStatus(allStationsStatus);
+
+      setLastUpdated(new Date(fetchedData["last_updated"] * 1000));
+
+
       map.on("load", function () {
         map.loadImage(markerUrl, function (error, img) {
           if (error) throw error;
@@ -152,6 +140,8 @@ const App = () => {
         });
 
         map.addControl(scale);
+
+        const playThrottled = throttle(() => sfx.play('scrolling'), 100);
         const geolocate = new mapboxgl.GeolocateControl({
           positionOptions: {
             enableHighAccuracy: true,
@@ -160,20 +150,18 @@ const App = () => {
         });
         map.addControl(geolocate);
         map.on("drag", function (e) {
-          if (!sfxScrolling.playing()) {
-            sfxScrolling.play();
-          }
+          playThrottled();
         });
+
         map.on("zoom", function (e) {
-          if (!sfxScrolling.playing()) {
-            sfxScrolling.play();
-          }
+          playThrottled();
         });
       });
     });
 
     // "https://docs.mapbox.com/mapbox-gl-js/assets/custom_marker.png",
     map.on("click", "stationLayer", function (e) {
+      sfx.play('click')
       let feature = e.features[0].properties;
       var coordinates = e.features[0].geometry.coordinates.slice();
       var description = e.features[0].properties.name;
@@ -189,13 +177,19 @@ const App = () => {
         .setLngLat(coordinates)
         .setHTML(description)
         .addTo(map);
+
       handleStationClick(feature);
     });
 
     return () => map.remove();
   }, []);
 
-  Howler.mute(!soundOn);
+  useEffect(() => {
+    if (sfx) {
+      sfx?.mute(!soundOn);
+    }
+  },
+  [sfx, soundOn])
 
   return (
     <div className="App" id="stationHeader">
