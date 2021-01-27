@@ -1,88 +1,88 @@
-import React from 'react';
-import { VegaLite } from 'react-vega';
-import './Vis.css';
+import React from "react";
+import { VegaLite } from "react-vega";
+import "./Vis.css";
 
 function Vis(props) {
   const { currentHour, data } = props;
   const barData = { table: data };
 
   const spec = {
-    data: { name: 'table' },
-    height: 'container',
-    width: 'container',
+    data: { name: "table" },
+    height: "container",
+    width: "container",
     autosize: {
-      type: 'fit',
-      contains: 'padding',
+      type: "fit",
+      contains: "padding",
     },
     config: {
       mark: { bar: {} },
-      title: { titleFont: 'Jost', titleFontSize: 16, titleColor: 'white' },
+      title: { titleFont: "Jost", titleFontSize: 16, titleColor: "white" },
 
       axis: {
         domain: false,
         gridOpacity: 0.4,
-        labelFont: 'Jost',
-        labelColor: 'white',
-        titleFont: 'Jost',
+        labelFont: "Jost",
+        labelColor: "white",
+        titleFont: "Jost",
         titleFontSize: 16,
-        titleColor: 'white',
+        titleColor: "white",
       },
     },
     encoding: { axis: { domain: false } },
-    background: 'transparent',
+    background: "transparent",
     layer: [
       {
         mark: {
-          type: 'bar',
-          color: 'white',
+          type: "bar",
+          color: "white",
         },
         encoding: {
           axis: { domain: false },
           opacity: {
             condition: {
               test: `datum['start_hour'] !== ${currentHour}`,
-              value: '.5',
+              value: ".5",
             },
           },
           x: {
-            type: 'ordinal',
-            field: 'start_hour',
-            title: 'Hour',
+            type: "ordinal",
+            field: "start_hour",
+            title: "Hour",
           },
           y: {
-            type: 'quantitative',
-            field: 'mean_rides',
-            title: 'Average count of rides',
+            type: "quantitative",
+            field: "mean_rides",
+            title: "Average count of rides",
           },
         },
       },
       {
         mark: {
-          type: 'text',
-          style: 'label',
-          color: 'white',
+          type: "text",
+          style: "label",
+          color: "white",
           dy: -10,
-          fontWeight: 'bold',
+          fontWeight: "bold",
         },
         encoding: {
           axis: { domain: false },
 
           text: {
-            type: 'quantitative',
-            field: 'mean_rides',
-            format: '.0f',
+            type: "quantitative",
+            field: "mean_rides",
+            format: ".0f",
           },
           x: {
-            type: 'ordinal',
-            field: 'start_hour',
-            title: 'Hour',
+            type: "ordinal",
+            field: "start_hour",
+            title: "Hour",
           },
-          y: { type: 'quantitative', field: 'mean_rides' },
+          y: { type: "quantitative", field: "mean_rides" },
         },
       },
     ],
-    title: { color: 'white', text: 'Average trips per hour', font: 'Jost' },
-    $schema: 'https://vega.github.io/schema/vega-lite/v4.8.1.json',
+    title: { color: "white", text: "Average trips per hour", font: "Jost" },
+    $schema: "https://vega.github.io/schema/vega-lite/v4.8.1.json",
   };
 
   return props.data ? (

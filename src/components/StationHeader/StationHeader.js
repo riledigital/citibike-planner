@@ -1,21 +1,21 @@
 // TODO: Remove live status stuff from it
-import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import styles from './StationHeader.module.css';
-import { useTransition, animated } from 'react-spring';
-import { ReactComponent as LoadingIllustration } from './undraw_No_data_re_kwbl.svg';
+import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
+import styles from "./StationHeader.module.css";
+import { useTransition, animated } from "react-spring";
+import { ReactComponent as LoadingIllustration } from "./undraw_No_data_re_kwbl.svg";
 const StationHeader = ({ name, station_id, nta_name, boro_name }) => {
   // Logic for handling null NTA codes
   const [show, setShow] = useState(false);
-  const stationNeighborhood = !nta_name ? '' : nta_name;
+  const stationNeighborhood = !nta_name ? "" : nta_name;
 
   const anim = useTransition(name, (item) => item, {
-    from: { transform: 'translate(0,-100px)', opacity: 0 },
-    update: { transform: 'translate(0,0)', opacity: 1 },
+    from: { transform: "translate(0,-100px)", opacity: 0 },
+    update: { transform: "translate(0,0)", opacity: 1 },
     leave: {
-      transform: 'translate(0,-100px)',
+      transform: "translate(0,-100px)",
       opacity: 0,
-      position: 'absolute',
+      position: "absolute",
     },
     unique: false,
     reset: true,

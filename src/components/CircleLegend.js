@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { interpolateLab, scaleLinear } from 'd3';
+import React, { useEffect } from "react";
+import { interpolateLab, scaleLinear } from "d3";
 const d3 = Object.assign({}, { scaleLinear, interpolateLab });
 
 const CircleLegend = ({ cmap }) => {
@@ -9,7 +9,7 @@ const CircleLegend = ({ cmap }) => {
     const cScale = d3
       .scaleLinear()
       .domain([0, 5])
-      .range(['white', 'blue'])
+      .range(["white", "blue"])
       .interpolate(d3.interpolateLab);
     const range = [...Array(5).keys()];
 

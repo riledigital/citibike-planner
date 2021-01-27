@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import { useTransition, animated } from 'react-spring';
+import React, { useState } from "react";
+import { useTransition, animated } from "react-spring";
 
-import styles from './Modal.module.css';
-import { ReactComponent as Bike } from './undraw_bike_ride_7xit.svg';
+import styles from "./Modal.module.css";
+import { ReactComponent as Bike } from "./undraw_bike_ride_7xit.svg";
 
 const Modal = ({ toggle, soundOn, toggleSound }) => {
   const [show, set] = useState(true);
 
   const transitions = useTransition(show, null, {
-    from: { opacity: 0, transform: 'translate(0, -100)' },
+    from: { opacity: 0, transform: "translate(0, -100)" },
     enter: { opacity: 1 },
     leave: { opacity: 0 },
   });
@@ -57,7 +57,7 @@ const Modal = ({ toggle, soundOn, toggleSound }) => {
                 sidebar that shows the ride distribution across all 24 hours of
                 the day.
                 <small>
-                  {' '}
+                  {" "}
                   This is a personal project unaffiliated with Motivate or Citi
                   Bike.
                 </small>
@@ -65,7 +65,7 @@ const Modal = ({ toggle, soundOn, toggleSound }) => {
 
               <div>
                 <button onClick={toggleSound}>
-                  Turn Sound {soundOn ? 'Off' : 'On'}
+                  Turn Sound {soundOn ? "Off" : "On"}
                 </button>
                 <button onClick={() => set()}>EXPLORE</button>
               </div>

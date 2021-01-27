@@ -7,7 +7,7 @@
   --button-bg: var(--links);
   --button-bg-hover: #c2b9fe;
   --theme-1: var(--links);
-  --font-main: "Jost", "Futura", sans-serif;
+  /* --font-main: "Jost", "Futura", sans-serif; */
 }
 
 .App {

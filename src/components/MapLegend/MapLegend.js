@@ -1,18 +1,18 @@
-import React from 'react';
-import { interpolateHcl, interpolate, scaleLinear } from 'd3';
-import styles from './MapLegend.module.css';
+import React from "react";
+import { interpolateHcl, interpolate, scaleLinear } from "d3";
+import styles from "./MapLegend.module.css";
 const MapLegend = ({
   data = [...Array(5).fill()],
   width = 120,
   height = 40,
 }) => {
   const legendLabel = {
-    fontFamily: 'Jost',
+    fontFamily: "Jost",
     fontSize: 10,
   };
   const color = scaleLinear()
     .domain([0, data.length])
-    .range(['white', 'blue'])
+    .range(["white", "blue"])
     .interpolate(interpolateHcl);
   const padding = 1;
   const radius = height / 6;
@@ -27,7 +27,7 @@ const MapLegend = ({
   return (
     <div className={styles.container}>
       <h4 className={styles.heading}>Legend</h4>
-      <figure style={{ maxWidth: '100%', margin: 'none' }}>
+      <figure style={{ maxWidth: "100%", margin: "none" }}>
         <p>Popularity</p>
         <svg viewBox={`0 0 ${width} ${height}`}>
           <g
