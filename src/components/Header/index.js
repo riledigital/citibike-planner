@@ -1,5 +1,5 @@
-import React from 'react';
-import styles from './Header.module.css';
+import React from "react";
+import styles from "./Header.module.css";
 
 const Header = ({ toggleModal, toggleSound, soundOn }) => {
   return (
@@ -9,7 +9,7 @@ const Header = ({ toggleModal, toggleSound, soundOn }) => {
       </div>
       <nav className={styles.nav}>
         <button onClick={toggleSound}>
-          Turn Sound {soundOn ? 'Off' : 'On'}
+          Turn Sound {soundOn ? "Off" : "On"}
         </button>
         <button className={styles.help} onClick={toggleModal}>
           Help

@@ -1,30 +1,12 @@
 import React, { useState, useEffect } from "react";
-
 import mapboxgl from "mapbox-gl";
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
-
-import "./App.css";
-import styles from "./styles/buttons.module.css";
-
 import { styleDefault, activityMarker } from "./modules/Map/MapStyles";
-
-import {
-  Header,
-  Footer,
-  Modal,
-  CircleLegend,
-  StationHeader,
-  LiveStatus,
-  StationActivity,
-  StationPopularity,
-  MapLegend,
-} from "./components";
-import Audio from "./modules/Audio";
 import { throttle } from "lodash";
 
 // import Ranking from "./Ranking/Ranking";
-const App = () => {
+const Map = () => {
   const [map, setMap] = useState(null);
   const [currentStation, setCurrentStation] = useState({});
   const [aggData, setAggData] = useState(null);
@@ -41,27 +23,6 @@ const App = () => {
 
   function toggleModal(e) {
     setShowModal(!showModal);
-  }
-
-  function getStationRanking(station_id) {
-    try {
-      let output = stationGeo.features.find(
-        (d) => d.properties.station_id === station_id
-      );
-      return { ...output.properties };
-    } catch (e) {
-      console.warn("stationGeo not showing");
-      console.warn(e);
-    }
-  }
-
-  function getStationStatus(id) {
-    try {
-      return stationStatus[id];
-    } catch (e) {
-      console.error("Oops, stationStatus not loaded");
-      console.error(e);
-    }
   }
 
   const handleStationClick = (station) => {
@@ -198,61 +159,8 @@ const App = () => {
   }, [sfx, soundOn]);
 
   return (
-    <div className="App" id="stationHeader">
-      <Header
-        toggleSound={() => setSound(!soundOn)}
-        soundOn={soundOn}
-        toggleModal={toggleModal}
-      />
-      <div className="grid-container">
-        <div className="App-sidebar">
-          {loading ? (
-            <p>
-              <progress></progress>
-            </p>
-          ) : (
-            <div className="data-viewer">
-              {stationGeo ? <StationHeader {...currentStation} /> : null}
-              {!loading && ranking && stationGeo ? (
-                <StationPopularity
-                  {...getStationRanking(currentStation.station_id)}
-                />
-              ) : null}
-
-              {aggData ? (
-                <StationActivity
-                  data={aggData ? aggData[currentStation.station_id] : null}
-                  height={150}
-                  fill="white"
-                />
-              ) : null}
-              {stationStatus ? (
-                <LiveStatus {...getStationStatus(currentStation.station_id)} />
-              ) : null}
-            </div>
-          )}
-
-          <div className="App-sidebar-footer">
-            <Footer />
-          </div>
-        </div>
-
-        <div id="main-map">
-          <div ref={(el) => (mapContainer = el)} className="mapContainer" />;
-          <div id="map-legend">
-            <MapLegend />
-          </div>
-        </div>
-      </div>
-      {showModal ? (
-        <Modal
-          toggle={toggleModal}
-          soundOn={soundOn}
-          toggleSound={() => setSound(!soundOn)}
-        />
-      ) : (
-        <></>
-      )}
+    <div id="main-map">
+      <div ref={(el) => (mapContainer = el)} className="mapContainer" />;
     </div>
   );
 };

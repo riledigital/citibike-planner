@@ -1,5 +1,5 @@
-import React from 'react';
-import styles from './StationPopularity.module.css';
+import React from "react";
+import styles from "./StationPopularity.module.css";
 const StationPopularity = ({ rank, stations_in_nta, nta_name }) => {
   return rank ? (
     <section>

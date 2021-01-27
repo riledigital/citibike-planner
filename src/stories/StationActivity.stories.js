@@ -1,10 +1,10 @@
-import React from 'react';
-import StationActivity from './../StationActivity/StationActivity';
+import React from "react";
+import StationActivity from "./../StationActivity/StationActivity";
 
-import data from '../data/aggs_by_hour.json';
+import data from "../data/aggs_by_hour.json";
 // This default export determines where your story goes in the story list
 export default {
-  title: 'StationActivity',
+  title: "StationActivity",
   component: StationActivity,
 };
 
@@ -14,11 +14,11 @@ export const Loaded = Template.bind({});
 
 Loaded.args = {
   /* the args you need here will depend on your component */
-  data: data['72'],
+  data: data["72"],
   width: 400,
   height: 200,
-  fill: 'blue',
-  textFill: 'black',
+  fill: "blue",
+  textFill: "black",
 };
 
 export const Empty = Template.bind({});
@@ -28,5 +28,5 @@ Empty.args = {
   data: null,
   width: 400,
   height: 200,
-  fill: 'white',
+  fill: "white",
 };

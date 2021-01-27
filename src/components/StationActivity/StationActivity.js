@@ -1,16 +1,16 @@
 // https://observablehq.com/@d3/margin-convention
-import React, { useEffect, useState } from 'react';
-import { extent, timeParse, timeFormat,scaleTime, scaleLinear } from 'd3';
-import { useTransition, animated } from 'react-spring';
+import React, { useEffect, useState } from "react";
+import { extent, timeParse, timeFormat, scaleTime, scaleLinear } from "d3";
+import { useTransition, animated } from "react-spring";
 
-import styles from './StationActivity.module.css';
+import styles from "./StationActivity.module.css";
 
 const StationActivity = ({
   data = [],
   width = 400,
   height = 400,
-  fill = 'blue',
-  textFill = 'white',
+  fill = "blue",
+  textFill = "white",
 }) => {
   const [items, setItems] = useState([]);
 
@@ -23,8 +23,8 @@ const StationActivity = ({
     trail: 20,
   });
 
-  const formatHour = timeFormat('%_I %p');
-  const parseTime = timeParse('%H');
+  const formatHour = timeFormat("%_I %p");
+  const parseTime = timeParse("%H");
   const margin = { top: 10, right: 5, bottom: 35, left: 5 };
   let extentOut = data ? extent(data, (d) => d.mean_rides) : [0, 100];
   const xScale = scaleTime()
@@ -47,7 +47,7 @@ const StationActivity = ({
       <p>Select a station on the map to view activity trends.</p>
     </div>
   ) : (
-    <figure className={styles['barchart__hours']}>
+    <figure className={styles["barchart__hours"]}>
       <h3 className={styles.heading}>Average trips per hour</h3>
       <svg viewBox={`0 0 ${width} ${height}`}>
         <text
@@ -102,7 +102,7 @@ const StationActivity = ({
                   <rect
                     className={
                       styles[
-                        item.start_hour === currentHour ? 'current_hour' : null
+                        item.start_hour === currentHour ? "current_hour" : null
                       ]
                     }
                     fill={fill}

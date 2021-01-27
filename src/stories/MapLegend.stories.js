@@ -1,9 +1,9 @@
-import React from 'react';
-import MapLegend from '../MapLegend/MapLegend';
+import React from "react";
+import MapLegend from "../MapLegend/MapLegend";
 
 // This default export determines where your story goes in the story list
 export default {
-  title: 'Map Legend',
+  title: "Map Legend",
   component: MapLegend,
 };
 

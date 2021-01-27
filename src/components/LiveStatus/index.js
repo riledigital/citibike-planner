@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
-import styles from './LiveStatus.module.css';
+import styles from "./LiveStatus.module.css";
 
 // https://gbfs.citibikenyc.com/gbfs/en/station_status.json
 
@@ -15,7 +15,7 @@ const LiveStatus = ({
 }) => {
   let statusInfo;
   if (!station_id) {
-    statusInfo = 'none';
+    statusInfo = "none";
   } else {
     statusInfo = {
       bikes: num_bikes_available,
@@ -25,28 +25,28 @@ const LiveStatus = ({
   }
 
   const formattedTime = new Date(last_reported * 1000).toLocaleTimeString(
-    'en-US'
+    "en-US"
   );
   return station_id ? (
     <>
       <h3 className={styles.heading}>Live Status</h3>
       <div className={styles.stationStatus}>
-        <div className={styles['station-bikes']}>
-          {statusInfo.bikes}{' '}
-          <span className={styles['station-status-label']}>Classic</span>
+        <div className={styles["station-bikes"]}>
+          {statusInfo.bikes}{" "}
+          <span className={styles["station-status-label"]}>Classic</span>
         </div>
-        <div className={styles['station-electric']}>
+        <div className={styles["station-electric"]}>
           {statusInfo.electric}
-          <span className={styles['station-status-label']}>
+          <span className={styles["station-status-label"]}>
             <span role="img" aria-label="electric">
               ⚡
             </span>
             Electric
           </span>
         </div>
-        <div className={styles['station-docks']}>
+        <div className={styles["station-docks"]}>
           {statusInfo.docks}
-          <span className={styles['station-status-label']}>Docks</span>
+          <span className={styles["station-status-label"]}>Docks</span>
         </div>
       </div>
       <p className={styles.lastUpdated}>Last updated on {formattedTime}</p>
@@ -58,7 +58,7 @@ const LiveStatus = ({
       </div> */}
     </>
   ) : (
-    <div className={styles['loading']}>
+    <div className={styles["loading"]}>
       <p>No station selected.</p>
       <p>Please click on a station on the map to view the activity details.</p>
     </div>

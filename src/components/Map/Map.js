@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 function Map(props) {
   const { handleMapMouseover, handleStationClick } = props;
