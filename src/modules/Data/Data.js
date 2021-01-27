@@ -1,13 +1,15 @@
-import { DATA_URLS } from "./../../config";
+import { ASSETS, DATA_URLS } from "../../config.js";
 
 class Data {
   constructor() {}
 
   startFetching() {
     console.log("Starting to fetch data!");
-    return Promise.allSettled(
-      DATA_URLS.entries().map((source) => this.fetchParseData(source[1]))
+    const promises = Array.from(DATA_URLS).map((source) =>
+      this.fetchParseData(source[1])
     );
+    debugger;
+    return Promise.allSettled(promises);
   }
 
   async fetchParseData(url) {
