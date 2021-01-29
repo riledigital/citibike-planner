@@ -18,7 +18,18 @@ module.exports = {
   },
   plugins: ["react", "prettier"],
   rules: {
+<<<<<<< HEAD
     indent: ["error", 2],
+=======
+    "no-unused-vars": ["warn"],
+    "no-debugger": ["warn"],
+    "prettier/prettier": ["warn"],
+    "react/jsx-key": ["warn"],
+    "react/jsx-no-target-blank": ["warn"],
+    "react/no-unescaped-entities": ["warn"],
+    "react/prop-types": ["warn"],
+    indent: ["warn", 2],
+>>>>>>> feature/restyles
     "linebreak-style": ["error", "unix"],
     semi: ["error", "always"],
   },

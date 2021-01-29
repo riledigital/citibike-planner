@@ -1,7 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+<<<<<<< HEAD
 import { Header } from "./components";
+=======
+import { Header } from "./Header";
+>>>>>>> feature/restyles
 import "./page.css";
 
 export const Page = ({ user, onLogin, onLogout, onCreateAccount }) => (
