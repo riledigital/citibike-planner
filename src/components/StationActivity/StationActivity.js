@@ -14,7 +14,11 @@ const StationActivity = ({
 }) => {
   const [items, setItems] = useState([]);
 
-  const transitions = useTransition(data, (item) => item.start_hour, {
+  debugger;
+  if (data === null) {
+    return <>Loading</>;
+  }
+  const transitions = useTransition(data, (item) => item?.start_hour, {
     from: { opacity: 0 },
     enter: { opacity: 1 },
     leave: { opacity: 0 },

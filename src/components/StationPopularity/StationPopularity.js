@@ -1,6 +1,9 @@
 import React from "react";
 import styles from "./StationPopularity.module.css";
 const StationPopularity = ({ rank, stations_in_nta, nta_name }) => {
+  if (!(rank && stations_in_nta && nta_name)) {
+    return <>No ranking available.</>;
+  }
   return rank ? (
     <section>
       <h3 className={styles.heading}>Popularity Ranking</h3>
