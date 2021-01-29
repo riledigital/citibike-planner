@@ -16,10 +16,11 @@ import {
   StationActivity,
   StationPopularity,
   MapLegend,
+  Inspector,
 } from "./components";
 import Audio from "./modules/Audio";
 import Data from "./modules/Data";
-import { throttle } from "lodash";
+import { throttle } from "lodash-es";
 
 // import Ranking from "./Ranking/Ranking";
 const App = () => {
@@ -38,27 +39,6 @@ const App = () => {
 
   function toggleModal(e) {
     setShowModal(!showModal);
-  }
-
-  function getStationRanking(station_id) {
-    try {
-      let output = stationGeo.features.find(
-        (d) => d.properties.station_id === station_id
-      );
-      return { ...output.properties };
-    } catch (e) {
-      console.warn("stationGeo not showing");
-      console.warn(e);
-    }
-  }
-
-  function getStationStatus(id) {
-    try {
-      return stationStatus[id];
-    } catch (e) {
-      console.error("Oops, stationStatus not loaded");
-      console.error(e);
-    }
   }
 
   const handleStationClick = (station) => {
@@ -83,7 +63,7 @@ const App = () => {
     const DataManager = new Data();
     const fetchData = async () => {
       const results = await DataManager.startFetching();
-      debugger;
+
       setAggData(results[0].value);
       setStationGeo(results[1].value);
       let allStationsStatus = {};
@@ -129,29 +109,9 @@ const App = () => {
       <div className="grid-container">
         <div className="App-sidebar">
           {loading ? (
-            <p>
-              <progress></progress>
-            </p>
+            <progress></progress>
           ) : (
-            <div className="data-viewer">
-              {stationGeo ? <StationHeader {...currentStation} /> : null}
-              {!loading && ranking && stationGeo ? (
-                <StationPopularity
-                  {...getStationRanking(currentStation.station_id)}
-                />
-              ) : null}
-
-              {aggData ? (
-                <StationActivity
-                  data={aggData ? aggData[currentStation.station_id] : null}
-                  height={150}
-                  fill="white"
-                />
-              ) : null}
-              {stationStatus ? (
-                <LiveStatus {...getStationStatus(currentStation.station_id)} />
-              ) : null}
-            </div>
+            <Inspector aggData={aggData} stationStatus={stationStatus} />
           )}
 
           <div className="App-sidebar-footer">

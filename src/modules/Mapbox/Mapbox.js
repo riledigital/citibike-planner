@@ -32,8 +32,6 @@ const Mapbox = ({
       ],
     });
     map.on("load", function () {
-      debugger;
-
       map.loadImage(markerUrl, function (error, img) {
         if (error) throw error;
         map.addImage("custom-marker", img);

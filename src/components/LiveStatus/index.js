@@ -27,7 +27,20 @@ const LiveStatus = ({
   const formattedTime = new Date(last_reported * 1000).toLocaleTimeString(
     "en-US"
   );
-  return station_id ? (
+
+  if (station_id === null) {
+    return (
+      <>
+        <div className={styles["loading"]}>
+          <p>No station selected.</p>
+          <p>
+            Please click on a station on the map to view the activity details.
+          </p>
+        </div>
+      </>
+    );
+  }
+  return (
     <>
       <h3 className={styles.heading}>Live Status</h3>
       <div className={styles.stationStatus}>
@@ -57,11 +70,6 @@ const LiveStatus = ({
         </a>
       </div> */}
     </>
-  ) : (
-    <div className={styles["loading"]}>
-      <p>No station selected.</p>
-      <p>Please click on a station on the map to view the activity details.</p>
-    </div>
   );
 };
 

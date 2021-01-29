@@ -8,7 +8,7 @@ class Data {
     const promises = Array.from(DATA_URLS).map((source) =>
       this.fetchParseData(source[1])
     );
-    debugger;
+
     return Promise.allSettled(promises);
   }
 

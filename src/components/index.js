@@ -3,6 +3,7 @@ export { default as CircleLegend } from "./CircleLegend";
 export { default as Footer } from "./Footer";
 export { default as Header } from "./Header";
 export { default as LiveStatus } from "./LiveStatus";
+export { default as Inspector } from "./Inspector";
 export { default as Modal } from "./Modal";
 export { default as StationActivity } from "./StationActivity";
 export { default as StationHeader } from "./StationHeader";
