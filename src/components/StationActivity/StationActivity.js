@@ -1,6 +1,6 @@
 // https://observablehq.com/@d3/margin-convention
 import React, { useEffect, useState } from "react";
-import { extent, timeParse, timeFormat,scaleTime, scaleLinear } from 'd3';
+import { extent, timeParse, timeFormat, scaleTime, scaleLinear } from "d3";
 import { useTransition, animated } from "react-spring";
 
 import styles from "./StationActivity.module.css";
