@@ -97,8 +97,8 @@
 
 .loading-illustration {
   border: 1px solid gray;
-  background-color: var(--text);
-  color: var(--bg);
+  background-color: var(--c-text);
+  color: var(--c-background);
   padding: 2rem;
   border-radius: 8px;
   text-align: center;

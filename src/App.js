@@ -94,7 +94,7 @@ const App = () => {
   }, [currentStation]);
 
   return (
-    <div className="App" id="stationHeader">
+    <div className="App">
       <Header
         toggleSound={() => setSound(!isMuted)}
         soundOn={isMuted}

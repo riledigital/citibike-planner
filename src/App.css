@@ -1,13 +1,12 @@
 /* Theme options */
 :root {
-  /* background-color: #0a2472; */
-  --bg: #0a2472;
-  --text: white;
-  --links: #c0b8ff;
-  --button-bg: var(--links);
+  --c-background: #ffffff;
+  --c-text: #0a2472;
+  --c-links: #c0b8ff;
+  --button-bg: var(--c-links);
   --button-bg-hover: #c2b9fe;
-  --theme-1: var(--links);
-  /* --font-main: "Jost", "Futura", sans-serif; */
+  --theme-1: var(--c-links);
+  --font-main: "Jost", "Futura", sans-serif;
 }
 
 .App {
@@ -19,14 +18,9 @@
 /* Colors */
 
 html {
-  background: var(--bg);
-  /* background-color: #0a2472; */
+  background: var(--c-background);
 }
 
-.App-sidebar {
-  background: var(--bg);
-  color: var(--text);
-}
 
 /* Layout */
 .mapboxgl-popup-content {
@@ -42,21 +36,6 @@ html {
   padding: 8px;
 } */
 
-.App-sidebar {
-  /* grid-row: 2; */
-  display: flex;
-  justify-content: space-between;
-  align-items: stretch;
-  align-content: flex-start;
-  flex-direction: column;
-  padding: 0 1rem 0 1rem;
-}
-
-.App-sidebar a {
-  color: white;
-  font-weight: 700;
-}
-
 #main-map {
   /* grid-row: 1; */
   position: relative;
@@ -66,7 +45,7 @@ html {
 
 .App-footer {
   align-self: end;
-  color: var(--text);
+  color: var(--c-text);
   /* padding: 1rem; */
 }
 

@@ -31,7 +31,7 @@
   flex-direction: column;
   align-items: left;
   justify-content: center;
-  color: var(--bg);
+  color: var(--c-background);
   background-color: white;
   padding: 2rem;
   border-radius: 6px;

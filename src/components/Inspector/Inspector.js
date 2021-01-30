@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { None } from "vega";
+import styles from "./Inspector.module.css";
+
 import {
   LiveStatus,
   StationHeader,
