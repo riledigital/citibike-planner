@@ -1,6 +1,6 @@
 /* Typography */
 a {
-  color: var(--links);
+  color: var(--c-links);
   font-weight: 600;
   text-decoration: none;
 }

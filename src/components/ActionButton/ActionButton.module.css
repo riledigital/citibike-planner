@@ -6,7 +6,7 @@
   border-radius: 4px;
   background: var(--theme-1);
   border: none;
-  color: var(--text);
+  color: var(--c-text);
   padding: 6px 16px;
   margin: 1rem;
   box-shadow: black 1px 1px 4px;

@@ -30,7 +30,7 @@ h1 {
   display: block;
   z-index: 100; /* Sit on top */
   border-radius: 8px;
-  background-color: var(--text);
+  background-color: var(--c-text);
   top: 0;
   position: absolute;
   padding: 1rem;
