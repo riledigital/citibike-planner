@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 
+import "./styles/reset.css";
 import "./App.css";
 import styles from "./styles/buttons.module.css";
 
@@ -101,25 +102,18 @@ const App = () => {
         toggleModal={toggleModal}
       />
       <div className="grid-container">
-        <div className="App-sidebar">
-          {loading ? (
-            <progress></progress>
-          ) : (
-            <Inspector
-              aggData={aggData}
-              stationStatus={stationStatus}
-              stationGeo={stationGeo}
-              currentStation={currentStation}
-              lastUpdated={lastUpdated}
-              ranking={ranking}
-            />
-          )}
-
-          <div className="App-sidebar-footer">
-            <Footer />
-          </div>
-        </div>
-
+        {loading ? (
+          <progress></progress>
+        ) : (
+          <Inspector
+            aggData={aggData}
+            stationStatus={stationStatus}
+            stationGeo={stationGeo}
+            currentStation={currentStation}
+            lastUpdated={lastUpdated}
+            ranking={ranking}
+          />
+        )}
         <div id="main-map">
           <Mapbox
             sfxManager={sfxManager}

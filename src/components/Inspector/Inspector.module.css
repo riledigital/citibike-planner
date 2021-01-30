@@ -1,6 +1,14 @@
 .inspector {
+    background: red;
     position: absolute;
     z-index: 10;
+    margin: 1rem auto;
+    transition: transform 500ms ease;
+    transform: translateY(80vh);
+}
+
+.inspector.active {
+    transform: translateY(0);
 }
 
 .App-sidebar {
