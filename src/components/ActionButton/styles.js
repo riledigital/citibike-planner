@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const StyledActionButton = styled.button`
   text-transform: uppercase;
@@ -13,6 +13,6 @@ const StyledActionButton = styled.button`
   margin: 1rem;
   box-shadow: black 1px 1px 4px;
   display: inline-block;
-`
+`;
 
 export default StyledActionButton;

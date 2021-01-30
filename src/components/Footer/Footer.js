@@ -1,8 +1,9 @@
 import React from "react";
+import { StyledFooter } from "./styles.js";
 
 const Footer = () => {
   return (
-    <div className="App-footer">
+    <StyledFooter>
       <a href="https://member.citibikenyc.com/map/" target="_blank">
         Go to the Official CitiBike Map
       </a>
@@ -37,7 +38,7 @@ const Footer = () => {
       </p>
       2020 App created by <a href="https://riledigital.com">Ri Le</a>.{" "}
       <a href="https://twitter.com/riledigital">@riledigital</a>
-    </div>
+    </StyledFooter>
   );
 };
 
