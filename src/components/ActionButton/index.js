@@ -1,11 +1,11 @@
 import React from "react";
-import styles from "./ActionButton.module.css";
+import StyledActionButton from './styles.js';
+
 const ActionButton = ({ href }) => {
   return (
-    <a className={styles["button"]} href={href}>
-      Unlock Citi Bike
-    </a>
+<StyledActionButton href={href}>Unlock Citi Bike
+</StyledActionButton>
   );
 };
 
-export default ActionButton;
+export default ActionButton
