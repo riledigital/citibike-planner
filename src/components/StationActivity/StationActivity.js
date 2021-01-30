@@ -12,9 +12,6 @@ const StationActivity = ({
   fill = "blue",
   textFill = "white",
 }) => {
-  const [items, setItems] = useState([]);
-
-  debugger;
   if (data === null) {
     return <>Loading</>;
   }

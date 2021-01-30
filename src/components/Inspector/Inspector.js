@@ -15,17 +15,29 @@ const Inspector = ({
   lastUpdated,
   ranking,
 }) => {
-  const [rank, setRank] = useState(new Map());
+  const [currentRank, setCurrentRank] = useState(new Map());
+  const [stationActivityData, setStationActivityData] = useState(new Map());
+  const [popularityData, setPopularityData] = useState(new Map());
+  const [liveStatusData, setLiveStatusData] = useState(new Map());
+  const [currentStationId, setCurrentStationId] = useState("");
+  const [stationAggData, setStationAggData] = useState({});
 
-  //   useEffect(() => {
-  //     const rankObject = getStationRanking(currentStation?.station_id).properties;
-  //     debugger;
-  //     const rank = new Map(rank);
-  //     rank.set("rank", rankObject?.rank);
-  //     rank.set("stations_in_nta", rankObject?.stations_in_nta);
-  //     rank.set("nta_name"), rankObject?.nta_name;
-  //     setRank(rank);
-  //   });
+  useEffect(() => {
+    const current_station_id = currentStation?.station_id ?? null;
+
+    const rankObject = getStationRanking(current_station_id);
+    if (rankObject) {
+      const newRank = new Map();
+      newRank.set("nta_name", rankObject.nta_name);
+      newRank.set("rank", rankObject.rank);
+      newRank.set("stations_in_nta", rankObject.stations_in_nta);
+      setCurrentRank(newRank);
+    }
+
+    setCurrentStationId(current_station_id);
+    setLiveStatusData();
+    setStationAggData(getStationAggData(currentStation));
+  }, [currentStation]);
 
   const getStationRanking = (station_id) => {
     try {
@@ -66,11 +78,11 @@ const Inspector = ({
     <>
       <div className="data-viewer">
         <StationHeader {...currentStation} />
-        {/* <StationPopularity
-          rank={rank}
-          stations_in_nta={stations_in_nta}
-          nta_name={nta_name}
-        /> */}
+        <StationPopularity
+          nta_name={currentRank.get("nta_name")}
+          rank={currentRank.get("rank")}
+          stations_in_nta={currentRank.get("stations_in_nta")}
+        />
         <StationActivity
           data={getStationAggData(currentStation)}
           height={150}

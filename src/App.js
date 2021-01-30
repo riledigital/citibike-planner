@@ -14,7 +14,6 @@ import {
   StationHeader,
   LiveStatus,
   StationActivity,
-  StationPopularity,
   MapLegend,
   Inspector,
 } from "./components";
@@ -29,7 +28,7 @@ const App = () => {
   const [currentStation, setCurrentStation] = useState({});
   const [aggData, setAggData] = useState(null);
   const [stationGeo, setStationGeo] = useState(null);
-  const [stationStatus, setStationStatus] = useState(null);
+  const [stationStatus, setStationStatus] = useState(new Map());
   const [lastUpdated, setLastUpdated] = useState(null);
 
   const [showModal, setShowModal] = useState(true);
@@ -63,13 +62,13 @@ const App = () => {
     const DataManager = new Data();
     const fetchData = async () => {
       const results = await DataManager.startFetching();
-
+      debugger;
       setAggData(results[0].value);
       setStationGeo(results[1].value);
-      let allStationsStatus = {};
+      let allStationsStatus = new Map();
       const fetchedData = results[2].value;
       fetchedData["data"]["stations"].forEach((record) => {
-        allStationsStatus[record.station_id] = { ...record };
+        allStationsStatus.set(record.station_id, { ...record });
       });
       setStationStatus(allStationsStatus);
       setLastUpdated(new Date(fetchedData["last_updated"] * 1000));
@@ -111,7 +110,14 @@ const App = () => {
           {loading ? (
             <progress></progress>
           ) : (
-            <Inspector aggData={aggData} stationStatus={stationStatus} />
+            <Inspector
+              aggData={aggData}
+              stationStatus={stationStatus}
+              stationGeo={stationGeo}
+              currentStation={currentStation}
+              lastUpdated={lastUpdated}
+              ranking={ranking}
+            />
           )}
 
           <div className="App-sidebar-footer">

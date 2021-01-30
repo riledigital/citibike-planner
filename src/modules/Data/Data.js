@@ -3,13 +3,13 @@ import { ASSETS, DATA_URLS } from "../../config.js";
 class Data {
   constructor() {}
 
-  startFetching() {
+  async startFetching() {
     console.log("Starting to fetch data!");
     const promises = Array.from(DATA_URLS).map((source) =>
       this.fetchParseData(source[1])
     );
 
-    return Promise.allSettled(promises);
+    return await Promise.allSettled(promises);
   }
 
   async fetchParseData(url) {
