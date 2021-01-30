@@ -9,6 +9,12 @@
   --font-main: "Jost", "Futura", sans-serif;
 }
 
+body {
+  font-family: var(--font-main);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
 .App {
   text-align: left;
   padding: 0;
@@ -142,17 +148,6 @@ summary {
   font-weight: bold;
 }
 
-.mapboxgl-popup-content {
-  transition: all 1s ease;
-  font-size: 1.5rem;
-  line-height: 1.2;
-  padding: 2rem;
-  font-family: "Jost";
-}
-
-.mapboxgl-ctrl {
-  font-family: "Jost";
-}
 
 button {
   margin: 0;
