@@ -1,46 +1,8 @@
-/* Theme options */
-:root {
-  --c-background: #ffffff;
-  --c-text: #0a2472;
-  --c-links: #c0b8ff;
-  --button-bg: var(--c-links);
-  --button-bg-hover: #c2b9fe;
-  --theme-1: var(--c-links);
-  --font-main: "Jost", "Futura", sans-serif;
-}
-
-body {
-  font-family: var(--font-main);
-  font-size: 16px;
-  line-height: 1.5;
-}
-
-.App {
-  text-align: left;
-  padding: 0;
-  font-family: var(--font-main);
-}
-
-/* Colors */
-
-html {
-  background: var(--c-background);
-}
-
-
-/* Layout */
-.mapboxgl-popup-content {
-  background: rgba(255, 255, 255, 0.9);
-}
+/* App Layout */
 
 .App {
   grid-template-columns: 1fr;
 }
-
-/* .App-header {
-  color: white;
-  padding: 8px;
-} */
 
 #main-map {
   /* grid-row: 1; */

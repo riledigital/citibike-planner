@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 
 import "./styles/reset.css";
+import "./styles/base.module.css";
 import "./App.css";
 import styles from "./styles/buttons.module.css";
 
