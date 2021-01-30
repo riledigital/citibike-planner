@@ -15,17 +15,15 @@ const Inspector = ({
   lastUpdated,
   ranking,
 }) => {
-  const [currentRank, setCurrentRank] = useState(new Map());
   const [stationActivityData, setStationActivityData] = useState(new Map());
-  const [popularityData, setPopularityData] = useState(new Map());
+  const [currentRank, setCurrentRank] = useState(new Map());
   const [liveStatusData, setLiveStatusData] = useState(new Map());
-  const [currentStationId, setCurrentStationId] = useState("");
-  const [stationAggData, setStationAggData] = useState({});
+  const [stationAggData, setStationAggData] = useState(null);
 
   useEffect(() => {
-    const current_station_id = currentStation?.station_id ?? null;
+    const currentStationId = currentStation?.station_id ?? null;
 
-    const rankObject = getStationRanking(current_station_id);
+    const rankObject = getStationRanking(currentStationId);
     if (rankObject) {
       const newRank = new Map();
       newRank.set("nta_name", rankObject.nta_name);
@@ -34,10 +32,29 @@ const Inspector = ({
       setCurrentRank(newRank);
     }
 
-    setCurrentStationId(current_station_id);
-    setLiveStatusData();
     setStationAggData(getStationAggData(currentStation));
-  }, [currentStation]);
+    debugger;
+    const liveStatusData = stationStatus.get(currentStationId);
+    if (liveStatusData) {
+      const newLiveStatusData = new Map();
+      newLiveStatusData.set("station_id", currentStationId);
+      newLiveStatusData.set(
+        "num_bikes_available",
+        liveStatusData.num_bikes_available
+      );
+      newLiveStatusData.set(
+        "num_ebikes_available",
+        liveStatusData.num_ebikes_available
+      );
+      newLiveStatusData.set(
+        "num_docks_available",
+        liveStatusData.num_docks_available
+      );
+      newLiveStatusData.set("last_reported", liveStatusData.last_reported);
+      newLiveStatusData.set("rental_url", liveStatusData.rental_url);
+      setLiveStatusData(newLiveStatusData);
+    }
+  }, [currentStation, stationStatus]);
 
   const getStationRanking = (station_id) => {
     try {
@@ -83,12 +100,15 @@ const Inspector = ({
           rank={currentRank.get("rank")}
           stations_in_nta={currentRank.get("stations_in_nta")}
         />
-        <StationActivity
-          data={getStationAggData(currentStation)}
-          height={150}
-          fill="white"
+        <StationActivity data={stationAggData} height={150} fill="white" />
+        <LiveStatus
+          station_id={liveStatusData.get("station_id")}
+          num_bikes_available={liveStatusData.get("num_bikes_available")}
+          num_ebikes_available={liveStatusData.get("num_ebikes_available")}
+          num_docks_available={liveStatusData.get("num_docks_available")}
+          last_reported={liveStatusData.get("last_reported")}
+          rental_url={liveStatusData.get("rental_url")}
         />
-        <LiveStatus {...getStationStatus(currentStation)} />
       </div>
     </>
   );

@@ -6,15 +6,16 @@ import { useTransition, animated } from "react-spring";
 import styles from "./StationActivity.module.css";
 
 const StationActivity = ({
-  data = [],
+  data,
   width = 400,
   height = 400,
   fill = "blue",
   textFill = "white",
 }) => {
-  if (data === null) {
+  if (!data) {
     return <>Loading</>;
   }
+
   const transitions = useTransition(data, (item) => item?.start_hour, {
     from: { opacity: 0 },
     enter: { opacity: 1 },
@@ -70,8 +71,8 @@ const StationActivity = ({
                 className={styles.axisBottom}
                 transform={`
               translate(${xScale(d.start_hour) + margin.left}, ${
-                height - margin.bottom / 1.2
-              })
+                  height - margin.bottom / 1.2
+                })
               rotate(${45}) `}
               >
                 <text

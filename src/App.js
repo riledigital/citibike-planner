@@ -11,9 +11,6 @@ import {
   Footer,
   Modal,
   CircleLegend,
-  StationHeader,
-  LiveStatus,
-  StationActivity,
   MapLegend,
   Inspector,
 } from "./components";
@@ -59,24 +56,22 @@ const App = () => {
 
     setLoading(true);
 
-    const DataManager = new Data();
-    const fetchData = async () => {
-      const results = await DataManager.startFetching();
-      debugger;
-      setAggData(results[0].value);
-      setStationGeo(results[1].value);
-      let allStationsStatus = new Map();
-      const fetchedData = results[2].value;
-      fetchedData["data"]["stations"].forEach((record) => {
-        allStationsStatus.set(record.station_id, { ...record });
-      });
-      setStationStatus(allStationsStatus);
-      setLastUpdated(new Date(fetchedData["last_updated"] * 1000));
-    };
     fetchData();
     setLoading(false);
   }, []);
-
+  const fetchData = async () => {
+    const DataManager = new Data();
+    const results = await DataManager.startFetching();
+    setAggData(results[0].value);
+    setStationGeo(results[1].value);
+    let allStationsStatus = new Map();
+    const fetchedData = results[2].value;
+    fetchedData["data"]["stations"].forEach((record) => {
+      allStationsStatus.set(record.station_id, { ...record });
+    });
+    setStationStatus(allStationsStatus);
+    setLastUpdated(new Date(fetchedData["last_updated"] * 1000));
+  };
   useEffect(() => {
     if (sfxManager) {
       sfxManager?.mute(!isMuted);
@@ -85,14 +80,14 @@ const App = () => {
 
   useEffect(() => {
     try {
-      ReactDOM.render(
-        <StationActivity
-          data={aggData ? aggData[currentStation.station_id] : null}
-          height={150}
-          fill="white"
-        />,
-        document.querySelector("#popup")
-      );
+      // ReactDOM.render(
+      //   <StationActivity
+      //     data={aggData ? aggData[currentStation.station_id] : null}
+      //     height={150}
+      //     fill="white"
+      //   />,
+      //   document.querySelector("#popup")
+      // );
     } catch (e) {
       console.log(e);
     }
