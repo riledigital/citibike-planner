@@ -1,0 +1,52 @@
+/* Variables */
+
+/* Colors */
+:root {
+
+  --c-text: #0a2472;
+  --c-links: #c0b8ff;
+  --button-bg: var(--c-links);
+  --button-bg-hover: #c2b9fe;
+  --c-background: #ffffff;
+
+  --theme-1: var(--c-links);
+}
+/* Typography */
+:root {
+  --font-main: "Jost", "Futura", sans-serif;
+  --font-size-base: 18px;
+  --line-height-base: 1.5;
+  --font-headings: var(--font-main);
+}
+
+/* Margins */
+:root {
+  --margin-base: 1rem;
+  --margin-tablet: 1.25rem;
+}
+
+/* Breakpoints */
+:root {
+  --bp-tablet: 600px;
+  --bp-tablet-xl: 700px;
+  --bp-desktop: 1000px;
+  --bp-desktop-xl: 1400px;
+}
+
+/* Defaults */
+body {
+  font-family: var(--font-main);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  text-align: left;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background: var(--c-background);
+}

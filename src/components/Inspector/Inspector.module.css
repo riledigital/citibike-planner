@@ -10,23 +10,3 @@
 .inspector.active {
     transform: translateY(0);
 }
-
-.App-sidebar {
-  background: var(--c-background);
-  color: var(--c-text);
-}
-
-.App-sidebar {
-  /* grid-row: 2; */
-  display: flex;
-  justify-content: space-between;
-  align-items: stretch;
-  align-content: flex-start;
-  flex-direction: column;
-  padding: 0 1rem 0 1rem;
-}
-
-.App-sidebar a {
-  color: var(--c-text);
-  font-weight: 700;
-}

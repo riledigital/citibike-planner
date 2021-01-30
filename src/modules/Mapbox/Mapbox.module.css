@@ -10,3 +10,7 @@
 .mapboxgl-ctrl {
   font-family: "Jost";
 }
+
+.mapboxgl-popup-content {
+  background: rgba(255, 255, 255, 0.9);
+}
