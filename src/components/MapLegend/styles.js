@@ -30,3 +30,8 @@ export const StyledP = styled.p`
   margin: 0;
   margin-bottom: 0.5rem;
 `;
+
+export const StyledLabel = styled.h3`
+  font-size: 0.8rem;
+  font-weight: normal;
+`;
