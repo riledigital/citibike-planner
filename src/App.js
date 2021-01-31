@@ -87,16 +87,20 @@ const App = () => {
   }, [sfxManager, isMuted]);
 
   useEffect(() => {
-    setVisibleInspector(true);
+    setVisibleInspector(currentStation !== null);
     try {
-      // ReactDOM.render(
-      //   <StationActivity
-      //     data={aggData ? aggData[currentStation.station_id] : null}
-      //     height={150}
-      //     fill="white"
-      //   />,
-      //   document.querySelector("#popup")
-      // );
+      ReactDOM.render(
+        <Inspector
+          aggData={aggData}
+          stationStatus={stationStatus}
+          stationGeo={stationGeo}
+          currentStation={currentStation}
+          lastUpdated={lastUpdated}
+          ranking={ranking}
+          visible={visibleInspector}
+        />,
+        document.querySelector("#popup")
+      );
     } catch (e) {
       console.log(e);
     }
@@ -110,7 +114,7 @@ const App = () => {
         soundOn={isMuted}
         toggleModal={toggleModal}
       />
-      <div className="grid-container">
+      <>
         {loading ? (
           <progress></progress>
         ) : (
@@ -135,7 +139,7 @@ const App = () => {
             <MapLegend />
           </div>
         </StyledMap>
-      </div>
+      </>
       {showModal ? (
         <Modal
           toggle={toggleModal}

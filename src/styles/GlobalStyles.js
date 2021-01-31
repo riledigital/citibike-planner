@@ -53,6 +53,7 @@ ${normalize}
 :root {
   --margin-base: 1rem;
   --margin-tablet: 1.25rem;
+  --margin-desktop: 2rem;
 
 /* Height of header */
   --h-header: 48px;
@@ -94,17 +95,17 @@ p {
 #App {
   position: relative;
   display: flex;
-  width:100%;
-  min-height: 100vh;
+  height: 100%;
+  width: 100%;
   overflow: unset;
 }
 
 .mapContainer {
   position: relative;
   min-width: 300px;
-  min-height: 90vh;
+  min-height: 95vh;
   width: 100%;
-  height: 100%;
+  height: 99vh;
 }
 `;
 

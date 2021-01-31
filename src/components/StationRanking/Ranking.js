@@ -8,11 +8,12 @@ const Ranking = ({ station }) => {
     return null;
   }
   const { rank, stations_in_nta, nta_name } = station;
+  const ordinal = rank == 1 ? "st" : "th";
   return (
     <>
-      <StyledRankTitle>Popularity Ranking</StyledRankTitle>
       <StyledRankText>
-        {rank} of {stations_in_nta} in {nta_name}
+        {rank}
+        {ordinal} of {stations_in_nta} in {nta_name}
       </StyledRankText>
     </>
   );

@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  StyledDescription,
-  StyledHeading,
-  StyledPopularity,
-} from "./styles.js";
+import { StyledPopularity, StyledRankText, StyledRankTitle } from "./styles.js";
 
 const StationPopularity = ({ rank, stations_in_nta, nta_name }) => {
   const [name, setName] = useState(null);
@@ -11,12 +7,15 @@ const StationPopularity = ({ rank, stations_in_nta, nta_name }) => {
     const nta_name_format = nta_name ? `in ${nta_name}` : "";
     setName(nta_name_format);
   });
+  const ordinal = rank == 1 ? "st" : "th";
+
   return rank ? (
     <StyledPopularity>
-      <StyledHeading>Popularity Ranking</StyledHeading>
-      <StyledDescription>
-        {rank} of {stations_in_nta} {name}
-      </StyledDescription>
+      {/* <StyledRankTitle>Popularity Ranking</StyledRankTitle> */}
+      <StyledRankText>
+        {rank}
+        {ordinal} most popular of {stations_in_nta} {name}
+      </StyledRankText>
     </StyledPopularity>
   ) : (
     <></>

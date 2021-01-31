@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyledInspector } from "./styles.js";
+import { StyledInspector, StyledDecorative } from "./styles.js";
 
 import {
   LiveStatus,
@@ -97,6 +97,7 @@ const Inspector = ({
   const isClosed = currentStation === null;
   return (
     <StyledInspector visible={visible}>
+      <StyledDecorative>Station Inspector</StyledDecorative>
       <StationHeader {...currentStation} />
       <StationPopularity
         nta_name={currentRank.get("nta_name")}

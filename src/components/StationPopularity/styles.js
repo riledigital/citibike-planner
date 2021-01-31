@@ -1,7 +1,15 @@
 import styled from "styled-components";
 
-export const StyledHeading = styled.h3``;
+export const StyledRankTitle = styled.span`
+  display: block;
+  font-family: "Jost";
+  font-weight: 800;
+  letter-spacing: 1px;
+`;
 
-export const StyledDescription = styled.h3``;
+export const StyledRankText = styled.span`
+  font-size: 1rem;
+  display: block;
+`;
 
-export const StyledPopularity = styled.div``;
+export const StyledPopularity = styled.span``;
