@@ -43,6 +43,7 @@ const App = () => {
   const [loading, setLoading] = useState(true);
 
   const toggleMenu = (e) => {
+    setVisibleInspector(false);
     setVisibleMenu(!visibleMenu);
   };
   function toggleModal(e) {

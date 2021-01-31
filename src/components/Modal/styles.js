@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { DEVICES, ButtonBase } from "./../../styles/GlobalStyles";
+import { DEVICES, ZSPACE, ButtonBase } from "./../../styles/GlobalStyles";
 
 import { ReactComponent as Bike } from "./undraw_bike_ride_7xit.svg";
 
@@ -25,7 +25,7 @@ export const StyledModal = styled.div`
   justify-content: center;
   margin: auto;
 
-  z-index: 30; /* Sit on top */
+  z-index: ${ZSPACE.modal}; /* Sit on top */
 
   @media ${DEVICES.tablet} {
     .illustration {

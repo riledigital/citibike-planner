@@ -46,9 +46,9 @@ const StationActivity = ({
     ${item?.start_hour}:00`);
   };
 
-  const handleMouseMove = (pageX, pageY, item) => {
+  const handleMouseMove = (e, pageX, pageY) => {
     setShowTooltip(true);
-    setCoords({ x: pageX, y: pageY });
+    setCoords({ x: e.clientX, y: e.clientY });
   };
 
   const transitions = useTransition(data, (item) => item?.start_hour, {
@@ -88,12 +88,23 @@ const StationActivity = ({
 
       <StyledTooltip
         showTooltip={showTooltip}
-        style={{ transform: `translate(${coords.x}px, ${coords.y}px)` }}
+        style={{
+          left: coords.x,
+          top: "50%",
+        }}
       >
         {tooltipText}
       </StyledTooltip>
 
-      <svg viewBox={`0 0 ${width} ${height}`}>
+      <svg
+        onMouseOver={(e) => {
+          setShowLabels(true);
+        }}
+        onMouseOut={(e) => {
+          setShowLabels(false);
+        }}
+        viewBox={`0 0 ${width} ${height}`}
+      >
         <text
           className={styles.axisTitle}
           textAnchor="middle"
@@ -156,7 +167,7 @@ const StationActivity = ({
                       height - yScale(item.mean_rides) - margin.bottom
                     }`}
                     onMouseOver={(e) => handleMouseOver(e, item)}
-                    onMouseMove={(e) => handleMouseMove(e.pageX, e.pageY)}
+                    onMouseMove={(e) => handleMouseMove(e, e.pageX, e.pageY)}
                   >
                     <title>
                       {/* Average of {item.mean_rides} at hour {item.start_hour} */}
