@@ -1,19 +1,21 @@
 import React from "react";
-import styles from "./Header.module.css";
-import { StyledBranding, StyledButton, StyledHeader } from "./styles.js";
+import {
+  StyledBranding,
+  StyledButton,
+  StyledHeader,
+  StyledNav,
+} from "./styles.js";
 
 const Header = ({ toggleModal, toggleSound, soundOn }) => {
   return (
     <StyledHeader>
-      <StyledBranding>
-        <span>Citi Bike Planner</span>
-      </StyledBranding>
-      <nav className={styles.nav}>
+      <StyledBranding>Citi Bike Planner</StyledBranding>
+      <StyledNav>
         <StyledButton onClick={toggleSound}>
           Turn Sound {soundOn ? "Off" : "On"}
         </StyledButton>
         <StyledButton onClick={toggleModal}>Help</StyledButton>
-      </nav>
+      </StyledNav>
     </StyledHeader>
   );
 };

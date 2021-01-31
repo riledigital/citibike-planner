@@ -17,7 +17,8 @@ export const StyledHeader = styled.header`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  /* grid-column: 1/10; */
   color: white;
   padding: 0.25rem;
 `;
+
+export const StyledNav = styled.nav``;

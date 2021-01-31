@@ -1,101 +1,79 @@
-.heading {
-  /* composes: fontHeading from "./../styles/typography.module.css"; */
+import styled from "styled-components";
+
+export const StyledHeading = styled.h4`
   text-transform: uppercase;
   font-weight: bold;
   padding: 0;
   margin: 0;
-}
+`;
 
-.station {
+export const StyledStation = styled.div`
   border: 1px solid gray;
   border-radius: 8px;
   text-align: center;
   padding: 0.5rem;
-}
+`;
 
-.info-header {
+export const StyledInfoHeader = styled.header`
   animation: 12s infinite flash;
   padding-bottom: 0;
-  /* margin-bottom: 0.25rem; */
-}
+`;
 
-.status-title {
+export const StyledStatusTitle = styled.h3`
   font-size: 1rem;
   text-transform: uppercase;
   font-weight: 600;
   letter-spacing: 1.1px;
   margin: 0 0 0 0;
   padding: 0 0 0.25rem 0;
-}
+`;
 
-.station-name {
+export const StyledStationName = styled.h3`
   margin-bottom: 0;
-}
-.station-id {
   font-size: 1rem;
   margin-top: 0;
   font-weight: 300;
-}
-.station-id:before {
   content: "#";
-}
-.station-info {
   margin: 0;
-}
+`;
 
-.station-info:last-child {
-  margin-bottom: 2rem;
-}
-
-/* Layout  */
-.stationStatus {
+export const StyledStationStatus = styled.div`
   display: flex;
   justify-content: center;
-}
-.stationStatus > * {
   flex-grow: 0;
   display: flex;
   flex-direction: column;
   padding: 0rem 0.5rem 0rem 0.5rem;
-}
+`;
 
-.station-status-label {
+export const StyledStationStatusLabel = styled.div`
   font-size: 0.7rem;
   line-height: 1.2;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 1.2px;
   margin-top: 0;
-}
+`;
 
-.lastUpdated {
-  /* composes: fontBody from "./../styles/typography.module.css"; */
+export const StyledLastUpdated = styled.div`
   font-weight: normal;
   font-size: 0.8rem;
   text-align: center;
   margin-top: 0.5rem;
-}
+`;
 
-.buttonUnlock {
+export const StyledButtonUnlock = styled.button`
   display: flex;
   margin: 0 auto;
-}
+`;
 
-/* Composed */
-.station-counts {
+export const StyledStationCounts = styled.div`
   font-family: "Jost";
   font-size: 1.5rem;
   text-align: center;
-}
+`;
 
-.station-bikes,
-.station-electric,
-.station-docks {
-  composes: station-counts;
-}
-/*  */
-
-.loading-illustration {
+export const StyledLoadingIllustration = styled.div`
   border: 1px solid gray;
   background-color: var(--c-text);
   color: var(--c-background);
@@ -103,8 +81,4 @@
   border-radius: 8px;
   text-align: center;
   height: 10rem;
-}
-
-p {
-  font-family: "Jost";
-}
+`;

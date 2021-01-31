@@ -5,6 +5,7 @@ import "./styles/reset.css";
 import "./styles/base.module.css";
 import "./App.css";
 import styles from "./styles/buttons.module.css";
+import GlobalStyles from "./styles/GlobalStyles";
 
 import Mapbox from "./modules/Mapbox";
 
@@ -97,6 +98,7 @@ const App = () => {
 
   return (
     <div className="App">
+      <GlobalStyles />
       <Header
         toggleSound={() => setSound(!isMuted)}
         soundOn={isMuted}

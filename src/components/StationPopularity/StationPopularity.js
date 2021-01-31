@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
-import styles from "./StationPopularity.module.css";
+import {
+  StyledDescription,
+  StyledHeading,
+  StyledPopularity,
+} from "./styles.js";
+
 const StationPopularity = ({ rank, stations_in_nta, nta_name }) => {
   const [name, setName] = useState(null);
   useEffect(() => {
@@ -7,12 +12,12 @@ const StationPopularity = ({ rank, stations_in_nta, nta_name }) => {
     setName(nta_name_format);
   });
   return rank ? (
-    <section>
-      <h3 className={styles.heading}>Popularity Ranking</h3>
-      <div className={styles.description}>
+    <StyledPopularity>
+      <StyledHeading>Popularity Ranking</StyledHeading>
+      <StyledDescription>
         {rank} of {stations_in_nta} {name}
-      </div>
-    </section>
+      </StyledDescription>
+    </StyledPopularity>
   ) : (
     <></>
   );
