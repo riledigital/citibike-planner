@@ -8,7 +8,6 @@ export { default as Modal } from "./Modal";
 export { default as StationActivity } from "./StationActivity";
 export { default as StationHeader } from "./StationHeader";
 export { default as StationPopularity } from "./StationPopularity";
-export { default as StationRanking } from "./StationRanking";
 export { default as MapLegend } from "./MapLegend";
 export { default as Mapbox } from "./Mapbox";
 export { default as Menu } from "./Menu";
