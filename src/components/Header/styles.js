@@ -23,6 +23,7 @@ export const StyledHeader = styled.header`
   padding: 0.25rem;
   width: 100%;
 
+  font-size: 0.95rem;
   position: sticky;
   top: 0;
 
