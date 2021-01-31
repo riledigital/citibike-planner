@@ -38,21 +38,22 @@ export const StyledStationName = styled.h3`
 `;
 
 export const StyledStationStatus = styled.div`
-  display: flex;
-  justify-content: center;
+  text-align: center;
   flex-grow: 0;
-  display: flex;
-  flex-direction: column;
-  padding: 0rem 0.5rem 0rem 0.5rem;
+  display: block;
+  /* padding: 0rem 0.5rem 0rem 0.5rem; */
+  height: auto;
 `;
 
 export const StyledStationStatusLabel = styled.div`
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   line-height: 1.2;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 1.2px;
   margin-top: 0;
+
+  height: auto;
 `;
 
 export const StyledLastUpdated = styled.div`
@@ -81,4 +82,13 @@ export const StyledLoadingIllustration = styled.div`
   border-radius: 8px;
   text-align: center;
   height: 10rem;
+`;
+
+export const StyledStatusGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  height: auto;
+  padding: 0;
+  margin: 0;
+  width: 100%;
 `;

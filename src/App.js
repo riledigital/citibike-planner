@@ -99,7 +99,7 @@ const App = () => {
           ranking={ranking}
           visible={visibleInspector}
         />,
-        document.querySelector("#popup")
+        document.querySelector("mapboxgl-popup-content")
       );
     } catch (e) {
       console.log(e);

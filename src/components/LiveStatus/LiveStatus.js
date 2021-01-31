@@ -7,6 +7,7 @@ import {
   StyledLastUpdated,
   StyledLoadingIllustration,
   StyledStation,
+  StyledStatusGrid,
   StyledStationStatus,
   StyledStationStatusLabel,
 } from "./styles.js";
@@ -48,7 +49,7 @@ const LiveStatus = ({
   return (
     <>
       <StyledHeading>Live Status</StyledHeading>
-      <StyledStationStatus>
+      <StyledStatusGrid>
         <StyledStationStatus>
           {statusInfo.bikes}{" "}
           <StyledStationStatusLabel>Classic</StyledStationStatusLabel>
@@ -66,7 +67,7 @@ const LiveStatus = ({
           {statusInfo.docks}
           <StyledStationStatusLabel>Docks</StyledStationStatusLabel>
         </StyledStationStatus>
-      </StyledStationStatus>
+      </StyledStatusGrid>
 
       <StyledLastUpdated>
         Last updated on {getFormattedTime(last_reported)}

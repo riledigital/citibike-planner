@@ -81,9 +81,7 @@ const Mapbox = ({
         // e.stopPropagation();
         map.flyTo({
           center: e.features[0].geometry.coordinates,
-          curve: 1,
-
-          speed: 3,
+          speed: 1,
           zoom: 16,
         });
 
