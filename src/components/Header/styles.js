@@ -21,11 +21,14 @@ export const StyledHeader = styled.header`
   color: white;
   padding: 0.25rem;
   width: 100%;
+
   position: sticky;
   top: 0;
 
   height: var(--h-header);
   background: var(--c-blue);
+
+  z-index: 200;
 `;
 
 export const StyledToggleMenu = styled.button`
