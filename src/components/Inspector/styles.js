@@ -8,10 +8,13 @@ export const StyledInspector = styled.dialog`
   background: var(--c-blue);
   color: var(--c-white);
   display: grid;
-  position: absolute;
-  top: 15vh;
+
+  /* position: absolute; */
+  /* top: 15vh; */
+
   left: var(--margin-base);
   z-index: 50;
+
   padding: var(--margin-base);
   padding-right: calc(var(--margin-base) * 2);
 
@@ -19,8 +22,8 @@ export const StyledInspector = styled.dialog`
   max-width: 90vw;
 
   transition: transform 200ms 250ms ease-in-out;
-  transform: ${({ visible }) =>
-    visible ? "translateY(0)" : "translateY(110%)"};
+  /* transform: ${({ visible }) =>
+    visible ? "translateY(0)" : "translateY(110%)"}; */
 
   @media ${DEVICES.tablet} {
     width: 450px;
