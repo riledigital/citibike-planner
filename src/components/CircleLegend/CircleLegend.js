@@ -21,10 +21,10 @@ const CircleLegend = ({ cmap }) => {
   return (
     <div>
       Legend
-      {colormap.map((c) => (
-        <p>
+      {colormap.map((c, idx) => (
+        <span key={idx}>
           {c.i} for {c.col}
-        </p>
+        </span>
       ))}
     </div>
   );
