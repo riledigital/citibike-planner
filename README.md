@@ -1,3 +1,6 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/fb07e722-da84-4463-80d1-1929ad783bb1/deploy-status)](https://app.netlify.com/sites/citibikeplanner/deploys)
+See the app on Netlify at [https://citibike-planner.netlify.app/](https://citibike-planner.netlify.app/).
+
 # CitiBike Activity Viewer
 
 The CitiBike Activity Viewer is a web app that shows when a particular CitiBike station is used most often.
