@@ -1,7 +1,12 @@
 import React from "react";
 import { interpolateHcl, interpolate, scaleLinear } from "d3";
 
-import { StyledMapLegend } from "./styles.js";
+import {
+  StyledMapLegend,
+  StyledLabel,
+  StyledFigure,
+  StyledHeading,
+} from "./styles.js";
 
 const MapLegend = ({
   data = [...Array(5).fill()],
@@ -28,9 +33,9 @@ const MapLegend = ({
   };
   return (
     <StyledMapLegend>
-      <h4 className={styles.heading}>Legend</h4>
-      <figure style={{ maxWidth: "100%", margin: "none" }}>
-        <p>Popularity</p>
+      <StyledHeading>Legend</StyledHeading>
+      <StyledFigure>
+        <StyledLabel>Popularity</StyledLabel>
         <svg viewBox={`0 0 ${width} ${height}`}>
           <g
             transform={`translate(${
@@ -69,7 +74,7 @@ const MapLegend = ({
             );
           })}
         </svg>
-      </figure>
+      </StyledFigure>
     </StyledMapLegend>
   );
 };

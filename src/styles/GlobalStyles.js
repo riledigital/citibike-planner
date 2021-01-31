@@ -1,9 +1,9 @@
 import { createGlobalStyle } from "styled-components";
 import FontJostBook from "./../fonts/subset-Jost-Book.woff2";
 import FontJostHeavy from "./../fonts/subset-Jost-Heavy.woff2";
-// import FontJostHeavy from
 
 export const DEVICES = {
+  // Media query mixin
   tablet: "screen and (min-width: 700px)",
   desktop: "screen and (min-width: 1000px)",
   "desktop-xl": " screen and (min-width: 768px)",
