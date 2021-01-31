@@ -4,6 +4,7 @@ import { extent, timeParse, timeFormat, scaleTime, scaleLinear } from "d3";
 import { useTransition, animated } from "react-spring";
 
 import styles from "./StationActivity.module.css";
+import { StyledTooltip } from "./styles.js";
 
 const StationActivity = ({
   data,
@@ -15,6 +16,14 @@ const StationActivity = ({
   if (!data) {
     return <>Loading</>;
   }
+
+  const [coords, setCoords] = useState({});
+
+  const handleMouseMove = ({ pageX, pageY }) => {
+    const coords = { x: pageX, y: pageY };
+    console.info(coords);
+    setCoords(coords);
+  };
 
   const transitions = useTransition(data, (item) => item?.start_hour, {
     from: { opacity: 0 },
@@ -29,6 +38,7 @@ const StationActivity = ({
   const parseTime = timeParse("%H");
   const margin = { top: 10, right: 5, bottom: 35, left: 5 };
   let extentOut = data ? extent(data, (d) => d.mean_rides) : [0, 100];
+
   const xScale = scaleTime()
     .domain([6, 24])
     .range([margin.left, width - margin.right]);
@@ -51,7 +61,11 @@ const StationActivity = ({
   ) : (
     <figure className={styles["barchart__hours"]}>
       <h3 className={styles.heading}>Average trips per hour</h3>
-      <svg viewBox={`0 0 ${width} ${height}`}>
+      <StyledTooltip coords={coords}>TOOLTIP</StyledTooltip>
+      <svg
+        onMouseMove={(e) => handleMouseMove(e)}
+        viewBox={`0 0 ${width} ${height}`}
+      >
         <text
           className={styles.axisTitle}
           textAnchor="middle"
@@ -71,8 +85,8 @@ const StationActivity = ({
                 className={styles.axisBottom}
                 transform={`
               translate(${xScale(d.start_hour) + margin.left}, ${
-                  height - margin.bottom / 1.2
-                })
+                height - margin.bottom / 1.2
+              })
               rotate(${45}) `}
               >
                 <text
