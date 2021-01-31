@@ -16,6 +16,9 @@ import {
   MapLegend,
   Modal,
 } from "./components";
+
+import { StyledMap } from "./AppStyles.js";
+
 import Audio from "./modules/Audio";
 import Data from "./modules/Data";
 import { throttle } from "lodash-es";
@@ -116,7 +119,7 @@ const App = () => {
             ranking={ranking}
           />
         )}
-        <div id="main-map">
+        <StyledMap>
           <Mapbox
             sfxManager={sfxManager}
             handleStationClick={(feature) => handleStationClick(feature)}
@@ -126,7 +129,7 @@ const App = () => {
           <div id="map-legend">
             <MapLegend />
           </div>
-        </div>
+        </StyledMap>
       </div>
       {showModal ? (
         <Modal

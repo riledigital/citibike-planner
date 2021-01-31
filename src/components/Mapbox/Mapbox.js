@@ -3,6 +3,7 @@ import { throttle } from "lodash";
 import mapboxgl from "mapbox-gl";
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
+import {} from "./styles.js";
 
 // Does this even work? IDK
 // import "https://api.tiles.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css";
