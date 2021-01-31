@@ -67,7 +67,7 @@ ${normalize}
   --margin-desktop: 2rem;
 
 /* Height of header */
-  --h-header: 48px;
+  --h-header: 32px;
 
  /* Border radius */
   --radius-s: 8px;
@@ -138,10 +138,10 @@ export const ButtonBase = `
 
   height: auto;
   width: auto;
-  padding: 1ch 2ch;
+  padding: .5ch 2ch;
 
   color: var(--c-black);
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   letter-spacing: 1px;
   text-align: center;
   font-weight: 900;
