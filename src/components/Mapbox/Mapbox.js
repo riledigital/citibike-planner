@@ -71,7 +71,22 @@ const Mapbox = ({
       map.addControl(geolocate);
       // Then add interactions
       // "https://docs.mapbox.com/mapbox-gl-js/assets/custom_marker.png",
+
+      map.on("click", function (e) {
+        console.info(e);
+        handleStationClick(null);
+      });
+
       map.on("click", "stationLayer", function (e) {
+        // e.stopPropagation();
+        map.flyTo({
+          center: e.features[0].geometry.coordinates,
+          curve: 1,
+
+          speed: 3,
+          zoom: 16,
+        });
+
         sfxManager?.play("click");
         let feature = e.features[0].properties;
         var coordinates = e.features[0].geometry.coordinates.slice();

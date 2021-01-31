@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledRankTitle = styled.h3`
+export const StyledRankTitle = styled.span`
   display: block;
   font-family: "Jost";
   font-size: 0.9rem;
