@@ -12,7 +12,7 @@ export const DEVICES = {
 };
 
 export const ZSPACE = {
-  map: 0,
+  map: -100,
   inspector: 20,
   modal: 30,
   header: 50,
@@ -42,6 +42,7 @@ ${normalize}
   --c-blue: #0a2472;
   --c-blue-alpha: rgba(10, 36, 114, .8);
   --c-white: #fefefe;
+  --c-black: #010203;
   --c-text: #0a2472;
   --c-links: #c0b8ff;
   --c-buttons: var(--c-links);
@@ -90,6 +91,7 @@ body {
 }
 
 * {
+
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -106,6 +108,7 @@ p {
 /* App container*/
 
 #App {
+  -webkit-transform: translate3d(0,0,0);
   position: absolute;
   top: 0;
   left: 0;
@@ -124,20 +127,25 @@ p {
   right: 0;
   bottom: 0%;
   z-index: ${ZSPACE.map};
+  cursor: pointer;
 }
 `;
 
 export const ButtonBase = `
   background-color: var(--c-buttons);
   border: 0;
-  font-size: 0.9rem;
-  letter-spacing: 1px;
-
-  font-weight: 900;
   border-radius: 9px;
+
   height: auto;
   width: auto;
   padding: 1ch 2ch;
+
+  color: var(--c-black);
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  text-align: center;
+  font-weight: 900;
+
   text-transform: uppercase;
 
   :first-of-type {

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+
 import { StyledInspector, StyledDecorative } from "./styles.js";
 
 import {
@@ -35,27 +36,16 @@ const Inspector = ({
     }
 
     setStationAggData(getStationAggData(currentStation));
-    const liveStatusData = stationStatus.get(currentStationId);
-    if (liveStatusData) {
-      const newLiveStatusData = new Map();
-      newLiveStatusData.set("station_id", currentStationId);
-      newLiveStatusData.set(
-        "num_bikes_available",
-        liveStatusData.num_bikes_available
-      );
-      newLiveStatusData.set(
-        "num_ebikes_available",
-        liveStatusData.num_ebikes_available
-      );
-      newLiveStatusData.set(
-        "num_docks_available",
-        liveStatusData.num_docks_available
-      );
-      newLiveStatusData.set("last_reported", liveStatusData.last_reported);
-      newLiveStatusData.set("rental_url", liveStatusData.rental_url);
-      setLiveStatusData(newLiveStatusData);
+
+    const updatedStatus = new Map();
+    if (currentStationId && stationStatus.size > 1) {
+      const newStatus = stationStatus.get(currentStationId);
+      const newStatusMap = new Map(Object.entries(newStatus));
+      newStatusMap.set("rental_url", rankObject.rental_url);
+      debugger;
+      setLiveStatusData(newStatusMap);
     }
-  }, [currentStation, stationStatus]);
+  }, [currentStation]);
 
   const getStationRanking = (station_id) => {
     try {
@@ -96,7 +86,7 @@ const Inspector = ({
   const isClosed = currentStation === null;
   return (
     <StyledInspector visible={visible}>
-      <StyledDecorative>Station Inspector</StyledDecorative>
+      <StyledDecorative>Station Info</StyledDecorative>
       <StationHeader {...currentStation} />
       <StationPopularity
         nta_name={currentRank.get("nta_name")}

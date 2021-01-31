@@ -1,10 +1,16 @@
 import styled from "styled-components";
+import { ButtonBase } from "./../../styles/GlobalStyles";
 
-export const StyledHeading = styled.h4`
+export const StyledHeading = styled.h3`
+  font-size: 1rem;
   text-transform: uppercase;
   font-weight: bold;
   padding: 0;
   margin: 0;
+  margin-top: 1rem;
+  margin-bottom: 0rem;
+  letter-spacing: 0.05rem;
+  text-align: center;
 `;
 
 export const StyledStation = styled.div`
@@ -41,8 +47,9 @@ export const StyledStationStatus = styled.div`
   text-align: center;
   flex-grow: 0;
   display: block;
-  /* padding: 0rem 0.5rem 0rem 0.5rem; */
+  padding: 0rem 0.5rem 0rem 0.5rem;
   height: auto;
+  overflow: hidden;
 `;
 
 export const StyledStationStatusLabel = styled.div`
@@ -60,12 +67,7 @@ export const StyledLastUpdated = styled.div`
   font-weight: normal;
   font-size: 0.8rem;
   text-align: center;
-  margin-top: 0.5rem;
-`;
-
-export const StyledButtonUnlock = styled.button`
-  display: flex;
-  margin: 0 auto;
+  margin-bottom: 0.5rem;
 `;
 
 export const StyledStationCounts = styled.div`
@@ -91,4 +93,15 @@ export const StyledStatusGrid = styled.div`
   padding: 0;
   margin: 0;
   width: 100%;
+`;
+
+export const StyledNumber = styled.div`
+  font-variant-numeric: oldstyle-nums;
+  display: block;
+  font-size: 1.5rem;
+`;
+
+export const StyledButtonUnlock = styled.a`
+  ${ButtonBase}
+  margin-top: 1rem;
 `;
