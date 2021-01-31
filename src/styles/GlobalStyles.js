@@ -1,13 +1,21 @@
 import { createGlobalStyle } from "styled-components";
+import { normalize } from "styled-normalize";
+
 import FontJostBook from "./../fonts/subset-Jost-Book.woff2";
 import FontJostHeavy from "./../fonts/subset-Jost-Heavy.woff2";
-import { normalize } from "styled-normalize";
 
 export const DEVICES = {
   // Media query mixin
   tablet: "screen and (min-width: 700px)",
   desktop: "screen and (min-width: 1000px)",
   "desktop-xl": " screen and (min-width: 768px)",
+};
+
+export const ZSPACE = {
+  map: 0,
+  inspector: 20,
+  modal: 30,
+  header: 50,
 };
 
 const GlobalStyle = createGlobalStyle`
@@ -35,6 +43,7 @@ ${normalize}
   --c-white: #fefefe;
   --c-text: #0a2472;
   --c-links: #c0b8ff;
+  --c-buttons: var(--c-links);
   --button-bg: var(--c-links);
   --button-bg-hover: #c2b9fe;
   --c-background: #ffffff;
@@ -93,20 +102,43 @@ p {
 /* App container*/
 
 #App {
-  position: relative;
-  display: flex;
-  height: 100%;
-  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: block;
   overflow: unset;
+  z-index: 0;
 }
 
 .mapContainer {
-  position: relative;
-  min-width: 300px;
-  min-height: 95vh;
-  width: 100%;
-  height: 99vh;
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0%;
+  z-index: ${ZSPACE.map};
 }
+`;
+
+export const ButtonBase = `
+  background-color: var(--c-buttons);
+  border: 0;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+
+  font-weight: 900;
+  border-radius: 9px;
+  height: auto;
+  width: auto;
+  padding: 1ch 2ch;
+  text-transform: uppercase;
+
+  :first-of-type {
+    margin-right: 1ch;
+  }
 `;
 
 export default GlobalStyle;

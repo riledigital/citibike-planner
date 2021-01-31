@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { ButtonBase } from "./../../styles/GlobalStyles";
 
 export const StyledBranding = styled.div`
   padding: 0 0 0 1rem;
@@ -28,12 +29,11 @@ export const StyledHeader = styled.header`
   height: var(--h-header);
   background: var(--c-blue);
 
-  z-index: 200;
+  z-index: 100;
 `;
 
 export const StyledToggleMenu = styled.button`
-  border: 1px solid black;
-  border-radius: 42px;
+  ${ButtonBase}
 `;
 
 export const StyledNav = styled.nav``;

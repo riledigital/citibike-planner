@@ -6,7 +6,7 @@ export const StyledMenu = styled.div`
   display: flex;
   position: absolute;
 
-  top: 0;
+  top: var(--h-header);
   right: 0;
   bottom: 0;
   left: 0;
@@ -17,4 +17,5 @@ export const StyledMenu = styled.div`
   padding: var(--margin-base);
 
   background: var(--c-background);
+  z-index: 100;
 `;
