@@ -1,6 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 import FontJostBook from "./../fonts/subset-Jost-Book.woff2";
 import FontJostHeavy from "./../fonts/subset-Jost-Heavy.woff2";
+import { normalize } from "styled-normalize";
 
 export const DEVICES = {
   // Media query mixin
@@ -10,6 +11,8 @@ export const DEVICES = {
 };
 
 const GlobalStyle = createGlobalStyle`
+${normalize}
+
 @font-face {
     font-family: 'Jost';
     src: url(${FontJostHeavy}) format('woff2');
@@ -28,6 +31,7 @@ const GlobalStyle = createGlobalStyle`
 
 /* Colors */
 :root {
+  --c-white: #fefefe;
   --c-text: #0a2472;
   --c-links: #c0b8ff;
   --button-bg: var(--c-links);
@@ -39,8 +43,8 @@ const GlobalStyle = createGlobalStyle`
 /* Typography */
 :root {
   --font-main: "Jost", "Futura", sans-serif;
-  --font-size-base: 18px;
-  --line-height-base: 1.5;
+  --font-size-base: 20px;
+  --line-height-base: 1.4;
   --font-headings: var(--font-main);
 }
 
@@ -63,6 +67,7 @@ body {
   font-family: var(--font-main);
   font-size: var(--font-size-base);
   line-height: var(--line-height-base);
+  font-weight: normal;
   text-align: left;
 }
 
@@ -76,6 +81,9 @@ html {
   background: var(--c-background);
 }
 
+p {
+  margin-bottom: 1rem;
+}
 `;
 
 export default GlobalStyle;

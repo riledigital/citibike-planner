@@ -32,6 +32,7 @@
     "react-vega": "^7.4.1",
     "s": "^1.0.0",
     "styled-components": "^5.2.1",
+    "styled-normalize": "^8.0.7",
     "vega": "^5.16.1",
     "vega-embed": "^6.12.2",
     "vega-lite": "^4.16.2"

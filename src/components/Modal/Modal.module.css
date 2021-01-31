@@ -7,15 +7,7 @@
   display: flex;
 }
 
-.modalContent {
-  display: block;
-  z-index: 100; /* Sit on top */
-  border-radius: 8px;
-  background-color: var(--c-text);
-  top: 0;
-  position: absolute;
-  padding: 1rem;
-}
+
 
 svg {
   display: block;
@@ -24,26 +16,16 @@ svg {
 }
 
 .attribution {
-  font-size: 0.9rem;
-  font-weight: bold;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
+
 }
 
 .illustration {
   /* max-height: 5rem; */
   /* z-index: 100; */
-  max-height: 6rem;
-  max-width: 80%;
-  padding: 1rem;
+
 }
 
 .close {
-  float: right;
-}
-
-.instructions {
-  /* composes: fontBody from "./../styles/typography.module.css"; */
 }
 
 .heading {
