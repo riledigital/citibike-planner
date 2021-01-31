@@ -1,6 +1,8 @@
 import React from "react";
 import { interpolateHcl, interpolate, scaleLinear } from "d3";
-import styles from "./MapLegend.module.css";
+
+import { StyledMapLegend } from "./styles.js";
+
 const MapLegend = ({
   data = [...Array(5).fill()],
   width = 120,
@@ -25,7 +27,7 @@ const MapLegend = ({
     right: 20,
   };
   return (
-    <div className={styles.container}>
+    <StyledMapLegend>
       <h4 className={styles.heading}>Legend</h4>
       <figure style={{ maxWidth: "100%", margin: "none" }}>
         <p>Popularity</p>
@@ -68,7 +70,7 @@ const MapLegend = ({
           })}
         </svg>
       </figure>
-    </div>
+    </StyledMapLegend>
   );
 };
 
