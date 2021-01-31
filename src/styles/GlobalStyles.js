@@ -40,6 +40,7 @@ ${normalize}
 /* Colors */
 :root {
   --c-blue: #0a2472;
+  --c-blue-alpha: rgba(10, 36, 114, .8);
   --c-white: #fefefe;
   --c-text: #0a2472;
   --c-links: #c0b8ff;
@@ -66,6 +67,9 @@ ${normalize}
 
 /* Height of header */
   --h-header: 48px;
+
+ /* Border radius */
+  --radius-s: 8px;
 }
 
 /* Breakpoints */

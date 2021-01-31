@@ -1,10 +1,17 @@
 // https://observablehq.com/@d3/margin-convention
 import React, { useEffect, useState } from "react";
-import { extent, timeParse, timeFormat, scaleTime, scaleLinear } from "d3";
+import {
+  extent,
+  timeParse,
+  timeFormat,
+  scaleTime,
+  scaleLinear,
+  format,
+} from "d3";
 import { useTransition, animated } from "react-spring";
 
 import styles from "./StationActivity.module.css";
-import { StyledTooltip } from "./styles.js";
+import { StyledTooltip, StyledBarLabel } from "./styles.js";
 
 const StationActivity = ({
   data,
@@ -13,16 +20,35 @@ const StationActivity = ({
   fill = "blue",
   textFill = "white",
 }) => {
+  const formatHour = timeFormat("%_I %p");
+  const parseTime = timeParse("%H");
+  const formatDecimals = format(".2f");
+  const margin = { top: 10, right: 5, bottom: 35, left: 5 };
   if (!data) {
     return <>Loading</>;
   }
 
   const [coords, setCoords] = useState({});
+  const [showTooltip, setShowTooltip] = useState(null);
+  const [tooltipText, setTooltipText] = useState(null);
+  const [showLabels, setShowLabels] = useState(false);
 
-  const handleMouseMove = ({ pageX, pageY }) => {
-    const coords = { x: pageX, y: pageY };
-    console.info(coords);
-    setCoords(coords);
+  const handleMouseOut = (e) => {
+    setShowTooltip(false);
+    setShowLabels(false);
+  };
+
+  const handleMouseOver = (e, item) => {
+    setShowLabels(true);
+    setTooltipText(`Average of ${formatDecimals(
+      item?.mean_rides
+    )} rides started/hour at
+    ${item?.start_hour}:00`);
+  };
+
+  const handleMouseMove = (pageX, pageY, item) => {
+    setShowTooltip(true);
+    setCoords({ x: pageX, y: pageY });
   };
 
   const transitions = useTransition(data, (item) => item?.start_hour, {
@@ -34,9 +60,6 @@ const StationActivity = ({
     trail: 20,
   });
 
-  const formatHour = timeFormat("%_I %p");
-  const parseTime = timeParse("%H");
-  const margin = { top: 10, right: 5, bottom: 35, left: 5 };
   let extentOut = data ? extent(data, (d) => d.mean_rides) : [0, 100];
 
   const xScale = scaleTime()
@@ -48,10 +71,11 @@ const StationActivity = ({
 
   const padding = 1;
   const currentHour = new Date().getHours();
+
   useEffect(() => {
     extentOut = data ? extent(data, (d) => d.mean_rides) : [0, 100];
     yScale = scaleLinear().domain(extentOut).range([height, 0]);
-  });
+  }, [data]);
 
   return !data ? (
     <div>
@@ -61,11 +85,15 @@ const StationActivity = ({
   ) : (
     <figure className={styles["barchart__hours"]}>
       <h3 className={styles.heading}>Average trips per hour</h3>
-      <StyledTooltip coords={coords}>TOOLTIP</StyledTooltip>
-      <svg
-        onMouseMove={(e) => handleMouseMove(e)}
-        viewBox={`0 0 ${width} ${height}`}
+
+      <StyledTooltip
+        showTooltip={showTooltip}
+        style={{ transform: `translate(${coords.x}px, ${coords.y}px)` }}
       >
+        {tooltipText}
+      </StyledTooltip>
+
+      <svg viewBox={`0 0 ${width} ${height}`}>
         <text
           className={styles.axisTitle}
           textAnchor="middle"
@@ -85,8 +113,8 @@ const StationActivity = ({
                 className={styles.axisBottom}
                 transform={`
               translate(${xScale(d.start_hour) + margin.left}, ${
-                height - margin.bottom / 1.2
-              })
+                  height - margin.bottom / 1.2
+                })
               rotate(${45}) `}
               >
                 <text
@@ -110,6 +138,7 @@ const StationActivity = ({
             <React.Fragment key={key}>
               <animated.g style={props}>
                 <g
+                  onMouseOut={(e) => handleMouseOut(e)}
                   transform={`translate(${xScale(item.start_hour)}, ${yScale(
                     item.mean_rides
                   )})`}
@@ -126,12 +155,14 @@ const StationActivity = ({
                     height={`${
                       height - yScale(item.mean_rides) - margin.bottom
                     }`}
+                    onMouseOver={(e) => handleMouseOver(e, item)}
+                    onMouseMove={(e) => handleMouseMove(e.pageX, e.pageY)}
                   >
                     <title>
-                      Average of {item.mean_rides} at hour {item.start_hour}
+                      {/* Average of {item.mean_rides} at hour {item.start_hour} */}
                     </title>
                   </rect>
-                  <text
+                  <StyledBarLabel
                     className={styles.barLabel}
                     textAnchor="left"
                     dx="3px"
@@ -140,9 +171,10 @@ const StationActivity = ({
                     fontSize="8px"
                     fontFamily="Jost"
                     fontWeight="800"
+                    style={{ opacity: showLabels ? 1.0 : 0 }}
                   >
                     {Number.parseFloat(item.mean_rides).toFixed(0)}
-                  </text>
+                  </StyledBarLabel>
                 </g>
               </animated.g>
             </React.Fragment>
