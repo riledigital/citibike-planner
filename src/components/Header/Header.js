@@ -6,11 +6,11 @@ import {
   StyledNav,
 } from "./styles.js";
 
-const Header = ({ toggleModal, toggleSound, soundOn }) => {
+const Header = ({ toggleModal, toggleMenu, toggleSound, soundOn }) => {
   return (
     <StyledHeader>
       <StyledBranding>Citi Bike Planner</StyledBranding>
-      <StyledToggleMenu>Menu</StyledToggleMenu>
+      <StyledToggleMenu onClick={() => toggleMenu()}>Menu</StyledToggleMenu>
     </StyledHeader>
   );
 };

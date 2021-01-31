@@ -12,6 +12,7 @@ import {
   Footer,
   Header,
   Inspector,
+  Menu,
   Mapbox,
   MapLegend,
   Modal,
@@ -32,13 +33,18 @@ const App = () => {
   const [stationGeo, setStationGeo] = useState(null);
   const [stationStatus, setStationStatus] = useState(new Map());
   const [lastUpdated, setLastUpdated] = useState(null);
+
   const [visibleInspector, setVisibleInspector] = useState(false);
+  const [visibleMenu, setVisibleMenu] = useState(false);
 
   const [showModal, setShowModal] = useState(true);
   const [ranking, setRanking] = useState({});
   const [isMuted, setSound] = useState(false);
   const [loading, setLoading] = useState(true);
 
+  const toggleMenu = (e) => {
+    setVisibleMenu(!visibleMenu);
+  };
   function toggleModal(e) {
     setShowModal(!showModal);
   }
@@ -113,6 +119,7 @@ const App = () => {
         toggleSound={() => setSound(!isMuted)}
         soundOn={isMuted}
         toggleModal={toggleModal}
+        toggleMenu={toggleMenu}
       />
       <>
         {loading ? (
@@ -140,7 +147,7 @@ const App = () => {
           </div>
         </StyledMap>
       </>
-      {showModal ? (
+      {visibleMenu ? (
         <Modal
           toggle={toggleModal}
           soundOn={isMuted}

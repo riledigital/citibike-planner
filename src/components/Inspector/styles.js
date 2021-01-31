@@ -1,5 +1,9 @@
 import styled from "styled-components";
-import DEVICES from "./../../styles/GlobalStyles";
+import { DEVICES, ZSPACE } from "./../../styles/GlobalStyles";
+
+const EASE_SLIDE = "cubic-bezier(0.16, 1, 0.3, 1)";
+const SPEED = "180ms";
+const DELAY = "1s";
 
 export const StyledInspector = styled.dialog`
   border: 0;
@@ -9,21 +13,23 @@ export const StyledInspector = styled.dialog`
   color: var(--c-white);
   display: grid;
 
+  z-index: ${ZSPACE.inspector};
   /* position: absolute; */
   /* top: 15vh; */
 
   left: var(--margin-base);
-  z-index: 50;
+  z-index: 10;
 
   padding: var(--margin-base);
   padding-right: calc(var(--margin-base) * 2);
 
-  max-height: 80vw;
+  min-height: auto;
+  max-height: 80vh;
   max-width: 90vw;
 
-  transition: transform 200ms 250ms ease-in-out;
-  /* transform: ${({ visible }) =>
-    visible ? "translateY(0)" : "translateY(110%)"}; */
+  transition: transform ${SPEED} ${DELAY} ${EASE_SLIDE};
+  transform: ${({ visible }) =>
+    visible ? "translateX(0)" : "translateX(-97%)"};
 
   @media ${DEVICES.tablet} {
     width: 450px;

@@ -35,7 +35,6 @@ const Inspector = ({
     }
 
     setStationAggData(getStationAggData(currentStation));
-    debugger;
     const liveStatusData = stationStatus.get(currentStationId);
     if (liveStatusData) {
       const newLiveStatusData = new Map();
