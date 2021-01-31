@@ -1,6 +1,14 @@
 import styled from "styled-components";
 
 export const StyledMapLegend = styled.div`
+  position: absolute;
+  bottom: 5vw;
+  right: 1vw;
+  z-index: 10;
+  max-width: 15vw;
+  padding: 0.5rem;
+  font-size: 0.8rem;
+
   background: rgba(255, 255, 255, 0.5);
   border-radius: 4px;
   font-size: 0.9rem;

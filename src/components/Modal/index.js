@@ -1,8 +1,17 @@
 import React, { useState } from "react";
 import { useTransition, animated } from "react-spring";
 
-import styles from "./Modal.module.css";
-import { ReactComponent as Bike } from "./undraw_bike_ride_7xit.svg";
+import {
+  StyledButtonSound,
+  StyledModal,
+  StyledModalContent,
+  StyledHeading,
+  StyledInstructions,
+  StyledSvgBike,
+  StyledTitle,
+  StyledAttribution,
+  StyledCloseButton,
+} from "./styles.js";
 
 const Modal = ({ toggle, soundOn, toggleSound }) => {
   const [show, set] = useState(true);
@@ -22,24 +31,22 @@ const Modal = ({ toggle, soundOn, toggleSound }) => {
     ({ item, key, props }) =>
       item && (
         <animated.div key={key} style={props}>
-          <div className={styles.modal} onClick={() => set()}>
-            <div className={styles.modalContent} onClick={stopPropogation}>
-              <button
+          <StyledModal onClick={() => set()}>
+            <StyledModalContent onClick={stopPropogation}>
+              <StyledCloseButton
                 type="button"
-                className={styles.close}
                 data-dismiss="modal"
                 aria-label="Close"
                 onClick={() => set()}
               >
-                <span aria-hidden="true">&times;</span>
-              </button>
-              <h1>Citi Bike Planner</h1>
-              <span className={styles.attribution}>By Ri Le</span>
+                &times;
+              </StyledCloseButton>
+              <StyledTitle>Citi Bike Planner</StyledTitle>
+              <StyledAttribution>By Ri Le</StyledAttribution>
 
               <figure>
-                <Bike
+                <StyledSvgBike
                   title="Cycling illustration (Katerina Limpitsouni)"
-                  className={styles.illustration}
                   viewBox="0 0 800.25287 695.42298"
                 />
               </figure>
@@ -51,26 +58,24 @@ const Modal = ({ toggle, soundOn, toggleSound }) => {
                 city and find out when your favorite stations are the busiest.
               </p>
 
-              <h3 className={styles.heading}>Instructions</h3>
-              <p className={styles.instructions}>
+              <StyledHeading>Instructions</StyledHeading>
+              <StyledInstructions>
                 Click on a station on the map. A histogram will appear on the
                 sidebar that shows the ride distribution across all 24 hours of
-                the day.
-                <small>
-                  {" "}
-                  This is a personal project unaffiliated with Motivate or Citi
-                  Bike.
-                </small>
-              </p>
+                the day. This is a personal project unaffiliated with Motivate
+                or Citi Bike.
+              </StyledInstructions>
 
               <div>
-                <button onClick={toggleSound}>
+                <StyledButtonSound onClick={toggleSound}>
                   Turn Sound {soundOn ? "Off" : "On"}
-                </button>
-                <button onClick={() => set()}>EXPLORE</button>
+                </StyledButtonSound>
+                <StyledButtonSound onClick={() => set()}>
+                  Explore
+                </StyledButtonSound>
               </div>
-            </div>
-          </div>
+            </StyledModalContent>
+          </StyledModal>
         </animated.div>
       )
   );

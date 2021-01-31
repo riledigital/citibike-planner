@@ -7,15 +7,14 @@ import "./App.css";
 import styles from "./styles/buttons.module.css";
 import GlobalStyles from "./styles/GlobalStyles";
 
-import Mapbox from "./modules/Mapbox";
-
 import {
-  Header,
-  Footer,
-  Modal,
   CircleLegend,
-  MapLegend,
+  Footer,
+  Header,
   Inspector,
+  Mapbox,
+  MapLegend,
+  Modal,
 } from "./components";
 import Audio from "./modules/Audio";
 import Data from "./modules/Data";
