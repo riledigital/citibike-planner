@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import styles from "./Inspector.module.css";
+import { StyledInspector } from "./styles.js";
 
 import {
   LiveStatus,
@@ -9,6 +9,7 @@ import {
 } from "./../index.js";
 
 const Inspector = ({
+  visible,
   aggData,
   stationStatus,
   stationGeo,
@@ -92,8 +93,10 @@ const Inspector = ({
       console.error(e);
     }
   };
+
+  const isClosed = currentStation === null;
   return (
-    <div className={styles.inspector}>
+    <StyledInspector visible={visible}>
       <StationHeader {...currentStation} />
       <StationPopularity
         nta_name={currentRank.get("nta_name")}
@@ -109,7 +112,7 @@ const Inspector = ({
         last_reported={liveStatusData.get("last_reported")}
         rental_url={liveStatusData.get("rental_url")}
       />
-    </div>
+    </StyledInspector>
   );
 };
 

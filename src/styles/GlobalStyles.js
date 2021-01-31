@@ -89,12 +89,20 @@ p {
   margin-bottom: 1rem;
 }
 
+/* App container*/
+
+#App {
+  position: relative;
+  display: flex;
+  width:100%;
+  min-height: 100vh;
+  overflow: unset;
+}
 
 .mapContainer {
-  margin-top: var(--h-header);
   position: relative;
   min-width: 300px;
-  min-height: 600px;
+  min-height: 90vh;
   width: 100%;
   height: 100%;
 }

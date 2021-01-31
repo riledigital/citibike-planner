@@ -27,11 +27,12 @@ import { throttle } from "lodash-es";
 const App = () => {
   const [sfxManager, setSfxManager] = useState(null);
   const [map, setMap] = useState(null);
-  const [currentStation, setCurrentStation] = useState({});
+  const [currentStation, setCurrentStation] = useState(null);
   const [aggData, setAggData] = useState(null);
   const [stationGeo, setStationGeo] = useState(null);
   const [stationStatus, setStationStatus] = useState(new Map());
   const [lastUpdated, setLastUpdated] = useState(null);
+  const [visibleInspector, setVisibleInspector] = useState(false);
 
   const [showModal, setShowModal] = useState(true);
   const [ranking, setRanking] = useState({});
@@ -64,6 +65,7 @@ const App = () => {
     fetchData();
     setLoading(false);
   }, []);
+
   const fetchData = async () => {
     const DataManager = new Data();
     const results = await DataManager.startFetching();
@@ -77,6 +79,7 @@ const App = () => {
     setStationStatus(allStationsStatus);
     setLastUpdated(new Date(fetchedData["last_updated"] * 1000));
   };
+
   useEffect(() => {
     if (sfxManager) {
       sfxManager?.mute(!isMuted);
@@ -84,6 +87,7 @@ const App = () => {
   }, [sfxManager, isMuted]);
 
   useEffect(() => {
+    setVisibleInspector(true);
     try {
       // ReactDOM.render(
       //   <StationActivity
@@ -117,6 +121,7 @@ const App = () => {
             currentStation={currentStation}
             lastUpdated={lastUpdated}
             ranking={ranking}
+            visible={visibleInspector}
           />
         )}
         <StyledMap>
