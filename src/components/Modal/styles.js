@@ -15,7 +15,8 @@ export const StyledModal = styled.div`
   position: fixed;
   left: 0;
   top: 0;
-  width: 90%;
+  right: 0;
+  width: 95%;
   height: 90%;
   overflow: scroll;
   justify-content: center;

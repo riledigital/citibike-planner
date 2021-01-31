@@ -31,6 +31,7 @@ ${normalize}
 
 /* Colors */
 :root {
+  --c-blue: #0a2472;
   --c-white: #fefefe;
   --c-text: #0a2472;
   --c-links: #c0b8ff;
@@ -52,6 +53,9 @@ ${normalize}
 :root {
   --margin-base: 1rem;
   --margin-tablet: 1.25rem;
+
+/* Height of header */
+  --h-header: 48px;
 }
 
 /* Breakpoints */
@@ -83,6 +87,16 @@ html {
 
 p {
   margin-bottom: 1rem;
+}
+
+
+.mapContainer {
+  margin-top: var(--h-header);
+  position: relative;
+  min-width: 300px;
+  min-height: 600px;
+  width: 100%;
+  height: 100%;
 }
 `;
 
