@@ -28,7 +28,7 @@ rect {
 }
 
 .heading {
-  /* composes: fontHeading from "./../styles/typography.module.css"; */
+  font-size: 1rem;
 }
 
 .axisBottom {
