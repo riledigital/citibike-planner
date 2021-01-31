@@ -40,6 +40,7 @@ export const StyledModal = styled.div`
 `;
 
 export const StyledModalContent = styled.div`
+  box-shadow: 1px 1px 12px 2px rgba(0, 0, 0, 0.5);
   background: var(--c-white);
   display: block;
   border-radius: 8px;
@@ -49,7 +50,7 @@ export const StyledModalContent = styled.div`
   z-index: 50; /* Sit on top */
 
   @media ${DEVICES.tablet} {
-    width: 400px;
+    width: 45ch;
   }
 `;
 
@@ -74,5 +75,26 @@ export const StyledAttribution = styled.p`
 `;
 
 export const StyledCloseButton = styled.button`
+  ${ButtonBase}
   float: right;
+`;
+
+export const StyledSummary = styled.summary`
+  font-size: 0.9rem;
+  font-weight: 900;
+  :last-of-type {
+    margin-bottom: 1rem;
+  }
+`;
+
+export const StyledDetails = styled.details`
+  font-size: 0.9rem;
+`;
+
+export const StyledButtonWrappers = styled.div`
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-around;
 `;
