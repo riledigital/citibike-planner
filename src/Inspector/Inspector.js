@@ -42,7 +42,6 @@ const Inspector = ({
       const newStatus = stationStatus.get(currentStationId);
       const newStatusMap = new Map(Object.entries(newStatus));
       newStatusMap.set("rental_url", rankObject.rental_url);
-      debugger;
       setLiveStatusData(newStatusMap);
     }
   }, [currentStation]);

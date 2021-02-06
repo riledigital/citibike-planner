@@ -12,7 +12,7 @@ export const StyledTooltip = styled.div`
 
   height: auto;
 
-  position: fixed;
+  position: absolute;
   padding: 0.5rem;
   z-index: 1000;
 

@@ -130,8 +130,31 @@ p {
   cursor: pointer;
 }
 
-.mapboxgl-ctrl {
+.mapboxgl-ctrl-top-right {
+
   top: calc(var(--margin-base) + 1rem );
+}
+
+.mapboxgl-ctrl {
+  font-family: var(--font-main);
+}
+
+
+.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip {
+  border-top-color: var(--c-blue);
+}
+
+.mapboxgl-popup-content {
+  display: flex;
+  flex-direction: column;
+  min-height: 2rem;
+  padding-right: 2rem;
+}
+
+.mapboxgl-popup-close-button {
+  color: var(--c-white);
+  padding: 1ch;
+  margin-bottom: 1ch;
 }
 `;
 
@@ -155,6 +178,8 @@ export const ButtonBase = `
   :first-of-type {
     margin-right: 1ch;
   }
+
+
 `;
 
 export default GlobalStyle;
