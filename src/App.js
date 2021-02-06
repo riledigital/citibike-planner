@@ -1,27 +1,20 @@
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 
-import "./styles/reset.css";
-import "./styles/base.module.css";
+import "common/styles/reset.css";
+import "common/styles/base.module.css";
+import styles from "common/styles/buttons.module.css";
 import "./App.css";
-import styles from "./styles/buttons.module.css";
-import GlobalStyles from "./styles/GlobalStyles";
-
-import {
-  CircleLegend,
-  Footer,
-  Header,
-  Inspector,
-  Menu,
-  Mapbox,
-  MapLegend,
-  Modal,
-} from "./components";
-
+import GlobalStyles from "common/styles/GlobalStyles";
 import { StyledMap } from "./AppStyles.js";
 
-import Audio from "./modules/Audio";
-import Data from "./modules/Data";
+import { Header, Modal } from "components";
+import Inspector from "./Inspector";
+import MapContainer, { MapLegend } from "./MapContainer";
+
+import Audio from "common/Audio";
+import Data from "common/Data";
+
 import { throttle } from "lodash-es";
 
 // import Ranking from "./Ranking/Ranking";
@@ -35,9 +28,9 @@ const App = () => {
   const [lastUpdated, setLastUpdated] = useState(null);
 
   const [visibleInspector, setVisibleInspector] = useState(false);
-  const [visibleMenu, setVisibleMenu] = useState(false);
-
+  const [visibleMenu, setVisibleMenu] = useState(true);
   const [showModal, setShowModal] = useState(true);
+
   const [ranking, setRanking] = useState({});
   const [isMuted, setSound] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -137,7 +130,7 @@ const App = () => {
           />
         )}
         <StyledMap>
-          <Mapbox
+          <MapContainer
             sfxManager={sfxManager}
             handleStationClick={(feature) => handleStationClick(feature)}
             setLoading={setLoading}

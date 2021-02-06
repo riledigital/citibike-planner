@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { DEVICES, ZSPACE, ButtonBase } from "./../../styles/GlobalStyles";
+import { DEVICES, ZSPACE, ButtonBase } from "common/styles/GlobalStyles";
 
 import { ReactComponent as Bike } from "./undraw_bike_ride_7xit.svg";
 
