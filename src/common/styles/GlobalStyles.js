@@ -129,6 +129,10 @@ p {
   z-index: ${ZSPACE.map};
   cursor: pointer;
 }
+
+.mapboxgl-ctrl {
+  top: calc(var(--margin-base) + 1rem );
+}
 `;
 
 export const ButtonBase = `

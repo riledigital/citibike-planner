@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { DEVICES, ZSPACE } from "./../../styles/GlobalStyles";
+import { DEVICES, ZSPACE } from "common/styles/GlobalStyles";
 
 const EASE_SLIDE = "cubic-bezier(0.16, 1, 0.3, 1)";
 const SPEED = "180ms";

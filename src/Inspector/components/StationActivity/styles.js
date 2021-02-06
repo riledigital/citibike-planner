@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { DEVICES } from "./../../styles/GlobalStyles";
+import { DEVICES } from "common/styles/GlobalStyles";
 
 export const StyledTooltip = styled.div`
   background: rgba(255, 255, 255, 0.9);
@@ -15,6 +15,8 @@ export const StyledTooltip = styled.div`
   position: fixed;
   padding: 0.5rem;
   z-index: 1000;
+
+  pointer-events: none;
 
   transition: opacity 250ms ease;
   opacity: ${({ showTooltip }) => (showTooltip ? 1.0 : 0)};
