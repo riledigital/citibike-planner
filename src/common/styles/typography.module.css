@@ -6,7 +6,7 @@ a {
 }
 
 .App {
-  font-family: "Jost";
+  font-family: var(--font-main);
   font-size: 18px;
 }
 
@@ -19,20 +19,20 @@ h1 {
 }
 
 .mapboxgl-popup-content {
-  font-family: "Jost";
+  font-family: var(--font-main);
   font-size: 1.4rem;
   line-height: 1.25;
   padding: 1rem;
 }
 
 .mapboxgl-ctrl-geocoder {
-  font-family: "Jost";
+  font-family: var(--font-main);
   /* font-size: 1.1rem; */
 }
 
 /* This style for all headings */
 .fontHeading {
-  font-family: "Jost";
+  font-family: var(--font-main);
   font-weight: bold;
   font-size: 0.8rem;
   text-transform: uppercase;
@@ -41,7 +41,7 @@ h1 {
 }
 
 .fontBody {
-  font-family: "Jost";
+  font-family: var(--font-main);
   font-size: 1rem;
   margin: 0 0 0.5rem 0;
 }

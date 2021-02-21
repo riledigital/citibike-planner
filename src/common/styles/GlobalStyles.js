@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import { css, createGlobalStyle } from "styled-components";
 import { normalize } from "styled-normalize";
 
 import FontJostBook from "./../fonts/subset-Jost-Book.woff2";
@@ -54,7 +54,7 @@ ${normalize}
 }
 /* Typography */
 :root {
-  --font-main: "Jost", "Futura", sans-serif;
+  --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   --font-size-base: 20px;
   --line-height-base: 1.4;
   --font-headings: var(--font-main);
@@ -158,14 +158,14 @@ p {
 }
 `;
 
-export const ButtonBase = `
+export const ButtonBase = css`
   background-color: var(--c-buttons);
   border: 0;
   border-radius: 9px;
 
   height: auto;
   width: auto;
-  padding: .5ch 2ch;
+  padding: 0.5ch 2ch;
 
   color: var(--c-black);
   font-size: 0.8rem;
@@ -178,8 +178,6 @@ export const ButtonBase = `
   :first-of-type {
     margin-right: 1ch;
   }
-
-
 `;
 
 export default GlobalStyle;

@@ -1,14 +1,13 @@
-
 .mapboxgl-popup-content {
   transition: all 1s ease;
   font-size: 1.5rem;
   line-height: 1.2;
   padding: 2rem;
-  font-family: "Jost";
+  font-family: var(--font-main);
 }
 
 .mapboxgl-ctrl {
-  font-family: "Jost";
+  font-family: var(--font-main);
 }
 
 .mapboxgl-popup-content {
