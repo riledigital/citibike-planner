@@ -71,7 +71,7 @@ export const StyledLastUpdated = styled.div`
 `;
 
 export const StyledStationCounts = styled.div`
-  font-family: "Jost";
+  font-family: var(--font-main);
   font-size: 1.5rem;
   text-align: center;
 `;

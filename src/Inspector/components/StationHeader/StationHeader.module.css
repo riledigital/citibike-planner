@@ -9,7 +9,7 @@
 
 .heading {
   /* composes: fontHeading from "../styles/typography.module.css"; */
-  font-family: "Jost";
+  font-family: var(--font-main);
   font-size: 1.25rem;
   line-height: 1.2;
   letter-spacing: 0px;
@@ -47,7 +47,7 @@
 
 .message {
   padding: 0;
-  font-family: "Jost";
+  font-family: var(--font-main);
 }
 
 svg {

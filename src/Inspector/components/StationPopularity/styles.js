@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const StyledRankTitle = styled.span`
   display: block;
-  font-family: "Jost";
+  font-family: var(--font-main);
   font-weight: 800;
   letter-spacing: 1px;
 `;
