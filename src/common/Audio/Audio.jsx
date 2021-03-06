@@ -7,14 +7,14 @@ class Audio {
     this.Howler = Howler;
     this.SOUNDS = {
       click: new Howl({
-        src: [`${process.env.PUBLIC_URL}/sound/pop.mp3`],
+        src: [`/sound/pop.mp3`],
       }),
       sfxBike1: new Howl({
-        src: [`${process.env.PUBLIC_URL}/sound/bikes.mp3`],
+        src: [`/sound/bikes.mp3`],
         volume: 0.15,
       }),
       scrolling: new Howl({
-        src: [`${process.env.PUBLIC_URL}/sound/zoom.mp3`],
+        src: [`/sound/zoom.mp3`],
         volume: 2,
       }),
     };
