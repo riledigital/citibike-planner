@@ -87,8 +87,12 @@ export const StyledLoadingIllustration = styled.div`
 `;
 
 export const StyledStatusGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  /* display: grid;
+  grid-template-columns: repeat(3, 1fr); */
+  display: flex;
+  justify-content: center;
+  gap: 1ch;
+
   height: auto;
   padding: 0;
   margin: 0;
