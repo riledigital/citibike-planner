@@ -8,7 +8,7 @@ The CitiBike Activity Viewer is a web app that shows when a particular CitiBike 
 # Setup
 
 - Run `nvm use` to use the `.nvmrc` file.
-- Run `yarn` to install all packages
+- Run `npm install` to install all packages
 - `npm run start` to develop
 
 # Build and deploy

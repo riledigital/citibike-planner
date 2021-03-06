@@ -18,6 +18,9 @@ module.exports = {
   },
   packageOptions: {
     /* ... */
+
+    polyfillNode: false,
+
     env: {
       NODE_ENV: true,
     },
