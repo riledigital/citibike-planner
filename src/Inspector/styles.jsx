@@ -38,7 +38,7 @@ export const StyledInspector = styled.div`
     visible ? "translateX(0)" : "translateX(-97%)"};
 
   @media ${DEVICES.tablet} {
-    width: 450px;
+    width: 45vw;
     padding: var(--margin-tablet);
     padding-right: calc(var(--margin-base) * 2);
   }
