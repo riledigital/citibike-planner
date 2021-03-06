@@ -31,7 +31,7 @@
   "scripts": {
     "start": "snowpack dev --polyfill-node",
     "build": "snowpack build --polyfill-node",
-    "deploy": "react-scripts build && netlify deploy --prod",
+    "deploy": "snowpack build --polyfill-node && netlify deploy --prod",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public"
   },

@@ -1,7 +1,5 @@
 import { css, createGlobalStyle } from "styled-components";
 import { normalize } from "styled-normalize";
-import FontJostBook from "./../fonts/subset-Jost-Book.woff2";
-import FontJostHeavy from "./../fonts/subset-Jost-Heavy.woff2";
 
 export const DEVICES = {
   // Media query mixin
@@ -19,23 +17,6 @@ export const ZSPACE = {
 
 const GlobalStyle = createGlobalStyle`
 ${normalize}
-
-@font-face {
-    font-family: 'Jost';
-    src: url(${FontJostHeavy}) format('woff2');
-    font-weight: 900;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Jost';
-    src: url(${FontJostBook}) format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
-
 /* Colors */
 :root {
   --c-blue: #0a2472;

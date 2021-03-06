@@ -108,7 +108,6 @@ const StationActivity = ({
         <text
           className={styles.axisTitle}
           textAnchor="middle"
-          fontFamily="Jost"
           fontSize="8px"
           fontWeight="800"
           fill={textFill}
@@ -124,15 +123,14 @@ const StationActivity = ({
                 className={styles.axisBottom}
                 transform={`
               translate(${xScale(d.start_hour) + margin.left}, ${
-                  height - margin.bottom / 1.2
-                })
+                height - margin.bottom / 1.2
+              })
               rotate(${45}) `}
               >
                 <text
                   className={styles.axisBottom}
                   fill={textFill}
                   fontSize="9px"
-                  fontFamily="Jost"
                   fontWeight="600"
                   textAnchor="left"
                 >
@@ -180,7 +178,6 @@ const StationActivity = ({
                     dy="-.25em"
                     fill={textFill}
                     fontSize="8px"
-                    fontFamily="Jost"
                     fontWeight="800"
                     style={{ opacity: showLabels ? 1.0 : 0 }}
                   >
