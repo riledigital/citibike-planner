@@ -1,12 +1,5 @@
 import styled from "styled-components";
-import { DEVICES, ZSPACE, ButtonBase } from "common/styles/GlobalStyles";
-
-import { ReactComponent as Bike } from "./undraw_bike_ride_7xit.svg";
-
-export const StyledSvgBike = styled(Bike)`
-  max-width: 80%;
-  padding: 1rem;
-`;
+import { DEVICES, ZSPACE, ButtonBase } from "@common/styles/GlobalStyles";
 
 export const StyledModal = styled.div`
   align-items: center;

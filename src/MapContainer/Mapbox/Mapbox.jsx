@@ -3,7 +3,7 @@ import { throttle } from "lodash";
 import mapboxgl from "mapbox-gl";
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
-import {} from "./styles.js";
+import {} from "./styles.jsx";
 
 // Does this even work? IDK
 // import "https://api.tiles.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css";
@@ -18,10 +18,10 @@ const Mapbox = ({
 }) => {
   const [map, setMap] = useState(null);
 
-  mapboxgl.accessToken = process.env.REACT_APP_MAPBOX;
+  mapboxgl.accessToken = import.meta.env.SNOWPACK_PUBLIC_MAPBOX;
 
   let mapContainer = React.createRef();
-  const markerUrl = `${process.env.PUBLIC_URL}/custom_marker.png`;
+  const markerUrl = `/custom_marker.png`;
 
   useEffect(() => {
     setLoading(true);

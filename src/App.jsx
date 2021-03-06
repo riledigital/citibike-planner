@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
+import styles from "@common/styles/buttons.module.css";
 
-import "common/styles/reset.css";
-import "common/styles/base.module.css";
-import styles from "common/styles/buttons.module.css";
+import "@common/styles/reset.css";
+import "@common/styles/base.module.css";
+
 import "./App.css";
-import GlobalStyles from "common/styles/GlobalStyles";
+import GlobalStyles from "@common/styles/GlobalStyles";
 import { StyledMap } from "./AppStyles.js";
 
-import { Header, Modal } from "components";
+import { Header, Modal } from "./components";
 import Inspector from "./Inspector";
 import MapContainer, { MapLegend } from "./MapContainer";
 
-import Audio from "common/Audio";
-import Data from "common/Data";
+import Audio from "@common/Audio";
+import Data from "@common/Data";
 
 import { throttle } from "lodash-es";
 
