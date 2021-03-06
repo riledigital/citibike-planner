@@ -1,6 +1,5 @@
 import { css, createGlobalStyle } from "styled-components";
 import { normalize } from "styled-normalize";
-
 import FontJostBook from "./../fonts/subset-Jost-Book.woff2";
 import FontJostHeavy from "./../fonts/subset-Jost-Heavy.woff2";
 

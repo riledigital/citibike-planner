@@ -7,7 +7,6 @@ import {
   StyledModalContent,
   StyledHeading,
   StyledInstructions,
-  StyledSvgBike,
   StyledTitle,
   StyledAttribution,
   StyledCloseButton,
@@ -46,12 +45,6 @@ const Modal = ({ toggle, soundOn, toggleSound }) => {
               </StyledCloseButton>
               <StyledTitle>Citi Bike Planner</StyledTitle>
               <StyledAttribution>By Ri Le</StyledAttribution>
-              <figure>
-                <StyledSvgBike
-                  title="Cycling illustration (Katerina Limpitsouni)"
-                  viewBox="0 0 800.25287 695.42298"
-                />
-              </figure>
               <p>When is the best time to take a Citi Bike in your area?</p>
               <p>
                 Use this app to find out which Citi Bike stations are free

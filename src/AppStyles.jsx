@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { ZSPACE } from "common/styles/GlobalStyles";
+import { ZSPACE } from "@common/styles/GlobalStyles";
 
 export const StyledMap = styled.div`
   /* Fit entire map to screen */

@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import styles from "./StationHeader.module.css";
 import { useTransition, animated } from "react-spring";
-import { ReactComponent as LoadingIllustration } from "./undraw_No_data_re_kwbl.svg";
 const StationHeader = ({ name, station_id, nta_name, boro_name }) => {
   // Logic for handling null NTA codes
   const [show, setShow] = useState(false);
@@ -53,14 +52,6 @@ const StationHeader = ({ name, station_id, nta_name, boro_name }) => {
       <p className={styles.message}>
         Please click on a station on the map to view the activity details.
       </p>
-      <figure className={styles.figure}>
-        <LoadingIllustration
-          className={styles.loadingIllustration}
-          alt="Two clipboards; missing data icon by Katerina Limpitsouni"
-          viewBox="0 0 647.63626 632.17383"
-          preserveAspectRatio="xMinYMin meet"
-        />
-      </figure>
     </div>
   );
 };

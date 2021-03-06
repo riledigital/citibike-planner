@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { ButtonBase } from "common/styles/GlobalStyles";
+import { ButtonBase } from "@common/styles/GlobalStyles";
 
 export const StyledBranding = styled.div`
   padding: 0 0 0 1rem;
@@ -19,11 +19,13 @@ export const StyledHeader = styled.header`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  color: white;
   padding: 0.25rem;
   width: 100%;
 
+  color: white;
   font-size: 0.95rem;
+  font-weight: bold;
+
   position: sticky;
   top: 0;
 

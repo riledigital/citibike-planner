@@ -6,7 +6,7 @@ import {
   StyledLabel,
   StyledFigure,
   StyledHeading,
-} from "./styles.js";
+} from "./styles.jsx";
 
 const MapLegend = ({
   data = [...Array(5).fill()],

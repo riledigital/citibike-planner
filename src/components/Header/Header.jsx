@@ -4,7 +4,7 @@ import {
   StyledToggleMenu,
   StyledHeader,
   StyledNav,
-} from "./styles.js";
+} from "./styles";
 
 const Header = ({ toggleModal, toggleMenu, toggleSound, soundOn }) => {
   return (
