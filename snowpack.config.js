@@ -31,4 +31,5 @@ module.exports = {
   buildOptions: {
     /* ... */
   },
+  exclude: ["src/stories/**/*"],
 };
