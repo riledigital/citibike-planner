@@ -18,7 +18,7 @@ module.exports = {
   },
   packageOptions: {
     /* ... */
-
+    source: "local",
     polyfillNode: false,
 
     env: {
