@@ -3,11 +3,11 @@ import React, { useState, useEffect } from "react";
 import { StyledInspector, StyledDecorative } from "./styles.js";
 
 import {
-  LiveStatus,
   StationHeader,
   StationActivity,
   StationPopularity,
-} from "./components";
+  LiveStatus,
+} from "./components-inspector";
 
 const Inspector = ({
   visible,
