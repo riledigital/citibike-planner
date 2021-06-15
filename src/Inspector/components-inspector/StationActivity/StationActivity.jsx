@@ -11,7 +11,7 @@ import {
 import { useTransition, animated } from "react-spring";
 
 import styles from "./StationActivity.module.css";
-import { StyledTooltip, StyledBarLabel } from "./styles.js";
+import { StyledTooltip, StyledBarLabel } from "./styles.jsx";
 
 const StationActivity = ({
   data,
@@ -123,8 +123,8 @@ const StationActivity = ({
                 className={styles.axisBottom}
                 transform={`
               translate(${xScale(d.start_hour) + margin.left}, ${
-                height - margin.bottom / 1.2
-              })
+                  height - margin.bottom / 1.2
+                })
               rotate(${45}) `}
               >
                 <text

@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { StyledPopularity, StyledRankText, StyledRankTitle } from "./styles.js";
+import {
+  StyledPopularity,
+  StyledRankText,
+  StyledRankTitle,
+} from "./styles.jsx";
 
 const StationPopularity = ({ rank, stations_in_nta, nta_name }) => {
   const [name, setName] = useState(null);

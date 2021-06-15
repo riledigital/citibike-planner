@@ -11,7 +11,7 @@ import {
   StyledStatusGrid,
   StyledStationStatus,
   StyledStationStatusLabel,
-} from "./styles.js";
+} from "./styles.jsx";
 
 function isMobile() {
   const toMatch = [/Android/i, /iPhone/i, /iPad/i, /iPod/i];
@@ -46,22 +46,22 @@ const LiveStatus = ({
     setShowUnlock(isMobile());
   }, [last_reported]);
 
-  if (!station_id) {
-    return <progress></progress>;
-  }
+  // if (!station_id) {
+  //   return <progress></progress>;
+  // }
 
-  if (station_id === null) {
-    return (
-      <>
-        <StyledLoadingIllustration>
-          <p>No station selected.</p>
-          <p>
-            Please click on a station on the map to view the activity details.
-          </p>
-        </StyledLoadingIllustration>
-      </>
-    );
-  }
+  // if (station_id === null) {
+  //   return (
+  //     <>
+  //       <StyledLoadingIllustration>
+  //         <p>No station selected.</p>
+  //         <p>
+  //           Please click on a station on the map to view the activity details.
+  //         </p>
+  //       </StyledLoadingIllustration>
+  //     </>
+  //   );
+  // }
 
   const handleButtonClick = (e) => {
     console.log(stationInfo);
@@ -104,5 +104,5 @@ const LiveStatus = ({
   );
 };
 
-LiveStatus.propTypes = {};
+// LiveStatus.propTypes = {};
 export default LiveStatus;
