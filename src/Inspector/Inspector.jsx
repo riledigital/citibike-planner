@@ -7,7 +7,7 @@ import {
   StationActivity,
   StationPopularity,
   LiveStatus,
-} from "./components-inspector";
+} from "./components";
 
 const Inspector = ({
   visible,
