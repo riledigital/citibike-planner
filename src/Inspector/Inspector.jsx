@@ -38,8 +38,8 @@ const Inspector = ({
     setStationAggData(getStationAggData(currentStation));
 
     const updatedStatus = new Map();
-    if (currentStationId && stationStatus.size > 1) {
-      const newStatus = stationStatus.get(currentStationId);
+    if (currentStationId && stationStatus?.size > 1) {
+      const newStatus = stationStatus?.get(currentStationId);
       const newStatusMap = new Map(Object.entries(newStatus));
       newStatusMap.set("rental_url", rankObject.rental_url);
       setLiveStatusData(newStatusMap);
@@ -48,7 +48,7 @@ const Inspector = ({
 
   const getStationRanking = (station_id) => {
     try {
-      let output = stationGeo.features.find(
+      let output = stationGeo?.features?.find(
         (d) => d.properties.station_id === station_id
       );
       return { ...output.properties };

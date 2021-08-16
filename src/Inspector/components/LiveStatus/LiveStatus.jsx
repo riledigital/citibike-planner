@@ -6,7 +6,6 @@ import {
   StyledHeading,
   StyledLastUpdated,
   StyledLoadingIllustration,
-  StyledStation,
   StyledNumber,
   StyledStatusGrid,
   StyledStationStatus,

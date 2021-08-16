@@ -12,7 +12,8 @@ export const StyledTooltip = styled.div`
 
   height: auto;
 
-  position: absolute;
+  position: fixed;
+  min-width: 300px;
   padding: 0.5rem;
   z-index: 1000;
 
