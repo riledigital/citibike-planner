@@ -14,7 +14,7 @@ import MapContainer, { MapLegend } from "/MapContainer";
 import Data from "@common/Data";
 
 // import Ranking from "./Ranking/Ranking";
-const App = () => {
+const App = ({ Component, pageProps }) => {
   const [sfxManager, setSfxManager] = useState(null);
   const [map, setMap] = useState(null);
   const [currentStation, setCurrentStation] = useState(null);
@@ -101,6 +101,8 @@ const App = () => {
       console.log(e);
     }
   }, [currentStation]);
+
+  return <Component />;
 
   return (
     <div className="App">
