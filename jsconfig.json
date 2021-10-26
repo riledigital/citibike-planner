@@ -1,6 +1,11 @@
+// tsconfig.json or jsconfig.json
 {
   "compilerOptions": {
-    "baseUrl": "src"
-  },
-  "include": ["src"]
+    "baseUrl": ".",
+    "paths": {
+      "@components/*": ["components/*"],
+      "@styles/*": ["styles/*"],
+      "@common/*": ["common/*"]
+    }
+  }
 }

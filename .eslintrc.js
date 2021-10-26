@@ -4,6 +4,8 @@ module.exports = {
     es2021: true,
   },
   extends: [
+    "next",
+    "next/core-web-vitals",
     "eslint:recommended",
     "prettier/react",
     "plugin:react/recommended",
@@ -16,17 +18,5 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: "module",
   },
-  plugins: ["react", "prettier"],
-  rules: {
-    "no-unused-vars": ["warn"],
-    "no-debugger": ["warn"],
-    "prettier/prettier": ["warn"],
-    "react/jsx-key": ["warn"],
-    "react/jsx-no-target-blank": ["warn"],
-    "react/no-unescaped-entities": ["warn"],
-    "react/prop-types": ["warn"],
-    indent: ["warn", 2],
-    "linebreak-style": ["error", "unix"],
-    semi: ["error", "always"],
-  },
+  plugins: ["eslint-config-next", "prettier"],
 };

@@ -1,66 +1,36 @@
 {
   "name": "citibike-activity",
-  "version": "0.1.0",
+  "version": "2.0.0",
   "private": true,
   "dependencies": {
     "@mapbox/mapbox-gl-geocoder": "^4.7.0",
-    "@reduxjs/toolkit": "^1.5.0",
-    "@storybook/cli": "^6.0.26",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
-    "animate.css": "^4.1.1",
     "browserlist": "^1.0.1",
     "d3": "^6.3.1",
-    "eslint-config-prettier": "^7.2.0",
-    "eslint-plugin-prettier": "^3.3.1",
     "howler": "^2.2.1",
     "lodash-es": "^4.17.20",
     "mapbox-gl": "^1.12.0",
+    "next": "^11.1.2",
     "normalize.css": "^8.0.1",
     "prettier": "2.2.1",
     "prop-types": "^15.7.2",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-redux": "^7.2.2",
+    "react": "latest",
+    "react-dom": "latest",
+    "react-refresh": "^0.10.0",
     "react-spring": "^8.0.27",
     "react-vega": "^7.4.3",
     "styled-components": "^5.2.1",
     "styled-normalize": "^8.0.7"
   },
   "scripts": {
-    "start": "snowpack dev --polyfill-node",
-    "build": "snowpack build --polyfill-node",
-    "deploy": "snowpack build --polyfill-node && netlify deploy --prod",
-    "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
   },
   "devDependencies": {
-    "@snowpack/plugin-dotenv": "^2.0.5",
-    "@storybook/addon-actions": "^6.0.26",
-    "@storybook/addon-essentials": "^6.0.26",
-    "@storybook/addon-links": "^6.0.26",
-    "@storybook/node-logger": "^6.0.26",
-    "@storybook/preset-create-react-app": "^3.1.4",
-    "@storybook/react": "^6.0.26",
     "eslint": "^7.18.0",
-    "eslint-plugin-react": "^7.22.0",
-    "react-is": "^16.13.1",
-    "snowpack": "^3.0.13"
+    "eslint-config-next": "^11.1.2",
+    "eslint-config-prettier": "^7.2.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-react": "^7.22.0"
   }
 }
