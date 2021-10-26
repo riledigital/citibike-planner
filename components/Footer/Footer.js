@@ -3,7 +3,11 @@ import { StyledFooter } from "./styles";
 const Footer = () => {
   return (
     <StyledFooter>
-      <a href="https://member.citibikenyc.com/map/" target="_blank">
+      <a
+        href="https://member.citibikenyc.com/map/"
+        target="_blank"
+        rel="noreferrer"
+      >
         Go to the Official CitiBike Map
       </a>
       <details>

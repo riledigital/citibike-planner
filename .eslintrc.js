@@ -1,13 +1,9 @@
 module.exports = {
-  env: {
-    browser: true,
-    es2021: true,
-  },
   extends: [
     "next",
     "next/core-web-vitals",
     "eslint:recommended",
-    "prettier/react",
+    "prettier",
     "plugin:react/recommended",
     "plugin:prettier/recommended",
   ],
@@ -18,5 +14,5 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: "module",
   },
-  plugins: ["eslint-config-next", "prettier"],
+  plugins: ["prettier"],
 };

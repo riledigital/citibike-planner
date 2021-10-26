@@ -95,7 +95,11 @@ const Modal = ({ toggle, soundOn, toggleSound }) => {
                 <a href="https://github.com/riledigital">@riledigital</a>
               </p>
 
-              <a href="https://member.citibikenyc.com/map/" target="_blank">
+              <a
+                href="https://member.citibikenyc.com/map/"
+                target="_blank"
+                rel="noreferrer"
+              >
                 Go to the Official CitiBike Map
               </a>
 
