@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const StyledMapElement = styled.div`
   display: block;
   position: fixed;
-  top: 0;
+  top: var(--h-header);
   right: 0;
   bottom: 0;
   left: 0;

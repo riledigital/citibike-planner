@@ -1,12 +1,5 @@
 module.exports = {
-  extends: [
-    "next",
-    "next/core-web-vitals",
-    "eslint:recommended",
-    "prettier",
-    "plugin:react/recommended",
-    "plugin:prettier/recommended",
-  ],
+  extends: ["next", "next/core-web-vitals", "eslint:recommended", "prettier"],
   parserOptions: {
     ecmaFeatures: {
       jsx: true,

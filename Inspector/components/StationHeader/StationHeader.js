@@ -34,26 +34,20 @@ const StationHeader = ({ name, station_id, nta_name, boro_name }) => {
     anim.map(
       ({ item, key, props }) =>
         item && (
-          <animated.div
-            style={props}
-            key={key}
-            className={styles.stationHeader}
-          >
-            <div className={styles.header}>
-              <h2 className={styles.heading}>{name}</h2>
-              <div className={styles.number}>{station_id}</div>
+          <animated.div style={props} key={key}>
+            <div>
+              <h2>{name}</h2>
+              <div>{station_id}</div>
             </div>
-            <div className={styles.nta}>
+            <div>
               {nta_name}, {boro_name}
             </div>
           </animated.div>
         )
     )
   ) : (
-    <div className={styles.loading}>
-      <p className={styles.message}>
-        Please click on a station on the map to view the activity details.
-      </p>
+    <div>
+      <p>Please click on a station on the map to view the activity details.</p>
     </div>
   );
 };

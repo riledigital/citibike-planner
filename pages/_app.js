@@ -9,6 +9,7 @@ import { StyledMap } from "../styles/AppStyles.js";
 import { Header, Modal } from "@components/index";
 import Inspector from "/Inspector";
 import MapContainer, { MapLegend } from "/MapContainer";
+import Script from "next/script";
 
 // import Audio from "@common/Audio";
 import Data from "@common/Data";
@@ -102,7 +103,27 @@ const App = ({ Component, pageProps }) => {
     }
   }, [currentStation]);
 
-  return <Component />;
+  return (
+    <>
+      <Script
+        strategy="afterInteractive"
+        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA}`}
+      />
+      <Script
+        strategy="afterInteractive"
+        id="show-banner"
+        dangerouslySetInnerHTML={{
+          _html: `window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', '${process.env.NEXT_PUBLIC_GA}');`,
+        }}
+      />
+      <GlobalStyles />
+      <Component />
+    </>
+  );
 
   return (
     <div className="App">
