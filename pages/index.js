@@ -1,3 +1,5 @@
+// Index should be the main map view. About should open a new page.
+
 import { useState, useEffect } from "react";
 
 import { Header, Modal } from "@components/index";
