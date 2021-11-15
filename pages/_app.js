@@ -1,3 +1,6 @@
+import { store } from "@/common/store";
+import { Provider } from "react-redux";
+
 import { useState, useEffect } from "react";
 
 import "@styles/index.css";
@@ -120,7 +123,9 @@ const App = ({ Component, pageProps }) => {
         }}
       />
       <GlobalStyles />
-      <Component />
+      <Provider store={store}>
+        <Component />
+      </Provider>
     </>
   );
 
