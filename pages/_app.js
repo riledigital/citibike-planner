@@ -17,7 +17,6 @@ import Data from "@common/Data";
 // import Ranking from "./Ranking/Ranking";
 const App = ({ Component, pageProps }) => {
   const [sfxManager, setSfxManager] = useState(null);
-  const [map, setMap] = useState(null);
   const [currentStation, setCurrentStation] = useState(null);
   const [aggData, setAggData] = useState(null);
   const [stationGeo, setStationGeo] = useState(null);
