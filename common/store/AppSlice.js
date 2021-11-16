@@ -2,19 +2,44 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import axios from "axios";
 
-const STATION_INFO = "/data/station_info.geojson";
-const DATA_SUMMARY = "/data/aggs_by_hour.json";
+const STATION_INFO = "/data/stations-with-nta.geojson";
+const DATA_SUMMARY = "/data/aggs-by-hour.json";
 const LIVE_STATUS = "https://gbfs.citibikenyc.com/gbfs/en/station_status.json";
 
+export const fetchFrequencyAnalysis = createAsyncThunk(
+  "app/fetchFrequencyAnalysis",
+  async () => {
+    const response = await axios.get(DATA_SUMMARY);
+    // response.data.features.map(d=> d.properties.)
+    return response.data;
+  }
+);
+
+export const fetchStationGeo = createAsyncThunk(
+  "app/fetchStationGeo",
+  async () => {
+    const response = await axios.get(STATION_INFO);
+    return response.data;
+  }
+);
+
+export const fetchLiveStatus = createAsyncThunk(
+  "app/fetchLiveStatus",
+  async () => {
+    const response = await axios.get(LIVE_STATUS);
+    return response.data;
+  }
+);
+
 const initialState = {
-  aggData: null,
+  stationFrequencyData: null,
   stationGeo: null,
   rankingData: null,
   stationStatusData: {},
   lastUpdated: null,
   favoriteStations: [],
 
-  currentStationId: null,
+  selectedStationId: null,
 
   isMuted: true,
   showMenu: false,
@@ -38,41 +63,39 @@ export const appSlice = createSlice({
       const { payload } = action;
       state.showInspector = payload;
     },
-    setShowInspector: (state, action) => {
+    setSelectedStationId: (state, action) => {
       const { payload } = action;
-      state.showInspector = payload;
+      state.selectedStationId = payload;
     },
   },
   extraReducers: (builder) => {
     // Add reducers for additional action types here, and handle loading state as needed
+    builder.addCase(fetchFrequencyAnalysis.fulfilled, (state, action) => {
+      state.stationFrequencyData = action.payload;
+    });
     builder.addCase(fetchStationGeo.fulfilled, (state, action) => {
-      // Add user to the state array
       state.stationGeo = action.payload;
     });
+    builder.addCase(fetchLiveStatus.pending, (state, action) => {
+      state.isLoading = true;
+    });
     builder.addCase(fetchLiveStatus.fulfilled, (state, action) => {
-      // Add user to the state array
       state.stationStatusData = action.payload;
     });
   },
 });
 
-export const fetchStationGeo = createAsyncThunk(
-  "users/fetchStationGeo",
-  async () => {
-    const response = await axios.get("/data/station_info.geojson");
-    return response.data;
-  }
-);
-
-export const fetchLiveStatus = createAsyncThunk(
-  "users/fetchLiveStatus",
-  async () => {
-    const response = await axios.get(LIVE_STATUS);
-    return response.data;
-  }
-);
+export const selectStationFrequencyData = (state) => {
+  const id = state.app.selectedStationId;
+  return state.app.stationFrequencyData[id];
+};
 
 // Action creators are generated for each case reducer function
-export const { setMuted, setMenu } = appSlice.actions;
+export const {
+  setMuted,
+  setMenu,
+  setShowInspector,
+  setSelectedStationId,
+} = appSlice.actions;
 
 export default appSlice.reducer;

@@ -2,6 +2,13 @@
 
 import { useState, useEffect } from "react";
 
+import {
+  fetchFrequencyAnalysis,
+  fetchLiveStatus,
+  fetchStationGeo,
+} from "@/common/store/AppSlice.js";
+import { useDispatch } from "react-redux";
+
 import { Header, Modal } from "@components/index";
 import Inspector from "/Inspector";
 import MapContainer, { MapLegend } from "/MapContainer";
@@ -12,8 +19,6 @@ import OpenLayers from "MapContainer/OpenLayers";
 
 // import Ranking from "./Ranking/Ranking";
 const App = ({ Component, pageProps }) => {
-  const [sfxManager, setSfxManager] = useState(null);
-  const [map, setMap] = useState(null);
   const [currentStation, setCurrentStation] = useState(null);
   const [aggData, setAggData] = useState(null);
   const [stationGeo, setStationGeo] = useState(null);
@@ -27,14 +32,14 @@ const App = ({ Component, pageProps }) => {
   const [ranking, setRanking] = useState({});
   const [isMuted, setSound] = useState(false);
   const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
 
-  const toggleMenu = (e) => {
-    setVisibleInspector(false);
-    setVisibleMenu(!visibleMenu);
-  };
-  function toggleModal(e) {
-    setShowModal(!showModal);
-  }
+  // New startup
+  useEffect(() => {
+    dispatch(fetchFrequencyAnalysis());
+    dispatch(fetchStationGeo());
+    dispatch(fetchLiveStatus());
+  }, []);
 
   const handleStationClick = (station) => {
     const queryElement = document.querySelector("#stationHeader");
@@ -46,66 +51,13 @@ const App = ({ Component, pageProps }) => {
     setCurrentStation(station);
   };
 
-  useEffect(() => {
-    const sfx = new Audio();
-    setSfxManager(sfx);
-    sfx.play("sfxBike1");
-
-    setLoading(true);
-
-    fetchData();
-    setLoading(false);
-  }, []);
-
-  const fetchData = async () => {
-    const DataManager = new Data();
-    const results = await DataManager.startFetching();
-    setAggData(results[0].value);
-    setStationGeo(results[1].value);
-    let allStationsStatus = new Map();
-    const fetchedData = results[2].value;
-    fetchedData["data"]["stations"].forEach((record) => {
-      allStationsStatus.set(record.station_id, { ...record });
-    });
-    setStationStatus(allStationsStatus);
-    setLastUpdated(new Date(fetchedData["last_updated"] * 1000));
-  };
-
-  useEffect(() => {
-    try {
-      sfxManager.mute(!isMuted);
-    } catch (e) {
-      console.error(e);
-    }
-  }, [sfxManager, isMuted]);
-
-  useEffect(() => {
-    setVisibleInspector(currentStation !== null);
-    try {
-      ReactDOM.render(
-        <Inspector
-          aggData={aggData}
-          stationStatus={stationStatus}
-          stationGeo={stationGeo}
-          currentStation={currentStation}
-          lastUpdated={lastUpdated}
-          ranking={ranking}
-          visible={visibleInspector}
-        />,
-        document.querySelector("mapboxgl-popup-content")
-      );
-    } catch (e) {
-      console.log(e);
-    }
-  }, [currentStation]);
-
   return (
     <>
       <Header
         toggleSound={() => setSound(!isMuted)}
         soundOn={isMuted}
-        toggleModal={toggleModal}
-        toggleMenu={toggleMenu}
+        // toggleModal={toggleModal}
+        // toggleMenu={toggleMenu}
       />
       <>
         <Inspector
@@ -122,7 +74,7 @@ const App = ({ Component, pageProps }) => {
       </>
       {visibleMenu ? (
         <Modal
-          toggle={toggleModal}
+          // toggle={toggleModal}
           soundOn={isMuted}
           toggleSound={() => setSound(!isMuted)}
         />

@@ -30,6 +30,7 @@ specifiers:
   react-vega: ^7.4.3
   styled-components: ^5.2.1
   styled-normalize: ^8.0.7
+  use-sound: ^4.0.1
 
 dependencies:
   '@mapbox/mapbox-gl-geocoder': 4.7.4_mapbox-gl@1.13.2
@@ -54,6 +55,7 @@ dependencies:
   react-vega: 7.4.4_react@17.0.2
   styled-components: 5.3.3_react-dom@17.0.2+react@17.0.2
   styled-normalize: 8.0.7_styled-components@5.3.3
+  use-sound: 4.0.1_react@17.0.2
 
 devDependencies:
   '@next/eslint-plugin-next': 11.1.2
@@ -4429,6 +4431,15 @@ packages:
     dependencies:
       punycode: 2.1.1
     dev: true
+
+  /use-sound/4.0.1_react@17.0.2:
+    resolution: {integrity: sha512-hykJ86kNcu6y/FzlSHcQxhjSGMslZx2WlfLpZNoPbvueakv4OF3xPxEtGV2YmculrIaH0tPp9LtG4jgy17xMWg==}
+    peerDependencies:
+      react: '>=16.8'
+    dependencies:
+      howler: 2.2.3
+      react: 17.0.2
+    dev: false
 
   /use-subscription/1.5.1_react@17.0.2:
     resolution: {integrity: sha512-Xv2a1P/yReAjAbhylMfFplFKj9GssgTwN7RlcTxBujFQcloStWNDQdc4g4NRWH9xS4i/FDk04vQBptAXoF3VcA==}
