@@ -73,6 +73,7 @@ const StationActivity = ({
   const currentHour = new Date().getHours();
 
   useEffect(() => {
+    debugger;
     extentOut = data ? extent(data, (d) => d.mean_rides) : [0, 100];
     yScale = scaleLinear().domain(extentOut).range([height, 0]);
   }, [data]);

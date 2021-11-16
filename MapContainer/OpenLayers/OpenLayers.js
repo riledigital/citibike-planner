@@ -27,9 +27,6 @@ import { setSelectedStationId } from "@/common/store/AppSlice";
 const OpenLayers = () => {
   const element = useRef();
   const mapRef = useRef();
-
-  const [map, setMap] = useState(null);
-
   const dispatch = useDispatch();
 
   const handleFeatureSelect = (e) => {
@@ -111,7 +108,7 @@ const OpenLayers = () => {
     });
     select.on("select", handleFeatureSelect);
     map.addInteraction(select);
-    setMap(map);
+
     map.on("singleclick", function (e) {
       console.log("Click:", e);
       console.log(select);

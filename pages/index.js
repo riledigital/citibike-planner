@@ -73,11 +73,7 @@ const App = ({ Component, pageProps }) => {
         <OpenLayers />
       </>
       {visibleMenu ? (
-        <Modal
-          // toggle={toggleModal}
-          soundOn={isMuted}
-          toggleSound={() => setSound(!isMuted)}
-        />
+        <Modal soundOn={isMuted} toggleSound={() => setSound(!isMuted)} />
       ) : null}
     </>
   );

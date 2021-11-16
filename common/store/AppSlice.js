@@ -86,8 +86,16 @@ export const appSlice = createSlice({
 });
 
 export const selectStationFrequencyData = (state) => {
-  const id = state.app.selectedStationId;
-  return state.app.stationFrequencyData[id];
+  const id = state.app?.selectedStationId;
+  return state.app?.stationFrequencyData[id];
+};
+export const selectStationGeo = (state) => {
+  const id = state.app?.selectedStationId;
+  return state.app?.stationGeo[id];
+};
+export const selectLiveStatus = (state) => {
+  const id = state.app?.selectedStationId;
+  return state.app?.stationStatusData[id];
 };
 
 // Action creators are generated for each case reducer function
