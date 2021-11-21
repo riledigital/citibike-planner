@@ -21,9 +21,7 @@ const Inspector = ({
   ranking,
 }) => {
   // const [stationActivityData, setStationActivityData] = useState(new Map());
-  const selectedStationFrequency = useSelector(selectStationFrequencyData);
 
-  debugger;
   return (
     <StyledInspector visible>
       <StyledDecorative>Station Info</StyledDecorative>
@@ -33,11 +31,7 @@ const Inspector = ({
         rank={currentRank.get("rank")}
         stations_in_nta={currentRank.get("stations_in_nta")}
       /> */}
-      <StationActivity
-        data={selectedStationFrequency}
-        height={150}
-        fill="white"
-      />
+      <StationActivity height={150} fill="white" />
       {/* <LiveStatus
         station_id={liveStatusData.get("station_id")}
         num_bikes_available={liveStatusData.get("num_bikes_available")}

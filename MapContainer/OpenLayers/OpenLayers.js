@@ -24,7 +24,7 @@ import { setSelectedStationId } from "@/common/store/AppSlice";
 
 //openlayers.org/en/latest/examples/vector-layer.html
 
-const OpenLayers = () => {
+const OpenLayers = (props) => {
   const element = useRef();
   const mapRef = useRef();
   const dispatch = useDispatch();
@@ -110,7 +110,7 @@ const OpenLayers = () => {
     map.addInteraction(select);
 
     map.on("singleclick", function (e) {
-      console.log("Click:", e);
+      console.log(" :", e);
       console.log(select);
     });
     mapRef.current = map;
@@ -118,7 +118,7 @@ const OpenLayers = () => {
       // Remove the map on unmount
       mapRef.current = null;
     };
-  }, []);
+  }, [props]);
   return <StyledMapElement ref={element} />;
 };
 
