@@ -65,6 +65,8 @@ export const appSlice = createSlice({
     },
     setSelectedStationId: (state, action) => {
       const { payload } = action;
+      debugger;
+      state.showInspector = payload ? true : false;
       state.selectedStationId = payload;
     },
   },
@@ -75,7 +77,6 @@ export const appSlice = createSlice({
     });
     builder.addCase(fetchStationGeo.fulfilled, (state, action) => {
       const entries = action?.payload?.features.map(({ properties }) => {
-        debugger;
         const obj = [properties.station_id, properties];
         return obj;
       });
@@ -87,10 +88,19 @@ export const appSlice = createSlice({
       state.isLoading = true;
     });
     builder.addCase(fetchLiveStatus.fulfilled, (state, action) => {
-      state.stationStatusData = action.payload;
+      const { payload } = action;
+      const transformed = payload.data.stations.map((d) => {
+        return [d.station_id, d];
+      });
+      const output = Object.fromEntries(transformed);
+      state.stationStatusData = output;
     });
   },
 });
+
+export const selectShowInspector = (state) => {
+  return state.AppSlice?.showInspector;
+};
 
 export const selectStationFrequencyData = (state) => {
   const id = state?.AppSlice?.selectedStationId;

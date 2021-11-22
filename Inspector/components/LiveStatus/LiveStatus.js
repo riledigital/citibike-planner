@@ -11,45 +11,22 @@ import {
   StyledStationStatus,
   StyledStationStatusLabel,
 } from "./styles";
-
-function isMobile() {
-  const toMatch = [/Android/i, /iPhone/i, /iPad/i, /iPod/i];
-
-  return toMatch.some((toMatchItem) => {
-    return navigator.userAgent.match(toMatchItem);
-  });
-}
+import { useSelector } from "react-redux";
+import { selectLiveStatus } from "@/common/Store/AppSlice";
 
 const getFormattedTime = (time) =>
   new Date(time * 1000).toLocaleTimeString("en-US");
 
-const LiveStatus = ({
-  station_id,
-  num_bikes_available,
-  num_ebikes_available,
-  num_docks_available,
-  last_reported,
-  rental_url,
-}) => {
-  const [stationInfo, setStationInfo] = useState(null);
-  const [showUnlock, setShowUnlock] = useState(false);
+const LiveStatus = () => {
+  const {
+    num_bikes_available,
+    num_docks_available,
+    num_ebikes_available,
+    last_reported,
+    station_status,
+  } = useSelector(selectLiveStatus) || {};
 
-  useEffect(() => {
-    setStationInfo({
-      bikes: num_bikes_available,
-      electric: !num_ebikes_available ? 0 : num_ebikes_available,
-      docks: num_docks_available,
-      rental_url: rental_url,
-    });
-
-    setShowUnlock(isMobile());
-  }, [last_reported]);
-
-  if (!station_id) {
-    return <progress></progress>;
-  }
-
-  if (station_id === null) {
+  if (num_bikes_available === null) {
     return (
       <>
         <StyledLoadingIllustration>
@@ -62,26 +39,20 @@ const LiveStatus = ({
     );
   }
 
-  const handleButtonClick = (e) => {
-    console.log(stationInfo);
-    window.location.href = stationInfo.rental_url;
-  };
-
   return (
     <>
       <StyledHeading>Live Status</StyledHeading>
-
+      {station_status}
       <StyledLastUpdated>
-        Last updated on {getFormattedTime(last_reported)}
+        Updated on {getFormattedTime(last_reported)}
       </StyledLastUpdated>
-
       <StyledStatusGrid>
         <StyledStationStatus>
-          <StyledNumber>{stationInfo.bikes} </StyledNumber>
+          <StyledNumber>{num_bikes_available} </StyledNumber>
           <StyledStationStatusLabel>Classic</StyledStationStatusLabel>
         </StyledStationStatus>
         <StyledStationStatus>
-          <StyledNumber>{stationInfo.electric}</StyledNumber>
+          <StyledNumber>{num_ebikes_available}</StyledNumber>
           <StyledStationStatusLabel>
             <span role="img" aria-label="electric">
               ⚡
@@ -90,15 +61,15 @@ const LiveStatus = ({
           </StyledStationStatusLabel>
         </StyledStationStatus>
         <StyledStationStatus>
-          <StyledNumber>{stationInfo.docks}</StyledNumber>
+          <StyledNumber>{num_docks_available}</StyledNumber>
           <StyledStationStatusLabel>Docks</StyledStationStatusLabel>
         </StyledStationStatus>
       </StyledStatusGrid>
-      {showUnlock ? (
+      {/* {showUnlock ? (
         <StyledButtonUnlock onClick={(e) => handleButtonClick()}>
           Unlock bike
         </StyledButtonUnlock>
-      ) : null}
+      ) : null} */}
     </>
   );
 };

@@ -11,10 +11,11 @@ const StationHeader = (props) => {
   // Logic for handling null NTA codes
   const stationData = useSelector(selectStationInfo);
 
-  const { name = "", station_id = "", nta_name = "", boro_name = "" } =
-    stationData || {};
-
-  const stationNeighborhood = !nta_name ? "" : nta_name;
+  const { name, station_id, ntaname, boroname } = stationData || {};
+  const stationNeighborhood = !ntaname ? "" : ntaname;
+  if (stationData) {
+    // debugger;
+  }
 
   return name ? (
     <animated.div style={props}>
@@ -23,7 +24,7 @@ const StationHeader = (props) => {
         <div>Station ID: {station_id}</div>
       </div>
       <div>
-        {nta_name}, {boro_name}
+        {stationNeighborhood}, {boroname}
       </div>
     </animated.div>
   ) : (
