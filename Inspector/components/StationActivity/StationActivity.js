@@ -81,9 +81,8 @@ const StationActivity = ({
     }
   }, [data]);
 
-  debugger;
   if (!data || !xScale || !yScale) {
-    return null;
+    return <>No data available.</>;
   }
 
   const formatTime = (time) => {

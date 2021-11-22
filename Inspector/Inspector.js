@@ -25,7 +25,7 @@ const Inspector = ({
   return (
     <StyledInspector visible>
       <StyledDecorative>Station Info</StyledDecorative>
-      {/* <StationHeader {...currentStation} /> */}
+      <StationHeader {...currentStation} />
       {/* <StationPopularity
         nta_name={currentRank.get("nta_name")}
         rank={currentRank.get("rank")}
