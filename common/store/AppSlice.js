@@ -37,7 +37,7 @@ const initialState = {
   rankingData: null,
   stationStatusData: {},
   lastUpdated: null,
-  favoriteStations: [],
+  stationFavorites: [],
 
   selectedStationId: null,
 
@@ -65,9 +65,19 @@ export const appSlice = createSlice({
     },
     setSelectedStationId: (state, action) => {
       const { payload } = action;
-      debugger;
       state.showInspector = payload ? true : false;
       state.selectedStationId = payload;
+    },
+    toggleStationFavorite: (state, action) => {
+      const { payload } = action;
+      const existingIdx = state?.stationFavorites?.findIndex(
+        (d) => d === payload
+      );
+      if (existingIdx >= 0) {
+        state.stationFavorites.splice(existingIdx, 1);
+      } else {
+        state.stationFavorites.push(payload);
+      }
     },
   },
   extraReducers: (builder) => {
@@ -97,6 +107,10 @@ export const appSlice = createSlice({
     });
   },
 });
+
+export const selectCurrentStation = (state) => {
+  return state.AppSlice?.selectedStationId;
+};
 
 export const selectShowInspector = (state) => {
   return state.AppSlice?.showInspector;
@@ -134,12 +148,20 @@ export const selectLiveStatus = (state) => {
   return state.AppSlice?.stationStatusData[id];
 };
 
+export const selectStationFavorited = (state) => {
+  const id = state.AppSlice?.selectedStationId;
+  const exists = state?.AppSlice?.stationFavorites?.findIndex((d) => d === id);
+
+  return exists >= 0 ? true : false;
+};
+
 // Action creators are generated for each case reducer function
 export const {
   setMuted,
   setMenu,
   setShowInspector,
   setSelectedStationId,
+  toggleStationFavorite,
 } = appSlice.actions;
 
 export default appSlice.reducer;

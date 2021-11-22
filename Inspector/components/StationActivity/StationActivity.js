@@ -33,13 +33,13 @@ const StationActivity = ({
   const [tooltipText, setTooltipText] = useState(null);
   const [showLabels, setShowLabels] = useState(false);
 
-  const xScale =
+  let xScale =
     data &&
     scaleTime()
       .domain([6, 24])
       .range([margin.left, width - margin.right]);
 
-  const yScale =
+  let yScale =
     data &&
     scaleLinear()
       .domain(extent(data, (d) => d?.mean_rides))
@@ -78,6 +78,17 @@ const StationActivity = ({
   useEffect(() => {
     if (data) {
       currentHour.current = new Date().getHours();
+      xScale =
+        data &&
+        scaleTime()
+          .domain([6, 24])
+          .range([margin.left, width - margin.right]);
+
+      yScale =
+        data &&
+        scaleLinear()
+          .domain(extent(data, (d) => d?.mean_rides))
+          .range([height - margin.bottom, margin.top]);
     }
   }, [data]);
 
@@ -94,55 +105,63 @@ const StationActivity = ({
   };
 
   return (
-    <svg viewBox={`0 0 ${width} ${height}`} xmlns="http://www.w3.org/2000/svg">
-      <g>
-        {transitions((props, item, t, key) => (
-          <React.Fragment key={key}>
-            <animated.g style={props}>
-              <g
-                onMouseOut={(e) => handleMouseOut(e)}
-                transform={`translate(${xScale(item?.start_hour)}, ${yScale(
-                  item?.mean_rides
-                )})`}
-              >
-                <rect
-                  fill={fill}
-                  width={width / 24 - padding}
-                  height={`${
-                    height - yScale(item?.mean_rides) - margin.bottom
-                  }`}
-                  onMouseOver={(e) => handleMouseOver(e, item)}
-                  onMouseMove={(e) => handleMouseMove(e, e.pageX, e.pageY)}
-                />
-                <StyledBarLabel
-                  textAnchor="left"
-                  dx="3px"
-                  dy="-.25em"
-                  fill={textFill}
-                  fontSize="8px"
-                  fontWeight="800"
-                  style={{ opacity: showLabels ? 1.0 : 0 }}
+    <>
+      <StyledTooltip>Test</StyledTooltip>
+      <p>Average number of rides per hour:</p>
+      <svg
+        viewBox={`0 0 ${width} ${height}`}
+        xmlns="http://www.w3.org/2000/svg"
+        onPointerOver={(e) => handleMouseOver(e)}
+        onPointerOut={(e) => handleMouseOut(e)}
+      >
+        <g>
+          {transitions((props, item, t, key) => (
+            <React.Fragment key={key}>
+              <animated.g style={props}>
+                <g
+                  onMouseOut={(e) => handleMouseOut(e)}
+                  transform={`translate(${xScale(item?.start_hour)}, ${yScale(
+                    item?.mean_rides
+                  )})`}
                 >
-                  {Number.parseFloat(item?.mean_rides).toFixed(0)}
-                </StyledBarLabel>
+                  <rect
+                    fill={fill}
+                    width={width / 24 - padding}
+                    height={`${
+                      height - yScale(item?.mean_rides) - margin.bottom
+                    }`}
+                    onMouseMove={(e) => handleMouseMove(e, e.pageX, e.pageY)}
+                  />
+                  <StyledBarLabel
+                    textAnchor="left"
+                    dx="3px"
+                    dy="-.25em"
+                    fill={textFill}
+                    fontSize="8px"
+                    fontWeight="800"
+                    style={{ opacity: showLabels ? 1.0 : 0 }}
+                  >
+                    {Number.parseFloat(item?.mean_rides).toFixed(0)}
+                  </StyledBarLabel>
 
-                <StyledBarLabel
-                  textAnchor="left"
-                  dx="3px"
-                  dy={height - yScale(item?.mean_rides)}
-                  fill={textFill}
-                  fontSize="8px"
-                  fontWeight="800"
-                  style={{ opacity: showLabels ? 1.0 : 0 }}
-                >
-                  {formatTime(item?.start_hour)}
-                </StyledBarLabel>
-              </g>
-            </animated.g>
-          </React.Fragment>
-        ))}
-      </g>
-    </svg>
+                  <StyledBarLabel
+                    textAnchor="left"
+                    dx="3px"
+                    dy={height - yScale(item?.mean_rides)}
+                    fill={textFill}
+                    fontSize="8px"
+                    fontWeight="800"
+                    style={{ opacity: showLabels ? 1.0 : 0 }}
+                  >
+                    {formatTime(item?.start_hour)}
+                  </StyledBarLabel>
+                </g>
+              </animated.g>
+            </React.Fragment>
+          ))}
+        </g>
+      </svg>
+    </>
   );
 };
 

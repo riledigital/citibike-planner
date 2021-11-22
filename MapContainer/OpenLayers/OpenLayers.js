@@ -32,7 +32,7 @@ const OpenLayers = (props) => {
   const handleFeatureSelect = (e) => {
     console.log("Selected feature!");
     const id = e?.selected?.at(0)?.values_?.station_id ?? null;
-    debugger;
+
     dispatch(setSelectedStationId(id));
   };
 

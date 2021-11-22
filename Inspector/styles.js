@@ -43,7 +43,7 @@ export const StyledInspector = styled(animated.div)`
   }
 `;
 
-export const StyledDecorative = styled.span`
+export const StyledDecorative = styled(animated.span)`
   display: inline;
   position: absolute;
   height: auto;
