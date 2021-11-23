@@ -151,8 +151,17 @@ export const selectLiveStatus = (state) => {
 export const selectStationFavorited = (state) => {
   const id = state.AppSlice?.selectedStationId;
   const exists = state?.AppSlice?.stationFavorites?.findIndex((d) => d === id);
-
   return exists >= 0 ? true : false;
+};
+
+export const selectStationFavorites = (state) => {
+  const ids = state.AppSlice?.stationFavorites;
+  const info = {};
+  ids?.forEach((d) => {
+    info[d] = state.AppSlice.stationInfo[d];
+  });
+
+  return info;
 };
 
 // Action creators are generated for each case reducer function
