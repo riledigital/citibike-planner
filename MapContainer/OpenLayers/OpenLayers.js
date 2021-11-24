@@ -19,8 +19,11 @@ import { map } from "lodash";
 import { StyledMapElement } from "./styles";
 import { Fill, Stroke, Style, Text, Circle } from "ol/style";
 import mapboxgl from "mapbox-gl";
-import { useDispatch } from "react-redux";
-import { setSelectedStationId } from "@/common/store/AppSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectCurrentStation,
+  setSelectedStationId,
+} from "@/common/store/AppSlice";
 
 //openlayers.org/en/latest/examples/vector-layer.html
 
@@ -28,6 +31,7 @@ const OpenLayers = (props) => {
   const element = useRef();
   const mapRef = useRef();
   const dispatch = useDispatch();
+  const selectedStationId = useSelector(selectCurrentStation);
 
   const handleFeatureSelect = (e) => {
     console.log("Selected feature!");
@@ -39,41 +43,50 @@ const OpenLayers = (props) => {
   const fill = new Fill({
     color: "rgba(255, 255, 255, 0.6)",
   });
+
   const stroke = new Stroke({
     color: "#319FD3",
     width: 1,
   });
-  const style = new Style({
-    fill,
-    stroke,
-    image: new Circle({
-      fill: fill,
-      stroke: stroke,
-      radius: 10,
-    }),
-    text: new Text({
-      font: "12px Calibri,sans-serif",
-      fill: new Fill({
-        color: "#000",
+
+  function styleFunction(feature, resolution) {
+    return new Style({
+      fill,
+      stroke,
+      image: new Circle({
+        fill: fill,
+        stroke: stroke,
+        radius: 10,
       }),
-      stroke: new Stroke({
-        color: "#fff",
-        width: 3,
+      text: new Text({
+        font: "12rem inherit",
+        scale: 1.5,
+        text: resolution < 12 ? feature.get("name") : null,
       }),
-    }),
-  });
+    });
+  }
 
   useEffect(() => {
+    let defaultView = new View({
+      projection: "EPSG:3857",
+      center: [-73.96923065185547, 40.751678516237334],
+      zoom: 12,
+      extent: [
+        -8277511.671749311,
+        4950516.872872229,
+        -8200658.478612049,
+        4994089.888624159,
+      ],
+    });
+
     const vectorLayer = new VectorLayer({
       source: new VectorSource({
         url: "/data/stations-with-nta.geojson",
         format: new GeoJSON(),
       }),
-      style: function (feature) {
-        style.getText().setText(feature.get("name"));
-        return style;
-      },
+      style: styleFunction,
     });
+
     const map = new Map({
       renderer: "webgl",
       layers: [
@@ -88,38 +101,39 @@ const OpenLayers = (props) => {
         vectorLayer,
       ],
       target: element.current,
-      view: new View({
-        projection: "EPSG:3857",
-        center: [-73.96923065185547, 40.751678516237334],
-        zoom: 12,
-        extent: [
-          -8277511.671749311,
-          4950516.872872229,
-          -8200658.478612049,
-          4994089.888624159,
-        ],
-      }),
+      view: defaultView,
     });
     const select = new Select({
       condition: click,
+      style: null,
       toggleCondition: (e) => {
         const cond = shiftKeyOnly(e) && singleClick(e);
         return cond;
       },
     });
     select.on("select", handleFeatureSelect);
+    defaultView.on("change:resolution", (e) => {
+      // debugger;
+      console.log(defaultView.getResolution());
+    });
     map.addInteraction(select);
 
     map.on("singleclick", function (e) {
       console.log(" :", e);
       console.log(select);
     });
+
     mapRef.current = map;
     return () => {
       // Remove the map on unmount
       mapRef.current = null;
     };
   }, [props]);
+
+  useEffect(() => {
+    mapRef.current;
+  }, [selectedStationId]);
+
   return <StyledMapElement ref={element} />;
 };
 
