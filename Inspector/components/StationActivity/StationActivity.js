@@ -33,19 +33,26 @@ const StationActivity = ({
   const [tooltipText, setTooltipText] = useState(null);
   const [showLabels, setShowLabels] = useState(false);
 
-  let xScale =
-    data &&
-    scaleTime()
-      .domain([6, 24])
-      .range([margin.left, width - margin.right]);
-
-  let yScale =
-    data &&
-    scaleLinear()
-      .domain(extent(data, (d) => d?.mean_rides))
-      .range([height - margin.bottom, margin.top]);
+  const transitions = useTransition(data, {
+    from: (item) => ({ transform: `scaleX(1)`, opacity: 0 }),
+    update: (item) => ({ opacity: 1 }),
+    enter: (item) => ({ opacity: 1 }),
+    leave: (item) => ({ transform: `scaleX(0)` }),
+    unique: true,
+    trail: 20,
+  });
 
   const currentHour = useRef();
+
+  currentHour.current = new Date().getHours();
+
+  let xScale = scaleTime()
+    .domain([6, 24])
+    .range([margin.left, width - margin.right]);
+
+  let yScale = scaleLinear()
+    .domain(data ? extent(data, (d) => d?.mean_rides) : [0, 1])
+    .range([height - margin.bottom, margin.top]);
 
   const handleMouseOut = (e) => {
     setShowTooltip(false);
@@ -64,33 +71,7 @@ const StationActivity = ({
     setShowTooltip(true);
     setCoords({ x: e.clientX, y: e.clientY });
   };
-
-  const transitions = useTransition(data, {
-    from: (item) => ({ opacity: 0 }),
-    enter: (item) => ({ opacity: 1 }),
-    leave: (item) => ({ opacity: 0 }),
-    unique: true,
-    trail: 20,
-  });
-
   const padding = 0.1;
-
-  useEffect(() => {
-    if (data) {
-      currentHour.current = new Date().getHours();
-      xScale =
-        data &&
-        scaleTime()
-          .domain([6, 24])
-          .range([margin.left, width - margin.right]);
-
-      yScale =
-        data &&
-        scaleLinear()
-          .domain(extent(data, (d) => d?.mean_rides))
-          .range([height - margin.bottom, margin.top]);
-    }
-  }, [data]);
 
   if (!data || !xScale || !yScale) {
     return <>No data available.</>;
@@ -117,20 +98,22 @@ const StationActivity = ({
         <g>
           {transitions((props, item, t, key) => (
             <React.Fragment key={key}>
-              <animated.g style={props}>
-                <g
+              <animated.g>
+                <animated.g
+                  style={{ opacity: props.opacity }}
                   onMouseOut={(e) => handleMouseOut(e)}
                   transform={`translate(${xScale(item?.start_hour)}, ${yScale(
                     item?.mean_rides
                   )})`}
                 >
-                  <rect
+                  <animated.rect
                     fill={fill}
                     width={width / 24 - padding}
                     height={`${
                       height - yScale(item?.mean_rides) - margin.bottom
                     }`}
                     onMouseMove={(e) => handleMouseMove(e, e.pageX, e.pageY)}
+                    style={{ transform: props.transform }}
                   />
                   <StyledBarLabel
                     textAnchor="left"
@@ -155,7 +138,7 @@ const StationActivity = ({
                   >
                     {formatTime(item?.start_hour)}
                   </StyledBarLabel>
-                </g>
+                </animated.g>
               </animated.g>
             </React.Fragment>
           ))}
