@@ -42,7 +42,7 @@ const LiveStatus = () => {
   return (
     <>
       <StyledHeading>Live Status</StyledHeading>
-      {station_status}
+
       <StyledLastUpdated>
         Updated on {getFormattedTime(last_reported)}
       </StyledLastUpdated>

@@ -14,7 +14,6 @@ import Inspector from "/Inspector";
 import MapContainer, { MapLegend } from "/MapContainer";
 
 // import Audio from "@common/Audio";
-import Data from "@common/Data";
 import OpenLayers from "MapContainer/OpenLayers";
 
 // import Ranking from "./Ranking/Ranking";
@@ -53,12 +52,12 @@ const App = ({ Component, pageProps }) => {
 
   return (
     <>
-      <Header
+      {/* <Header
         toggleSound={() => setSound(!isMuted)}
         soundOn={isMuted}
         // toggleModal={toggleModal}
         // toggleMenu={toggleMenu}
-      />
+      /> */}
       <>
         <Inspector
           aggData={aggData}
@@ -72,9 +71,6 @@ const App = ({ Component, pageProps }) => {
         <MapLegend />
         <OpenLayers />
       </>
-      {visibleMenu ? (
-        <Modal soundOn={isMuted} toggleSound={() => setSound(!isMuted)} />
-      ) : null}
     </>
   );
 };

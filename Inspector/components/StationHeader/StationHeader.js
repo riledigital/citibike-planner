@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
+import ManageStation from "@components/ManageStation";
 // import "./StationHeader.css";
 import { useTransition, animated } from "@react-spring/web";
 import { useSelector } from "react-redux";
@@ -11,6 +12,11 @@ import styled from "styled-components";
 
 const StyledStationHeader = styled(animated.div)`
   margin-bottom: 1rem;
+`;
+
+const StationName = styled.h2`
+  line-height: 1.1;
+  font-size: 1.4rem;
 `;
 
 const StationHeader = (props) => {
@@ -25,14 +31,12 @@ const StationHeader = (props) => {
 
   return name ? (
     <StyledStationHeader style={props.style}>
+      <StationName>
+        {name}
+        <StyledId title="Station ID">#{station_id}</StyledId>
+      </StationName>
       <div>
-        <h2>
-          {name}
-          <StyledId title="Station ID">#{station_id}</StyledId>
-        </h2>
-      </div>
-      <div>
-        {stationNeighborhood}, {boroname}
+        {stationNeighborhood}, {boroname} <ManageStation />
       </div>
     </StyledStationHeader>
   ) : (

@@ -9,6 +9,8 @@ import "@styles/App.css";
 import GlobalStyles from "/styles/GlobalStyles";
 import Script from "next/script";
 
+import ThumbNav from "@components/ThumbNav";
+
 const App = ({ Component, pageProps }) => {
   return (
     <>
@@ -29,6 +31,7 @@ const App = ({ Component, pageProps }) => {
       />
       <GlobalStyles />
       <Provider store={store}>
+        <ThumbNav />
         <Component />
       </Provider>
     </>

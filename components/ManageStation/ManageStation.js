@@ -15,11 +15,7 @@ const ManageStation = () => {
   const handleClick = (e) => {
     dispatch(toggleStationFavorite(currentId));
   };
-  return (
-    <div>
-      <button onClick={handleClick}>{isFavorited ? "Remove" : "Add"}</button>
-    </div>
-  );
+  return <button onClick={handleClick}>{isFavorited ? "-" : "+"}</button>;
 };
 
 export default ManageStation;

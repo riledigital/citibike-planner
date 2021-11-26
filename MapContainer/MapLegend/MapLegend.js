@@ -14,8 +14,7 @@ const MapLegend = ({
   height = 40,
 }) => {
   const legendLabel = {
-    fontFamily: "Jost",
-    fontSize: 10,
+    fontSize: 8,
   };
   const color = scaleLinear()
     .domain([0, data.length])
@@ -33,7 +32,7 @@ const MapLegend = ({
   };
   return (
     <StyledMapLegend>
-      <StyledHeading>Legend</StyledHeading>
+      {/* <StyledHeading>Legend</StyledHeading> */}
       <StyledFigure>
         <StyledLabel>Popularity</StyledLabel>
         <svg viewBox={`0 0 ${width} ${height}`}>

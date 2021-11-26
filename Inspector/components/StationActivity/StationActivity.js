@@ -73,7 +73,7 @@ const StationActivity = ({
     trail: 20,
   });
 
-  const padding = 1;
+  const padding = 0.1;
 
   useEffect(() => {
     if (data) {
@@ -105,7 +105,7 @@ const StationActivity = ({
   };
 
   return (
-    <>
+    <StyledActivity>
       <StyledTooltip>Test</StyledTooltip>
       <p>Average number of rides per hour:</p>
       <svg
@@ -161,8 +161,14 @@ const StationActivity = ({
           ))}
         </g>
       </svg>
-    </>
+    </StyledActivity>
   );
 };
 
 export default StationActivity;
+
+import styled from "styled-components";
+
+const StyledActivity = styled.div`
+  font-size: 0.8rem;
+`;

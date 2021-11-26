@@ -47,7 +47,7 @@ ${normalize}
   --margin-desktop: 2rem;
 
 /* Height of header */
-  --h-header: 32px;
+  --h-thumbnav: 4rem;
 
  /* Border radius */
   --radius-s: 8px;
@@ -83,58 +83,6 @@ html {
 
 p {
   margin-bottom: 1rem;
-}
-
-/* App container*/
-
-#App {
-  -webkit-transform: translate3d(0,0,0);
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: block;
-  overflow: unset;
-  z-index: 0;
-}
-
-.mapContainer {
-  display: block;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0%;
-  z-index: ${ZSPACE.map};
-  cursor: pointer;
-}
-
-.mapboxgl-ctrl-top-right {
-
-  top: calc(var(--margin-base) + 1rem );
-}
-
-.mapboxgl-ctrl {
-  font-family: var(--font-main);
-}
-
-
-.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip {
-  border-top-color: var(--c-blue);
-}
-
-.mapboxgl-popup-content {
-  display: flex;
-  flex-direction: column;
-  min-height: 2rem;
-  padding-right: 2rem;
-}
-
-.mapboxgl-popup-close-button {
-  color: var(--c-white);
-  padding: 1ch;
-  margin-bottom: 1ch;
 }
 `;
 
