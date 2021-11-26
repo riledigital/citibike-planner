@@ -1,14 +1,17 @@
 import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from "next/router";
 
 import {
   selectStationFavorites,
   selectStationFavorited,
+  setSelectedStationId,
   toggleStationFavorite,
 } from "@/common/Store/AppSlice";
 import LayoutContent from "@components/LayoutContent";
 
 const ToggleButton = ({ station_id }) => {
   const dispatch = useDispatch();
+
   const isFavorited = useSelector((state) => {
     return state?.AppSlice?.stationFavorites?.findIndex(
       (d) => d === station_id
@@ -26,12 +29,15 @@ const ToggleButton = ({ station_id }) => {
     </div>
   );
 };
+
 const StationItem = ({ station_id, name, boroname }) => {
   const dispatch = useDispatch();
+  const router = useRouter();
   return (
     <tr
       onClick={() => {
         dispatch(setSelectedStationId(station_id));
+        router.push("/");
       }}
     >
       <td>{station_id}</td>

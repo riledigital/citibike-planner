@@ -7,6 +7,7 @@ import XYZ from "ol/source/XYZ";
 import GeoJSON from "ol/format/GeoJSON";
 import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
+import { bbox } from "ol/loadingstrategy";
 
 // Interactions
 import Select from "ol/interaction/Select";
@@ -27,11 +28,28 @@ import {
 
 //openlayers.org/en/latest/examples/vector-layer.html
 
+const zoomToFeature = function zoomToFeature(id, view, vectorSource) {
+  if (!id) {
+    return null;
+  }
+  const feature = vectorSource.getFeatureById(id);
+  const point = feature?.getGeometry();
+  const coords = point?.getCoordinates();
+  debugger;
+
+  view?.setCenter(coords);
+  view?.setZoom(17);
+};
+
 const OpenLayers = (props) => {
   const element = useRef();
   const mapRef = useRef();
   const dispatch = useDispatch();
   const selectedStationId = useSelector(selectCurrentStation);
+
+  const viewRef = useRef();
+  const stationLayer = useRef();
+  const vectorSource = useRef();
 
   const handleFeatureSelect = (e) => {
     console.log("Selected feature!");
@@ -61,29 +79,40 @@ const OpenLayers = (props) => {
       text: new Text({
         font: "12rem inherit",
         scale: 1.5,
-        text: resolution < 12 ? feature.get("name") : null,
+        text: resolution < 2.4 ? feature.get("name") : null,
       }),
     });
   }
 
   useEffect(() => {
-    let defaultView = new View({
+    viewRef.current = new View({
       projection: "EPSG:3857",
       center: [-73.96923065185547, 40.751678516237334],
       zoom: 12,
       extent: [
-        -8277511.671749311,
-        4950516.872872229,
-        -8200658.478612049,
+        -8254095.437413851,
+        4953354.557334871,
+        -8219694.931266008,
         4994089.888624159,
       ],
     });
 
-    const vectorLayer = new VectorLayer({
-      source: new VectorSource({
-        url: "/data/stations-with-nta.geojson",
-        format: new GeoJSON(),
-      }),
+    vectorSource.current = new VectorSource({
+      url: "/data/stations-with-nta.geojson",
+      format: new GeoJSON(),
+      // strategy: bbox,
+    });
+
+    // set id/key for all features
+    vectorSource.current.on("featuresloadend", () => {
+      console.debug("OL featuresloadend");
+      vectorSource.current.forEachFeature((feature) => {
+        feature.setId(feature.get("station_id"));
+      });
+    });
+
+    stationLayer.current = new VectorLayer({
+      source: vectorSource.current,
       style: styleFunction,
     });
 
@@ -98,10 +127,10 @@ const OpenLayers = (props) => {
             tilePixelRatio: 1, // THIS IS IMPORTANT
           }),
         }),
-        vectorLayer,
+        stationLayer.current,
       ],
       target: element.current,
-      view: defaultView,
+      view: viewRef.current,
     });
     const select = new Select({
       condition: click,
@@ -112,9 +141,8 @@ const OpenLayers = (props) => {
       },
     });
     select.on("select", handleFeatureSelect);
-    defaultView.on("change:resolution", (e) => {
-      // debugger;
-      console.log(defaultView.getResolution());
+    viewRef.current.on("change:resolution", (e) => {
+      console.log(viewRef.current.getResolution());
     });
     map.addInteraction(select);
 
@@ -131,7 +159,19 @@ const OpenLayers = (props) => {
   }, [props]);
 
   useEffect(() => {
-    mapRef.current;
+    if (selectedStationId) {
+      try {
+        zoomToFeature(selectedStationId, viewRef.current, vectorSource.current);
+      } catch (e) {
+        vectorSource.current.once("featuresloadend", () => {
+          zoomToFeature(
+            selectedStationId,
+            viewRef.current,
+            vectorSource.current
+          );
+        });
+      }
+    }
   }, [selectedStationId]);
 
   return <StyledMapElement ref={element} />;
