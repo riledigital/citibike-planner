@@ -19,7 +19,8 @@ const GlobalStyle = createGlobalStyle`
 ${normalize}
 /* Colors */
 :root {
-  --c-blue: #0a2472;
+  --c-blue: hsl(225,83.9%,24.3%);
+  --c-blue-dark: hsl(225,83.9%,15%);
   --c-blue-alpha: rgba(10, 36, 114, .8);
   --c-white: #fefefe;
   --c-black: #010203;

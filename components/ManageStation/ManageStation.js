@@ -1,9 +1,13 @@
+import styled from "styled-components";
+
 import {
   selectCurrentStation,
   selectStationFavorited,
-  setSelectedStationId,
   toggleStationFavorite,
 } from "@/common/Store/AppSlice";
+
+import { Button } from "@/components";
+
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -15,7 +19,16 @@ const ManageStation = () => {
   const handleClick = (e) => {
     dispatch(toggleStationFavorite(currentId));
   };
-  return <button onClick={handleClick}>{isFavorited ? "-" : "+"}</button>;
+
+  return (
+    <StyledButton onClick={handleClick}>
+      {isFavorited ? "Remove" : "Add"}
+    </StyledButton>
+  );
 };
 
 export default ManageStation;
+
+const StyledButton = styled(Button)`
+  float: right;
+`;
