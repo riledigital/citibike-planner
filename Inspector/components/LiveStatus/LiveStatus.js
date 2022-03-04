@@ -1,8 +1,4 @@
-import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-
 import {
-  StyledButtonUnlock,
   StyledHeading,
   StyledLastUpdated,
   StyledLoadingIllustration,
@@ -12,7 +8,7 @@ import {
   StyledStationStatusLabel,
 } from "./styles";
 import { useSelector } from "react-redux";
-import { selectLiveStatus } from "@/common/Store/AppSlice";
+import { selectLiveStatus } from "common/store/AppSlice";
 
 const getFormattedTime = (time) =>
   new Date(time * 1000).toLocaleTimeString("en-US");
@@ -23,7 +19,6 @@ const LiveStatus = () => {
     num_docks_available,
     num_ebikes_available,
     last_reported,
-    station_status,
   } = useSelector(selectLiveStatus) || {};
 
   if (num_bikes_available === null) {

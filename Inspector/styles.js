@@ -2,16 +2,13 @@ import styled from "styled-components";
 import { DEVICES, ZSPACE } from "/styles/GlobalStyles";
 import { animated } from "@react-spring/web";
 
-const EASE_SLIDE = "cubic-bezier(0.16, 1, 0.3, 1)";
-const SPEED = "180ms";
-const DELAY = "1s";
-
 export const StyledInspector = styled(animated.div)`
   border: 0;
   box-shadow: 0px 3px 6px 2px rgba(0, 0, 0, 0.5);
   border-radius: 0.5rem;
   background: var(--c-blue);
   color: var(--c-white);
+
   display: flex;
   flex-direction: column;
 
@@ -26,14 +23,15 @@ export const StyledInspector = styled(animated.div)`
   padding: var(--margin-base);
   padding-right: calc(var(--margin-base) * 2);
 
-  min-height: auto;
   max-height: 80vh;
-  max-width: 40rem;
+  height: fit-content;
+  width: 40rem;
 
   overflow: visible;
 
   @media ${DEVICES.tablet} {
-    width: 45vw;
+    height: max-content;
+    width: 30rem;
     padding: var(--margin-tablet);
     padding-right: calc(var(--margin-base) * 2);
   }

@@ -1,15 +1,18 @@
+import { selectStationFrequencyData } from "common/store/AppSlice";
 import { max } from "d3-array";
 import { scaleBand, scaleLinear, scaleRadial } from "d3-scale";
 import { interpolatePuOr } from "d3-scale-chromatic";
 import { arc } from "d3-shape";
 import { range } from "lodash-es";
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
-const RadialVis = ({ data, ...props }) => {
-  const height = 600;
-  const width = 600;
+const RadialVis = (props) => {
+  const data = useSelector(selectStationFrequencyData);
+  const height = 400;
+  const width = height;
   const innerRadius = 60;
-  const outerRadius = 600 / 2;
+  const outerRadius = height / 2;
 
   const [maxRides] = useState(() => max(data.map((d) => d.mean_rides)));
 
@@ -51,8 +54,8 @@ const RadialVis = ({ data, ...props }) => {
       style={{ width: 300, height: 300, margin: "auto" }}
       {...props}
     >
-      <g style={{ transform: `translate(300px,300px)` }}>
-        {data.map((item, i) => (
+      <g style={{ transform: `translate(${width / 2}px,${width / 2}px)` }}>
+        {data?.map((item, i) => (
           <path
             key={i}
             fill={fill(item.start_hour)}

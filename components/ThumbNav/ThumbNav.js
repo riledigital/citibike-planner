@@ -4,7 +4,7 @@ import Link from "next/link";
 const NavLink = ({ children, href, onClick }) => {
   return (
     <StyledLi>
-      <Link {...{ href }}>
+      <Link {...{ href }} passHref>
         <StyledA>{children}</StyledA>
       </Link>
     </StyledLi>
@@ -55,14 +55,25 @@ const StyledLi = styled.li`
   list-style-type: none;
   padding-left: 0;
   padding: 0.5ch;
-  min-width: 5rem;
+  min-width: 8rem;
+
+  border: 0.1rem solid white;
+  border-radius: 10rem;
 
   &:hover {
-    background: blue;
+    filter: brightness(50%);
+  }
+
+  &:active {
+    filter: invert(100%);
   }
 `;
 
 const StyledA = styled.a`
   color: var(--c-white);
   font-weight: bold;
+  text-decoration: none;
+
+  &:hover {
+  }
 `;

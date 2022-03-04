@@ -1,0 +1,16 @@
+.stationId {
+  width: 8rem;
+}
+
+.stationName {
+  width: 20rem;
+}
+
+.stationBorough {
+  max-width: 10rem;
+}
+
+.tr:hover {
+    background: rgb(0,0,0, 0.15);
+    cursor: pointer;
+}

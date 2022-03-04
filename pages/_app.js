@@ -1,17 +1,15 @@
-import { store } from "@/common/store";
-import { Provider, useDispatch } from "react-redux";
+import { store } from "common/store";
+import { Provider } from "react-redux";
 
-import { useState, useEffect } from "react";
-
-import "@styles/index.css";
-import "@styles/App.css";
+import "cssremedy/css/remedy.css";
+import "styles/App.css";
 
 import GlobalStyles from "/styles/GlobalStyles";
 import Script from "next/script";
 
-import ThumbNav from "@components/ThumbNav";
+import ThumbNav from "components/ThumbNav";
 
-const App = ({ Component, pageProps }) => {
+const App = ({ Component }) => {
   return (
     <>
       <Script

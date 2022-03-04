@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { ButtonBase } from "@styles/GlobalStyles";
+import { ButtonBase } from "styles/GlobalStyles";
 
 export const StyledBranding = styled.div`
   padding: 0 0 0 1rem;

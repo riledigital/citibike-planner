@@ -2,11 +2,11 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
-import ManageStation from "@components/ManageStation";
+import ManageStation from "components/ManageStation";
 // import "./StationHeader.css";
 import { useTransition, animated } from "@react-spring/web";
 import { useSelector } from "react-redux";
-import { selectStationInfo } from "@/common/Store/AppSlice";
+import { selectStationInfo } from "common/store/AppSlice";
 
 import styled from "styled-components";
 
@@ -35,9 +35,9 @@ const StationHeader = (props) => {
         {name}
         <StyledId title="Station ID">#{station_id}</StyledId>
       </StationName>
-      <div>
+      <StyledStationInfo>
         {stationNeighborhood}, {boroname} <ManageStation />
-      </div>
+      </StyledStationInfo>
     </StyledStationHeader>
   ) : (
     <div>
@@ -50,6 +50,10 @@ StationHeader.propTypes = {
   station: PropTypes.object,
 };
 export default StationHeader;
+
+const StyledStationInfo = styled.div`
+  font-size: 1rem;
+`;
 
 const StyledId = styled.div`
   display: block;

@@ -1,13 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
+import styled from "styled-components";
 import { useRouter } from "next/router";
+import styles from "styles/favorites.module.css";
 
 import {
   selectStationFavorites,
-  selectStationFavorited,
   setSelectedStationId,
   toggleStationFavorite,
-} from "@/common/Store/AppSlice";
-import LayoutContent from "@components/LayoutContent";
+} from "common/store/AppSlice";
+import LayoutContent from "components/LayoutContent";
 
 const ToggleButton = ({ station_id }) => {
   const dispatch = useDispatch();
@@ -35,6 +36,7 @@ const StationItem = ({ station_id, name, boroname }) => {
   const router = useRouter();
   return (
     <tr
+      className={styles.tr}
       onClick={() => {
         dispatch(setSelectedStationId(station_id));
         router.push("/");
@@ -58,13 +60,22 @@ const Favorites = () => {
     <LayoutContent>
       <h1>Favorites</h1>
       <p>Add stations to your favorites on the map!</p>
-      <table>
+      <StyledTable>
+        <tr className={styles.tr}>
+          <th className={styles.stationId}>Station ID</th>
+          <th className={styles.stationName}>Name</th>
+          <th className={styles.stationBorough}>Borough</th>
+        </tr>
         {Object.values(favorites).map((d) => (
           <StationItem key={d.station_id} {...d} />
         ))}
-      </table>
+      </StyledTable>
     </LayoutContent>
   );
 };
 
 export default Favorites;
+
+const StyledTable = styled.table`
+  width: 100%;
+`;

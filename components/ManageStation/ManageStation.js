@@ -4,11 +4,9 @@ import {
   selectCurrentStation,
   selectStationFavorited,
   toggleStationFavorite,
-} from "@/common/Store/AppSlice";
+} from "common/store/AppSlice";
 
-import { Button } from "@/components";
-
-import React from "react";
+import { Button } from "components";
 import { useDispatch, useSelector } from "react-redux";
 
 const ManageStation = () => {
@@ -16,7 +14,7 @@ const ManageStation = () => {
   const isFavorited = useSelector(selectStationFavorited);
   const currentId = useSelector(selectCurrentStation);
 
-  const handleClick = (e) => {
+  const handleClick = () => {
     dispatch(toggleStationFavorite(currentId));
   };
 

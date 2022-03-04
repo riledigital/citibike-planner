@@ -1,5 +1,10 @@
 module.exports = {
   extends: ["next", "next/core-web-vitals", "eslint:recommended", "prettier"],
+  env: {
+    browser: true,
+    node: true,
+    es6: true,
+  },
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
@@ -8,4 +13,7 @@ module.exports = {
     sourceType: "module",
   },
   plugins: ["prettier"],
+  rules: {
+    "no-unused-vars": ["off"],
+  },
 };

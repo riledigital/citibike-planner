@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 // Index should be the main map view. About should open a new page.
 
 import { useState, useEffect } from "react";
@@ -6,31 +7,28 @@ import {
   fetchFrequencyAnalysis,
   fetchLiveStatus,
   fetchStationGeo,
-} from "@/common/store/AppSlice.js";
+} from "common/store/AppSlice";
+
 import { useDispatch } from "react-redux";
 
-import { Header, Modal } from "@components/index";
 import Inspector from "/Inspector";
-import MapContainer, { MapLegend } from "/MapContainer";
+import { MapLegend } from "/MapContainer";
 
 // import Audio from "@common/Audio";
 import OpenLayers from "MapContainer/OpenLayers";
 
 // import Ranking from "./Ranking/Ranking";
-const App = ({ Component, pageProps }) => {
-  const [currentStation, setCurrentStation] = useState(null);
-  const [aggData, setAggData] = useState(null);
-  const [stationGeo, setStationGeo] = useState(null);
-  const [stationStatus, setStationStatus] = useState(new Map());
-  const [lastUpdated, setLastUpdated] = useState(null);
+const App = () => {
+  const [currentStation] = useState(null);
+  const [aggData] = useState(null);
+  const [stationGeo] = useState(null);
+  const [stationStatus] = useState(new Map());
+  const [lastUpdated] = useState(null);
 
-  const [visibleInspector, setVisibleInspector] = useState(false);
-  const [visibleMenu, setVisibleMenu] = useState(true);
-  const [showModal, setShowModal] = useState(true);
+  const [visibleInspector] = useState(false);
 
-  const [ranking, setRanking] = useState({});
-  const [isMuted, setSound] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [ranking] = useState({});
+
   const dispatch = useDispatch();
 
   // New startup
@@ -38,17 +36,7 @@ const App = ({ Component, pageProps }) => {
     dispatch(fetchFrequencyAnalysis());
     dispatch(fetchStationGeo());
     dispatch(fetchLiveStatus());
-  }, []);
-
-  const handleStationClick = (station) => {
-    const queryElement = document.querySelector("#stationHeader");
-    if (queryElement) {
-      queryElement.scrollIntoView({
-        behavior: "smooth",
-      });
-    }
-    setCurrentStation(station);
-  };
+  }, [dispatch]);
 
   return (
     <>

@@ -11,13 +11,17 @@ import {
 
 import { useSelector } from "react-redux";
 
-import { selectShowInspector } from "@/common/store/AppSlice";
+import { selectShowInspector } from "common/store/AppSlice";
 import { useSpring, useTrail } from "@react-spring/web";
 
 const Inspector = () => {
   // const [stationActivityData, setStationActivityData] = useState(new Map());
   const visible = useSelector(selectShowInspector);
   const spring = useSpring({
+    config: {
+      tension: 210,
+      friction: 20,
+    },
     transform: `translateX(${visible ? "0" : "-100"}%)`,
   });
 
@@ -30,12 +34,6 @@ const Inspector = () => {
     <StyledInspector {...{ style: spring }}>
       <StyledDecorative style={springs[0]}>Station Info</StyledDecorative>
       <StationHeader style={springs[1]} />
-
-      {/* <StationPopularity
-        nta_name={currentRank.get("nta_name")}
-        rank={currentRank.get("rank")}
-        stations_in_nta={currentRank.get("stations_in_nta")}
-      /> */}
       <StationActivity height={150} fill="white" />
       <LiveStatus />
     </StyledInspector>

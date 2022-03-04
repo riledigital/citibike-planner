@@ -1,4 +1,4 @@
-import LayoutContent from "@components/LayoutContent";
+import LayoutContent from "components/LayoutContent";
 const AboutPage = () => {
   return (
     <LayoutContent>
@@ -22,8 +22,8 @@ const AboutPage = () => {
         We rank rides by the average number of trips started at each stations,
         grouped by Neighborhood Tabulation Areas (NTAs), which were created to
         predict population counts in New York City at a level finer than Census
-        Tracts. Neighborhoods are loosely defined, but NTA's provide a
-        sufficient rough estimate.
+        Tracts. Neighborhoods are loosely defined, but NTAs provide a sufficient
+        rough estimate.
       </p>
       <p>
         Data is aggregated from{" "}

@@ -19,12 +19,11 @@ import { map } from "lodash";
 
 import { StyledMapElement } from "./styles";
 import { Fill, Stroke, Style, Text, Circle } from "ol/style";
-import mapboxgl from "mapbox-gl";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectCurrentStation,
   setSelectedStationId,
-} from "@/common/store/AppSlice";
+} from "common/store/AppSlice";
 
 //openlayers.org/en/latest/examples/vector-layer.html
 
@@ -35,7 +34,6 @@ const zoomToFeature = function zoomToFeature(id, view, vectorSource) {
   const feature = vectorSource.getFeatureById(id);
   const point = feature?.getGeometry();
   const coords = point?.getCoordinates();
-  debugger;
 
   view?.setCenter(coords);
   view?.setZoom(17);
