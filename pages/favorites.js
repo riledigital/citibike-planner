@@ -1,14 +1,14 @@
-import { useDispatch, useSelector } from "react-redux";
-import styled from "styled-components";
-import { useRouter } from "next/router";
-import styles from "styles/favorites.module.css";
-
 import {
   selectStationFavorites,
   setSelectedStationId,
   toggleStationFavorite,
 } from "common/store/AppSlice";
 import LayoutContent from "components/LayoutContent";
+import Title from "components/Title";
+import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
+import styled from "styled-components";
+import styles from "styles/favorites.module.css";
 
 const ToggleButton = ({ station_id }) => {
   const dispatch = useDispatch();
@@ -58,17 +58,20 @@ const Favorites = () => {
 
   return (
     <LayoutContent>
+      <Title>Favorites</Title>
       <h1>Favorites</h1>
       <p>Add stations to your favorites on the map!</p>
       <StyledTable>
-        <tr className={styles.tr}>
-          <th className={styles.stationId}>Station ID</th>
-          <th className={styles.stationName}>Name</th>
-          <th className={styles.stationBorough}>Borough</th>
-        </tr>
-        {Object.values(favorites).map((d) => (
-          <StationItem key={d.station_id} {...d} />
-        ))}
+        <tbody>
+          <tr className={styles.tr}>
+            <th className={styles.stationId}>Station ID</th>
+            <th className={styles.stationName}>Name</th>
+            <th className={styles.stationBorough}>Borough</th>
+          </tr>
+          {Object.values(favorites).map((d) => (
+            <StationItem key={d.station_id} {...d} />
+          ))}
+        </tbody>
       </StyledTable>
     </LayoutContent>
   );

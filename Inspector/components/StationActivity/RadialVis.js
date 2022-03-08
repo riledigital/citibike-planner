@@ -18,7 +18,7 @@ const RadialVis = (props) => {
 
   const [x] = useState(() =>
     scaleBand()
-      .domain(range(6, 22))
+      .domain(range(0, 24))
       .range([0, 2 * Math.PI])
   );
   const [y] = useState(() =>

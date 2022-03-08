@@ -1,21 +1,18 @@
-/* eslint-disable no-undef */
-// Index should be the main map view. About should open a new page.
-
-import { useState, useEffect } from "react";
-
+import Inspector from "/Inspector";
+import { MapLegend } from "/MapContainer";
 import {
   fetchFrequencyAnalysis,
   fetchLiveStatus,
   fetchStationGeo,
 } from "common/store/AppSlice";
-
-import { useDispatch } from "react-redux";
-
-import Inspector from "/Inspector";
-import { MapLegend } from "/MapContainer";
-
+import Title from "components/Title";
 // import Audio from "@common/Audio";
 import OpenLayers from "MapContainer/OpenLayers";
+/* eslint-disable no-undef */
+// Index should be the main map view. About should open a new page.
+
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
 // import Ranking from "./Ranking/Ranking";
 const App = () => {
@@ -46,19 +43,19 @@ const App = () => {
         // toggleModal={toggleModal}
         // toggleMenu={toggleMenu}
       /> */}
-      <>
-        <Inspector
-          aggData={aggData}
-          stationStatus={stationStatus}
-          stationGeo={stationGeo}
-          currentStation={currentStation}
-          lastUpdated={lastUpdated}
-          ranking={ranking}
-          visible={visibleInspector}
-        />
-        <MapLegend />
-        <OpenLayers />
-      </>
+
+      <Title>Map</Title>
+      <Inspector
+        aggData={aggData}
+        stationStatus={stationStatus}
+        stationGeo={stationGeo}
+        currentStation={currentStation}
+        lastUpdated={lastUpdated}
+        ranking={ranking}
+        visible={visibleInspector}
+      />
+      <MapLegend />
+      <OpenLayers />
     </>
   );
 };

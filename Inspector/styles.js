@@ -3,6 +3,8 @@ import { DEVICES, ZSPACE } from "/styles/GlobalStyles";
 import { animated } from "@react-spring/web";
 
 export const StyledInspector = styled(animated.div)`
+  contain: layout;
+  isolation: isolate;
   border: 0;
   box-shadow: 0px 3px 6px 2px rgba(0, 0, 0, 0.5);
   border-radius: 0.5rem;
@@ -10,7 +12,8 @@ export const StyledInspector = styled(animated.div)`
   color: var(--c-white);
 
   display: flex;
-  flex-direction: column;
+  flex-flow: column nowrap;
+  gap: 0.5rem;
 
   z-index: ${ZSPACE.inspector};
 
@@ -25,7 +28,7 @@ export const StyledInspector = styled(animated.div)`
 
   max-height: 80vh;
   height: fit-content;
-  width: 40rem;
+  max-width: 90%;
 
   overflow: visible;
 

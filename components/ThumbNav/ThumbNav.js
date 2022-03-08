@@ -1,79 +1,27 @@
-import styled from "styled-components";
+import clsx from "clsx";
 import Link from "next/link";
+import styles from "./ThumbNav.module.css";
 
 const NavLink = ({ children, href, onClick }) => {
   return (
-    <StyledLi>
+    <li className={clsx(styles.li)}>
       <Link {...{ href }} passHref>
-        <StyledA>{children}</StyledA>
+        <a className={clsx(styles.a)}>{children}</a>
       </Link>
-    </StyledLi>
+    </li>
   );
 };
 
 const ThumbNav = () => {
   return (
-    <StyledThumbNav>
-      <StyledNavList>
+    <nav className={clsx(styles["nav-container"])}>
+      <ul className={clsx(styles.list)}>
         <NavLink href="/">Map</NavLink>
         <NavLink href="/favorites">Stations</NavLink>
         <NavLink href="/about">About</NavLink>
-      </StyledNavList>
-    </StyledThumbNav>
+      </ul>
+    </nav>
   );
 };
 
 export default ThumbNav;
-
-const StyledThumbNav = styled.nav`
-  background: var(--c-blue);
-  color: var(--c-white);
-
-  display: flex;
-  z-index: 999;
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  height: 4rem;
-`;
-
-const StyledNavList = styled.ul`
-  display: flex;
-  justify-content: center;
-  flex-direction: row;
-  gap: 1ch;
-
-  margin: auto;
-`;
-
-const StyledLi = styled.li`
-  text-align: center;
-  align-items: center;
-
-  font-size: 1rem;
-  list-style-type: none;
-  padding-left: 0;
-  padding: 0.5ch;
-  min-width: 8rem;
-
-  border: 0.1rem solid white;
-  border-radius: 10rem;
-
-  &:hover {
-    filter: brightness(50%);
-  }
-
-  &:active {
-    filter: invert(100%);
-  }
-`;
-
-const StyledA = styled.a`
-  color: var(--c-white);
-  font-weight: bold;
-  text-decoration: none;
-
-  &:hover {
-  }
-`;

@@ -66,6 +66,8 @@ const OpenLayers = (props) => {
   });
 
   function styleFunction(feature, resolution) {
+    // TODO: Lookup data value
+    // const { station_id } = feature.values_;
     return new Style({
       fill,
       stroke,
@@ -75,7 +77,7 @@ const OpenLayers = (props) => {
         radius: 10,
       }),
       text: new Text({
-        font: "12rem inherit",
+        font: "12px inherit",
         scale: 1.5,
         text: resolution < 2.4 ? feature.get("name") : null,
       }),
@@ -140,7 +142,7 @@ const OpenLayers = (props) => {
     });
     select.on("select", handleFeatureSelect);
     viewRef.current.on("change:resolution", (e) => {
-      console.log(viewRef.current.getResolution());
+      // console.log(viewRef.current.getResolution());
     });
     map.addInteraction(select);
 

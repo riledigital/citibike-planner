@@ -27,6 +27,4 @@ const ManageStation = () => {
 
 export default ManageStation;
 
-const StyledButton = styled(Button)`
-  float: right;
-`;
+const StyledButton = styled(Button)``;

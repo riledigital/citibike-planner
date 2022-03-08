@@ -1,13 +1,11 @@
+import GlobalStyles from "/styles/GlobalStyles";
 import { store } from "common/store";
+import ThumbNav from "components/ThumbNav";
+import Script from "next/script";
 import { Provider } from "react-redux";
 
 import "cssremedy/css/remedy.css";
 import "styles/App.css";
-
-import GlobalStyles from "/styles/GlobalStyles";
-import Script from "next/script";
-
-import ThumbNav from "components/ThumbNav";
 
 const App = ({ Component }) => {
   return (

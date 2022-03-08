@@ -1,3 +1,1 @@
-import { default as StationHeader } from "./StationHeader";
-
-export default StationHeader;
+export { default } from "./StationHeader";

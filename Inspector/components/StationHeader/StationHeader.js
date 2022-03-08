@@ -1,44 +1,32 @@
 // TODO: Remove live status stuff from it
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-
+import clsx from "clsx";
 import ManageStation from "components/ManageStation";
-// import "./StationHeader.css";
+import styles from "./StationHeader.module.css";
 import { useTransition, animated } from "@react-spring/web";
 import { useSelector } from "react-redux";
 import { selectStationInfo } from "common/store/AppSlice";
 
 import styled from "styled-components";
 
-const StyledStationHeader = styled(animated.div)`
-  margin-bottom: 1rem;
-`;
-
-const StationName = styled.h2`
-  line-height: 1.1;
-  font-size: 1.4rem;
-`;
-
 const StationHeader = (props) => {
-  // Logic for handling null NTA c  odes
+  // Logic for handling null NTA codes
   const stationData = useSelector(selectStationInfo);
 
   const { name, station_id, ntaname, boroname } = stationData || {};
   const stationNeighborhood = !ntaname ? "" : ntaname;
-  if (stationData) {
-    // debugger;
-  }
 
   return name ? (
-    <StyledStationHeader style={props.style}>
-      <StationName>
+    <header className={clsx(styles.header)} style={props.style}>
+      <div className={clsx(styles.name)}>
         {name}
         <StyledId title="Station ID">#{station_id}</StyledId>
-      </StationName>
+      </div>
       <StyledStationInfo>
-        {stationNeighborhood}, {boroname} <ManageStation />
+        {stationNeighborhood}, {boroname}
       </StyledStationInfo>
-    </StyledStationHeader>
+      <ManageStation />
+    </header>
   ) : (
     <div>
       <p>Please click on a station on the map to view the activity details.</p>
@@ -46,10 +34,9 @@ const StationHeader = (props) => {
   );
 };
 
-StationHeader.propTypes = {
-  station: PropTypes.object,
-};
 export default StationHeader;
+
+const StationName = styled.h2``;
 
 const StyledStationInfo = styled.div`
   font-size: 1rem;

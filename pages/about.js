@@ -1,7 +1,10 @@
 import LayoutContent from "components/LayoutContent";
+import Title from "components/Title";
+
 const AboutPage = () => {
   return (
     <LayoutContent>
+      <Title>About</Title>
       <StyledTitle>Citi Bike Planner</StyledTitle>
       <StyledAttribution>By Ri Le</StyledAttribution>
       <p>When is the best time to take a Citi Bike in your area?</p>
