@@ -1,5 +1,7 @@
 import "ol/ol.css";
+import styles from "./OpenLayers.module.css";
 import Map from "ol/Map";
+import Overlay from "ol/Overlay";
 import OSM from "ol/source/OSM";
 import TileLayer from "ol/layer/Tile";
 import View from "ol/View";
@@ -24,10 +26,11 @@ import {
   selectCurrentStation,
   setSelectedStationId,
 } from "common/store/AppSlice";
+import clsx from "clsx";
 
 //openlayers.org/en/latest/examples/vector-layer.html
 
-const zoomToFeature = function zoomToFeature(id, view, vectorSource) {
+const zoomToFeature = function zoomToFeature(id, view, vectorSource, popupRef) {
   if (!id) {
     return null;
   }
@@ -37,6 +40,8 @@ const zoomToFeature = function zoomToFeature(id, view, vectorSource) {
 
   view?.setCenter(coords);
   view?.setZoom(17);
+
+  popupRef?.current?.setPosition(coords);
 };
 
 const OpenLayers = (props) => {
@@ -45,14 +50,17 @@ const OpenLayers = (props) => {
   const dispatch = useDispatch();
   const selectedStationId = useSelector(selectCurrentStation);
 
+  const [stationData, setStationData] = useState(null);
+
   const viewRef = useRef();
   const stationLayer = useRef();
   const vectorSource = useRef();
 
   const handleFeatureSelect = (e) => {
     console.log("Selected feature!");
-    const id = e?.selected?.at(0)?.values_?.station_id ?? null;
-
+    const data = e?.selected?.at(0)?.values_ ?? {};
+    const id = data?.station_id ?? null;
+    setStationData(data);
     dispatch(setSelectedStationId(id));
   };
 
@@ -83,6 +91,9 @@ const OpenLayers = (props) => {
       }),
     });
   }
+
+  const overlayRef = useRef();
+  const popupRef = useRef();
 
   useEffect(() => {
     viewRef.current = new View({
@@ -144,16 +155,28 @@ const OpenLayers = (props) => {
     viewRef.current.on("change:resolution", (e) => {
       // console.log(viewRef.current.getResolution());
     });
+
+    // Overlay
+    popupRef.current = new Overlay({
+      element: overlayRef.current,
+      positioning: "bottom-center",
+      stopEvent: false,
+    });
+
+    map.addOverlay(popupRef?.current);
+
     map.addInteraction(select);
 
     map.on("singleclick", function (e) {
       console.log(" :", e);
       console.log(select);
+      // popup.setPosition(e.coordinate);
     });
 
     mapRef.current = map;
     return () => {
       // Remove the map on unmount
+      overlayRef.current = null;
       mapRef.current = null;
     };
   }, [props]);
@@ -161,20 +184,35 @@ const OpenLayers = (props) => {
   useEffect(() => {
     if (selectedStationId) {
       try {
-        zoomToFeature(selectedStationId, viewRef.current, vectorSource.current);
+        zoomToFeature(
+          selectedStationId,
+          viewRef.current,
+          vectorSource.current,
+          popupRef
+        );
       } catch (e) {
         vectorSource.current.once("featuresloadend", () => {
           zoomToFeature(
             selectedStationId,
             viewRef.current,
-            vectorSource.current
+            vectorSource.current,
+            popupRef
           );
         });
       }
     }
   }, [selectedStationId]);
 
-  return <StyledMapElement ref={element} />;
+  return (
+    <div>
+      <div
+        ref={overlayRef}
+        className={clsx(styles.overlay, selectedStationId ? styles.show : null)}
+      ></div>
+
+      <StyledMapElement ref={element} />
+    </div>
+  );
 };
 
 export default OpenLayers;
