@@ -127,6 +127,10 @@ export const selectStationFrequencyData = (state) => {
   );
 };
 
+export const selectStationGeoJson = (state) => {
+  return state.stationGeo;
+};
+
 export const selectStationGeo = (state) => {
   const id = state.AppSlice?.selectedStationId;
   if (!id) {

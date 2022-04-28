@@ -8,6 +8,7 @@ import {
 import Title from "components/Title";
 // import Audio from "@common/Audio";
 import OpenLayers from "MapContainer/OpenLayers";
+import ReactMap from "MapContainer/ReactMap";
 /* eslint-disable no-undef */
 // Index should be the main map view. About should open a new page.
 
@@ -55,7 +56,7 @@ const App = () => {
         visible={visibleInspector}
       />
       <MapLegend />
-      <OpenLayers />
+      <ReactMap />
     </>
   );
 };
