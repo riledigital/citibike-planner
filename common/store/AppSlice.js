@@ -38,9 +38,7 @@ const initialState = {
   stationStatusData: {},
   lastUpdated: null,
   stationFavorites: [],
-
   selectedStationId: null,
-
   isMuted: true,
   showMenu: false,
   showInspector: false,

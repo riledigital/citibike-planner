@@ -9,6 +9,7 @@ import {
   selectCurrentStation,
   selectStationGeoJson,
   setSelectedStationId,
+  setShowInspector,
 } from "common/store/AppSlice";
 
 const layerStyleStations = {
@@ -32,6 +33,11 @@ const layerStyleStationsText = {
     "text-color": "#000000",
   },
 };
+
+const BOUNDS = [
+  [-74.1741943359375, 40.550330732028456],
+  [-73.66676330566406, 40.901576859936284],
+];
 const ReactMap = () => {
   const dispatch = useDispatch();
   const selectedStationId = useSelector(selectCurrentStation);
@@ -39,18 +45,15 @@ const ReactMap = () => {
     latitude: 40.751678516237334,
     longitude: -73.96923065185547,
     zoom: 14,
-    bounds: [
-      [-74.1741943359375, 40.550330732028456],
-      [-73.66676330566406, 40.901576859936284],
-    ],
+    bounds: BOUNDS,
   });
 
   return (
     <Map
       {...viewState}
       onClick={(e) => {
+        // No features on click
         let firstFeature;
-        dispatch(setSelectedStationId(null));
         if (e.features) {
           firstFeature = e.features.at(0);
           const {
@@ -59,16 +62,20 @@ const ReactMap = () => {
           console.debug(`Clicked station_id: `, station_id);
           // TODO: do stuff with clicked feature
           dispatch(setSelectedStationId(station_id));
-          // debugger;
+
           setViewState({
             longitude: e.lngLat.lng,
             latitude: e.lngLat.lat,
             zoom: 16,
+            bounds: BOUNDS,
           });
+        } else {
+          dispatch(setShowInspector(false));
+          dispatch(setSelectedStationId(null));
         }
       }}
-      interactiveLayerIds={["stationsPoints"]}
-      onMove={(evt) => setViewState(evt.viewState)}
+      interactiveLayerIds={["landcover", "background", "stationsPoints"]}
+      onMove={(evt) => setViewState(evt?.viewState)}
       mapLib={maplibregl}
       style={{
         position: "fixed",
