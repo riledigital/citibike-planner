@@ -10,22 +10,24 @@ import styled from "styled-components";
 import { StyledBarLabel } from "./styles";
 import clsx from "clsx";
 import styles from "./BarPlot.module.css";
+import { useCallback } from "react";
 
 const RADIAL_PLOT = Symbol("RADIAL_PLOT");
 const BAR_PLOT = Symbol("BAR_PLOT");
 
+const PADDING_BOTTOM = 40;
+
 const BarPlot = ({
   width = 400,
   height = 250,
-  fill = "var(--c-white)",
-  textFill = "var(--c-blue)",
+  fill = "var(--c-blue)",
+  textFill = "var(--c-background)",
 }) => {
   const timeRanges = [6, 22];
   const timeRangeCount = timeRanges[1] - timeRanges[0];
   const data = useSelector(selectStationFrequencyData)?.filter(
     (d) => d.start_hour > timeRanges[0] && d.start_hour <= timeRanges[1]
   );
-  const yRange = [0, 50];
 
   const formatHour = timeFormat("%_I %p");
   const parseTime = timeParse("%H");
@@ -35,6 +37,13 @@ const BarPlot = ({
   const [showTooltip, setShowTooltip] = useState(null);
   const [tooltipText, setTooltipText] = useState(null);
   const [showLabels, setShowLabels] = useState(false);
+  const maxYDefault =
+    max(data?.map(({ mean_rides }) => mean_rides) ?? []) ?? 100;
+  const yRange = [0, maxYDefault];
+  const yScale = scaleLinear()
+    .domain(yRange)
+    .range([0, height - PADDING_BOTTOM])
+    .clamp(true);
   const currentHour = useRef();
 
   currentHour.current = new Date().getHours();
@@ -44,7 +53,10 @@ const BarPlot = ({
   //   scaleTime().domain(timeRanges).range([0, width]).clamp(true)
   // );
 
-  const yScale = scaleLinear().domain(yRange).range([0, height]).clamp(true);
+  // const yScale = scaleLinear()
+  //   .domain(yRange)
+  //   .range([0, height - PADDING_BOTTOM])
+  //   .clamp(true);
   // const [yScale] = useState(() =>
   //   scaleLinear().domain(yRange).range([0, height]).clamp(true)
   // );
@@ -55,8 +67,8 @@ const BarPlot = ({
       setCoords({ x: e.clientX, y: e.clientY });
     }),
     useEventListenerRef("mouseout", (e) => {
-      setShowTooltip(false);
-      setShowLabels(false);
+      // setShowTooltip(false);
+      // setShowLabels(false);
     }),
     useEventListenerRef("mouseover", function (e, item) {
       setShowLabels(true);
@@ -82,6 +94,10 @@ const BarPlot = ({
   };
 
   const barWidth = width / timeRangeCount - padding;
+
+  function formatAMPM(hr) {
+    return hr >= 12 ? "PM" : "AM";
+  }
 
   return (
     <>
@@ -109,8 +125,8 @@ const BarPlot = ({
                 <StyledBarLabel
                   textAnchor="center"
                   dx="1"
-                  dy={-yScale(item?.mean_rides) + 13}
-                  fill={textFill}
+                  dy={-yScale(item?.mean_rides) - 4}
+                  fill="var(--c-black)"
                   fontSize="12"
                   fontWeight="800"
                   style={{ opacity: showLabels ? 1.0 : 0 }}
@@ -121,19 +137,34 @@ const BarPlot = ({
 
               <StyledBarLabel
                 textAnchor="center"
-                dy={-2}
+                dy={10}
                 dx={barWidth / 4}
-                fill={textFill}
-                fontSize="11"
+                fill="var(--c-foreground)"
+                fontSize="10"
                 fontWeight="800"
-                style={{ opacity: showLabels ? 1 : 0 }}
+                style={{
+                  opacity: showLabels ? 1 : 0,
+                  transform: "rotate(45deg)",
+                }}
               >
-                {formatTime(item?.start_hour)}
+                {formatTime(item?.start_hour)} {formatAMPM(item?.start_hour)}
               </StyledBarLabel>
             </g>
           </React.Fragment>
         ))}
       </svg>
+      {/* <input
+        className={styles["ySliderInput"]}
+        type="range"
+        id="volume"
+        name="volume"
+        min="10"
+        max={maxYDefault}
+        value={maxYRange}
+        onChange={(e) => {
+          setMaxYRange(e.target.value);
+        }}
+      ></input> */}
     </>
   );
 };

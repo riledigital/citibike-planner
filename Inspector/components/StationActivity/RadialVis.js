@@ -8,13 +8,13 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
 const RadialVis = (props) => {
-  const data = useSelector(selectStationFrequencyData);
+  const data = useSelector(selectStationFrequencyData) ?? [];
   const height = 400;
   const width = height;
   const innerRadius = 60;
   const outerRadius = height / 2;
 
-  const [maxRides] = useState(() => max(data.map((d) => d.mean_rides)));
+  const [maxRides] = useState(() => max(data?.map((d) => d.mean_rides)));
 
   const [x] = useState(() =>
     scaleBand()

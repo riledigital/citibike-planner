@@ -3,13 +3,17 @@ import { DEVICES, ZSPACE } from "/styles/GlobalStyles";
 import { animated } from "@react-spring/web";
 
 export const StyledInspector = styled(animated.div)`
+  --c-background: var(--c-white);
+  --c-foreground: var(--c-black);
+
   contain: layout;
   isolation: isolate;
   border: 0;
   box-shadow: 0px 3px 6px 2px rgba(0, 0, 0, 0.5);
   border-radius: 0.5rem;
-  background: var(--c-blue);
-  color: var(--c-white);
+
+  background: var(--c-background);
+  color: var(--c-foreground);
 
   display: flex;
   flex-flow: column nowrap;

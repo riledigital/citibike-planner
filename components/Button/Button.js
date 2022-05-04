@@ -1,18 +1,13 @@
-import styled from "styled-components";
-import React from "react";
+import clsx from "clsx";
+import styles from "./Button.module.css";
 
 const Button = (props) => {
-  return <StyledBase {...props} />;
+  return (
+    <button
+      // className={styles["button"]}
+      {...{ ...props, className: clsx(styles.button, props?.className) }}
+    />
+  );
 };
 
 export default Button;
-
-const StyledBase = styled.button`
-  background: var(--c-blue);
-  border: thin solid white;
-  border-radius: 2ch;
-  color: var(--c-white);
-  padding: 0.8ch 1ch;
-  font-weight: bold;
-  font-size: 0.9rem;
-`;

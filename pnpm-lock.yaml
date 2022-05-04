@@ -37,6 +37,7 @@ specifiers:
   react-map-gl: ^7.0.11
   react-redux: ^7.2.8
   react-refresh: ^0.10.0
+  react-slider: ^2.0.0
   rooks: ^5.11.0
   styled-components: ^5.3.5
   styled-normalize: ^8.0.7
@@ -70,6 +71,7 @@ dependencies:
   react-map-gl: 7.0.11_mapbox-gl@1.13.2+react@18.0.0
   react-redux: 7.2.8_react-dom@18.0.0+react@18.0.0
   react-refresh: 0.10.0
+  react-slider: 2.0.0_react@18.0.0
   rooks: 5.11.0_react-dom@18.0.0+react@18.0.0
   styled-components: 5.3.5_1a79be909b93ec9b98501cf963be33c8
   styled-normalize: 8.0.7_styled-components@5.3.5
@@ -3356,6 +3358,15 @@ packages:
   /react-refresh/0.10.0:
     resolution: {integrity: sha512-PgidR3wST3dDYKr6b4pJoqQFpPGNKDSCDx4cZoshjXipw3LzO7mG1My2pwEzz2JVkF+inx3xRpDeQLFQGH/hsQ==}
     engines: {node: '>=0.10.0'}
+    dev: false
+
+  /react-slider/2.0.0_react@18.0.0:
+    resolution: {integrity: sha512-r2Z4VkGvtQXbmiANEYzYdCnb4SnTRpgog1QZa++Wl1x1n5vRL3QOufyf52VVkcaLQCLk5m0WPMwGNvRqcBDtmw==}
+    peerDependencies:
+      react: ^16 || ^17
+    dependencies:
+      prop-types: 15.8.1
+      react: 18.0.0
     dev: false
 
   /react/18.0.0:

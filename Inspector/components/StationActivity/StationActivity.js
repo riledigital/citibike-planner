@@ -7,6 +7,9 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import BarPlot from "./BarPlot";
 import RadialVis from "./RadialVis";
+import Button from "components/Button";
+
+import styles from "./StationActivity.module.css";
 
 const RADIAL_PLOT = Symbol("RADIAL_PLOT");
 const BAR_PLOT = Symbol("BAR_PLOT");
@@ -24,13 +27,21 @@ const StationActivity = ({
   currentHour.current = new Date().getHours();
 
   return (
-    <StyledStationActivity
-      onClick={(e) => {
-        setType(type === BAR_PLOT ? RADIAL_PLOT : BAR_PLOT);
-      }}
-    >
+    <StyledStationActivity>
       <p>Average number of rides per hour:</p>
       {renderVisType(type)}
+
+      <div className={styles["toggleButtonsContainer"]}>
+        <Button className={styles["button"]} onClick={(e) => setType(BAR_PLOT)}>
+          Bar
+        </Button>
+        <Button
+          className={styles["button"]}
+          onClick={(e) => setType(RADIAL_PLOT)}
+        >
+          Radial
+        </Button>
+      </div>
     </StyledStationActivity>
   );
 };

@@ -29,6 +29,7 @@
     "react-map-gl": "^7.0.11",
     "react-redux": "^7.2.8",
     "react-refresh": "^0.10.0",
+    "react-slider": "^2.0.0",
     "rooks": "^5.11.0",
     "styled-components": "^5.3.5",
     "styled-normalize": "^8.0.7",
