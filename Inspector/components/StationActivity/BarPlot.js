@@ -1,3 +1,4 @@
+/* eslint-disable */
 // https://observablehq.com/@d3/margin-convention
 import { useEventListenerRef, useMergeRefs, useMouse } from "rooks";
 import { selectStationFrequencyData } from "common/store/AppSlice";
@@ -25,10 +26,10 @@ const BarPlot = ({
 }) => {
   const timeRanges = [6, 22];
   const timeRangeCount = timeRanges[1] - timeRanges[0];
-  const data = useSelector(selectStationFrequencyData)?.filter(
+  let data = useSelector(selectStationFrequencyData);
+  data = data?.filter(
     (d) => d.start_hour > timeRanges[0] && d.start_hour <= timeRanges[1]
   );
-
   const formatHour = timeFormat("%_I %p");
   const parseTime = timeParse("%H");
   const formatDecimals = format(".2f");
@@ -40,6 +41,8 @@ const BarPlot = ({
   const maxYDefault =
     max(data?.map(({ mean_rides }) => mean_rides) ?? []) ?? 100;
   const yRange = [0, maxYDefault];
+
+  // prettier-ignore
   const yScale = scaleLinear()
     .domain(yRange)
     .range([0, height - PADDING_BOTTOM])
@@ -48,18 +51,10 @@ const BarPlot = ({
 
   currentHour.current = new Date().getHours();
 
-  const xScale = scaleTime().domain(timeRanges).range([0, width]).clamp(true);
-  // const [xScale] = useState(() =>
-  //   scaleTime().domain(timeRanges).range([0, width]).clamp(true)
-  // );
-
-  // const yScale = scaleLinear()
-  //   .domain(yRange)
-  //   .range([0, height - PADDING_BOTTOM])
-  //   .clamp(true);
-  // const [yScale] = useState(() =>
-  //   scaleLinear().domain(yRange).range([0, height]).clamp(true)
-  // );
+  const xScale = scaleTime()
+    .domain(timeRanges)
+    .range([0, width - 32])
+    .clamp(false);
 
   const eventRefs = useMergeRefs(
     useEventListenerRef("mousemove", (e, pageX, pageY) => {
@@ -93,79 +88,66 @@ const BarPlot = ({
     }
   };
 
-  const barWidth = width / timeRangeCount - padding;
+  // prettier-ignore
+  const barWidth = (width / timeRangeCount) - padding;
 
   function formatAMPM(hr) {
     return hr >= 12 ? "PM" : "AM";
   }
 
   return (
-    <>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox={[0, 0, width, height].join(" ")}
-        preserveAspectRatio="xMidYMin meet"
-        ref={eventRefs}
-        {...{ width, height }}
-      >
-        {data.map((item, t, key) => (
-          <React.Fragment key={t}>
-            <g
-              transform={`translate(
-                ${xScale(item?.start_hour)},
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox={[0, -20, width, height + 20].join(" ")}
+      preserveAspectRatio="xMidYMin meet"
+      ref={eventRefs}
+      className={styles["svgContainer"]}
+      {...{ width, height }}
+    >
+      {data.map(({ start_hour, mean_rides }, t, key) => (
+        <g
+          key={key}
+          transform={`translate(
+                ${xScale(start_hour)},
               ${yScale(yRange[1])})`}
+        >
+          <rect
+            fill={fill}
+            width={barWidth}
+            height={yScale(mean_rides)}
+            style={{ transform: `scaleY(-1)` }}
+          />
+          {true && (
+            <StyledBarLabel
+              textAnchor="center"
+              dx="1"
+              dy={-yScale(mean_rides) - 4}
+              fill="var(--c-black)"
+              fontSize="12"
+              fontWeight="800"
+              style={{ opacity: showLabels ? 1.0 : 0 }}
             >
-              <rect
-                fill={fill}
-                width={width / timeRangeCount - padding}
-                height={yScale(item?.mean_rides)}
-                style={{ transform: `scaleY(-1)` }}
-              />
-              {true && (
-                <StyledBarLabel
-                  textAnchor="center"
-                  dx="1"
-                  dy={-yScale(item?.mean_rides) - 4}
-                  fill="var(--c-black)"
-                  fontSize="12"
-                  fontWeight="800"
-                  style={{ opacity: showLabels ? 1.0 : 0 }}
-                >
-                  {Number.parseFloat(item?.mean_rides).toFixed(0)}
-                </StyledBarLabel>
-              )}
+              {Number.parseFloat(mean_rides).toFixed(0)}
+            </StyledBarLabel>
+          )}
 
-              <StyledBarLabel
-                textAnchor="center"
-                dy={10}
-                dx={barWidth / 4}
-                fill="var(--c-foreground)"
-                fontSize="10"
-                fontWeight="800"
-                style={{
-                  opacity: showLabels ? 1 : 0,
-                  transform: "rotate(45deg)",
-                }}
-              >
-                {formatTime(item?.start_hour)} {formatAMPM(item?.start_hour)}
-              </StyledBarLabel>
-            </g>
-          </React.Fragment>
-        ))}
-      </svg>
-      {/* <input
-        className={styles["ySliderInput"]}
-        type="range"
-        id="volume"
-        name="volume"
-        min="10"
-        max={maxYDefault}
-        value={maxYRange}
-        onChange={(e) => {
-          setMaxYRange(e.target.value);
-        }}
-      ></input> */}
-    </>
+          <StyledBarLabel
+            textAnchor="center"
+            dy={10}
+            dx={barWidth / 4}
+            fill="var(--c-foreground)"
+            fontSize="10"
+            fontWeight="800"
+            style={{
+              opacity: showLabels ? 1 : 0,
+              transform: "rotate(45deg)",
+            }}
+          >
+            {formatTime(start_hour)} {formatAMPM(start_hour)}
+          </StyledBarLabel>
+        </g>
+      ))}
+    </svg>
   );
 };
 
