@@ -6,6 +6,7 @@ import { arc } from "d3-shape";
 import { range } from "lodash-es";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import { formatAMPM, formatTime } from "./lib";
 
 const RadialVis = (props) => {
   const data = useSelector(selectStationFrequencyData) ?? [];
@@ -35,17 +36,23 @@ const RadialVis = (props) => {
     return interpolatePuOr(normalized);
   });
 
-  const [arcGen] = useState(() =>
+  const arcGen = ({ mean_rides, start_hour }) =>
     arc()
       .innerRadius(innerRadius)
-      .outerRadius(({ mean_rides }) => y(mean_rides))
-      .startAngle(function ({ start_hour }) {
-        return x(start_hour);
-      })
-      .endAngle(({ start_hour }) => x(start_hour) + x.bandwidth())
+      .outerRadius(y(mean_rides))
+      .startAngle(x(start_hour))
+      .endAngle(x(start_hour) + x.bandwidth())
       .padAngle(1)
-      .padRadius(Math.PI * 2)
-  );
+      .padRadius(Math.PI * 2);
+
+  const centroidGen = ({ mean_rides, start_hour }) =>
+    arc()
+      .innerRadius(innerRadius)
+      .outerRadius(y(maxRides) + 60)
+      .startAngle(x(start_hour))
+      .endAngle(x(start_hour) + x.bandwidth())
+      .padAngle(1)
+      .padRadius(Math.PI * 2);
 
   return (
     <svg
@@ -55,14 +62,18 @@ const RadialVis = (props) => {
       {...props}
     >
       <g style={{ transform: `translate(${width / 2}px,${width / 2}px)` }}>
-        {data?.map((item, i) => (
-          <path
-            key={i}
-            fill={fill(item.start_hour)}
-            d={arcGen(item)}
-            tite={JSON.stringify(item)}
-          ></path>
-        ))}
+        {data?.map((item, i) => {
+          let d = arcGen(item)();
+          let c = centroidGen(item).centroid();
+          return (
+            <g key={i} title={JSON.stringify(item)}>
+              <path d={d} fill={fill(item.start_hour)}></path>
+              <text textAnchor="middle" {...{ x: c[0], y: c[1] }}>
+                {formatTime(item.start_hour)} {formatAMPM(item.start_hour)}
+              </text>
+            </g>
+          );
+        })}
       </g>
     </svg>
   );

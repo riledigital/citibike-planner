@@ -6,7 +6,7 @@ import { animated, useTransition } from "@react-spring/web";
 import { format, scaleLinear, scaleTime, timeFormat, timeParse, max } from "d3";
 import React, { useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import styled from "styled-components";
+import { formatAMPM, formatTime } from "./lib";
 
 import { StyledBarLabel } from "./styles";
 import clsx from "clsx";
@@ -80,20 +80,8 @@ const BarPlot = ({
     return <>No data available.</>;
   }
 
-  const formatTime = (time) => {
-    if (time > 12) {
-      return `${Number.parseFloat(time).toFixed(0) - 12}`;
-    } else {
-      return `${Number.parseFloat(time).toFixed(0)}`;
-    }
-  };
-
   // prettier-ignore
   const barWidth = (width / timeRangeCount) - padding;
-
-  function formatAMPM(hr) {
-    return hr >= 12 ? "PM" : "AM";
-  }
 
   return (
     <svg
@@ -106,7 +94,7 @@ const BarPlot = ({
     >
       {data.map(({ start_hour, mean_rides }, t, key) => (
         <g
-          key={key}
+          key={t}
           transform={`translate(
                 ${xScale(start_hour)},
               ${yScale(yRange[1])})`}
