@@ -9,48 +9,7 @@ import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import styles from "styles/favorites.module.css";
-
-const ToggleButton = ({ station_id }) => {
-  const dispatch = useDispatch();
-
-  const isFavorited = useSelector((state) => {
-    return state?.AppSlice?.stationFavorites?.findIndex(
-      (d) => d === station_id
-    ) >= 0
-      ? true
-      : false;
-  });
-
-  const handleClick = (e) => {
-    dispatch(toggleStationFavorite(station_id));
-  };
-  return (
-    <div>
-      <button onClick={handleClick}>{isFavorited ? "-" : "+"}</button>
-    </div>
-  );
-};
-
-const StationItem = ({ station_id, name, boroname }) => {
-  const dispatch = useDispatch();
-  const router = useRouter();
-  return (
-    <tr
-      className={styles.tr}
-      onClick={() => {
-        dispatch(setSelectedStationId(station_id));
-        router.push("/");
-      }}
-    >
-      <td>{station_id}</td>
-      <td>{name}</td>
-      <td>{boroname}</td>
-      <td>
-        <ToggleButton station_id={station_id} />
-      </td>
-    </tr>
-  );
-};
+import FavoriteStation from "../components/FavoriteStation";
 
 const Favorites = () => {
   // const dispatch = useDispatch();
@@ -61,7 +20,12 @@ const Favorites = () => {
       <Title>Favorites</Title>
       <h1>Favorites</h1>
       <p>Add stations to your favorites on the map!</p>
-      <StyledTable>
+      <div className={styles.favoriteGrid}>
+        {Object.values(favorites).map((d) => (
+          <FavoriteStation key={d.station_id} {...d} />
+        ))}
+      </div>
+      {/* <StyledTable>
         <tbody>
           <tr className={styles.tr}>
             <th className={styles.stationId}>Station ID</th>
@@ -72,7 +36,7 @@ const Favorites = () => {
             <StationItem key={d.station_id} {...d} />
           ))}
         </tbody>
-      </StyledTable>
+      </StyledTable> */}
     </LayoutContent>
   );
 };

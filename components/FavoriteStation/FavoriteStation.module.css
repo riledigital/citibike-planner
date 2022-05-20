@@ -1,0 +1,13 @@
+.container {
+  padding: 2rem;
+
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(auto-fill, minmax(35ch, 1fr));
+  min-height: 20rem;
+}
+
+.name {
+  display: flex;
+  gap: 2rem;
+}

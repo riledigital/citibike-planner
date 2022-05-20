@@ -38,6 +38,7 @@ specifiers:
   react-redux: ^7.2.8
   react-refresh: ^0.10.0
   react-slider: ^2.0.0
+  reduxjs-toolkit-persist: ^7.2.1
   rooks: ^5.11.0
   styled-components: ^5.3.5
   styled-normalize: ^8.0.7
@@ -72,6 +73,7 @@ dependencies:
   react-redux: 7.2.8_react-dom@18.0.0+react@18.0.0
   react-refresh: 0.10.0
   react-slider: 2.0.0_react@18.0.0
+  reduxjs-toolkit-persist: 7.2.1_@reduxjs+toolkit@1.8.1
   rooks: 5.11.0_react-dom@18.0.0+react@18.0.0
   styled-components: 5.3.5_1a79be909b93ec9b98501cf963be33c8
   styled-normalize: 8.0.7_styled-components@5.3.5
@@ -3415,6 +3417,14 @@ packages:
     resolution: {integrity: sha512-oSBmcKKIuIR4ME29/AeNUnl5L+hvBq7OaJWzaptTQJAntaPvxIJqfnjbaEiCzzaIz+XmVILfqAM3Ob0aXLPfjA==}
     dependencies:
       '@babel/runtime': 7.17.9
+    dev: false
+
+  /reduxjs-toolkit-persist/7.2.1_@reduxjs+toolkit@1.8.1:
+    resolution: {integrity: sha512-1gu9Qid0qXlsM4a2D8eHx/YOwa7I0lgAXqM0KYQoX2RA+KMezkq5wkJKEMLoUkpqVuWYHRdU7auS2/jFVsR0gQ==}
+    peerDependencies:
+      '@reduxjs/toolkit': ^1.6.1
+    dependencies:
+      '@reduxjs/toolkit': 1.8.1_react-redux@7.2.8+react@18.0.0
     dev: false
 
   /regenerator-runtime/0.13.9:

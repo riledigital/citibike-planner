@@ -1,3 +1,6 @@
+import { PersistGate } from "reduxjs-toolkit-persist/integration/react";
+import { persistStore } from "reduxjs-toolkit-persist";
+
 import GlobalStyles from "/styles/GlobalStyles";
 import { store } from "common/store";
 import ThumbNav from "components/ThumbNav";
@@ -6,6 +9,8 @@ import { Provider } from "react-redux";
 
 import "cssremedy/css/remedy.css";
 import "styles/App.css";
+
+const persistor = persistStore(store);
 
 const App = ({ Component }) => {
   return (
@@ -27,8 +32,10 @@ const App = ({ Component }) => {
       />
       <GlobalStyles />
       <Provider store={store}>
-        <ThumbNav />
-        <Component />
+        <PersistGate loading={null} persistor={persistor}>
+          <ThumbNav />
+          <Component />
+        </PersistGate>
       </Provider>
     </>
   );

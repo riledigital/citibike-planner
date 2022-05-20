@@ -12,7 +12,7 @@ const Content = styled.main`
 
   @media screen and (min-width: 1000px) {
     margin: auto;
-    max-width: 55ch;
+    /* max-width: 55ch; */
 
     h1,
     h2,
@@ -22,7 +22,7 @@ const Content = styled.main`
     h5,
     h6,
     p {
-      max-width: 55ch;
+      /* max-width: 55ch; */
     }
   }
 `;

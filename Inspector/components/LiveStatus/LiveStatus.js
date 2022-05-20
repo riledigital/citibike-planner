@@ -8,19 +8,38 @@ import {
   StyledStationStatusLabel,
 } from "./styles";
 import { useSelector } from "react-redux";
-import { selectLiveStatus } from "common/store/AppSlice";
+import {
+  selectCurrentStation,
+  selectAllLiveStatus,
+} from "/common/store/AppSlice";
 
 const getFormattedTime = (time) =>
   new Date(time * 1000).toLocaleTimeString("en-US");
 
-const LiveStatus = () => {
-  const {
-    num_bikes_available,
+const LiveStatus = ({ stationId }) => {
+  const allLiveStatus = useSelector(selectAllLiveStatus) ?? {};
+  const currentStationId = useSelector(selectCurrentStation);
+
+  let num_bikes_available,
     num_docks_available,
     num_ebikes_available,
-    last_reported,
-  } = useSelector(selectLiveStatus) || {};
+    last_reported;
 
+  if (!stationId) {
+    ({
+      num_bikes_available = 0,
+      num_docks_available = 0,
+      num_ebikes_available = 0,
+      last_reported = 0,
+    } = allLiveStatus[currentStationId]);
+  } else {
+    ({
+      num_bikes_available = 0,
+      num_docks_available = 0,
+      num_ebikes_available = 0,
+      last_reported = 0,
+    } = allLiveStatus[stationId]);
+  }
   if (num_bikes_available === null) {
     return (
       <>

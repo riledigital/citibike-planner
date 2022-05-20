@@ -145,6 +145,14 @@ export const selectStationInfo = (state) => {
   return state.AppSlice?.stationInfo[id];
 };
 
+export const selectAllStationInfo = (state) => {
+  return state.AppSlice.stationInfo;
+};
+
+export const selectAllLiveStatus = (state) => {
+  return state.AppSlice.stationStatusData;
+};
+
 export const selectLiveStatus = (state) => {
   const id = state.AppSlice?.selectedStationId;
   return state.AppSlice?.stationStatusData[id];
