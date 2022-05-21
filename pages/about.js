@@ -39,15 +39,14 @@ const AboutPage = () => {
       <StyledHeading>How did you make this?</StyledHeading>
       <p>
         Data aggregation was performed using Python and the geopandas library.
-        This front-end is built with React, Redux, and styled-components.
-        Visualizations were made with a combination of D3 and React, and the map
-        is powered by OpenLayers.{" "}
-        <a href="https://github.com/rl2999/citibike-planner">
+        This front-end is built with React and Redux. Visualizations were made
+        with a combination of D3 and React, and the map is powered by Mapbox.
+        <a href="https://github.com/riledigital/citibike-planner">
           The source is available on GitHub.
         </a>
       </p>
       <p>
-        2021 App created by <a href="https://riledigital.com/">@riledigital</a>
+        2022 App created by <a href="https://riledigital.com/">@riledigital</a>
       </p>
       <a
         href="https://member.citibikenyc.com/map/"

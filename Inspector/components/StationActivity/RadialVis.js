@@ -37,7 +37,7 @@ const RadialVis = ({ stationId = null, ...props }) => {
   );
 
   const [fill] = useState(() => (x) => {
-    const normalized = scaleLinear().domain([6, 22]).range([0, 1]).clamp(true)(
+    const normalized = scaleLinear().domain([5, 22]).range([0, 1]).clamp(true)(
       x
     );
     return interpolatePuOr(normalized);
@@ -75,7 +75,15 @@ const RadialVis = ({ stationId = null, ...props }) => {
           return (
             <g key={i} title={JSON.stringify(item)}>
               <path d={d} fill={fill(item.start_hour)}></path>
-              <text textAnchor="middle" {...{ x: c[0], y: c[1] }}>
+              <text
+                fontSize=".8rem"
+                textAnchor="middle"
+                rotate={x(item.start_hour)}
+                {...{
+                  x: c[0],
+                  y: c[1],
+                }}
+              >
                 {formatTime(item.start_hour)} {formatAMPM(item.start_hour)}
               </text>
             </g>

@@ -1,6 +1,8 @@
 export function formatTime(time) {
   if (time > 12) {
     return `${Number.parseFloat(time).toFixed(0) - 12}`;
+  } else if (time === 0) {
+    return `12`;
   } else {
     return `${Number.parseFloat(time).toFixed(0)}`;
   }
