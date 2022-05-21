@@ -5,6 +5,7 @@ import {
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import BarPlot from "Inspector/components/StationActivity/BarPlot";
+import RadialVis from "Inspector/components/StationActivity/RadialVis";
 import LiveStatus from "Inspector/components/LiveStatus";
 import Button from "components/Button";
 
@@ -40,9 +41,9 @@ const FavoriteStation = ({ station_id, name, boroname }) => {
     <div className={styles.container}>
       <div className={styles.stationHeader}>
         <div className={styles.info}>
-          <div className={styles.name}>
+          <h3 className={styles.name}>
             {name} <div className={styles.station}>{station_id}</div>
-          </div>
+          </h3>
           <div className={styles.borough}>{boroname}</div>
         </div>
         <div className={styles.toggle}>
@@ -56,6 +57,9 @@ const FavoriteStation = ({ station_id, name, boroname }) => {
           </Button>
           <ToggleButton station_id={station_id} />
         </div>
+      </div>
+      <div>
+        <RadialVis stationId={station_id} />
       </div>
       <div>
         <BarPlot stationId={station_id} />

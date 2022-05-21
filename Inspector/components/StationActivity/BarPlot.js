@@ -5,16 +5,14 @@ import {
   selectCurrentStation,
   selectAllStationFrequencyData,
 } from "common/store/AppSlice";
-import { animated, useTransition } from "@react-spring/web";
+import { useFrequency } from "hooks/useFrequency";
 import { format, scaleLinear, scaleTime, timeFormat, timeParse, max } from "d3";
 import React, { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
+
 import { formatAMPM, formatTime } from "./lib";
 
 import { StyledBarLabel } from "./styles";
-import clsx from "clsx";
 import styles from "./BarPlot.module.css";
-import { useCallback } from "react";
 
 const RADIAL_PLOT = Symbol("RADIAL_PLOT");
 const BAR_PLOT = Symbol("BAR_PLOT");
@@ -28,13 +26,7 @@ const BarPlot = ({
   stationId = null,
   textFill = "var(--c-background)",
 }) => {
-  let currentlySelectedId = useSelector(selectCurrentStation);
-  let data = useSelector(selectAllStationFrequencyData);
-  if (stationId) {
-    data = data[stationId];
-  } else {
-    data = data[currentlySelectedId];
-  }
+  const { data } = useFrequency(stationId);
 
   const timeRanges = [6, 22];
   const timeRangeCount = timeRanges[1] - timeRanges[0];
