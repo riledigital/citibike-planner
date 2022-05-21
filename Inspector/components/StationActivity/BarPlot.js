@@ -1,10 +1,13 @@
 /* eslint-disable */
 // https://observablehq.com/@d3/margin-convention
 import { useEventListenerRef, useMergeRefs, useMouse } from "rooks";
-import { selectStationFrequencyData } from "common/store/AppSlice";
+import {
+  selectCurrentStation,
+  selectAllStationFrequencyData,
+} from "common/store/AppSlice";
 import { animated, useTransition } from "@react-spring/web";
 import { format, scaleLinear, scaleTime, timeFormat, timeParse, max } from "d3";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { formatAMPM, formatTime } from "./lib";
 
@@ -22,11 +25,19 @@ const BarPlot = ({
   width = 400,
   height = 250,
   fill = "var(--c-blue)",
+  stationId = null,
   textFill = "var(--c-background)",
 }) => {
+  let currentlySelectedId = useSelector(selectCurrentStation);
+  let data = useSelector(selectAllStationFrequencyData);
+  if (stationId) {
+    data = data[stationId];
+  } else {
+    data = data[currentlySelectedId];
+  }
+
   const timeRanges = [6, 22];
   const timeRangeCount = timeRanges[1] - timeRanges[0];
-  let data = useSelector(selectStationFrequencyData);
   data = data?.filter(
     (d) => d.start_hour > timeRanges[0] && d.start_hour <= timeRanges[1]
   );
@@ -83,6 +94,11 @@ const BarPlot = ({
   // prettier-ignore
   const barWidth = (width / timeRangeCount) - padding;
 
+  useEffect(() => {
+    if (stationId) {
+      setShowLabels(true);
+    }
+  });
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -100,7 +116,11 @@ const BarPlot = ({
               ${yScale(yRange[1])})`}
         >
           <rect
-            fill={fill}
+            fill={
+              new Date().getHours() === start_hour
+                ? "var(--c-blue-highlight)"
+                : fill
+            }
             width={barWidth}
             height={yScale(mean_rides)}
             style={{ transform: `scaleY(-1)` }}
@@ -123,7 +143,11 @@ const BarPlot = ({
             textAnchor="center"
             dy={10}
             dx={barWidth / 4}
-            fill="var(--c-foreground)"
+            fill={
+              new Date().getHours() === start_hour
+                ? "red"
+                : "var(--c-foreground)"
+            }
             fontSize="10"
             fontWeight="800"
             style={{

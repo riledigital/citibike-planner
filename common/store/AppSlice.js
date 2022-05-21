@@ -124,6 +124,9 @@ export const selectStationFrequencyData = (state) => {
     state?.AppSlice?.stationFrequencyData[id]
   );
 };
+export const selectAllStationFrequencyData = (state) => {
+  return state?.AppSlice?.stationFrequencyData;
+};
 
 export const selectStationGeoJson = (state) => {
   return state.stationGeo;

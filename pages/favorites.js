@@ -16,7 +16,7 @@ const Favorites = () => {
   const favorites = useSelector(selectStationFavorites);
 
   return (
-    <LayoutContent>
+    <div className={styles.container}>
       <Title>Favorites</Title>
       <h1>Favorites</h1>
       <p>Add stations to your favorites on the map!</p>
@@ -25,24 +25,8 @@ const Favorites = () => {
           <FavoriteStation key={d.station_id} {...d} />
         ))}
       </div>
-      {/* <StyledTable>
-        <tbody>
-          <tr className={styles.tr}>
-            <th className={styles.stationId}>Station ID</th>
-            <th className={styles.stationName}>Name</th>
-            <th className={styles.stationBorough}>Borough</th>
-          </tr>
-          {Object.values(favorites).map((d) => (
-            <StationItem key={d.station_id} {...d} />
-          ))}
-        </tbody>
-      </StyledTable> */}
-    </LayoutContent>
+    </div>
   );
 };
 
 export default Favorites;
-
-const StyledTable = styled.table`
-  width: 100%;
-`;

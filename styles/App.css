@@ -1,5 +1,6 @@
 :root {
-  --c-blue: hsl(225, 83.9%, 24.3%);
+  --c-blue-highlight: #5270cc;
+  --c-blue: #0a2472;
   --c-blue-dark: hsl(225, 83.9%, 15%);
   --c-blue-alpha: rgba(10, 36, 114, 0.8);
   --c-white: #fefefe;
