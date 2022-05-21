@@ -25,7 +25,7 @@ const LiveStatus = ({ stationId }) => {
     num_ebikes_available,
     last_reported;
 
-  if (!stationId) {
+  if (!stationId && currentStationId) {
     ({
       num_bikes_available = 0,
       num_docks_available = 0,
@@ -38,7 +38,7 @@ const LiveStatus = ({ stationId }) => {
       num_docks_available = 0,
       num_ebikes_available = 0,
       last_reported = 0,
-    } = allLiveStatus[stationId]);
+    } = allLiveStatus?.[stationId] ?? {});
   }
   if (num_bikes_available === null) {
     return (

@@ -3,6 +3,7 @@ lockfileVersion: 5.3
 specifiers:
   '@mapbox/mapbox-gl-geocoder': ^4.7.4
   '@next/eslint-plugin-next': ^11.1.4
+  '@react-aria/interactions': ^3.8.4
   '@react-spring/web': ^9.4.4
   '@reduxjs/toolkit': ^1.8.1
   '@types/node': ^17.0.25
@@ -47,6 +48,7 @@ specifiers:
 
 dependencies:
   '@mapbox/mapbox-gl-geocoder': 4.7.4_mapbox-gl@1.13.2
+  '@react-aria/interactions': 3.8.4_react@18.0.0
   '@react-spring/web': 9.4.4_react-dom@18.0.0+react@18.0.0
   '@reduxjs/toolkit': 1.8.1_react-redux@7.2.8+react@18.0.0
   axios: 0.24.0
@@ -539,6 +541,39 @@ packages:
     resolution: {integrity: sha512-Yx6Z93kmz3JVPYoPPRFJXnt2/G4kfaxRROcZVVHsE4zOClJXvkOVidv/JfvP6hWn16lykbKYKVzUsId6mqXdGg==}
     dev: false
 
+  /@react-aria/interactions/3.8.4_react@18.0.0:
+    resolution: {integrity: sha512-6EHFKK8pmjSJSKcBbduijPETKqE669XZ1VaEY8ubr6VnlVhCszvKHoxpU384CkNiDNLJOVkK6HDzPXsn3lxhng==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0-rc.1
+    dependencies:
+      '@babel/runtime': 7.17.9
+      '@react-aria/utils': 3.12.0_react@18.0.0
+      '@react-types/shared': 3.12.0_react@18.0.0
+      react: 18.0.0
+    dev: false
+
+  /@react-aria/ssr/3.1.2_react@18.0.0:
+    resolution: {integrity: sha512-amXY11ImpokvkTMeKRHjsSsG7v1yzzs6yeqArCyBIk60J3Yhgxwx9Cah+Uu/804ATFwqzN22AXIo7SdtIaMP+g==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0-rc.1
+    dependencies:
+      '@babel/runtime': 7.17.9
+      react: 18.0.0
+    dev: false
+
+  /@react-aria/utils/3.12.0_react@18.0.0:
+    resolution: {integrity: sha512-1TMrE7UpgTgQHgW3z0r6Zo4CTUDwNsZEwzg+mQVub8ZalonhuNs5OrulUn+lRIsGELNktGNkeh/29WsS1Od8eg==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0-rc.1
+    dependencies:
+      '@babel/runtime': 7.17.9
+      '@react-aria/ssr': 3.1.2_react@18.0.0
+      '@react-stately/utils': 3.4.1_react@18.0.0
+      '@react-types/shared': 3.12.0_react@18.0.0
+      clsx: 1.1.1
+      react: 18.0.0
+    dev: false
+
   /@react-spring/animated/9.4.4_react@18.0.0:
     resolution: {integrity: sha512-e9xnuBaUTD+NolKikUmrGWjX8AVCPyj1GcEgjgq9E+0sXKv46UY7cm2EmB6mUDTxWIDVKebARY++xT4nGDraBQ==}
     peerDependencies:
@@ -591,6 +626,23 @@ packages:
       '@react-spring/types': 9.4.4
       react: 18.0.0
       react-dom: 18.0.0_react@18.0.0
+    dev: false
+
+  /@react-stately/utils/3.4.1_react@18.0.0:
+    resolution: {integrity: sha512-mjFbKklj/W8KRw1CQSpUJxHd7lhUge4i00NwJTwGxbzmiJgsTWlKKS/1rBf48ey9hUBopXT5x5vG/AxQfWTQug==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0-rc.1
+    dependencies:
+      '@babel/runtime': 7.17.9
+      react: 18.0.0
+    dev: false
+
+  /@react-types/shared/3.12.0_react@18.0.0:
+    resolution: {integrity: sha512-faGr9xOjtMlkQPfA1i36iUmWS/hpPPtxIwdAtBi6p7rCejmShMLFZ2YN4DxzbJUCVubF2S1+rMMIKuXG17DkEw==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0-rc.1
+    dependencies:
+      react: 18.0.0
     dev: false
 
   /@reduxjs/toolkit/1.8.1_react-redux@7.2.8+react@18.0.0:

@@ -1,13 +1,16 @@
+import { useHover } from "@react-aria/interactions";
 import {
   setSelectedStationId,
   toggleStationFavorite,
 } from "common/store/AppSlice";
-import { useRouter } from "next/router";
-import { useDispatch, useSelector } from "react-redux";
+import Button from "components/Button";
+import LiveStatus from "Inspector/components/LiveStatus";
 import BarPlot from "Inspector/components/StationActivity/BarPlot";
 import RadialVis from "Inspector/components/StationActivity/RadialVis";
-import LiveStatus from "Inspector/components/LiveStatus";
-import Button from "components/Button";
+import { useRouter } from "next/router";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { animated, useSpring } from "@react-spring/web";
 
 import styles from "./FavoriteStation.module.css";
 
@@ -37,8 +40,23 @@ const ToggleButton = ({ station_id }) => {
 const FavoriteStation = ({ station_id, name, boroname }) => {
   const dispatch = useDispatch();
   const router = useRouter();
+
+  // let [events, setEvents] = useState([]);
+  let { hoverProps, isHovered } = useHover({});
+
+  const styleProps = useSpring({
+    transform: isHovered ? `translateY(-10px)` : `translateY(0px)`,
+    filter: isHovered
+      ? `drop-shadow(0 12px 8px rgba(0, 0, 0, 0.15))`
+      : `drop-shadow(0 3px 4px rgba(0, 0, 0, 0.5))`,
+  });
+
   return (
-    <div className={styles.container}>
+    <animated.div
+      {...hoverProps}
+      style={styleProps}
+      className={styles.container}
+    >
       <div className={styles.stationHeader}>
         <div className={styles.info}>
           <h3 className={styles.name}>
@@ -67,7 +85,7 @@ const FavoriteStation = ({ station_id, name, boroname }) => {
       <div>
         <LiveStatus stationId={station_id} />
       </div>
-    </div>
+    </animated.div>
   );
 };
 
