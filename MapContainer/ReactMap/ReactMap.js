@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   selectCurrentStation,
   selectStationGeo,
+  selectStationInfo,
   setSelectedStationId,
   setShowInspector,
 } from "common/store/AppSlice";
@@ -43,6 +44,9 @@ const ReactMap = () => {
   const dispatch = useDispatch();
   const selectedStationId = useSelector(selectCurrentStation);
   const stationGeo = useSelector(selectStationGeo);
+  const stationData = useSelector(selectStationInfo);
+  const { name, station_id, ntaname, boroname } = stationData || {};
+  const stationNeighborhood = !ntaname ? "" : ntaname;
 
   const mapRef = useRef();
 
@@ -132,7 +136,8 @@ const ReactMap = () => {
             anchor="bottom"
             onClose={() => dispatch(setSelectedStationId(null))}
           >
-            Selected
+            <div>{name}</div>
+            <div>{ntaname}</div>
           </Popup>
         )}
         <Layer {...layerStyleStations} />
