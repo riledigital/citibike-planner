@@ -137,7 +137,9 @@ export const selectStationGeo = (state) => {
   if (!id) {
     return null;
   }
-  return state?.AppSlice?.stationGeo[id];
+  const { features } = state.AppSlice.stationGeo;
+  const feature = features.find((d) => d.properties.station_id === id);
+  return feature;
 };
 
 export const selectStationInfo = (state) => {

@@ -1,13 +1,13 @@
-import Map, { Source, Layer } from "react-map-gl";
+import Map, { Source, Layer, Popup } from "react-map-gl";
 import maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import styles from "./ReactMap.module.css";
 import clsx from "clsx";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectCurrentStation,
-  selectStationGeoJson,
+  selectStationGeo,
   setSelectedStationId,
   setShowInspector,
 } from "common/store/AppSlice";
@@ -38,9 +38,14 @@ const BOUNDS = [
   [-74.1741943359375, 40.550330732028456],
   [-73.66676330566406, 40.901576859936284],
 ];
+
 const ReactMap = () => {
   const dispatch = useDispatch();
   const selectedStationId = useSelector(selectCurrentStation);
+  const stationGeo = useSelector(selectStationGeo);
+
+  const mapRef = useRef();
+
   const [viewState, setViewState] = useState({
     latitude: 40.751678516237334,
     longitude: -73.96923065185547,
@@ -48,9 +53,33 @@ const ReactMap = () => {
     bounds: BOUNDS,
   });
 
+  useEffect(() => {
+    console.log(`Changed ${selectedStationId}`);
+    // query by station id through mapbox
+  }, [selectedStationId]);
+
+  const flyMapTo = () => {
+    // Cannot use querySourceFeatures bc we
+    if (selectedStationId) {
+      const {
+        geometry: {
+          coordinates: [lng, lat],
+        },
+      } = stationGeo;
+      console.log(lat, lng);
+
+      mapRef.current?.flyTo({
+        center: [lng, lat],
+        speed: 2,
+        minZoom: 14,
+      });
+    }
+  };
+
   return (
     <Map
       {...viewState}
+      ref={mapRef}
       onClick={(e) => {
         // No features on click
         let firstFeature;
@@ -62,7 +91,6 @@ const ReactMap = () => {
           console.debug(`Clicked station_id: `, station_id);
           // TODO: do stuff with clicked feature
           dispatch(setSelectedStationId(station_id));
-
           setViewState({
             longitude: e.lngLat.lng,
             latitude: e.lngLat.lat,
@@ -76,6 +104,10 @@ const ReactMap = () => {
       }}
       interactiveLayerIds={["landcover", "background", "stationsPoints"]}
       onMove={(evt) => setViewState(evt?.viewState)}
+      onLoad={() => {
+        console.log("source loaded");
+        flyMapTo();
+      }}
       mapLib={maplibregl}
       style={{
         position: "fixed",
@@ -93,6 +125,16 @@ const ReactMap = () => {
         type="geojson"
         data={"data/stations-with-nta.geojson"}
       >
+        {selectedStationId && stationGeo && (
+          <Popup
+            longitude={stationGeo?.geometry?.coordinates?.[0]}
+            latitude={stationGeo?.geometry?.coordinates?.[1]}
+            anchor="bottom"
+            onClose={() => dispatch(setSelectedStationId(null))}
+          >
+            Selected
+          </Popup>
+        )}
         <Layer {...layerStyleStations} />
         <Layer {...layerStyleStationsText} />
       </Source>
