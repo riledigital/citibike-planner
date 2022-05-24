@@ -59,6 +59,12 @@ const BarPlot = ({
     .range([0, width - 32])
     .clamp(false);
 
+  useEffect(() => {
+    if (stationId) {
+      setShowLabels(true);
+    }
+  });
+
   const eventRefs = useMergeRefs(
     useEventListenerRef("mousemove", (e, pageX, pageY) => {
       setShowTooltip(true);
@@ -86,11 +92,6 @@ const BarPlot = ({
   // prettier-ignore
   const barWidth = (width / timeRangeCount) - padding;
 
-  useEffect(() => {
-    if (stationId) {
-      setShowLabels(true);
-    }
-  });
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
