@@ -1,0 +1,16 @@
+.svgContainer {
+  padding: 0;
+  margin: 0;
+}
+
+.tooltip {
+  display: flex;
+  position: fixed;
+  /* top: 0; */
+  /* left: 0; */
+
+  font-size: 0.9rem;
+
+  height: 10rem;
+  width: 10rem;
+}

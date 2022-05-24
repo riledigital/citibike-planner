@@ -1,14 +1,10 @@
 module.exports = {
+  extends: ["next", "next/core-web-vitals", "eslint:recommended", "prettier"],
   env: {
     browser: true,
-    es2021: true,
+    node: true,
+    es6: true,
   },
-  extends: [
-    "eslint:recommended",
-    "prettier/react",
-    "plugin:react/recommended",
-    "plugin:prettier/recommended",
-  ],
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
@@ -16,17 +12,8 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: "module",
   },
-  plugins: ["react", "prettier"],
+  plugins: ["prettier"],
   rules: {
-    "no-unused-vars": ["warn"],
-    "no-debugger": ["warn"],
-    "prettier/prettier": ["warn"],
-    "react/jsx-key": ["warn"],
-    "react/jsx-no-target-blank": ["warn"],
-    "react/no-unescaped-entities": ["warn"],
-    "react/prop-types": ["warn"],
-    indent: ["warn", 2],
-    "linebreak-style": ["error", "unix"],
-    semi: ["error", "always"],
+    "no-unused-vars": ["off"],
   },
 };

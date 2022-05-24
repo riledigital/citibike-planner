@@ -1,0 +1,18 @@
+.button {
+  background: var(--c-blue);
+  border: thin solid white;
+  border-radius: 2ch;
+  color: var(--c-white);
+  padding: 0.8ch 1ch;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.button:hover {
+  background: var(--button-bg-hover);
+}
+
+.button:active {
+  background: var(--button-bg-active);
+  color: var(--black);
+}
