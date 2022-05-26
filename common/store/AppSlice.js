@@ -1,17 +1,21 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import axios from "axios";
+import { fetchMsgPackBlob } from "../Data/MsgPack";
 
 const STATION_INFO = "/data/stations-with-nta.geojson";
-const DATA_SUMMARY = "/data/aggs-by-hour.json";
+const DATA_SUMMARY = "/data/hourly_breakdown.msgpack";
 const LIVE_STATUS = "https://gbfs.citibikenyc.com/gbfs/en/station_status.json";
 
 export const fetchFrequencyAnalysis = createAsyncThunk(
   "app/fetchFrequencyAnalysis",
   async () => {
-    const response = await axios.get(DATA_SUMMARY);
-    // response.data.features.map(d=> d.properties.)
-    return response.data;
+    // const response = await axios.get(DATA_SUMMARY);
+    // // response.data.features.map(d=> d.properties.)
+    // return response.data;
+    const data = await fetchMsgPackBlob(DATA_SUMMARY);
+    console.log("yay");
+    return data;
   }
 );
 
@@ -32,17 +36,18 @@ export const fetchLiveStatus = createAsyncThunk(
 );
 
 const initialState = {
+  isLoading: false,
+  isMuted: true,
+  lastUpdated: null,
+  rankingData: null,
+  selectedStation: null,
+  selectedStationId: null,
+  showInspector: false,
+  showMenu: false,
+  stationFavorites: [],
   stationFrequencyData: null,
   stationGeo: null,
-  rankingData: null,
   stationStatusData: {},
-  lastUpdated: null,
-  stationFavorites: [],
-  selectedStationId: null,
-  isMuted: true,
-  showMenu: false,
-  showInspector: false,
-  isLoading: false,
 };
 
 export const appSlice = createSlice({
@@ -60,6 +65,15 @@ export const appSlice = createSlice({
     setShowInspector: (state, action) => {
       const { payload } = action;
       state.showInspector = payload;
+    },
+    setSelectedShortName: (state, action) => {
+      const { payload: short_name } = action;
+      state.showInspector = short_name ? true : false;
+      const currentStation = state.stationGeo.features.find(
+        ({ properties: { short_name: sn } }) => sn === short_name
+      );
+      state.selectedStation = currentStation;
+      // state.selectedStationId = state.selectedStation.station_id;
     },
     setSelectedStationId: (state, action) => {
       const { payload } = action;
@@ -105,6 +119,10 @@ export const appSlice = createSlice({
     });
   },
 });
+
+export const selectCurrentStationData = (state) => {
+  return state.AppSlice.selectedStation;
+};
 
 export const selectCurrentStation = (state) => {
   return state.AppSlice?.selectedStationId;
@@ -184,6 +202,7 @@ export const {
   setMuted,
   setMenu,
   setShowInspector,
+  setSelectedShortName,
   setSelectedStationId,
   toggleStationFavorite,
 } = appSlice.actions;

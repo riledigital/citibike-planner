@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@mapbox/mapbox-gl-geocoder": "^4.7.4",
+    "@msgpack/msgpack": "^2.7.2",
     "@netlify/plugin-nextjs": "^4.7.0",
     "@react-aria/interactions": "^3.8.4",
     "@react-spring/web": "^9.4.4",

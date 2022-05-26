@@ -2,6 +2,7 @@ lockfileVersion: 5.3
 
 specifiers:
   '@mapbox/mapbox-gl-geocoder': ^4.7.4
+  '@msgpack/msgpack': ^2.7.2
   '@netlify/plugin-nextjs': ^4.7.0
   '@next/eslint-plugin-next': ^11.1.4
   '@react-aria/interactions': ^3.8.4
@@ -49,6 +50,7 @@ specifiers:
 
 dependencies:
   '@mapbox/mapbox-gl-geocoder': 4.7.4_mapbox-gl@1.13.2
+  '@msgpack/msgpack': 2.7.2
   '@netlify/plugin-nextjs': 4.7.0_react-dom@18.0.0+react@18.0.0
   '@react-aria/interactions': 3.8.4_react@18.0.0
   '@react-spring/web': 9.4.4_react-dom@18.0.0+react@18.0.0
@@ -398,6 +400,11 @@ packages:
   /@mapbox/whoots-js/3.1.0:
     resolution: {integrity: sha512-Es6WcD0nO5l+2BOQS4uLfNPYQaNDfbot3X1XUoloz+x0mPDS3eeORZJl06HXjwBG1fOGwCRnzK88LMdxKRrd6Q==}
     engines: {node: '>=6.0.0'}
+    dev: false
+
+  /@msgpack/msgpack/2.7.2:
+    resolution: {integrity: sha512-rYEi46+gIzufyYUAoHDnRzkWGxajpD9vVXFQ3g1vbjrBm6P7MBmm+s/fqPa46sxa+8FOUdEuRQKaugo5a4JWpw==}
+    engines: {node: '>= 10'}
     dev: false
 
   /@netlify/functions/0.7.2:

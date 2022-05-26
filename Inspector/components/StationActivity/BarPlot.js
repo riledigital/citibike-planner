@@ -41,8 +41,7 @@ const BarPlot = ({
   const [showTooltip, setShowTooltip] = useState(null);
   const [tooltipText, setTooltipText] = useState(null);
   const [showLabels, setShowLabels] = useState(false);
-  const maxYDefault =
-    max(data?.map(({ mean_rides }) => mean_rides) ?? []) ?? 100;
+  const maxYDefault = max(data?.map(({ counts }) => counts) ?? []) ?? 100;
   const yRange = [0, maxYDefault];
 
   // prettier-ignore
@@ -101,7 +100,7 @@ const BarPlot = ({
       className={styles["svgContainer"]}
       {...{ width, height }}
     >
-      {data.map(({ start_hour, mean_rides }, t, key) => (
+      {data.map(({ start_hour, counts }, t, key) => (
         <g
           key={t}
           transform={`translate(
@@ -115,20 +114,20 @@ const BarPlot = ({
                 : fill
             }
             width={barWidth}
-            height={yScale(mean_rides)}
+            height={yScale(counts)}
             style={{ transform: `scaleY(-1)` }}
           />
           {true && (
             <StyledBarLabel
               textAnchor="center"
               dx="1"
-              dy={-yScale(mean_rides) - 4}
+              dy={-yScale(counts) - 4}
               fill="var(--c-black)"
               fontSize="12"
               fontWeight="800"
               style={{ opacity: showLabels ? 1.0 : 0 }}
             >
-              {Number.parseFloat(mean_rides).toFixed(0)}
+              {Number.parseFloat(counts).toFixed(0)}
             </StyledBarLabel>
           )}
 

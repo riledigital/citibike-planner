@@ -11,6 +11,7 @@ import {
   selectStationInfo,
   setSelectedStationId,
   setShowInspector,
+  setSelectedShortName,
 } from "common/store/AppSlice";
 
 const layerStyleStations = {
@@ -90,11 +91,12 @@ const ReactMap = () => {
         if (e.features) {
           firstFeature = e.features.at(0);
           const {
-            properties: { station_id },
+            properties: { station_id, short_name },
           } = firstFeature;
-          console.debug(`Clicked station_id: `, station_id);
+          // console.debug({ station_id, short_name });
           // TODO: do stuff with clicked feature
-          dispatch(setSelectedStationId(station_id));
+          // dispatch(setSelectedStationId(station_id));
+          dispatch(setSelectedShortName(short_name));
           setViewState({
             longitude: e.lngLat.lng,
             latitude: e.lngLat.lat,

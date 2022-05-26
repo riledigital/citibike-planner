@@ -12,34 +12,19 @@ import {
   selectCurrentStation,
   selectAllLiveStatus,
 } from "/common/store/AppSlice";
+import { useLiveStatus } from "../../../hooks/useLiveStatus";
 
 const getFormattedTime = (time) =>
   new Date(time * 1000).toLocaleTimeString("en-US");
 
 const LiveStatus = ({ stationId }) => {
-  const allLiveStatus = useSelector(selectAllLiveStatus) ?? {};
-  const currentStationId = useSelector(selectCurrentStation);
-
-  let num_bikes_available,
+  const {
+    num_bikes_available,
     num_docks_available,
     num_ebikes_available,
-    last_reported;
+    last_reported,
+  } = useLiveStatus();
 
-  if (!stationId && currentStationId) {
-    ({
-      num_bikes_available = 0,
-      num_docks_available = 0,
-      num_ebikes_available = 0,
-      last_reported = 0,
-    } = allLiveStatus[currentStationId]);
-  } else {
-    ({
-      num_bikes_available = 0,
-      num_docks_available = 0,
-      num_ebikes_available = 0,
-      last_reported = 0,
-    } = allLiveStatus?.[stationId] ?? {});
-  }
   if (num_bikes_available === null) {
     return (
       <>
@@ -58,15 +43,15 @@ const LiveStatus = ({ stationId }) => {
       <StyledHeading>Live Status</StyledHeading>
 
       <StyledLastUpdated>
-        Updated on {getFormattedTime(last_reported)}
+        Updated on {getFormattedTime(last_reported ?? "")}
       </StyledLastUpdated>
       <StyledStatusGrid>
         <StyledStationStatus>
-          <StyledNumber>{num_bikes_available} </StyledNumber>
+          <StyledNumber>{num_bikes_available ?? "N/A"} </StyledNumber>
           <StyledStationStatusLabel>Classic</StyledStationStatusLabel>
         </StyledStationStatus>
         <StyledStationStatus>
-          <StyledNumber>{num_ebikes_available}</StyledNumber>
+          <StyledNumber>{num_ebikes_available ?? "N/A"}</StyledNumber>
           <StyledStationStatusLabel>
             <span role="img" aria-label="electric">
               ⚡
@@ -75,7 +60,7 @@ const LiveStatus = ({ stationId }) => {
           </StyledStationStatusLabel>
         </StyledStationStatus>
         <StyledStationStatus>
-          <StyledNumber>{num_docks_available}</StyledNumber>
+          <StyledNumber>{num_docks_available ?? "N/A"}</StyledNumber>
           <StyledStationStatusLabel>Docks</StyledStationStatusLabel>
         </StyledStationStatus>
       </StyledStatusGrid>
