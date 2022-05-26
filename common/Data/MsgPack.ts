@@ -2,7 +2,7 @@
 import { decodeAsync, decode } from '@msgpack/msgpack';
 import axios from 'axios';
 
-export async function decodeFromBlob(blob: Blob) {
+export async function decodeFromBlob(blob) {
   if (blob.stream) {
     // Blob#stream(): ReadableStream<Uint8Array> (recommended)
     return await decodeAsync(blob.stream());
