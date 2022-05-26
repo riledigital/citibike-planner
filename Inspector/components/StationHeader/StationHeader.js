@@ -8,13 +8,17 @@ import { useSelector } from "react-redux";
 import { selectStationInfo } from "common/store/AppSlice";
 
 import styled from "styled-components";
+import { useStationData } from "/hooks/useStationData";
 
 const StationHeader = (props) => {
   // Logic for handling null NTA codes
-  const stationData = useSelector(selectStationInfo);
-
-  const { name, station_id, ntaname, boroname } = stationData || {};
-  const stationNeighborhood = !ntaname ? "" : ntaname;
+  const {
+    name,
+    station_id,
+    ntaname,
+    boroname,
+    stationNeighborhood,
+  } = useStationData();
 
   return name ? (
     <header className={clsx(styles.header)} style={props.style}>
