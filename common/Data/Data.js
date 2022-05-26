@@ -4,7 +4,7 @@ class Data {
   constructor() {}
 
   async startFetching() {
-    console.log("Starting to fetch data!");
+    // console.log("Starting to fetch data!");
     const promises = Array.from(DATA_URLS).map((source) =>
       this.fetchParseData(source[1])
     );

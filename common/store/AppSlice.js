@@ -14,7 +14,6 @@ export const fetchFrequencyAnalysis = createAsyncThunk(
     // // response.data.features.map(d=> d.properties.)
     // return response.data;
     const data = await fetchMsgPackBlob(DATA_SUMMARY);
-    console.log("yay");
     return data;
   }
 );
@@ -125,7 +124,7 @@ export const selectCurrentStationData = (state) => {
 };
 
 export const selectCurrentStation = (state) => {
-  return state.AppSlice?.selectedStationId;
+  return state.AppSlice?.selectedStation?.properties?.station_id;
 };
 
 export const selectShowInspector = (state) => {
@@ -151,13 +150,7 @@ export const selectStationGeoJson = (state) => {
 };
 
 export const selectStationGeo = (state) => {
-  const id = state.AppSlice?.selectedStationId;
-  if (!id) {
-    return null;
-  }
-  const { features } = state.AppSlice.stationGeo;
-  const feature = features.find((d) => d.properties.station_id === id);
-  return feature;
+  return state.AppSlice.selectedStation;
 };
 
 export const selectStationInfo = (state) => {

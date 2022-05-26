@@ -57,7 +57,7 @@ const OpenLayers = (props) => {
   const vectorSource = useRef();
 
   const handleFeatureSelect = (e) => {
-    console.log("Selected feature!");
+    // console.log("Selected feature!");
     const data = e?.selected?.at(0)?.values_ ?? {};
     const id = data?.station_id ?? null;
     setStationData(data);
@@ -168,8 +168,8 @@ const OpenLayers = (props) => {
     map.addInteraction(select);
 
     map.on("singleclick", function (e) {
-      console.log(" :", e);
-      console.log(select);
+      // console.log(" :", e);
+      // console.log(select);
       // popup.setPosition(e.coordinate);
     });
 

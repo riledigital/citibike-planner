@@ -20,9 +20,7 @@ const RadialVis = ({ stationId = null, ...props }) => {
   const innerRadius = 60;
   const outerRadius = height / 2;
 
-  const [maxRides] = useState(() =>
-    max(data.map(({ mean_rides }) => mean_rides))
-  );
+  const [maxRides] = useState(() => max(data.map(({ counts }) => counts)));
 
   const [x] = useState(() =>
     scaleBand()
@@ -43,16 +41,16 @@ const RadialVis = ({ stationId = null, ...props }) => {
     return interpolatePuOr(normalized);
   });
 
-  const arcGen = ({ mean_rides, start_hour }) =>
+  const arcGen = ({ counts, start_hour }) =>
     arc()
       .innerRadius(innerRadius)
-      .outerRadius(y(mean_rides))
+      .outerRadius(y(counts))
       .startAngle(x(start_hour))
       .endAngle(x(start_hour) + x.bandwidth())
       .padAngle(1)
       .padRadius(Math.PI * 2);
 
-  const centroidGen = ({ mean_rides, start_hour }) =>
+  const centroidGen = ({ counts, start_hour }) =>
     arc()
       .innerRadius(innerRadius)
       .outerRadius(y(maxRides) + 60)

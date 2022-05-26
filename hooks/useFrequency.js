@@ -10,8 +10,6 @@ export const useFrequency = (stationId = null) => {
   // let currentlySelectedId = useSelector(selectCurrentStation);
   const short_name = currentStation?.properties?.short_name;
   let data = useSelector(selectAllStationFrequencyData);
-  console.log(currentStation?.properties);
-  console.log(data?.[short_name]);
   if (stationId) {
     data = data[stationId] ?? [];
   } else {

@@ -59,7 +59,7 @@ const ReactMap = () => {
   });
 
   useEffect(() => {
-    console.log(`Changed ${selectedStationId}`);
+    // console.log(`Changed ${selectedStationId}`);
     // query by station id through mapbox
   }, [selectedStationId]);
 
@@ -71,7 +71,7 @@ const ReactMap = () => {
           coordinates: [lng, lat],
         },
       } = stationGeo;
-      console.log(lat, lng);
+      // console.log(lat, lng);
 
       mapRef.current?.flyTo({
         center: [lng, lat],
@@ -95,7 +95,7 @@ const ReactMap = () => {
           } = firstFeature;
           // console.debug({ station_id, short_name });
           // TODO: do stuff with clicked feature
-          // dispatch(setSelectedStationId(station_id));
+          dispatch(setSelectedStationId(station_id));
           dispatch(setSelectedShortName(short_name));
           setViewState({
             longitude: e.lngLat.lng,
@@ -111,7 +111,7 @@ const ReactMap = () => {
       interactiveLayerIds={["landcover", "background", "stationsPoints"]}
       onMove={(evt) => setViewState(evt?.viewState)}
       onLoad={() => {
-        console.log("source loaded");
+        // console.log("source loaded");
         flyMapTo();
       }}
       mapLib={maplibregl}

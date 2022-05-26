@@ -17,7 +17,7 @@ export const useLiveStatus = (stationId = null) => {
     num_ebikes_available: 0,
     last_reported: 0,
   };
-  console.log({ currentStation });
+  // console.log({ currentStation });
 
   try {
     if (!stationId && currentStationId) {

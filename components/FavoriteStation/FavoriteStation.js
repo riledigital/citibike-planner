@@ -37,7 +37,7 @@ const ToggleButton = ({ station_id }) => {
   );
 };
 
-const FavoriteStation = ({ station_id, name, boroname }) => {
+const FavoriteStation = ({ short_name, station_id, name, boroname }) => {
   const dispatch = useDispatch();
   const router = useRouter();
 
@@ -60,7 +60,7 @@ const FavoriteStation = ({ station_id, name, boroname }) => {
       <div className={styles.stationHeader}>
         <div className={styles.info}>
           <h3 className={styles.name}>
-            {name} <div className={styles.station}>{station_id}</div>
+            {name} <div className={styles.station}>{short_name}</div>
           </h3>
           <div className={styles.borough}>{boroname}</div>
         </div>
@@ -73,17 +73,17 @@ const FavoriteStation = ({ station_id, name, boroname }) => {
           >
             View in map
           </Button>
-          <ToggleButton station_id={station_id} />
+          <ToggleButton station_id={short_name} />
         </div>
       </div>
       <div>
-        <RadialVis stationId={station_id} />
+        <RadialVis stationId={short_name} />
       </div>
       <div>
-        <BarPlot stationId={station_id} />
+        <BarPlot stationId={short_name} />
       </div>
       <div>
-        <LiveStatus stationId={station_id} />
+        <LiveStatus stationId={short_name} />
       </div>
     </animated.div>
   );
