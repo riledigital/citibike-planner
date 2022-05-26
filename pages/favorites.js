@@ -5,9 +5,7 @@ import {
 } from "common/store/AppSlice";
 import LayoutContent from "components/LayoutContent";
 import Title from "components/Title";
-import { useRouter } from "next/router";
-import { useDispatch, useSelector } from "react-redux";
-import styled from "styled-components";
+import { useSelector } from "react-redux";
 import styles from "styles/favorites.module.css";
 import FavoriteStation from "../components/FavoriteStation";
 
