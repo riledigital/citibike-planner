@@ -294,7 +294,7 @@ force = true
   ]
 
 [[redirects]]
-from = "/_next/data/gUVxquMUI9G_u-R3lX5Zp/index.json"
+from = "/_next/data/UmVo9auWq-Nnd4GG3HW1S/index.json"
 to = "/.netlify/functions/___netlify-handler"
 status = 200
 
@@ -304,7 +304,7 @@ to = "/.netlify/functions/___netlify-handler"
 status = 200
 
 [[redirects]]
-from = "/_next/data/gUVxquMUI9G_u-R3lX5Zp/about.json"
+from = "/_next/data/UmVo9auWq-Nnd4GG3HW1S/about.json"
 to = "/.netlify/functions/___netlify-handler"
 status = 200
 
@@ -314,7 +314,7 @@ to = "/.netlify/functions/___netlify-handler"
 status = 200
 
 [[redirects]]
-from = "/_next/data/gUVxquMUI9G_u-R3lX5Zp/favorites.json"
+from = "/_next/data/UmVo9auWq-Nnd4GG3HW1S/favorites.json"
 to = "/.netlify/functions/___netlify-handler"
 status = 200
 
@@ -626,7 +626,7 @@ status = 200
       ]
 
     [[context.production.redirects]]
-    from = "/_next/data/gUVxquMUI9G_u-R3lX5Zp/index.json"
+    from = "/_next/data/UmVo9auWq-Nnd4GG3HW1S/index.json"
     to = "/.netlify/functions/___netlify-handler"
     status = 200
 
@@ -636,7 +636,7 @@ status = 200
     status = 200
 
     [[context.production.redirects]]
-    from = "/_next/data/gUVxquMUI9G_u-R3lX5Zp/about.json"
+    from = "/_next/data/UmVo9auWq-Nnd4GG3HW1S/about.json"
     to = "/.netlify/functions/___netlify-handler"
     status = 200
 
@@ -646,7 +646,7 @@ status = 200
     status = 200
 
     [[context.production.redirects]]
-    from = "/_next/data/gUVxquMUI9G_u-R3lX5Zp/favorites.json"
+    from = "/_next/data/UmVo9auWq-Nnd4GG3HW1S/favorites.json"
     to = "/.netlify/functions/___netlify-handler"
     status = 200
 
@@ -956,7 +956,7 @@ status = 200
       ]
 
     [[context.msgpack.redirects]]
-    from = "/_next/data/gUVxquMUI9G_u-R3lX5Zp/index.json"
+    from = "/_next/data/UmVo9auWq-Nnd4GG3HW1S/index.json"
     to = "/.netlify/functions/___netlify-handler"
     status = 200
 
@@ -966,7 +966,7 @@ status = 200
     status = 200
 
     [[context.msgpack.redirects]]
-    from = "/_next/data/gUVxquMUI9G_u-R3lX5Zp/about.json"
+    from = "/_next/data/UmVo9auWq-Nnd4GG3HW1S/about.json"
     to = "/.netlify/functions/___netlify-handler"
     status = 200
 
@@ -976,7 +976,7 @@ status = 200
     status = 200
 
     [[context.msgpack.redirects]]
-    from = "/_next/data/gUVxquMUI9G_u-R3lX5Zp/favorites.json"
+    from = "/_next/data/UmVo9auWq-Nnd4GG3HW1S/favorites.json"
     to = "/.netlify/functions/___netlify-handler"
     status = 200
 
