@@ -15,6 +15,7 @@ const StationHeader = (props) => {
   const {
     name,
     station_id,
+    short_name,
     ntaname,
     boroname,
     stationNeighborhood,
@@ -24,11 +25,13 @@ const StationHeader = (props) => {
     <header className={clsx(styles.header)} style={props.style}>
       <div className={clsx(styles.name)}>
         {name}
-        <StyledId title="Station ID">#{station_id}</StyledId>
+        <div className={styles["id-label"]} title="Station ID">
+          #{short_name}
+        </div>
       </div>
-      <StyledStationInfo>
+      <div className={styles["station-info"]}>
         {stationNeighborhood}, {boroname}
-      </StyledStationInfo>
+      </div>
       <ManageStation />
     </header>
   ) : (
@@ -39,16 +42,3 @@ const StationHeader = (props) => {
 };
 
 export default StationHeader;
-
-const StationName = styled.h2``;
-
-const StyledStationInfo = styled.div`
-  font-size: 1rem;
-`;
-
-const StyledId = styled.div`
-  display: block;
-  float: right;
-
-  font-size: 1rem;
-`;

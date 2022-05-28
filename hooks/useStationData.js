@@ -7,8 +7,16 @@ import { useSelector } from "react-redux";
 export const useStationData = (stationId = null) => {
   let currentStation = useSelector(selectCurrentStationData);
   let stationData = currentStation?.properties;
-  const { name = "", station_id = "", ntaname = "", boroname = "" } =
-    stationData ?? {};
+  const {
+    name = "",
+    station_id = "",
+    short_name = "",
+    ntaname = "",
+    boroname = "",
+  } = stationData ?? {};
   const stationNeighborhood = !ntaname ? "" : ntaname;
-  return { name, station_id, ntaname, boroname, stationNeighborhood };
+  return {
+    ...stationData,
+    stationNeighborhood,
+  };
 };

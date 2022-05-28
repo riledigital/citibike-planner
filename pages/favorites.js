@@ -12,6 +12,7 @@ import FavoriteStation from "../components/FavoriteStation";
 const Favorites = () => {
   // const dispatch = useDispatch();
   const favorites = useSelector(selectStationFavorites);
+  console.log(favorites);
 
   return (
     <div className={styles.container}>
@@ -19,9 +20,9 @@ const Favorites = () => {
       <h1>Favorites</h1>
       <p>Add stations to your favorites on the map!</p>
       <div className={styles.favoriteGrid}>
-        {Object.values(favorites).map((d) => (
-          <FavoriteStation key={d.station_id} {...d} />
-        ))}
+        {Object.values(favorites).map(
+          (d) => d && <FavoriteStation key={d?.station_id} {...d} />
+        )}
       </div>
     </div>
   );

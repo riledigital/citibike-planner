@@ -8,4 +8,15 @@
 .name {
   line-height: 1.1;
   font-size: 1.2rem;
+  width: 100%;
+}
+
+.station-info {
+  font-size: 1rem;
+}
+
+.id-label {
+  display: block;
+  float: right;
+  font-size: 1rem;
 }
