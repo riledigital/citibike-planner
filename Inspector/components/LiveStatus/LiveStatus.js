@@ -1,18 +1,13 @@
+import { useLiveStatus } from "hooks/useLiveStatus";
 import {
   StyledHeading,
   StyledLastUpdated,
   StyledLoadingIllustration,
   StyledNumber,
-  StyledStatusGrid,
   StyledStationStatus,
   StyledStationStatusLabel,
+  StyledStatusGrid,
 } from "./styles";
-import { useSelector } from "react-redux";
-import {
-  selectCurrentStation,
-  selectAllLiveStatus,
-} from "/common/store/AppSlice";
-import { useLiveStatus } from "../../../hooks/useLiveStatus";
 
 const getFormattedTime = (time) =>
   new Date(time * 1000).toLocaleTimeString("en-US");

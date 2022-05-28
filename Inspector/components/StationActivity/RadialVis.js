@@ -71,6 +71,7 @@ const RadialVis = ({ stationId = null, ...props }) => {
           let d = arcGen(item)();
           let c = centroidGen(item).centroid();
           return (
+            // @ts-ignore
             <g key={i} title={JSON.stringify(item)}>
               <path d={d} fill={fill(item.start_hour)}></path>
               <text

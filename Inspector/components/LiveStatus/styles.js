@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { ButtonBase } from "/styles/GlobalStyles";
+import { ButtonBase } from "styles/GlobalStyles";
 
 export const StyledHeading = styled.h3`
   font-size: 1rem;

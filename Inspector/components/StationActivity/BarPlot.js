@@ -26,7 +26,7 @@ const BarPlot = ({
   stationId = null,
   textFill = "var(--c-background)",
 }) => {
-  const { data } = useFrequency(stationId);
+  let { data } = useFrequency(stationId);
 
   const timeRanges = [6, 22];
   const timeRangeCount = timeRanges[1] - timeRanges[0];

@@ -8,4 +8,7 @@ module.exports = withPWA({
   pwa: {
     dest: "public",
   },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
 });

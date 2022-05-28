@@ -18,8 +18,8 @@ import { useStationData } from "../../hooks/useStationData";
 const ToggleButton = ({ shortName }) => {
   const dispatch = useDispatch();
 
-  const isFavorited = useSelector((state) => {
-    return state.AppSlice?.stationFavorites?.findIndex(
+  const isFavorited = useSelector((state: any) => {
+    return state?.AppSlice?.stationFavorites?.findIndex(
       (d) => d === shortName
     ) >= 0
       ? true

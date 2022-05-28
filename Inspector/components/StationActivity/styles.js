@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { DEVICES } from "/styles/GlobalStyles";
+import { DEVICES } from "styles/GlobalStyles";
 
 export const StyledTooltip = styled.div`
   background: rgba(255, 255, 255, 0.9);
