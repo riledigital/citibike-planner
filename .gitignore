@@ -1,6 +1,12 @@
 # Created by https://www.toptal.com/developers/gitignore/api/visualstudiocode
 # Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode
 
+**/public/workbox-*
+**/public/workbox-*.js
+**/public/sw-*
+**/public/sw.js
+**/public/worker-*.js
+
 ### VisualStudioCode ###
 .vscode/*
 !.vscode/settings.json
