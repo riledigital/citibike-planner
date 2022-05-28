@@ -3,8 +3,8 @@
 
 **/public/workbox-*
 **/public/workbox-*.js
-**/public/sw-*
-**/public/sw.js
+**/public/sw*
+**/public/sw.js.*
 **/public/worker-*.js
 
 ### VisualStudioCode ###
