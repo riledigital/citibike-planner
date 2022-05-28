@@ -47,9 +47,15 @@ const ReactMap = () => {
   const selectedStationId = useSelector(selectCurrentStation);
   const stationGeo = useSelector(selectStationGeo);
 
-  const selectedStationData = useSelector(selectCurrentStationData);
+  const selectedStationData = useSelector(selectCurrentStationData) ?? {};
   const {
-    properties: { name, station_id, ntaname, boroname },
+    geometry: { coordinates: [lng = 0, lat = 0] = [] } = {},
+    properties: {
+      name = "",
+      station_id = "",
+      ntaname = "",
+      boroname = "",
+    } = {},
   } = selectedStationData;
 
   const stationNeighborhood = !ntaname ? "" : ntaname;
@@ -79,7 +85,7 @@ const ReactMap = () => {
       } = stationGeo;
       // console.log(lat, lng);
 
-      mapRef.current?.flyTo({
+      mapRef?.current?.flyTo({
         center: [lng, lat],
         speed: 2,
         minZoom: 14,
@@ -140,8 +146,8 @@ const ReactMap = () => {
       >
         {showPopup && (
           <Popup
-            longitude={selectedStationData?.geometry?.coordinates?.[0]}
-            latitude={selectedStationData?.geometry?.coordinates?.[1]}
+            longitude={lng}
+            latitude={lat}
             anchor="bottom"
             onClose={() => {
               setShowPopup(false);

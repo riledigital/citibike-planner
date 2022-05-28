@@ -1,37 +1,32 @@
-import styled from "styled-components";
-
 import {
-  selectCurrentStation,
+  selectCurrentStationData,
   selectStationFavorited,
   toggleStationFavorite,
-} from "common/store/AppSlice";
-
-import styles from "./ManageStation.module.css";
-
+} from "common/store";
+import { useStationData } from "hooks/useStationData";
 import { Button } from "components";
-import { useDispatch, useSelector } from "react-redux";
 import { FaHeart, FaHeartBroken } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import styles from "./ManageStation.module.css";
 
 const ManageStation = () => {
   const dispatch = useDispatch();
   const isFavorited = useSelector(selectStationFavorited);
-  const currentId = useSelector(selectCurrentStation);
+  const { short_name } = useStationData();
 
   const handleClick = () => {
-    dispatch(toggleStationFavorite(currentId));
+    dispatch(toggleStationFavorite(short_name));
   };
 
   return (
-    <StyledButton onClick={handleClick}>
+    <Button className={styles.button} onClick={handleClick}>
       {isFavorited ? (
         <FaHeartBroken className={styles.icon} />
       ) : (
         <FaHeart className={styles.icon} />
       )}
-    </StyledButton>
+    </Button>
   );
 };
 
 export default ManageStation;
-
-const StyledButton = styled(Button)``;

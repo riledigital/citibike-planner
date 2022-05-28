@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
 
 import axios from "axios";
-import { fetchMsgPackBlob } from "../Data/MsgPack";
+import { fetchMsgPackBlob } from "common/Data/MsgPack";
 
 const STATION_INFO = "/data/stations-with-nta.geojson";
 const DATA_SUMMARY = "/data/hourly_breakdown.msgpack";
@@ -71,7 +71,6 @@ export const appSlice = createSlice({
       const currentStation = state.stationGeo.features.find(
         ({ properties: { short_name: sn } }) => sn === short_name
       );
-      console.log(current(currentStation));
 
       state.selectedStation = currentStation;
       // state.selectedStationId = state.selectedStation.station_id;
@@ -82,14 +81,14 @@ export const appSlice = createSlice({
       state.selectedStationId = payload;
     },
     toggleStationFavorite: (state, action) => {
-      const { payload } = action;
+      const { payload: short_name } = action;
       const existingIdx = state?.stationFavorites?.findIndex(
-        (d) => d === payload
+        (d) => d === short_name
       );
-      if (existingIdx >= 0) {
+      if (existingIdx !== -1) {
         state.stationFavorites.splice(existingIdx, 1);
       } else {
-        state.stationFavorites.push(payload);
+        state.stationFavorites.push(short_name);
       }
     },
   },
@@ -103,8 +102,8 @@ export const appSlice = createSlice({
         const obj = [properties.station_id, properties];
         return obj;
       });
-      const map = Object.fromEntries(entries);
-      state.stationInfo = map;
+      // const map = Object.fromEntries(entries);
+      // state.stationInfo = map;
       state.stationGeo = action.payload;
     });
     builder.addCase(fetchLiveStatus.pending, (state, action) => {
@@ -164,7 +163,7 @@ export const selectStationInfo = (state) => {
 };
 
 export const selectAllStationInfo = (state) => {
-  return state.AppSlice.stationInfo;
+  return state.AppSlice?.stationGeo?.features ?? [];
 };
 
 export const selectAllLiveStatus = (state) => {
@@ -177,19 +176,21 @@ export const selectLiveStatus = (state) => {
 };
 
 export const selectStationFavorited = (state) => {
-  const id = state.AppSlice?.selectedStationId;
-  const exists = state?.AppSlice?.stationFavorites?.findIndex((d) => d === id);
+  const { short_name } = state.AppSlice.selectedStation;
+  const exists = state?.AppSlice?.stationFavorites?.findIndex(
+    (d) => d === short_name
+  );
   return exists >= 0 ? true : false;
 };
 
 export const selectStationFavorites = (state) => {
   const ids = state.AppSlice?.stationFavorites;
-  const info = {};
-  ids?.forEach((d) => {
-    info[d] = state.AppSlice.stationInfo[d];
-  });
+  // const info = {};
+  // ids?.forEach((d) => {
+  //   info[d] = state.AppSlice.stationGeo.features[d];
+  // });
 
-  return info;
+  return ids;
 };
 
 // Action creators are generated for each case reducer function

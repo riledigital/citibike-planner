@@ -1,10 +1,23 @@
 {
   "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
+    "paths": {
+      "$common/*": ["./common/*"],
+      "$components/*": ["./components/*"],
+      "$hooks/*": ["./hooks/*"],
+      "$Inspector/*": ["./Inspector/*"],
+      "$MapContainer/*": ["./MapContainer/*"],
+      "$pages/*": ["./pages/*"],
+      "$styles/*": ["./styles/*"]
+    },
+    "resolveJsonModule": true,
+    "sourceMap": true,
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
+    "checkJs": true,
     "strict": false,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
@@ -12,10 +25,15 @@
     "esModuleInterop": true,
     "module": "esnext",
     "moduleResolution": "node",
-    "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "components/ManageStation/ManageStation.js",
+    "MapContainer/ReactMap/ReactMap.jjs"
+  ],
   "exclude": ["node_modules"]
 }

@@ -13,20 +13,22 @@ import { useDispatch, useSelector } from "react-redux";
 import { animated, useSpring } from "@react-spring/web";
 
 import styles from "./FavoriteStation.module.css";
+import { useStationData } from "../../hooks/useStationData";
 
-const ToggleButton = ({ station_id }) => {
+const ToggleButton = ({ shortName }) => {
   const dispatch = useDispatch();
+  console.log("Short name:", shortName);
 
   const isFavorited = useSelector((state) => {
-    return state?.AppSlice?.stationFavorites?.findIndex(
-      (d) => d === station_id
+    return state.AppSlice?.stationFavorites?.findIndex(
+      (d) => d === shortName
     ) >= 0
       ? true
       : false;
   });
 
   const handleClick = (e) => {
-    dispatch(toggleStationFavorite(station_id));
+    dispatch(toggleStationFavorite(shortName));
   };
   return (
     <div>
@@ -37,9 +39,10 @@ const ToggleButton = ({ station_id }) => {
   );
 };
 
-const FavoriteStation = ({ short_name, station_id, name, boroname }) => {
+const FavoriteStation = ({ shortName }) => {
   const dispatch = useDispatch();
   const router = useRouter();
+  const { name, station_id, boroname } = useStationData(shortName);
 
   // let [events, setEvents] = useState([]);
   let { hoverProps, isHovered } = useHover({});
@@ -60,27 +63,27 @@ const FavoriteStation = ({ short_name, station_id, name, boroname }) => {
       <div className={styles.stationHeader}>
         <div className={styles.info}>
           <h3 className={styles.name}>
-            {name} <div className={styles.station}>{short_name}</div>
+            {name} <div className={styles.station}>{shortName}</div>
           </h3>
           <div className={styles.borough}>{boroname}</div>
         </div>
         <div className={styles.toggle}>
           <Button
             onClick={() => {
-              dispatch(setSelectedShortName(short_name));
+              dispatch(setSelectedShortName(shortName));
               router.push("/");
             }}
           >
             View in map
           </Button>
-          <ToggleButton station_id={short_name} />
+          <ToggleButton shortName={shortName} />
         </div>
       </div>
       <div>
-        <RadialVis stationId={short_name} />
+        <RadialVis stationId={shortName} />
       </div>
       <div>
-        <BarPlot stationId={short_name} />
+        <BarPlot stationId={shortName} />
       </div>
       <div>
         <LiveStatus stationId={station_id} />

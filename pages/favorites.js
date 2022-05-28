@@ -21,7 +21,10 @@ const Favorites = () => {
       <p>Add stations to your favorites on the map!</p>
       <div className={styles.favoriteGrid}>
         {Object.values(favorites).map(
-          (d) => d && <FavoriteStation key={d?.station_id} {...d} />
+          (short_name) =>
+            short_name && (
+              <FavoriteStation shortName={short_name} key={short_name} />
+            )
         )}
       </div>
     </div>

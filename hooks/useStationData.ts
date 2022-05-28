@@ -1,12 +1,21 @@
 import {
   selectCurrentStationData,
-  selectAllLiveStatus,
+  selectAllStationInfo,
 } from "common/store/AppSlice";
 import { useSelector } from "react-redux";
 
-export const useStationData = (stationId = null) => {
+// if not null, select ALL station data
+export const useStationData = (shortName = null) => {
   let currentStation = useSelector(selectCurrentStationData);
-  let stationData = currentStation?.properties;
+  let allStationInfo = useSelector(selectAllStationInfo);
+
+  let stationData = shortName
+    ? allStationInfo.find(
+        ({ properties: { short_name } }) => short_name === shortName
+      )?.properties
+    : currentStation?.properties;
+  
+  console.log(stationData)
   const {
     name = "",
     station_id = "",
