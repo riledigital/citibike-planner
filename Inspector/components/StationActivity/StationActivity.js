@@ -1,15 +1,11 @@
 // https://observablehq.com/@d3/margin-convention
-import { selectStationFrequencyData } from "common/store/AppSlice";
-import { useTransition } from "@react-spring/web";
-import { scaleLinear, scaleTime } from "d3";
+import Button from "components/Button";
 import React, { useRef, useState } from "react";
-import { useSelector } from "react-redux";
 import styled from "styled-components";
 import BarPlot from "./BarPlot";
 import RadialVis from "./RadialVis";
-import Button from "components/Button";
-
 import styles from "./StationActivity.module.css";
+import { FaChartBar, FaClock } from "react-icons/fa";
 
 const RADIAL_PLOT = Symbol("RADIAL_PLOT");
 const BAR_PLOT = Symbol("BAR_PLOT");
@@ -33,13 +29,15 @@ const StationActivity = ({
 
       <div className={styles["toggleButtonsContainer"]}>
         <Button className={styles["button"]} onClick={(e) => setType(BAR_PLOT)}>
-          Bar
+          <FaChartBar />
+          <span className="sa-only">Bar</span>
         </Button>
         <Button
           className={styles["button"]}
           onClick={(e) => setType(RADIAL_PLOT)}
         >
-          Radial
+          <FaClock />
+          <span className="sa-only">Radial</span>
         </Button>
       </div>
     </StyledStationActivity>

@@ -41,6 +41,7 @@ const AboutPage = () => {
         Data aggregation was performed using Python and the geopandas library.
         This front-end is built with React and Redux. Visualizations were made
         with a combination of D3 and React, and the map is powered by Mapbox.
+        Icons from FontAwesome.
         <br />
         <a href="https://github.com/riledigital/citibike-planner">
           The source is available on GitHub.
