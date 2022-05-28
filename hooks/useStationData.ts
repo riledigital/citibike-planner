@@ -15,7 +15,6 @@ export const useStationData = (shortName = null) => {
       )?.properties
     : currentStation?.properties;
   
-  console.log(stationData)
   const {
     name = "",
     station_id = "",

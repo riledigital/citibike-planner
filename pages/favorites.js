@@ -12,7 +12,6 @@ import FavoriteStation from "../components/FavoriteStation";
 const Favorites = () => {
   // const dispatch = useDispatch();
   const favorites = useSelector(selectStationFavorites);
-  console.log(favorites);
 
   return (
     <div className={styles.container}>
