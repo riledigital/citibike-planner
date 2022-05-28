@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
 
 import axios from "axios";
 import { fetchMsgPackBlob } from "../Data/MsgPack";
@@ -71,6 +71,8 @@ export const appSlice = createSlice({
       const currentStation = state.stationGeo.features.find(
         ({ properties: { short_name: sn } }) => sn === short_name
       );
+      console.log(current(currentStation));
+
       state.selectedStation = currentStation;
       // state.selectedStationId = state.selectedStation.station_id;
     },

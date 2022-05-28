@@ -1,6 +1,6 @@
 import { useHover } from "@react-aria/interactions";
 import {
-  setSelectedStationId,
+  setSelectedShortName,
   toggleStationFavorite,
 } from "common/store/AppSlice";
 import Button from "components/Button";
@@ -67,7 +67,7 @@ const FavoriteStation = ({ short_name, station_id, name, boroname }) => {
         <div className={styles.toggle}>
           <Button
             onClick={() => {
-              dispatch(setSelectedStationId(station_id));
+              dispatch(setSelectedShortName(short_name));
               router.push("/");
             }}
           >
@@ -83,7 +83,7 @@ const FavoriteStation = ({ short_name, station_id, name, boroname }) => {
         <BarPlot stationId={short_name} />
       </div>
       <div>
-        <LiveStatus stationId={short_name} />
+        <LiveStatus stationId={station_id} />
       </div>
     </animated.div>
   );

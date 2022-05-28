@@ -38,3 +38,16 @@
     transform: translateY(-2rem);
   }
 }
+
+.popup-container {
+  display: flex;
+  flex-flow: column nowrap;
+  font-size: 1rem;
+  font-family: var(--font-main);
+  align-items: center;
+}
+.popup-name {
+  font-weight: var(--fw-bold);
+}
+.popup-nta {
+}

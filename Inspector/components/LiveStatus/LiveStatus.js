@@ -23,7 +23,7 @@ const LiveStatus = ({ stationId }) => {
     num_docks_available,
     num_ebikes_available,
     last_reported,
-  } = useLiveStatus();
+  } = useLiveStatus(stationId);
 
   if (num_bikes_available === null) {
     return (

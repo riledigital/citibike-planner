@@ -12,6 +12,7 @@ import {
   setSelectedStationId,
   setShowInspector,
   setSelectedShortName,
+  selectCurrentStationData,
 } from "common/store/AppSlice";
 
 const layerStyleStations = {
@@ -45,11 +46,16 @@ const ReactMap = () => {
   const dispatch = useDispatch();
   const selectedStationId = useSelector(selectCurrentStation);
   const stationGeo = useSelector(selectStationGeo);
-  const stationData = useSelector(selectStationInfo);
-  const { name, station_id, ntaname, boroname } = stationData || {};
+
+  const selectedStationData = useSelector(selectCurrentStationData);
+  const {
+    properties: { name, station_id, ntaname, boroname },
+  } = selectedStationData;
+
   const stationNeighborhood = !ntaname ? "" : ntaname;
 
   const mapRef = useRef();
+  const [showPopup, setShowPopup] = useState(true);
 
   const [viewState, setViewState] = useState({
     latitude: 40.751678516237334,
@@ -97,6 +103,7 @@ const ReactMap = () => {
           // TODO: do stuff with clicked feature
           dispatch(setSelectedStationId(station_id));
           dispatch(setSelectedShortName(short_name));
+          setShowPopup(true);
           setViewState({
             longitude: e.lngLat.lng,
             latitude: e.lngLat.lat,
@@ -131,15 +138,20 @@ const ReactMap = () => {
         type="geojson"
         data={"data/stations-with-nta.geojson"}
       >
-        {selectedStationId && stationGeo && (
+        {showPopup && (
           <Popup
-            longitude={stationGeo?.geometry?.coordinates?.[0]}
-            latitude={stationGeo?.geometry?.coordinates?.[1]}
+            longitude={selectedStationData?.geometry?.coordinates?.[0]}
+            latitude={selectedStationData?.geometry?.coordinates?.[1]}
             anchor="bottom"
-            onClose={() => dispatch(setSelectedStationId(null))}
+            onClose={() => {
+              setShowPopup(false);
+              dispatch(setSelectedStationId(null));
+            }}
           >
-            <div>{name}</div>
-            <div>{ntaname}</div>
+            <div className={styles["popup-container"]}>
+              <div className={styles["popup-name"]}>{name}</div>
+              <div className={styles["popup-nta"]}>{ntaname}</div>
+            </div>
           </Popup>
         )}
         <Layer {...layerStyleStations} />
