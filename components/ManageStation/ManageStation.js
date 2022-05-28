@@ -6,8 +6,11 @@ import {
   toggleStationFavorite,
 } from "common/store/AppSlice";
 
+import styles from "./ManageStation.module.css";
+
 import { Button } from "components";
 import { useDispatch, useSelector } from "react-redux";
+import { FaHeart, FaHeartBroken } from "react-icons/fa";
 
 const ManageStation = () => {
   const dispatch = useDispatch();
@@ -20,7 +23,11 @@ const ManageStation = () => {
 
   return (
     <StyledButton onClick={handleClick}>
-      {isFavorited ? "Remove" : "Add"}
+      {isFavorited ? (
+        <FaHeartBroken className={styles.icon} />
+      ) : (
+        <FaHeart className={styles.icon} />
+      )}
     </StyledButton>
   );
 };
