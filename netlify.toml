@@ -21,6 +21,23 @@
     "!node_modules/.pnpm/next@12.1.5_react-dom@18.0.0+react@18.0.0/node_modules/next/dist/server/lib/squoosh/**/*.wasm",
     "!node_modules/.pnpm/next@12.1.5_react-dom@18.0.0+react@18.0.0/node_modules/next/dist/next-server/server/lib/squoosh/**/*.wasm",
     "!node_modules/.pnpm/next@12.1.5_react-dom@18.0.0+react@18.0.0/node_modules/next/dist/compiled/webpack/bundle4.js",
+    "!node_modules/.pnpm/next@12.1.5_react-dom@18.0.0+react@18.0.0/node_modules/next/dist/compiled/webpack/bundle5.js",
+    ".env",
+    ".env.local",
+    ".env.production",
+    ".env.production.local",
+    "./public/locales/**",
+    "./next-i18next.config.js",
+    ".next/server/**",
+    ".next/serverless/**",
+    ".next/*.json",
+    ".next/BUILD_ID",
+    ".next/static/chunks/webpack-middleware*.js",
+    "!.next/server/**/*.js.nft.json",
+    "!node_modules/.pnpm/next@12.1.5_react-dom@18.0.0+react@18.0.0/node_modules/next/dist/compiled/@ampproject/toolbox-optimizer/**/*",
+    "!node_modules/.pnpm/next@12.1.5_react-dom@18.0.0+react@18.0.0/node_modules/next/dist/server/lib/squoosh/**/*.wasm",
+    "!node_modules/.pnpm/next@12.1.5_react-dom@18.0.0+react@18.0.0/node_modules/next/dist/next-server/server/lib/squoosh/**/*.wasm",
+    "!node_modules/.pnpm/next@12.1.5_react-dom@18.0.0+react@18.0.0/node_modules/next/dist/compiled/webpack/bundle4.js",
     "!node_modules/.pnpm/next@12.1.5_react-dom@18.0.0+react@18.0.0/node_modules/next/dist/compiled/webpack/bundle5.js"
   ]
   external_node_modules = []
@@ -28,6 +45,23 @@
 
   [functions.___netlify-odb-handler]
   included_files = [
+    ".env",
+    ".env.local",
+    ".env.production",
+    ".env.production.local",
+    "./public/locales/**",
+    "./next-i18next.config.js",
+    ".next/server/**",
+    ".next/serverless/**",
+    ".next/*.json",
+    ".next/BUILD_ID",
+    ".next/static/chunks/webpack-middleware*.js",
+    "!.next/server/**/*.js.nft.json",
+    "!node_modules/.pnpm/next@12.1.5_react-dom@18.0.0+react@18.0.0/node_modules/next/dist/compiled/@ampproject/toolbox-optimizer/**/*",
+    "!node_modules/.pnpm/next@12.1.5_react-dom@18.0.0+react@18.0.0/node_modules/next/dist/server/lib/squoosh/**/*.wasm",
+    "!node_modules/.pnpm/next@12.1.5_react-dom@18.0.0+react@18.0.0/node_modules/next/dist/next-server/server/lib/squoosh/**/*.wasm",
+    "!node_modules/.pnpm/next@12.1.5_react-dom@18.0.0+react@18.0.0/node_modules/next/dist/compiled/webpack/bundle4.js",
+    "!node_modules/.pnpm/next@12.1.5_react-dom@18.0.0+react@18.0.0/node_modules/next/dist/compiled/webpack/bundle5.js",
     ".env",
     ".env.local",
     ".env.production",
@@ -58,6 +92,21 @@ command = "npm run build"
 
 [[plugins]]
 package = "@netlify/plugin-nextjs"
+
+[[redirects]]
+from = "/_next/data/UmVo9auWq-Nnd4GG3HW1S/index.json"
+to = "/.netlify/functions/___netlify-handler"
+status = 200
+
+[[redirects]]
+from = "/_next/data/UmVo9auWq-Nnd4GG3HW1S/about.json"
+to = "/.netlify/functions/___netlify-handler"
+status = 200
+
+[[redirects]]
+from = "/_next/data/UmVo9auWq-Nnd4GG3HW1S/favorites.json"
+to = "/.netlify/functions/___netlify-handler"
+status = 200
 
 [[redirects]]
 from = "/_next/static/*"
@@ -294,7 +343,7 @@ force = true
   ]
 
 [[redirects]]
-from = "/_next/data/UmVo9auWq-Nnd4GG3HW1S/index.json"
+from = "/_next/data/cROisTpVu0JpmVWIuJv8B/index.json"
 to = "/.netlify/functions/___netlify-handler"
 status = 200
 
@@ -304,7 +353,7 @@ to = "/.netlify/functions/___netlify-handler"
 status = 200
 
 [[redirects]]
-from = "/_next/data/UmVo9auWq-Nnd4GG3HW1S/about.json"
+from = "/_next/data/cROisTpVu0JpmVWIuJv8B/about.json"
 to = "/.netlify/functions/___netlify-handler"
 status = 200
 
@@ -314,7 +363,7 @@ to = "/.netlify/functions/___netlify-handler"
 status = 200
 
 [[redirects]]
-from = "/_next/data/UmVo9auWq-Nnd4GG3HW1S/favorites.json"
+from = "/_next/data/cROisTpVu0JpmVWIuJv8B/favorites.json"
 to = "/.netlify/functions/___netlify-handler"
 status = 200
 
@@ -358,6 +407,23 @@ status = 200
         "!node_modules/.pnpm/next@12.1.5_react-dom@18.0.0+react@18.0.0/node_modules/next/dist/server/lib/squoosh/**/*.wasm",
         "!node_modules/.pnpm/next@12.1.5_react-dom@18.0.0+react@18.0.0/node_modules/next/dist/next-server/server/lib/squoosh/**/*.wasm",
         "!node_modules/.pnpm/next@12.1.5_react-dom@18.0.0+react@18.0.0/node_modules/next/dist/compiled/webpack/bundle4.js",
+        "!node_modules/.pnpm/next@12.1.5_react-dom@18.0.0+react@18.0.0/node_modules/next/dist/compiled/webpack/bundle5.js",
+        ".env",
+        ".env.local",
+        ".env.production",
+        ".env.production.local",
+        "./public/locales/**",
+        "./next-i18next.config.js",
+        ".next/server/**",
+        ".next/serverless/**",
+        ".next/*.json",
+        ".next/BUILD_ID",
+        ".next/static/chunks/webpack-middleware*.js",
+        "!.next/server/**/*.js.nft.json",
+        "!node_modules/.pnpm/next@12.1.5_react-dom@18.0.0+react@18.0.0/node_modules/next/dist/compiled/@ampproject/toolbox-optimizer/**/*",
+        "!node_modules/.pnpm/next@12.1.5_react-dom@18.0.0+react@18.0.0/node_modules/next/dist/server/lib/squoosh/**/*.wasm",
+        "!node_modules/.pnpm/next@12.1.5_react-dom@18.0.0+react@18.0.0/node_modules/next/dist/next-server/server/lib/squoosh/**/*.wasm",
+        "!node_modules/.pnpm/next@12.1.5_react-dom@18.0.0+react@18.0.0/node_modules/next/dist/compiled/webpack/bundle4.js",
         "!node_modules/.pnpm/next@12.1.5_react-dom@18.0.0+react@18.0.0/node_modules/next/dist/compiled/webpack/bundle5.js"
       ]
       external_node_modules = []
@@ -365,6 +431,23 @@ status = 200
 
       [context.production.functions.___netlify-odb-handler]
       included_files = [
+        ".env",
+        ".env.local",
+        ".env.production",
+        ".env.production.local",
+        "./public/locales/**",
+        "./next-i18next.config.js",
+        ".next/server/**",
+        ".next/serverless/**",
+        ".next/*.json",
+        ".next/BUILD_ID",
+        ".next/static/chunks/webpack-middleware*.js",
+        "!.next/server/**/*.js.nft.json",
+        "!node_modules/.pnpm/next@12.1.5_react-dom@18.0.0+react@18.0.0/node_modules/next/dist/compiled/@ampproject/toolbox-optimizer/**/*",
+        "!node_modules/.pnpm/next@12.1.5_react-dom@18.0.0+react@18.0.0/node_modules/next/dist/server/lib/squoosh/**/*.wasm",
+        "!node_modules/.pnpm/next@12.1.5_react-dom@18.0.0+react@18.0.0/node_modules/next/dist/next-server/server/lib/squoosh/**/*.wasm",
+        "!node_modules/.pnpm/next@12.1.5_react-dom@18.0.0+react@18.0.0/node_modules/next/dist/compiled/webpack/bundle4.js",
+        "!node_modules/.pnpm/next@12.1.5_react-dom@18.0.0+react@18.0.0/node_modules/next/dist/compiled/webpack/bundle5.js",
         ".env",
         ".env.local",
         ".env.production",
@@ -647,6 +730,275 @@ status = 200
 
     [[context.production.redirects]]
     from = "/_next/data/UmVo9auWq-Nnd4GG3HW1S/favorites.json"
+    to = "/.netlify/functions/___netlify-handler"
+    status = 200
+
+    [[context.production.redirects]]
+    from = "/favorites"
+    to = "/.netlify/functions/___netlify-handler"
+    status = 200
+
+    [[context.production.redirects]]
+    from = "/*"
+    to = "/.netlify/functions/___netlify-handler"
+    status = 200
+
+    [[context.production.redirects]]
+    from = "/_next/static/*"
+    to = "/static/:splat"
+    status = 200
+
+    [[context.production.redirects]]
+    from = "/_next/image*"
+    to = "/_ipx/w_:width,q_:quality/:url"
+    status = 301
+
+      [context.production.redirects.query]
+      url = ":url"
+      w = ":width"
+      q = ":quality"
+
+    [[context.production.redirects]]
+    from = "/_ipx/*"
+    to = "/.netlify/builders/_ipx"
+    status = 200
+
+    [[context.production.redirects]]
+    from = "/cache/*"
+    to = "/404.html"
+    status = 404
+    force = true
+
+    [[context.production.redirects]]
+    from = "/server/*"
+    to = "/404.html"
+    status = 404
+    force = true
+
+    [[context.production.redirects]]
+    from = "/serverless/*"
+    to = "/404.html"
+    status = 404
+    force = true
+
+    [[context.production.redirects]]
+    from = "/trace"
+    to = "/404.html"
+    status = 404
+    force = true
+
+    [[context.production.redirects]]
+    from = "/traces"
+    to = "/404.html"
+    status = 404
+    force = true
+
+    [[context.production.redirects]]
+    from = "/routes-manifest.json"
+    to = "/404.html"
+    status = 404
+    force = true
+
+    [[context.production.redirects]]
+    from = "/build-manifest.json"
+    to = "/404.html"
+    status = 404
+    force = true
+
+    [[context.production.redirects]]
+    from = "/prerender-manifest.json"
+    to = "/404.html"
+    status = 404
+    force = true
+
+    [[context.production.redirects]]
+    from = "/react-loadable-manifest.json"
+    to = "/404.html"
+    status = 404
+    force = true
+
+    [[context.production.redirects]]
+    from = "/BUILD_ID"
+    to = "/404.html"
+    status = 404
+    force = true
+
+    [[context.production.redirects]]
+    from = "/api"
+    to = "/.netlify/functions/___netlify-handler"
+    status = 200
+
+    [[context.production.redirects]]
+    from = "/api/*"
+    to = "/.netlify/functions/___netlify-handler"
+    status = 200
+
+    [[context.production.redirects]]
+    from = "/custom_marker.png"
+    to = "/custom_marker.png"
+    status = 200
+
+      [context.production.redirects.conditions]
+      Cookie = [
+        "__prerender_bypass",
+        "__next_preview_data"
+      ]
+
+    [[context.production.redirects]]
+    from = "/logo192.png"
+    to = "/logo192.png"
+    status = 200
+
+      [context.production.redirects.conditions]
+      Cookie = [
+        "__prerender_bypass",
+        "__next_preview_data"
+      ]
+
+    [[context.production.redirects]]
+    from = "/logo512.png"
+    to = "/logo512.png"
+    status = 200
+
+      [context.production.redirects.conditions]
+      Cookie = [
+        "__prerender_bypass",
+        "__next_preview_data"
+      ]
+
+    [[context.production.redirects]]
+    from = "/manifest.json"
+    to = "/manifest.json"
+    status = 200
+
+      [context.production.redirects.conditions]
+      Cookie = [
+        "__prerender_bypass",
+        "__next_preview_data"
+      ]
+
+    [[context.production.redirects]]
+    from = "/robots.txt"
+    to = "/robots.txt"
+    status = 200
+
+      [context.production.redirects.conditions]
+      Cookie = [
+        "__prerender_bypass",
+        "__next_preview_data"
+      ]
+
+    [[context.production.redirects]]
+    from = "/data/hourly_breakdown.msgpack"
+    to = "/data/hourly_breakdown.msgpack"
+    status = 200
+
+      [context.production.redirects.conditions]
+      Cookie = [
+        "__prerender_bypass",
+        "__next_preview_data"
+      ]
+
+    [[context.production.redirects]]
+    from = "/data/stations-with-nta.geojson"
+    to = "/data/stations-with-nta.geojson"
+    status = 200
+
+      [context.production.redirects.conditions]
+      Cookie = [
+        "__prerender_bypass",
+        "__next_preview_data"
+      ]
+
+    [[context.production.redirects]]
+    from = "/fonts/subset-Jost-Book.woff2"
+    to = "/fonts/subset-Jost-Book.woff2"
+    status = 200
+
+      [context.production.redirects.conditions]
+      Cookie = [
+        "__prerender_bypass",
+        "__next_preview_data"
+      ]
+
+    [[context.production.redirects]]
+    from = "/fonts/subset-Jost-Heavy.woff2"
+    to = "/fonts/subset-Jost-Heavy.woff2"
+    status = 200
+
+      [context.production.redirects.conditions]
+      Cookie = [
+        "__prerender_bypass",
+        "__next_preview_data"
+      ]
+
+    [[context.production.redirects]]
+    from = "/sound/bikes.mp3"
+    to = "/sound/bikes.mp3"
+    status = 200
+
+      [context.production.redirects.conditions]
+      Cookie = [
+        "__prerender_bypass",
+        "__next_preview_data"
+      ]
+
+    [[context.production.redirects]]
+    from = "/sound/pop.mp3"
+    to = "/sound/pop.mp3"
+    status = 200
+
+      [context.production.redirects.conditions]
+      Cookie = [
+        "__prerender_bypass",
+        "__next_preview_data"
+      ]
+
+    [[context.production.redirects]]
+    from = "/sound/zoom.mp3"
+    to = "/sound/zoom.mp3"
+    status = 200
+
+      [context.production.redirects.conditions]
+      Cookie = [
+        "__prerender_bypass",
+        "__next_preview_data"
+      ]
+
+    [[context.production.redirects]]
+    from = "/*"
+    to = "/.netlify/functions/___netlify-handler"
+    status = 200
+    force = true
+
+      [context.production.redirects.conditions]
+      Cookie = [
+        "__prerender_bypass",
+        "__next_preview_data"
+      ]
+
+    [[context.production.redirects]]
+    from = "/_next/data/cROisTpVu0JpmVWIuJv8B/index.json"
+    to = "/.netlify/functions/___netlify-handler"
+    status = 200
+
+    [[context.production.redirects]]
+    from = "/"
+    to = "/.netlify/functions/___netlify-handler"
+    status = 200
+
+    [[context.production.redirects]]
+    from = "/_next/data/cROisTpVu0JpmVWIuJv8B/about.json"
+    to = "/.netlify/functions/___netlify-handler"
+    status = 200
+
+    [[context.production.redirects]]
+    from = "/about"
+    to = "/.netlify/functions/___netlify-handler"
+    status = 200
+
+    [[context.production.redirects]]
+    from = "/_next/data/cROisTpVu0JpmVWIuJv8B/favorites.json"
     to = "/.netlify/functions/___netlify-handler"
     status = 200
 
@@ -986,6 +1338,624 @@ status = 200
     status = 200
 
     [[context.msgpack.redirects]]
+    from = "/*"
+    to = "/.netlify/functions/___netlify-handler"
+    status = 200
+
+  [context.main]
+
+    [context.main.functions]
+
+      [context.main.functions.___netlify-handler]
+      included_files = [
+        ".env",
+        ".env.local",
+        ".env.production",
+        ".env.production.local",
+        "./public/locales/**",
+        "./next-i18next.config.js",
+        ".next/server/**",
+        ".next/serverless/**",
+        ".next/*.json",
+        ".next/BUILD_ID",
+        ".next/static/chunks/webpack-middleware*.js",
+        "!.next/server/**/*.js.nft.json",
+        "!node_modules/.pnpm/next@12.1.5_react-dom@18.0.0+react@18.0.0/node_modules/next/dist/compiled/@ampproject/toolbox-optimizer/**/*",
+        "!node_modules/.pnpm/next@12.1.5_react-dom@18.0.0+react@18.0.0/node_modules/next/dist/server/lib/squoosh/**/*.wasm",
+        "!node_modules/.pnpm/next@12.1.5_react-dom@18.0.0+react@18.0.0/node_modules/next/dist/next-server/server/lib/squoosh/**/*.wasm",
+        "!node_modules/.pnpm/next@12.1.5_react-dom@18.0.0+react@18.0.0/node_modules/next/dist/compiled/webpack/bundle4.js",
+        "!node_modules/.pnpm/next@12.1.5_react-dom@18.0.0+react@18.0.0/node_modules/next/dist/compiled/webpack/bundle5.js",
+        ".env",
+        ".env.local",
+        ".env.production",
+        ".env.production.local",
+        "./public/locales/**",
+        "./next-i18next.config.js",
+        ".next/server/**",
+        ".next/serverless/**",
+        ".next/*.json",
+        ".next/BUILD_ID",
+        ".next/static/chunks/webpack-middleware*.js",
+        "!.next/server/**/*.js.nft.json",
+        "!node_modules/.pnpm/next@12.1.5_react-dom@18.0.0+react@18.0.0/node_modules/next/dist/compiled/@ampproject/toolbox-optimizer/**/*",
+        "!node_modules/.pnpm/next@12.1.5_react-dom@18.0.0+react@18.0.0/node_modules/next/dist/server/lib/squoosh/**/*.wasm",
+        "!node_modules/.pnpm/next@12.1.5_react-dom@18.0.0+react@18.0.0/node_modules/next/dist/next-server/server/lib/squoosh/**/*.wasm",
+        "!node_modules/.pnpm/next@12.1.5_react-dom@18.0.0+react@18.0.0/node_modules/next/dist/compiled/webpack/bundle4.js",
+        "!node_modules/.pnpm/next@12.1.5_react-dom@18.0.0+react@18.0.0/node_modules/next/dist/compiled/webpack/bundle5.js"
+      ]
+
+      [context.main.functions.___netlify-odb-handler]
+      included_files = [
+        ".env",
+        ".env.local",
+        ".env.production",
+        ".env.production.local",
+        "./public/locales/**",
+        "./next-i18next.config.js",
+        ".next/server/**",
+        ".next/serverless/**",
+        ".next/*.json",
+        ".next/BUILD_ID",
+        ".next/static/chunks/webpack-middleware*.js",
+        "!.next/server/**/*.js.nft.json",
+        "!node_modules/.pnpm/next@12.1.5_react-dom@18.0.0+react@18.0.0/node_modules/next/dist/compiled/@ampproject/toolbox-optimizer/**/*",
+        "!node_modules/.pnpm/next@12.1.5_react-dom@18.0.0+react@18.0.0/node_modules/next/dist/server/lib/squoosh/**/*.wasm",
+        "!node_modules/.pnpm/next@12.1.5_react-dom@18.0.0+react@18.0.0/node_modules/next/dist/next-server/server/lib/squoosh/**/*.wasm",
+        "!node_modules/.pnpm/next@12.1.5_react-dom@18.0.0+react@18.0.0/node_modules/next/dist/compiled/webpack/bundle4.js",
+        "!node_modules/.pnpm/next@12.1.5_react-dom@18.0.0+react@18.0.0/node_modules/next/dist/compiled/webpack/bundle5.js",
+        ".env",
+        ".env.local",
+        ".env.production",
+        ".env.production.local",
+        "./public/locales/**",
+        "./next-i18next.config.js",
+        ".next/server/**",
+        ".next/serverless/**",
+        ".next/*.json",
+        ".next/BUILD_ID",
+        ".next/static/chunks/webpack-middleware*.js",
+        "!.next/server/**/*.js.nft.json",
+        "!node_modules/.pnpm/next@12.1.5_react-dom@18.0.0+react@18.0.0/node_modules/next/dist/compiled/@ampproject/toolbox-optimizer/**/*",
+        "!node_modules/.pnpm/next@12.1.5_react-dom@18.0.0+react@18.0.0/node_modules/next/dist/server/lib/squoosh/**/*.wasm",
+        "!node_modules/.pnpm/next@12.1.5_react-dom@18.0.0+react@18.0.0/node_modules/next/dist/next-server/server/lib/squoosh/**/*.wasm",
+        "!node_modules/.pnpm/next@12.1.5_react-dom@18.0.0+react@18.0.0/node_modules/next/dist/compiled/webpack/bundle4.js",
+        "!node_modules/.pnpm/next@12.1.5_react-dom@18.0.0+react@18.0.0/node_modules/next/dist/compiled/webpack/bundle5.js"
+      ]
+
+    [[context.main.redirects]]
+    from = "/_next/static/*"
+    to = "/static/:splat"
+    status = 200
+
+    [[context.main.redirects]]
+    from = "/_next/image*"
+    to = "/_ipx/w_:width,q_:quality/:url"
+    status = 301
+
+      [context.main.redirects.query]
+      url = ":url"
+      w = ":width"
+      q = ":quality"
+
+    [[context.main.redirects]]
+    from = "/_ipx/*"
+    to = "/.netlify/builders/_ipx"
+    status = 200
+
+    [[context.main.redirects]]
+    from = "/cache/*"
+    to = "/404.html"
+    status = 404
+    force = true
+
+    [[context.main.redirects]]
+    from = "/server/*"
+    to = "/404.html"
+    status = 404
+    force = true
+
+    [[context.main.redirects]]
+    from = "/serverless/*"
+    to = "/404.html"
+    status = 404
+    force = true
+
+    [[context.main.redirects]]
+    from = "/trace"
+    to = "/404.html"
+    status = 404
+    force = true
+
+    [[context.main.redirects]]
+    from = "/traces"
+    to = "/404.html"
+    status = 404
+    force = true
+
+    [[context.main.redirects]]
+    from = "/routes-manifest.json"
+    to = "/404.html"
+    status = 404
+    force = true
+
+    [[context.main.redirects]]
+    from = "/build-manifest.json"
+    to = "/404.html"
+    status = 404
+    force = true
+
+    [[context.main.redirects]]
+    from = "/prerender-manifest.json"
+    to = "/404.html"
+    status = 404
+    force = true
+
+    [[context.main.redirects]]
+    from = "/react-loadable-manifest.json"
+    to = "/404.html"
+    status = 404
+    force = true
+
+    [[context.main.redirects]]
+    from = "/BUILD_ID"
+    to = "/404.html"
+    status = 404
+    force = true
+
+    [[context.main.redirects]]
+    from = "/api"
+    to = "/.netlify/functions/___netlify-handler"
+    status = 200
+
+    [[context.main.redirects]]
+    from = "/api/*"
+    to = "/.netlify/functions/___netlify-handler"
+    status = 200
+
+    [[context.main.redirects]]
+    from = "/custom_marker.png"
+    to = "/custom_marker.png"
+    status = 200
+
+      [context.main.redirects.conditions]
+      Cookie = [
+        "__prerender_bypass",
+        "__next_preview_data"
+      ]
+
+    [[context.main.redirects]]
+    from = "/logo192.png"
+    to = "/logo192.png"
+    status = 200
+
+      [context.main.redirects.conditions]
+      Cookie = [
+        "__prerender_bypass",
+        "__next_preview_data"
+      ]
+
+    [[context.main.redirects]]
+    from = "/logo512.png"
+    to = "/logo512.png"
+    status = 200
+
+      [context.main.redirects.conditions]
+      Cookie = [
+        "__prerender_bypass",
+        "__next_preview_data"
+      ]
+
+    [[context.main.redirects]]
+    from = "/manifest.json"
+    to = "/manifest.json"
+    status = 200
+
+      [context.main.redirects.conditions]
+      Cookie = [
+        "__prerender_bypass",
+        "__next_preview_data"
+      ]
+
+    [[context.main.redirects]]
+    from = "/robots.txt"
+    to = "/robots.txt"
+    status = 200
+
+      [context.main.redirects.conditions]
+      Cookie = [
+        "__prerender_bypass",
+        "__next_preview_data"
+      ]
+
+    [[context.main.redirects]]
+    from = "/data/hourly_breakdown.msgpack"
+    to = "/data/hourly_breakdown.msgpack"
+    status = 200
+
+      [context.main.redirects.conditions]
+      Cookie = [
+        "__prerender_bypass",
+        "__next_preview_data"
+      ]
+
+    [[context.main.redirects]]
+    from = "/data/stations-with-nta.geojson"
+    to = "/data/stations-with-nta.geojson"
+    status = 200
+
+      [context.main.redirects.conditions]
+      Cookie = [
+        "__prerender_bypass",
+        "__next_preview_data"
+      ]
+
+    [[context.main.redirects]]
+    from = "/fonts/subset-Jost-Book.woff2"
+    to = "/fonts/subset-Jost-Book.woff2"
+    status = 200
+
+      [context.main.redirects.conditions]
+      Cookie = [
+        "__prerender_bypass",
+        "__next_preview_data"
+      ]
+
+    [[context.main.redirects]]
+    from = "/fonts/subset-Jost-Heavy.woff2"
+    to = "/fonts/subset-Jost-Heavy.woff2"
+    status = 200
+
+      [context.main.redirects.conditions]
+      Cookie = [
+        "__prerender_bypass",
+        "__next_preview_data"
+      ]
+
+    [[context.main.redirects]]
+    from = "/sound/bikes.mp3"
+    to = "/sound/bikes.mp3"
+    status = 200
+
+      [context.main.redirects.conditions]
+      Cookie = [
+        "__prerender_bypass",
+        "__next_preview_data"
+      ]
+
+    [[context.main.redirects]]
+    from = "/sound/pop.mp3"
+    to = "/sound/pop.mp3"
+    status = 200
+
+      [context.main.redirects.conditions]
+      Cookie = [
+        "__prerender_bypass",
+        "__next_preview_data"
+      ]
+
+    [[context.main.redirects]]
+    from = "/sound/zoom.mp3"
+    to = "/sound/zoom.mp3"
+    status = 200
+
+      [context.main.redirects.conditions]
+      Cookie = [
+        "__prerender_bypass",
+        "__next_preview_data"
+      ]
+
+    [[context.main.redirects]]
+    from = "/*"
+    to = "/.netlify/functions/___netlify-handler"
+    status = 200
+    force = true
+
+      [context.main.redirects.conditions]
+      Cookie = [
+        "__prerender_bypass",
+        "__next_preview_data"
+      ]
+
+    [[context.main.redirects]]
+    from = "/_next/data/UmVo9auWq-Nnd4GG3HW1S/index.json"
+    to = "/.netlify/functions/___netlify-handler"
+    status = 200
+
+    [[context.main.redirects]]
+    from = "/"
+    to = "/.netlify/functions/___netlify-handler"
+    status = 200
+
+    [[context.main.redirects]]
+    from = "/_next/data/UmVo9auWq-Nnd4GG3HW1S/about.json"
+    to = "/.netlify/functions/___netlify-handler"
+    status = 200
+
+    [[context.main.redirects]]
+    from = "/about"
+    to = "/.netlify/functions/___netlify-handler"
+    status = 200
+
+    [[context.main.redirects]]
+    from = "/_next/data/UmVo9auWq-Nnd4GG3HW1S/favorites.json"
+    to = "/.netlify/functions/___netlify-handler"
+    status = 200
+
+    [[context.main.redirects]]
+    from = "/favorites"
+    to = "/.netlify/functions/___netlify-handler"
+    status = 200
+
+    [[context.main.redirects]]
+    from = "/*"
+    to = "/.netlify/functions/___netlify-handler"
+    status = 200
+
+    [[context.main.redirects]]
+    from = "/_next/static/*"
+    to = "/static/:splat"
+    status = 200
+
+    [[context.main.redirects]]
+    from = "/_next/image*"
+    to = "/_ipx/w_:width,q_:quality/:url"
+    status = 301
+
+      [context.main.redirects.query]
+      url = ":url"
+      w = ":width"
+      q = ":quality"
+
+    [[context.main.redirects]]
+    from = "/_ipx/*"
+    to = "/.netlify/builders/_ipx"
+    status = 200
+
+    [[context.main.redirects]]
+    from = "/cache/*"
+    to = "/404.html"
+    status = 404
+    force = true
+
+    [[context.main.redirects]]
+    from = "/server/*"
+    to = "/404.html"
+    status = 404
+    force = true
+
+    [[context.main.redirects]]
+    from = "/serverless/*"
+    to = "/404.html"
+    status = 404
+    force = true
+
+    [[context.main.redirects]]
+    from = "/trace"
+    to = "/404.html"
+    status = 404
+    force = true
+
+    [[context.main.redirects]]
+    from = "/traces"
+    to = "/404.html"
+    status = 404
+    force = true
+
+    [[context.main.redirects]]
+    from = "/routes-manifest.json"
+    to = "/404.html"
+    status = 404
+    force = true
+
+    [[context.main.redirects]]
+    from = "/build-manifest.json"
+    to = "/404.html"
+    status = 404
+    force = true
+
+    [[context.main.redirects]]
+    from = "/prerender-manifest.json"
+    to = "/404.html"
+    status = 404
+    force = true
+
+    [[context.main.redirects]]
+    from = "/react-loadable-manifest.json"
+    to = "/404.html"
+    status = 404
+    force = true
+
+    [[context.main.redirects]]
+    from = "/BUILD_ID"
+    to = "/404.html"
+    status = 404
+    force = true
+
+    [[context.main.redirects]]
+    from = "/api"
+    to = "/.netlify/functions/___netlify-handler"
+    status = 200
+
+    [[context.main.redirects]]
+    from = "/api/*"
+    to = "/.netlify/functions/___netlify-handler"
+    status = 200
+
+    [[context.main.redirects]]
+    from = "/custom_marker.png"
+    to = "/custom_marker.png"
+    status = 200
+
+      [context.main.redirects.conditions]
+      Cookie = [
+        "__prerender_bypass",
+        "__next_preview_data"
+      ]
+
+    [[context.main.redirects]]
+    from = "/logo192.png"
+    to = "/logo192.png"
+    status = 200
+
+      [context.main.redirects.conditions]
+      Cookie = [
+        "__prerender_bypass",
+        "__next_preview_data"
+      ]
+
+    [[context.main.redirects]]
+    from = "/logo512.png"
+    to = "/logo512.png"
+    status = 200
+
+      [context.main.redirects.conditions]
+      Cookie = [
+        "__prerender_bypass",
+        "__next_preview_data"
+      ]
+
+    [[context.main.redirects]]
+    from = "/manifest.json"
+    to = "/manifest.json"
+    status = 200
+
+      [context.main.redirects.conditions]
+      Cookie = [
+        "__prerender_bypass",
+        "__next_preview_data"
+      ]
+
+    [[context.main.redirects]]
+    from = "/robots.txt"
+    to = "/robots.txt"
+    status = 200
+
+      [context.main.redirects.conditions]
+      Cookie = [
+        "__prerender_bypass",
+        "__next_preview_data"
+      ]
+
+    [[context.main.redirects]]
+    from = "/data/hourly_breakdown.msgpack"
+    to = "/data/hourly_breakdown.msgpack"
+    status = 200
+
+      [context.main.redirects.conditions]
+      Cookie = [
+        "__prerender_bypass",
+        "__next_preview_data"
+      ]
+
+    [[context.main.redirects]]
+    from = "/data/stations-with-nta.geojson"
+    to = "/data/stations-with-nta.geojson"
+    status = 200
+
+      [context.main.redirects.conditions]
+      Cookie = [
+        "__prerender_bypass",
+        "__next_preview_data"
+      ]
+
+    [[context.main.redirects]]
+    from = "/fonts/subset-Jost-Book.woff2"
+    to = "/fonts/subset-Jost-Book.woff2"
+    status = 200
+
+      [context.main.redirects.conditions]
+      Cookie = [
+        "__prerender_bypass",
+        "__next_preview_data"
+      ]
+
+    [[context.main.redirects]]
+    from = "/fonts/subset-Jost-Heavy.woff2"
+    to = "/fonts/subset-Jost-Heavy.woff2"
+    status = 200
+
+      [context.main.redirects.conditions]
+      Cookie = [
+        "__prerender_bypass",
+        "__next_preview_data"
+      ]
+
+    [[context.main.redirects]]
+    from = "/sound/bikes.mp3"
+    to = "/sound/bikes.mp3"
+    status = 200
+
+      [context.main.redirects.conditions]
+      Cookie = [
+        "__prerender_bypass",
+        "__next_preview_data"
+      ]
+
+    [[context.main.redirects]]
+    from = "/sound/pop.mp3"
+    to = "/sound/pop.mp3"
+    status = 200
+
+      [context.main.redirects.conditions]
+      Cookie = [
+        "__prerender_bypass",
+        "__next_preview_data"
+      ]
+
+    [[context.main.redirects]]
+    from = "/sound/zoom.mp3"
+    to = "/sound/zoom.mp3"
+    status = 200
+
+      [context.main.redirects.conditions]
+      Cookie = [
+        "__prerender_bypass",
+        "__next_preview_data"
+      ]
+
+    [[context.main.redirects]]
+    from = "/*"
+    to = "/.netlify/functions/___netlify-handler"
+    status = 200
+    force = true
+
+      [context.main.redirects.conditions]
+      Cookie = [
+        "__prerender_bypass",
+        "__next_preview_data"
+      ]
+
+    [[context.main.redirects]]
+    from = "/_next/data/cROisTpVu0JpmVWIuJv8B/index.json"
+    to = "/.netlify/functions/___netlify-handler"
+    status = 200
+
+    [[context.main.redirects]]
+    from = "/"
+    to = "/.netlify/functions/___netlify-handler"
+    status = 200
+
+    [[context.main.redirects]]
+    from = "/_next/data/cROisTpVu0JpmVWIuJv8B/about.json"
+    to = "/.netlify/functions/___netlify-handler"
+    status = 200
+
+    [[context.main.redirects]]
+    from = "/about"
+    to = "/.netlify/functions/___netlify-handler"
+    status = 200
+
+    [[context.main.redirects]]
+    from = "/_next/data/cROisTpVu0JpmVWIuJv8B/favorites.json"
+    to = "/.netlify/functions/___netlify-handler"
+    status = 200
+
+    [[context.main.redirects]]
+    from = "/favorites"
+    to = "/.netlify/functions/___netlify-handler"
+    status = 200
+
+    [[context.main.redirects]]
     from = "/*"
     to = "/.netlify/functions/___netlify-handler"
     status = 200

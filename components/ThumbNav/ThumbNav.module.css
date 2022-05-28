@@ -49,3 +49,10 @@
   background: var(--c-white);
   color: var(--c-blue);
 }
+
+.icon {
+  display: block;
+  height: 2em;
+  width: 2em;
+  margin: auto;
+}
