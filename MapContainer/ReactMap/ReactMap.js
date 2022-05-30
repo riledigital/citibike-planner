@@ -13,29 +13,8 @@ import {
   setShowInspector,
   setSelectedShortName,
   selectCurrentStationData,
+  STATION_INFO,
 } from "common/store/AppSlice";
-
-const layerStyleStations = {
-  id: "stationsPoints",
-  type: "circle",
-  paint: {
-    "circle-radius": 10,
-    "circle-color": "#007cbf",
-  },
-};
-
-const layerStyleStationsText = {
-  id: "stationsText",
-  type: "symbol",
-  layout: {
-    "text-field": ["get", "name"],
-    "text-offset": [0, -1.5],
-    "text-size": 12,
-  },
-  paint: {
-    "text-color": "#000000",
-  },
-};
 
 const BOUNDS = [
   [-74.1741943359375, 40.550330732028456],
@@ -46,6 +25,37 @@ const ReactMap = () => {
   const dispatch = useDispatch();
   const selectedStationId = useSelector(selectCurrentStation);
   const stationGeo = useSelector(selectStationGeo);
+
+  const [layerStyleStations] = useState({
+    id: "stationsPoints",
+    type: "circle",
+    paint: {
+      "circle-radius": 10,
+      "circle-color": [
+        "interpolate-hcl",
+        ["linear"],
+        ["get", "station_rank"],
+        1,
+        "rgb(255, 209, 255)",
+        45,
+        "rgb(94, 52, 255)",
+      ],
+      // "circle-color": "#007cbf",
+    },
+  });
+
+  const layerStyleStationsText = {
+    id: "stationsText",
+    type: "symbol",
+    layout: {
+      "text-field": ["get", "name"],
+      "text-offset": [0, -1.5],
+      "text-size": 12,
+    },
+    paint: {
+      "text-color": "#000000",
+    },
+  };
 
   const selectedStationData = useSelector(selectCurrentStationData) ?? {};
   const {
@@ -107,6 +117,7 @@ const ReactMap = () => {
           } = firstFeature;
           // console.debug({ station_id, short_name });
           // TODO: do stuff with clicked feature
+          console.log(firstFeature);
           dispatch(setSelectedStationId(station_id));
           dispatch(setSelectedShortName(short_name));
           setShowPopup(true);
@@ -142,7 +153,7 @@ const ReactMap = () => {
       <Source
         id="my-data"
         type="geojson"
-        data={"data/stations-with-nta.geojson"}
+        data={"/data/station_geo_ranked.geojson"}
       >
         {showPopup && (
           <Popup

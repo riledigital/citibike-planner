@@ -3,7 +3,7 @@ import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
 import axios from "axios";
 import { fetchMsgPackBlob } from "common/Data/MsgPack";
 
-const STATION_INFO = "/data/stations-with-nta.geojson";
+const STATION_INFO = "/data/station_geo_ranked.geojson";
 const DATA_SUMMARY = "/data/hourly_breakdown.msgpack";
 const LIVE_STATUS = "https://gbfs.citibikenyc.com/gbfs/en/station_status.json";
 
@@ -37,15 +37,15 @@ export const fetchLiveStatus = createAsyncThunk(
 const initialState = {
   isLoading: false,
   isMuted: true,
-  lastUpdated: null,
-  rankingData: null,
-  selectedStation: null,
-  selectedStationId: null,
+  lastUpdated: "",
+  rankingData: {},
+  selectedStation: {},
+  selectedStationId: "",
   showInspector: false,
   showMenu: false,
   stationFavorites: [],
-  stationFrequencyData: null,
-  stationGeo: null,
+  stationFrequencyData: {},
+  stationGeo: {},
   stationStatusData: {},
 };
 
@@ -68,7 +68,7 @@ export const appSlice = createSlice({
     setSelectedShortName: (state, action) => {
       const { payload: short_name } = action;
       state.showInspector = short_name ? true : false;
-      const currentStation = state.stationGeo.features.find(
+      const currentStation = state?.stationGeo?.features?.find(
         ({ properties: { short_name: sn } }) => sn === short_name
       );
 
