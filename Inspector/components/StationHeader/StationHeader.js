@@ -1,14 +1,8 @@
 // TODO: Remove live status stuff from it
-import React, { useEffect, useState } from "react";
 import clsx from "clsx";
 import ManageStation from "components/ManageStation";
+import React from "react";
 import styles from "./StationHeader.module.css";
-
-import { useTransition, animated } from "@react-spring/web";
-import { useSelector } from "react-redux";
-import { selectStationInfo } from "common/store/AppSlice";
-
-import styled from "styled-components";
 import { useStationData } from "/hooks/useStationData";
 
 /**
@@ -53,12 +47,12 @@ const StationHeader = (props) => {
       <div className={styles["station-info"]}>
         <div className={styles["station-ranking"]}>
           Rank {ordinal(station_rank)} of {stations_count} in
+          <div>
+            {stationNeighborhood}, {boroname}
+          </div>
         </div>
-        <div>
-          {stationNeighborhood}, {boroname}
-        </div>
+        <ManageStation />
       </div>
-      <ManageStation />
     </header>
   ) : (
     <div>

@@ -2,16 +2,22 @@
   display: flex;
   flex-flow: column nowrap;
   align-items: flex-start;
-  gap: 0.5rem;
+  gap: 0.5em;
 }
 
 .name {
   line-height: 1.1;
   font-size: 1.2rem;
+  font-weight: var(--fw-bold);
   width: 100%;
 }
 
 .station-info {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  width: 100%;
+
   font-size: 1rem;
 }
 
@@ -19,4 +25,8 @@
   display: block;
   float: right;
   font-size: 1rem;
+}
+
+.station-ranking {
+  display: block;
 }
