@@ -29,6 +29,4 @@ export const StyledTooltip = styled.div`
 
 `transform: translate(${({ coords }) => `${coords.x}px, ${coords.y}px`});`;
 
-export const StyledBarLabel = styled.text`
-  transition: opacity 500ms ease;
-`;
+export const StyledBarLabel = styled.text``;

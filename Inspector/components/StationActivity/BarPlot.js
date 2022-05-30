@@ -1,18 +1,11 @@
 /* eslint-disable */
 // https://observablehq.com/@d3/margin-convention
-import { useEventListenerRef, useMergeRefs, useMouse } from "rooks";
-import {
-  selectCurrentStation,
-  selectAllStationFrequencyData,
-} from "common/store/AppSlice";
+import { format, max, scaleLinear, scaleTime, timeFormat, timeParse } from "d3";
 import { useFrequency } from "hooks/useFrequency";
-import { format, scaleLinear, scaleTime, timeFormat, timeParse, max } from "d3";
 import React, { useEffect, useRef, useState } from "react";
-
-import { formatAMPM, formatTime } from "./lib";
-
-import { StyledBarLabel } from "./styles";
+import { useEventListenerRef, useMergeRefs } from "rooks";
 import styles from "./BarPlot.module.css";
+import { formatAMPM, formatTime } from "./lib";
 
 const RADIAL_PLOT = Symbol("RADIAL_PLOT");
 const BAR_PLOT = Symbol("BAR_PLOT");
@@ -102,12 +95,14 @@ const BarPlot = ({
     >
       {data.map(({ start_hour, counts }, t, key) => (
         <g
+          className={styles["group"]}
           key={t}
           transform={`translate(
                 ${xScale(start_hour)},
               ${yScale(yRange[1])})`}
         >
           <rect
+            className={styles["rect"]}
             fill={
               new Date().getHours() === start_hour
                 ? "var(--c-blue-highlight)"
@@ -118,7 +113,8 @@ const BarPlot = ({
             style={{ transform: `scaleY(-1)` }}
           />
           {true && (
-            <StyledBarLabel
+            <text
+              className={styles["text-label"]}
               textAnchor="center"
               dx="1"
               dy={-yScale(counts) - 4}
@@ -128,10 +124,11 @@ const BarPlot = ({
               style={{ opacity: showLabels ? 1.0 : 0 }}
             >
               {Number.parseFloat(counts).toFixed(0)}
-            </StyledBarLabel>
+            </text>
           )}
 
-          <StyledBarLabel
+          <text
+            className={styles["text-label"]}
             textAnchor="center"
             dy={10}
             dx={barWidth / 4}
@@ -148,7 +145,7 @@ const BarPlot = ({
             }}
           >
             {formatTime(start_hour)} {formatAMPM(start_hour)}
-          </StyledBarLabel>
+          </text>
         </g>
       ))}
     </svg>

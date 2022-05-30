@@ -3,6 +3,18 @@
   margin: 0;
 }
 
+.svgContainer:hover .group {
+  opacity: 0.5;
+}
+
+.svgContainer:hover .group:hover {
+  opacity: 1;
+}
+
+.svgContainer:hover .text-label {
+  opacity: 0.1;
+}
+
 .tooltip {
   display: flex;
   position: fixed;
@@ -13,4 +25,15 @@
 
   height: 10rem;
   width: 10rem;
+}
+
+.text-label {
+  /* transition: opacity 500ms ease; */
+}
+.group {
+  transition: opacity 80ms ease;
+}
+.rect:hover {
+  /* filter: brightness(2); */
+  transition: opacity 80ms ease;
 }
