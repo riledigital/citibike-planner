@@ -3,6 +3,7 @@ import { persistStore } from "reduxjs-toolkit-persist";
 
 import GlobalStyles from "/styles/GlobalStyles";
 import { store } from "common/store";
+import Loading from "components/Loading";
 import ThumbNav from "components/ThumbNav";
 import Script from "next/script";
 import { Provider } from "react-redux";
@@ -32,7 +33,7 @@ const App = ({ Component }) => {
       />
       <GlobalStyles />
       <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
+        <PersistGate loading={<Loading />} persistor={persistor}>
           <ThumbNav />
           <Component />
         </PersistGate>
