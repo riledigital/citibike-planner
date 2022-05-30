@@ -116,8 +116,7 @@ const ReactMap = () => {
             properties: { station_id, short_name },
           } = firstFeature;
           // console.debug({ station_id, short_name });
-          // TODO: do stuff with clicked feature
-          console.log(firstFeature);
+
           dispatch(setSelectedStationId(station_id));
           dispatch(setSelectedShortName(short_name));
           setShowPopup(true);

@@ -3,12 +3,30 @@ import React, { useEffect, useState } from "react";
 import clsx from "clsx";
 import ManageStation from "components/ManageStation";
 import styles from "./StationHeader.module.css";
+
 import { useTransition, animated } from "@react-spring/web";
 import { useSelector } from "react-redux";
 import { selectStationInfo } from "common/store/AppSlice";
 
 import styled from "styled-components";
 import { useStationData } from "/hooks/useStationData";
+
+/**
+ * Intl ordinal standard
+ * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/PluralRules/PluralRules#using_options
+ */
+const en_ordinal_rules = new Intl.PluralRules("en", { type: "ordinal" });
+const suffixes = new Map([
+  ["one", "st"],
+  ["two", "nd"],
+  ["few", "rd"],
+  ["other", "th"],
+]);
+function ordinal(number) {
+  const rule = en_ordinal_rules.select(number);
+  const suffix = suffixes.get(rule);
+  return number + suffix;
+}
 
 const StationHeader = (props) => {
   // Logic for handling null NTA codes
@@ -19,6 +37,8 @@ const StationHeader = (props) => {
     ntaname,
     boroname,
     stationNeighborhood,
+    station_rank,
+    stations_count,
   } = useStationData();
 
   return name ? (
@@ -29,8 +49,14 @@ const StationHeader = (props) => {
           #{short_name}
         </div>
       </div>
+
       <div className={styles["station-info"]}>
-        {stationNeighborhood}, {boroname}
+        <div className={styles["station-ranking"]}>
+          Rank {ordinal(station_rank)} of {stations_count} in
+        </div>
+        <div>
+          {stationNeighborhood}, {boroname}
+        </div>
       </div>
       <ManageStation />
     </header>

@@ -176,7 +176,7 @@ export const selectLiveStatus = (state) => {
 };
 
 export const selectStationFavorited = (state) => {
-  const { short_name } = state.AppSlice.selectedStation;
+  const { short_name } = state.AppSlice.selectedStation.properties;
   const exists = state?.AppSlice?.stationFavorites?.findIndex(
     (d) => d === short_name
   );
