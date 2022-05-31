@@ -5,7 +5,6 @@ import { fetchMsgPackBlob } from "common/Data/MsgPack";
 
 const STATION_INFO = "/data/station_geo_ranked.geojson";
 const DATA_SUMMARY = "/data/hourly_breakdown.msgpack";
-const LIVE_STATUS = "https://gbfs.citibikenyc.com/gbfs/en/station_status.json";
 
 export const fetchFrequencyAnalysis = createAsyncThunk(
   "app/fetchFrequencyAnalysis",
@@ -26,14 +25,6 @@ export const fetchStationGeo = createAsyncThunk(
   }
 );
 
-export const fetchLiveStatus = createAsyncThunk(
-  "app/fetchLiveStatus",
-  async () => {
-    const response = await axios.get(LIVE_STATUS);
-    return response.data;
-  }
-);
-
 const initialState = {
   isLoading: false,
   isMuted: true,
@@ -46,7 +37,6 @@ const initialState = {
   stationFavorites: [],
   stationFrequencyData: {},
   stationGeo: {},
-  stationStatusData: {},
 };
 
 export const appSlice = createSlice({
@@ -106,17 +96,6 @@ export const appSlice = createSlice({
       // state.stationInfo = map;
       state.stationGeo = action.payload;
     });
-    builder.addCase(fetchLiveStatus.pending, (state, action) => {
-      state.isLoading = true;
-    });
-    builder.addCase(fetchLiveStatus.fulfilled, (state, action) => {
-      const { payload } = action;
-      const transformed = payload.data.stations.map((d) => {
-        return [d.station_id, d];
-      });
-      const output = Object.fromEntries(transformed);
-      state.stationStatusData = output;
-    });
   },
 });
 
@@ -164,15 +143,6 @@ export const selectStationInfo = (state) => {
 
 export const selectAllStationInfo = (state) => {
   return state.AppSlice?.stationGeo?.features ?? [];
-};
-
-export const selectAllLiveStatus = (state) => {
-  return state.AppSlice.stationStatusData;
-};
-
-export const selectLiveStatus = (state) => {
-  const id = state.AppSlice?.selectedStationId;
-  return state.AppSlice?.stationStatusData[id];
 };
 
 export const selectStationFavorited = (state) => {

@@ -30,7 +30,7 @@ const App = () => {
 
   // New startup
   useEffect(() => {
-    dispatch(fetchFrequencyAnalysis());
+    // dispatch(fetchFrequencyAnalysis());
     dispatch(fetchStationGeo());
     dispatch(fetchLiveStatus());
   }, [dispatch]);

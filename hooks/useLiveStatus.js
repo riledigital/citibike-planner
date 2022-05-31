@@ -1,11 +1,11 @@
-import {
-  selectCurrentStationData,
-  selectAllLiveStatus,
-} from "common/store/AppSlice";
+import { selectCurrentStationData } from "common/store/AppSlice";
+
+import { useGetLiveDataQuery } from "common/store/CBServer";
 import { useSelector } from "react-redux";
 
 export const useLiveStatus = (stationId = null) => {
-  const allLiveStatus = useSelector(selectAllLiveStatus);
+  // const allLiveStatus = useSelector(selectAllLiveStatus);
+  const { data: allLiveStatus } = useGetLiveDataQuery();
   let currentStation = useSelector(selectCurrentStationData);
 
   // uses the old station_id field

@@ -2,10 +2,12 @@
 // https://observablehq.com/@d3/margin-convention
 import { format, max, scaleLinear, scaleTime, timeFormat, timeParse } from "d3";
 import { useFrequency } from "hooks/useFrequency";
-import React, { useEffect, useRef, useState } from "react";
+import { useGetHourlySummaryQuery } from "common/store/CBServer";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useEventListenerRef, useMergeRefs } from "rooks";
 import styles from "./BarPlot.module.css";
 import { formatAMPM, formatTime } from "./lib";
+import { useStationData } from "../../../hooks/useStationData";
 
 const RADIAL_PLOT = Symbol("RADIAL_PLOT");
 const BAR_PLOT = Symbol("BAR_PLOT");
@@ -19,7 +21,9 @@ const BarPlot = ({
   stationId = null,
   textFill = "var(--c-background)",
 }) => {
-  let { data } = useFrequency(stationId);
+  // let { data } = useFrequency(stationId);
+  const { short_name } = useStationData();
+  let { data } = useGetHourlySummaryQuery(stationId ?? short_name);
 
   const timeRanges = [6, 22];
   const timeRangeCount = timeRanges[1] - timeRanges[0];
@@ -34,9 +38,9 @@ const BarPlot = ({
   const [showTooltip, setShowTooltip] = useState(null);
   const [tooltipText, setTooltipText] = useState(null);
   const [showLabels, setShowLabels] = useState(false);
-  const maxYDefault = max(data?.map(({ counts }) => counts) ?? []) ?? 100;
-  const yRange = [0, maxYDefault];
+  const maxY = max(data?.map(({ counts }) => counts) ?? []) ?? 100;
 
+  const yRange = [0, maxY];
   // prettier-ignore
   const yScale = scaleLinear()
     .domain(yRange)

@@ -36,9 +36,9 @@ const ReactMap = () => {
         ["linear"],
         ["get", "station_rank"],
         1,
-        "rgb(255, 209, 255)",
-        45,
         "rgb(94, 52, 255)",
+        45,
+        "rgb(255, 209, 255)",
       ],
       // "circle-color": "#007cbf",
     },
@@ -135,7 +135,10 @@ const ReactMap = () => {
       onMove={(evt) => setViewState(evt?.viewState)}
       onLoad={() => {
         // console.log("source loaded");
-        flyMapTo();
+        if (selectedStationData) {
+          flyMapTo();
+          dispatch(setShowInspector(true));
+        }
       }}
       mapLib={maplibregl}
       style={{
