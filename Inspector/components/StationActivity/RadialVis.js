@@ -1,17 +1,11 @@
-import {
-  selectCurrentStation,
-  selectAllStationFrequencyData,
-} from "common/store/AppSlice";
 import { max } from "d3-array";
 import { scaleBand, scaleLinear, scaleRadial } from "d3-scale";
 import { interpolatePuOr } from "d3-scale-chromatic";
 import { arc } from "d3-shape";
-import { range } from "lodash-es";
-import React, { useState } from "react";
-
 import { useFrequency } from "hooks/useFrequency";
+import { range } from "lodash-es";
+import { useState } from "react";
 import { formatAMPM, formatTime } from "./lib";
-import { useStationData } from "../../../hooks/useStationData";
 
 const RadialVis = ({ stationId = null, ...props }) => {
   const { data } = useFrequency(stationId);

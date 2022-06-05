@@ -21,9 +21,9 @@ const BarPlot = ({
   stationId = null,
   textFill = "var(--c-background)",
 }) => {
-  // let { data } = useFrequency(stationId);
   const { short_name } = useStationData();
-  let { data } = useGetHourlySummaryQuery(stationId ?? short_name);
+  let { data } = useFrequency(stationId ?? short_name);
+  // let { data } = useGetHourlySummaryQuery(stationId ?? short_name);
 
   const timeRanges = [6, 22];
   const timeRangeCount = timeRanges[1] - timeRanges[0];

@@ -1,18 +1,12 @@
-import Inspector from "/Inspector";
-import { MapLegend } from "/MapContainer";
-import {
-  fetchFrequencyAnalysis,
-  fetchLiveStatus,
-  fetchStationGeo,
-} from "common/store/AppSlice";
 import Title from "components/Title";
 // import Audio from "@common/Audio";
 import ReactMap from "MapContainer/ReactMap";
 /* eslint-disable no-undef */
 // Index should be the main map view. About should open a new page.
-
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import Inspector from "/Inspector";
+import { MapLegend } from "/MapContainer";
 
 // import Ranking from "./Ranking/Ranking";
 const App = () => {
@@ -30,8 +24,7 @@ const App = () => {
 
   // New startup
   useEffect(() => {
-    // dispatch(fetchFrequencyAnalysis());
-    dispatch(fetchStationGeo());
+    // dispatch(fetchStationGeo());
   }, [dispatch]);
 
   return (

@@ -3,7 +3,7 @@ import {
   selectStationFavorited,
   toggleStationFavorite,
 } from "common/store";
-import { useStationData } from "hooks/useStationData";
+import { useStationData } from "$hooks/useStationData";
 import { Button } from "components";
 import { FaHeart, FaHeartBroken } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";

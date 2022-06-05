@@ -1,20 +1,15 @@
-import Map, { Source, Layer, Popup } from "react-map-gl";
-import maplibregl from "maplibre-gl";
-import "maplibre-gl/dist/maplibre-gl.css";
-import styles from "./ReactMap.module.css";
-import clsx from "clsx";
-import { useCallback, useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import {
-  selectCurrentStation,
-  selectStationGeo,
-  selectStationInfo,
+  setSelectedShortName,
   setSelectedStationId,
   setShowInspector,
-  setSelectedShortName,
-  selectCurrentStationData,
-  STATION_INFO,
 } from "common/store/AppSlice";
+import maplibregl from "maplibre-gl";
+import "maplibre-gl/dist/maplibre-gl.css";
+import { useEffect, useRef, useState } from "react";
+import Map, { Layer, Popup, Source } from "react-map-gl";
+import { useDispatch } from "react-redux";
+import { useStationData } from "../../hooks/useStationData";
+import styles from "./ReactMap.module.css";
 
 const BOUNDS = [
   [-74.1741943359375, 40.550330732028456],
@@ -23,8 +18,11 @@ const BOUNDS = [
 
 const ReactMap = () => {
   const dispatch = useDispatch();
-  const selectedStationId = useSelector(selectCurrentStation);
-  const stationGeo = useSelector(selectStationGeo);
+  const {
+    geometry,
+    station_id: selectedStationId,
+    ...stationData
+  } = useStationData();
 
   const [layerStyleStations] = useState({
     id: "stationsPoints",
@@ -57,7 +55,6 @@ const ReactMap = () => {
     },
   };
 
-  const selectedStationData = useSelector(selectCurrentStationData) ?? {};
   const {
     geometry: { coordinates: [lng = 0, lat = 0] = [] } = {},
     properties: {
@@ -66,7 +63,7 @@ const ReactMap = () => {
       ntaname = "",
       boroname = "",
     } = {},
-  } = selectedStationData;
+  } = stationData;
 
   const stationNeighborhood = !ntaname ? "" : ntaname;
 
@@ -89,10 +86,8 @@ const ReactMap = () => {
     // Cannot use querySourceFeatures bc we
     if (selectedStationId) {
       const {
-        geometry: {
-          coordinates: [lng, lat],
-        },
-      } = stationGeo;
+        coordinates: [lng, lat],
+      } = geometry;
       // console.log(lat, lng);
 
       mapRef?.current?.flyTo({
@@ -135,7 +130,7 @@ const ReactMap = () => {
       onMove={(evt) => setViewState(evt?.viewState)}
       onLoad={() => {
         // console.log("source loaded");
-        if (selectedStationData) {
+        if (station_id) {
           flyMapTo();
           dispatch(setShowInspector(true));
         }

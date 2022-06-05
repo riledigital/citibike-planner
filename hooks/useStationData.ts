@@ -1,30 +1,24 @@
 import {
-  selectCurrentStationData,
-  selectAllStationInfo,
+  selectShortName,
 } from "common/store/AppSlice";
+import {useGetStationGeoJsonQuery} from "common/store/CBServer";
 import { useSelector } from "react-redux";
 
 // if not null, select ALL station data
 export const useStationData = (shortName = null) => {
-  let currentStation = useSelector(selectCurrentStationData);
-  let allStationInfo = useSelector(selectAllStationInfo);
-
-  let stationData = shortName
-    ? allStationInfo.find(
-        ({ properties: { short_name } }) => short_name === shortName
-      )?.properties
-    : currentStation?.properties;
+  let short_name_state = useSelector(selectShortName);
+  let short_name = shortName ?? short_name_state;
   
-  const {
-    name = "",
-    station_id = "",
-    short_name = "",
-    ntaname = "",
-    boroname = "",
-  } = stationData ?? {};
-  const stationNeighborhood = !ntaname ? "" : ntaname;
+  const { data } = useGetStationGeoJsonQuery();
+  
+  console.log("data", data);
+  let stationData = {};
+  if (data) {
+    stationData = data?.[short_name] ?? {};
+  }
+    
   return {
     ...stationData,
-    stationNeighborhood,
+    geometry: stationData?.geometry,
   };
 };

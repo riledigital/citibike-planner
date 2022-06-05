@@ -2,6 +2,7 @@
 import clsx from "clsx";
 import ManageStation from "components/ManageStation";
 import React from "react";
+import { useSelector } from "react-redux";
 import styles from "./StationHeader.module.css";
 import { useStationData } from "/hooks/useStationData";
 
@@ -48,7 +49,7 @@ const StationHeader = (props) => {
         <div className={styles["station-ranking"]}>
           Rank {ordinal(station_rank)} of {stations_count} in
           <div>
-            {stationNeighborhood}, {boroname}
+            {ntaname}, {boroname}
           </div>
         </div>
         <ManageStation />

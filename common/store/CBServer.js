@@ -19,6 +19,19 @@ export const cbserverApi = createApi({
         return output;
       },
     }),
+    getStationGeoJson: builder.query({
+      query: () => ({
+        baseUrl: null,
+        url: `http://localhost:3000/data/station_geo_ranked.geojson`,
+      }),
+      transformResponse: (response) => {
+        const entries = response.features.map(({ properties }) => {
+          const obj = [properties.short_name, properties];
+          return obj;
+        });
+        return Object.fromEntries(entries);
+      },
+    }),
     getHourlySummary: builder.query({
       query: (short_name) => ({
         url: `hourly`,
@@ -31,4 +44,8 @@ export const cbserverApi = createApi({
 
 // Export hooks for usage in function components, which are
 // auto-generated based on the defined endpoints
-export const { useGetLiveDataQuery, useGetHourlySummaryQuery } = cbserverApi;
+export const {
+  useGetLiveDataQuery,
+  useGetStationGeoJsonQuery,
+  useGetHourlySummaryQuery,
+} = cbserverApi;

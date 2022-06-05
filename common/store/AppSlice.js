@@ -1,29 +1,10 @@
-import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
-
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { fetchMsgPackBlob } from "common/Data/MsgPack";
+
+// import { fetchMsgPackBlob } from "common/Data/MsgPack";
 
 const STATION_INFO = "/data/station_geo_ranked.geojson";
-const DATA_SUMMARY = "/data/hourly_breakdown.msgpack";
-
-export const fetchFrequencyAnalysis = createAsyncThunk(
-  "app/fetchFrequencyAnalysis",
-  async () => {
-    // const response = await axios.get(DATA_SUMMARY);
-    // // response.data.features.map(d=> d.properties.)
-    // return response.data;
-    const data = await fetchMsgPackBlob(DATA_SUMMARY);
-    return data;
-  }
-);
-
-export const fetchStationGeo = createAsyncThunk(
-  "app/fetchStationGeo",
-  async () => {
-    const response = await axios.get(STATION_INFO);
-    return response.data;
-  }
-);
+// const DATA_SUMMARY = "/data/hourly_breakdown.msgpack";
 
 const initialState = {
   isLoading: false,
@@ -32,6 +13,7 @@ const initialState = {
   rankingData: {},
   selectedStation: {},
   selectedStationId: "",
+  selectedStationShortName: "",
   showInspector: false,
   showMenu: false,
   stationFavorites: [],
@@ -58,11 +40,7 @@ export const appSlice = createSlice({
     setSelectedShortName: (state, action) => {
       const { payload: short_name } = action;
       state.showInspector = short_name ? true : false;
-      const currentStation = state?.stationGeo?.features?.find(
-        ({ properties: { short_name: sn } }) => sn === short_name
-      );
-
-      state.selectedStation = currentStation;
+      state.selectedStationShortName = short_name;
       // state.selectedStationId = state.selectedStation.station_id;
     },
     setSelectedStationId: (state, action) => {
@@ -82,71 +60,22 @@ export const appSlice = createSlice({
       }
     },
   },
-  extraReducers: (builder) => {
-    // Add reducers for additional action types here, and handle loading state as needed
-    builder.addCase(fetchFrequencyAnalysis.fulfilled, (state, action) => {
-      state.stationFrequencyData = action.payload;
-    });
-    builder.addCase(fetchStationGeo.fulfilled, (state, action) => {
-      const entries = action?.payload?.features.map(({ properties }) => {
-        const obj = [properties.station_id, properties];
-        return obj;
-      });
-      // const map = Object.fromEntries(entries);
-      // state.stationInfo = map;
-      state.stationGeo = action.payload;
-    });
-  },
 });
 
-export const selectCurrentStationData = (state) => {
-  return state.AppSlice.selectedStation;
+export const selectShortName = (state) => {
+  return state.AppSlice?.selectedStationShortName;
 };
 
-export const selectCurrentStation = (state) => {
-  return state.AppSlice?.selectedStation?.properties?.station_id;
+export const selectCurrentStationId = (state) => {
+  return state.AppSlice?.selectedStationId;
 };
 
 export const selectShowInspector = (state) => {
   return state.AppSlice?.showInspector;
 };
 
-export const selectStationFrequencyData = (state) => {
-  const id = state?.AppSlice?.selectedStationId;
-  if (!id) {
-    return null;
-  }
-  return (
-    state?.AppSlice?.stationFrequencyData &&
-    state?.AppSlice?.stationFrequencyData[id]
-  );
-};
-export const selectAllStationFrequencyData = (state) => {
-  return state?.AppSlice?.stationFrequencyData;
-};
-
-export const selectStationGeoJson = (state) => {
-  return state.stationGeo;
-};
-
-export const selectStationGeo = (state) => {
-  return state.AppSlice.selectedStation;
-};
-
-export const selectStationInfo = (state) => {
-  const id = state.AppSlice?.selectedStationId;
-  if (!id || !state.AppSlice.stationInfo) {
-    return null;
-  }
-  return state.AppSlice?.stationInfo[id];
-};
-
-export const selectAllStationInfo = (state) => {
-  return state.AppSlice?.stationGeo?.features ?? [];
-};
-
 export const selectStationFavorited = (state) => {
-  const { short_name } = state.AppSlice.selectedStation.properties;
+  const short_name = state.AppSlice.selectedStationShortName;
   const exists = state?.AppSlice?.stationFavorites?.findIndex(
     (d) => d === short_name
   );

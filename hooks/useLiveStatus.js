@@ -1,15 +1,13 @@
-import { selectCurrentStationData } from "common/store/AppSlice";
-
+import { selectCurrentStationId } from "common/store/AppSlice";
 import { useGetLiveDataQuery } from "common/store/CBServer";
 import { useSelector } from "react-redux";
 
 export const useLiveStatus = (stationId = null) => {
-  // const allLiveStatus = useSelector(selectAllLiveStatus);
   const { data: allLiveStatus } = useGetLiveDataQuery();
-  let currentStation = useSelector(selectCurrentStationData);
 
+  const station_id = useSelector(selectCurrentStationId);
   // uses the old station_id field
-  const currentStationId = stationId ?? currentStation?.properties?.station_id;
+  const currentStationId = stationId ?? station_id;
 
   let statusData = {
     num_bikes_available: 0,
@@ -21,9 +19,9 @@ export const useLiveStatus = (stationId = null) => {
 
   try {
     if (!stationId && currentStationId) {
-      statusData = allLiveStatus[currentStationId] ?? statusData;
+      statusData = allLiveStatus?.[currentStationId] ?? statusData;
     } else {
-      statusData = allLiveStatus[stationId] ?? statusData;
+      statusData = allLiveStatus?.[stationId] ?? statusData;
     }
   } catch (e) {
     console.error(e);
