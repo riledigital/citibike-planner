@@ -32,7 +32,6 @@ const App = () => {
   useEffect(() => {
     // dispatch(fetchFrequencyAnalysis());
     dispatch(fetchStationGeo());
-    dispatch(fetchLiveStatus());
   }, [dispatch]);
 
   return (

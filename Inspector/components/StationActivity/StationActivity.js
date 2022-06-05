@@ -6,6 +6,7 @@ import BarPlot from "./BarPlot";
 import RadialVis from "./RadialVis";
 import styles from "./StationActivity.module.css";
 import { FaChartBar, FaClock } from "react-icons/fa";
+import { useFrequency } from "hooks/useFrequency";
 
 const RADIAL_PLOT = Symbol("RADIAL_PLOT");
 const BAR_PLOT = Symbol("BAR_PLOT");
@@ -19,8 +20,17 @@ const StationActivity = ({
   const [type, setType] = useState(BAR_PLOT);
 
   const currentHour = useRef();
+  const { data } = useFrequency();
 
   currentHour.current = new Date().getHours();
+
+  if (!data) {
+    return (
+      <>
+        <div>No data available for this station.</div>
+      </>
+    );
+  }
 
   return (
     <StyledStationActivity>

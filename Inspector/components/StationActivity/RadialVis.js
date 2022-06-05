@@ -11,16 +11,24 @@ import React, { useState } from "react";
 
 import { useFrequency } from "hooks/useFrequency";
 import { formatAMPM, formatTime } from "./lib";
+import { useStationData } from "../../../hooks/useStationData";
 
 const RadialVis = ({ stationId = null, ...props }) => {
   const { data } = useFrequency(stationId);
-
+  console.log(data);
   const height = 400;
   const width = height;
   const innerRadius = 60;
   const outerRadius = height / 2;
 
-  const [maxRides] = useState(() => max(data.map(({ counts }) => counts)));
+  const [maxRides] = useState(() => {
+    try {
+      return max(data.map(({ counts }) => counts));
+    } catch (e) {
+      console.error(e);
+      return 100;
+    }
+  });
 
   const [x] = useState(() =>
     scaleBand()
