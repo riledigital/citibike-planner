@@ -9,7 +9,6 @@ import { formatAMPM, formatTime } from "./lib";
 
 const RadialVis = ({ stationId = null, ...props }) => {
   const { data } = useFrequency(stationId);
-  console.log(data);
   const height = 400;
   const width = height;
   const innerRadius = 60;

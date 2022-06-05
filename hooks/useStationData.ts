@@ -10,8 +10,7 @@ export const useStationData = (shortName = null) => {
   let short_name = shortName ?? short_name_state;
   
   const { data } = useGetStationGeoJsonQuery();
-  
-  console.log("data", data);
+
   let stationData = {};
   if (data) {
     stationData = data?.[short_name] ?? {};
