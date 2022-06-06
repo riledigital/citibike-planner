@@ -14,33 +14,23 @@ const RadialVis = ({ stationId = null, ...props }) => {
   const innerRadius = 60;
   const outerRadius = height / 2;
 
-  const [maxRides] = useState(() => {
-    try {
-      return max(data.map(({ counts }) => counts));
-    } catch (e) {
-      console.error(e);
-      return 100;
-    }
-  });
+  const maxRides = max(data?.map(({ counts }) => counts) ?? [100]);
 
-  const [x] = useState(() =>
-    scaleBand()
-      .domain(range(0, 24))
-      .range([0, 2 * Math.PI])
-  );
-  const [y] = useState(() =>
-    scaleRadial()
-      .domain([0, maxRides])
-      .range([innerRadius, outerRadius])
-      .clamp(true)
-  );
+  const x = scaleBand()
+    .domain(range(0, 24))
+    .range([0, 2 * Math.PI]);
 
-  const [fill] = useState(() => (x) => {
+  const y = scaleRadial()
+    .domain([0, maxRides])
+    .range([innerRadius, outerRadius])
+    .clamp(true);
+
+  const fill = (x) => {
     const normalized = scaleLinear().domain([5, 22]).range([0, 1]).clamp(true)(
       x
     );
     return interpolatePuOr(normalized);
-  });
+  };
 
   const arcGen = ({ counts, start_hour }) =>
     arc()

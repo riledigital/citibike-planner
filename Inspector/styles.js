@@ -39,11 +39,11 @@ export const StyledInspector = styled(animated.div)`
   @media ${DEVICES.tablet} {
     height: max-content;
     width: 30rem;
-    padding: var(--margin-tablet);
+    /* padding: var(--margin-tablet); */
     padding-right: calc(var(--margin-base) * 2);
   }
   @media ${DEVICES.desktop} {
-    padding: var(--margin-desktop);
+    /* padding: var(--margin-desktop); */
     padding-right: calc(var(--margin-base) * 2);
   }
 `;

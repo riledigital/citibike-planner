@@ -5,6 +5,7 @@
 .favoriteGrid {
   display: grid;
   gap: 1rem;
+  padding-bottom: calc(var(--margin-desktop) * 2);
 }
 
 .stationId {

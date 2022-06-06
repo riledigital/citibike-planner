@@ -1,9 +1,4 @@
-import {
-  selectStationFavorites,
-  setSelectedStationId,
-  toggleStationFavorite,
-} from "common/store/AppSlice";
-import LayoutContent from "components/LayoutContent";
+import { selectStationFavorites } from "common/store/AppSlice";
 import Title from "components/Title";
 import { useSelector } from "react-redux";
 import styles from "styles/favorites.module.css";

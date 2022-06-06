@@ -35,7 +35,7 @@
 
 /* Margins */
 :root {
-  --margin-base: 1rem;
+  --margin-base: clamp(1rem, 2vmin + 1rem, 8rem);
   --margin-tablet: 1.25rem;
   --margin-desktop: 2rem;
 
