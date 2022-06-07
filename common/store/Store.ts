@@ -7,7 +7,8 @@ import {
 } from "reduxjs-toolkit-persist";
 import storage from "reduxjs-toolkit-persist/lib/storage"; // defaults to localStorage for web
 import AppSlice from "./AppSlice";
-import { cbserverApi } from './CBServer';
+
+import { cbStaticApi, cbserverApi } from './CBServer';
 
 
 const persistConfig = {
@@ -15,7 +16,11 @@ const persistConfig = {
   storage,
 };
 
-const _persistedReducer = { AppSlice: persistReducer(persistConfig, AppSlice), [cbserverApi.reducerPath]:cbserverApi.reducer };
+const _persistedReducer = {
+  AppSlice: persistReducer(persistConfig, AppSlice),
+  [cbserverApi.reducerPath]: cbserverApi.reducer,
+  [cbStaticApi.reducerPath]: cbStaticApi.reducer
+};
 
  const store = configureStore({
    reducer: _persistedReducer,

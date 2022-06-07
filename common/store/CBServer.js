@@ -1,6 +1,31 @@
 // Need to use the React-specific entry point to allow generating React hooks
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
+export const cbStaticApi = createApi({
+  reducerPath: "static",
+  baseQuery: fetchBaseQuery({ baseUrl: process.env.URL }),
+  endpoints: (builder) => ({
+    getStationGeoJson: builder.query({
+      query: () => ({
+        /** use the Netlify env variables
+         * @see https://docs.netlify.com/configure-builds/environment-variables/#read-only-variables
+         */
+        baseUrl: "",
+        url: `/data/station_geo_ranked.geojson`,
+      }),
+      transformResponse: (response) => {
+        const entries = response.features.map(({ properties }) => {
+          const obj = [properties.short_name, properties];
+          return obj;
+        });
+        return Object.fromEntries(entries);
+      },
+    }),
+  }),
+});
+
+export const { useGetStationGeoJsonQuery } = cbStaticApi;
+
 // Define a service using a base URL and expected endpoints
 export const cbserverApi = createApi({
   reducerPath: "cbserverApi",
@@ -19,19 +44,6 @@ export const cbserverApi = createApi({
         return output;
       },
     }),
-    getStationGeoJson: builder.query({
-      query: () => ({
-        baseUrl: null,
-        url: `http://localhost:3000/data/station_geo_ranked.geojson`,
-      }),
-      transformResponse: (response) => {
-        const entries = response.features.map(({ properties }) => {
-          const obj = [properties.short_name, properties];
-          return obj;
-        });
-        return Object.fromEntries(entries);
-      },
-    }),
     getHourlySummary: builder.query({
       query: (short_name) => ({
         url: `hourly`,
@@ -44,8 +56,4 @@ export const cbserverApi = createApi({
 
 // Export hooks for usage in function components, which are
 // auto-generated based on the defined endpoints
-export const {
-  useGetLiveDataQuery,
-  useGetStationGeoJsonQuery,
-  useGetHourlySummaryQuery,
-} = cbserverApi;
+export const { useGetLiveDataQuery, useGetHourlySummaryQuery } = cbserverApi;
