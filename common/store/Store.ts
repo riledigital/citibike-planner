@@ -5,7 +5,8 @@ import {
   PERSIST, persistReducer, PURGE,
   REGISTER, REHYDRATE
 } from "reduxjs-toolkit-persist";
-import storage from "reduxjs-toolkit-persist/lib/storage"; // defaults to localStorage for web
+import storage from 'redux-persist-indexeddb-storage';
+// import storage from "reduxjs-toolkit-persist/lib/storage"; // defaults to localStorage for web
 import AppSlice from "./AppSlice";
 
 import { cbStaticApi, cbserverApi } from './CBServer';
@@ -13,7 +14,7 @@ import { cbStaticApi, cbserverApi } from './CBServer';
 
 const persistConfig = {
   key: "root",
-  storage,
+  storage: storage("citibikeplanner"),
 };
 
 const _persistedReducer = {

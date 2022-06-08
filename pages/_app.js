@@ -33,7 +33,7 @@ const App = ({ Component }) => {
       />
       <GlobalStyles />
       <Provider store={store}>
-        <PersistGate loading={<Loading />} persistor={persistor}>
+        <PersistGate loading={null} persistor={persistor}>
           <ThumbNav />
           <Component />
         </PersistGate>
