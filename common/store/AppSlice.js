@@ -4,7 +4,7 @@ import axios from "axios";
 import { fetchMsgPackBlob } from "common/Data/MsgPack";
 
 const STATION_INFO = "/data/station_geo_ranked.geojson";
-const DATA_SUMMARY = "/data/hourly_breakdown.msgpack";
+const DATA_SUMMARY = "/data/df_summary_hourly.msgpack";
 const LIVE_STATUS = "https://gbfs.citibikenyc.com/gbfs/en/station_status.json";
 
 export const fetchFrequencyAnalysis = createAsyncThunk(
