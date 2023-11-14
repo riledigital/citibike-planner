@@ -1,14 +1,16 @@
 import clsx from "clsx";
 import Link from "next/link";
-import styles from "./ThumbNav.module.css";
 import { FaMapMarkedAlt, FaMapMarkerAlt, FaQuestion } from "react-icons/fa";
 
-const NavLink = ({ children, href, onClick }) => {
+import styles from "./ThumbNav.module.css";
+
+const NavLink = ({ children, href, label }) => {
   return (
     <li className={clsx(styles.li)}>
-      <Link {...{ href }} passHref>
-        <a className={clsx(styles.a)}>{children}</a>
+      <Link {...{ href }} passHref className={clsx(styles.a)} legacyBehavior>
+        {children}
       </Link>
+      <span className="sa-only">{label}</span>
     </li>
   );
 };
@@ -17,17 +19,14 @@ const ThumbNav = () => {
   return (
     <nav className={clsx(styles["nav-container"])}>
       <ul className={clsx(styles.list)}>
-        <NavLink href="/">
+        <NavLink href="/" label="Map">
           <FaMapMarkedAlt className={styles.icon} alt="map" />
-          <span className="sa-only">Map</span>
         </NavLink>
-        <NavLink href="/favorites">
+        <NavLink href="/favorites" label="Favorites">
           <FaMapMarkerAlt className={styles.icon} alt="Stations" />
-          <span className="sa-only">Favorites</span>
         </NavLink>
-        <NavLink href="/about">
+        <NavLink href="/about" label="About">
           <FaQuestion className={styles.icon} alt="About" />
-          <span className="sa-only">About</span>
         </NavLink>
       </ul>
     </nav>

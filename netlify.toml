@@ -424,7 +424,8 @@ status = 200
         "!node_modules/.pnpm/next@12.1.5_react-dom@18.0.0+react@18.0.0/node_modules/next/dist/server/lib/squoosh/**/*.wasm",
         "!node_modules/.pnpm/next@12.1.5_react-dom@18.0.0+react@18.0.0/node_modules/next/dist/next-server/server/lib/squoosh/**/*.wasm",
         "!node_modules/.pnpm/next@12.1.5_react-dom@18.0.0+react@18.0.0/node_modules/next/dist/compiled/webpack/bundle4.js",
-        "!node_modules/.pnpm/next@12.1.5_react-dom@18.0.0+react@18.0.0/node_modules/next/dist/compiled/webpack/bundle5.js"
+        "!node_modules/.pnpm/next@12.1.5_react-dom@18.0.0+react@18.0.0/node_modules/next/dist/compiled/webpack/bundle5.js",
+        "public/data/**"
       ]
       external_node_modules = []
       node_bundler = "nft"

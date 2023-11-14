@@ -1,6 +1,6 @@
-const withPWA = require("next-pwa");
 
-module.exports = withPWA({
+
+module.exports = {
   compiler: {
     // ssr and displayName are configured by default
     styledComponents: true,
@@ -11,4 +11,4 @@ module.exports = withPWA({
   typescript: {
     ignoreBuildErrors: true,
   },
-});
+};
