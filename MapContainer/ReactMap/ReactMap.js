@@ -1,20 +1,13 @@
-import Map, { Source, Layer, Popup } from "react-map-gl";
-import maplibregl from "maplibre-gl";
-import "maplibre-gl/dist/maplibre-gl.css";
-import styles from "./ReactMap.module.css";
 import clsx from "clsx";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { selectCurrentStation, selectCurrentStationData, selectStationGeo, setSelectedShortName, setSelectedStationId, setShowInspector } from "common/store/AppSlice";
+import maplibregl from "maplibre-gl";
+import { useEffect, useRef, useState } from "react";
+import Map, { Layer, Popup, Source } from "react-map-gl";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  selectCurrentStation,
-  selectStationGeo,
-  selectStationInfo,
-  setSelectedStationId,
-  setShowInspector,
-  setSelectedShortName,
-  selectCurrentStationData,
-  STATION_INFO,
-} from "common/store/AppSlice";
+
+import styles from "./ReactMap.module.css";
+
+import "maplibre-gl/dist/maplibre-gl.css";
 
 const BOUNDS = [
   [-74.1741943359375, 40.550330732028456],
