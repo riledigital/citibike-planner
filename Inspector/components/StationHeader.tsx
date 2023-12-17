@@ -1,10 +1,9 @@
 "use client";
-import clsx from "clsx";
 // import ManageStation from "components/ManageStation";
 import React from "react";
-import styles from "./StationHeader.module.css";
 import { useStationRanking } from "hooks/useStationRanking";
 import { useStationState } from "common/MapState";
+import { styled } from "styled-components";
 
 /**
  * Intl ordinal standard
@@ -22,6 +21,39 @@ function ordinal(number) {
   const suffix = suffixes.get(rule);
   return number + suffix;
 }
+
+const StyledHeader = styled.header`
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: flex-start;
+  gap: 0.5em;
+`;
+
+const StyledName = styled.div`
+  line-height: 1.1;
+  font-size: 1.2rem;
+  font-weight: var(--fw-bold);
+  width: 100%;
+`;
+
+const StyledIdLabel = styled.span`
+  display: block;
+  float: right;
+  font-size: 1rem;
+`;
+
+const StyledInfo = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  width: 100%;
+
+  font-size: 1rem;
+`;
+
+const StyledRanking = styled.div`
+  display: block;
+`;
 
 export function StationHeader(props) {
   // Logic for handling null NTA codes
@@ -53,23 +85,21 @@ export function StationHeader(props) {
   } = data.stationAnalysis.get(currentStationId);
 
   return (
-    <header className={clsx(styles.header)} style={props.style}>
-      <div className={clsx(styles.name)}>
+    <StyledHeader>
+      <StyledName>
         {name}
-        <div className={styles["id-label"]} title="Station ID">
-          #{short_name}
-        </div>
-      </div>
+        <StyledIdLabel title="Station ID">#{short_name}</StyledIdLabel>
+      </StyledName>
 
-      <div className={styles["station-info"]}>
-        <div className={styles["station-ranking"]}>
+      <StyledInfo>
+        <StyledRanking>
           Rank {ordinal(station_rank)} of {stations_count} in
           <div>
             {ntaname}, {boroname}
           </div>
-        </div>
+        </StyledRanking>
         {/* <ManageStation /> */}
-      </div>
-    </header>
+      </StyledInfo>
+    </StyledHeader>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 import { StyledInspector, StyledDecorative } from "./styles";
-import { StationHeader } from "./components/StationHeader/StationHeader";
+import { StationHeader } from "./components/StationHeader";
 import { animated, useSpring, useTrail } from "@react-spring/web";
 import { useStationState } from "common/MapState";
 
