@@ -1,24 +1,25 @@
 // https://observablehq.com/@d3/margin-convention
 import Button from "components/Button";
 import React, { useRef, useState } from "react";
+import { FaChartBar, FaClock } from "react-icons/fa";
 import styled from "styled-components";
+
 import BarPlot from "./BarPlot";
 import RadialVis from "./RadialVis";
 import styles from "./StationActivity.module.css";
-import { FaChartBar, FaClock } from "react-icons/fa";
 
 const RADIAL_PLOT = Symbol("RADIAL_PLOT");
 const BAR_PLOT = Symbol("BAR_PLOT");
 
-const StationActivity = ({
+export function StationActivity({
   width = 400,
   height = 400,
   fill = "var(--c-white)",
   textFill = "var(--c-white)",
-}) => {
-  const [type, setType] = useState(BAR_PLOT);
+}) {
+  const [type, setType] = useState<Symbol>(BAR_PLOT);
 
-  const currentHour = useRef();
+  const currentHour = useRef<number>(0);
 
   currentHour.current = new Date().getHours();
 
@@ -42,7 +43,7 @@ const StationActivity = ({
       </div>
     </StyledStationActivity>
   );
-};
+}
 
 const renderVisType = (type) => {
   switch (type) {
@@ -57,8 +58,6 @@ const renderVisType = (type) => {
     }
   }
 };
-
-export default StationActivity;
 
 const formatTime = (time) => {
   if (time > 12) {

@@ -1,6 +1,7 @@
-import { useState } from "react";
 import { StationStatus } from "common/Data/gbfs";
+import { useState } from "react";
 import useSWR from "swr";
+
 const URL_CITIBIKE_LIVE_STATUS = `https://gbfs.citibikenyc.com/gbfs/en/station_status.json`;
 
 export function useStationStatus(key: string) {

@@ -1,9 +1,11 @@
 /* eslint-disable */
 // https://observablehq.com/@d3/margin-convention
 import { format, max, scaleLinear, scaleTime, timeFormat, timeParse } from "d3";
-import { useFrequency } from "hooks/useFrequency";
 import React, { useEffect, useRef, useState } from "react";
 import { useEventListenerRef, useMergeRefs } from "rooks";
+
+import { useStationState } from "../../../../common/MapState";
+import { useFrequency } from "../../../../hooks/useFrequency";
 import styles from "./BarPlot.module.css";
 import { formatAMPM, formatTime } from "./lib";
 
@@ -16,10 +18,10 @@ const BarPlot = ({
   width = 400,
   height = 250,
   fill = "var(--c-blue)",
-  stationId = null,
   textFill = "var(--c-background)",
 }) => {
-  let { data } = useFrequency(stationId);
+  const { currentStationId: stationId } = useStationState();
+  let { hourlyData: data } = useFrequency(stationId);
 
   const timeRanges = [6, 22];
   const timeRangeCount = timeRanges[1] - timeRanges[0];
@@ -42,7 +44,7 @@ const BarPlot = ({
     .domain(yRange)
     .range([0, height - PADDING_BOTTOM])
     .clamp(true);
-  const currentHour = useRef();
+  const currentHour = useRef<number>(0);
 
   currentHour.current = new Date().getHours();
 
@@ -83,6 +85,10 @@ const BarPlot = ({
 
   // prettier-ignore
   const barWidth = (width / timeRangeCount) - padding;
+
+  if (!data) {
+    return <div>Loading</div>;
+  }
 
   return (
     <svg
