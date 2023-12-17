@@ -1,6 +1,7 @@
 "use client";
 import { StyledInspector, StyledDecorative } from "./styles";
 import { StationHeader } from "./components/StationHeader";
+import { LiveStatus } from "./components/LiveStatus";
 import { animated, useSpring, useTrail } from "@react-spring/web";
 import { useStationState } from "common/MapState";
 
@@ -29,7 +30,9 @@ export function Inspector() {
       <animated.div style={springs[2]}>
         {/* <StationActivity height={150} fill="white" /> */}
       </animated.div>
-      <animated.div style={springs[3]}>{/* <LiveStatus /> */}</animated.div>
+      <animated.div style={springs[3]}>
+        <LiveStatus />
+      </animated.div>
     </StyledInspector>
   );
 }
