@@ -1,4 +1,4 @@
-import { css, createGlobalStyle } from "styled-components";
+import { css } from "styled-components";
 import { normalize } from "styled-normalize";
 
 export const DEVICES = {
@@ -14,10 +14,6 @@ export const ZSPACE = {
   modal: 30,
   header: 50,
 };
-
-const GlobalStyle = createGlobalStyle`
-${normalize}
-`;
 
 export const ButtonBase = css`
   background-color: var(--c-buttons);
@@ -36,5 +32,3 @@ export const ButtonBase = css`
 
   text-transform: uppercase;
 `;
-
-export default GlobalStyle;

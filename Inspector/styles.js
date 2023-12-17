@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { DEVICES, ZSPACE } from "/styles/GlobalStyles";
+import { DEVICES, ZSPACE } from "styles/GlobalStyles";
 import { animated } from "@react-spring/web";
 
 export const StyledInspector = styled(animated.div)`

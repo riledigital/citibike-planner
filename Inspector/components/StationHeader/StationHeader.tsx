@@ -1,9 +1,10 @@
-// TODO: Remove live status stuff from it
+"use client";
 import clsx from "clsx";
-import ManageStation from "components/ManageStation";
+// import ManageStation from "components/ManageStation";
 import React from "react";
 import styles from "./StationHeader.module.css";
-import { useStationData } from "/hooks/useStationData";
+import { useStationRanking } from "hooks/useStationRanking";
+import { useStationState } from "common/MapState";
 
 /**
  * Intl ordinal standard
@@ -22,20 +23,36 @@ function ordinal(number) {
   return number + suffix;
 }
 
-const StationHeader = (props) => {
+export function StationHeader(props) {
   // Logic for handling null NTA codes
+  const { currentStationId } = useStationState();
+
+  const { data, isLoading } = useStationRanking(1);
+
+  if (isLoading && data) {
+    return <div>loading</div>;
+  }
+
+  if (!currentStationId) {
+    return (
+      <div>
+        <p>
+          Please click on a station on the map to view the activity details.
+        </p>
+      </div>
+    );
+  }
+
   const {
     name,
-    station_id,
     short_name,
-    ntaname,
     boroname,
-    stationNeighborhood,
+    ntaname,
     station_rank,
     stations_count,
-  } = useStationData();
+  } = data.stationAnalysis.get(currentStationId);
 
-  return name ? (
+  return (
     <header className={clsx(styles.header)} style={props.style}>
       <div className={clsx(styles.name)}>
         {name}
@@ -48,17 +65,11 @@ const StationHeader = (props) => {
         <div className={styles["station-ranking"]}>
           Rank {ordinal(station_rank)} of {stations_count} in
           <div>
-            {stationNeighborhood}, {boroname}
+            {ntaname}, {boroname}
           </div>
         </div>
-        <ManageStation />
+        {/* <ManageStation /> */}
       </div>
     </header>
-  ) : (
-    <div>
-      <p>Please click on a station on the map to view the activity details.</p>
-    </div>
   );
-};
-
-export default StationHeader;
+}
