@@ -1,5 +1,5 @@
-import { useStationState } from "../../common/MapState";
-import { useStationStatus } from "../../hooks/useStationStatus";
+import { useStationState } from "../../../common/MapState";
+import { useStationStatus } from "../../../hooks/useStationStatus";
 import styled from "styled-components";
 
 const StyledHeading = styled.h3`

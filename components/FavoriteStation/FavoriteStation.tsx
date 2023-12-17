@@ -4,9 +4,9 @@ import {
   toggleStationFavorite,
 } from "common/store/AppSlice";
 import Button from "components/Button";
-import LiveStatus from "Inspector/components/LiveStatus";
-import BarPlot from "Inspector/components/StationActivity/BarPlot";
-import RadialVis from "Inspector/components/StationActivity/RadialVis";
+import LiveStatus from "$components/Inspector/components/LiveStatus";
+import BarPlot from "$components/Inspector/components/StationActivity/BarPlot";
+import RadialVis from "$components/Inspector/components/StationActivity/RadialVis";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
