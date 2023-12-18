@@ -26,5 +26,3 @@ export const StyledTooltip = styled.div`
     max-width: 50%;
   }
 `;
-
-`transform: translate(${({ coords }) => `${coords.x}px, ${coords.y}px`});`;

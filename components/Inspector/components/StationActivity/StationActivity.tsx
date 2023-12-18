@@ -2,14 +2,36 @@
 import Button from "components/Button";
 import React, { useRef, useState } from "react";
 import { FaChartBar, FaClock } from "react-icons/fa";
-import styled from "styled-components";
+import { styled } from "styled-components";
 
 import BarPlot from "./BarPlot";
 import RadialVis from "./RadialVis";
-import styles from "./StationActivity.module.css";
 
 const RADIAL_PLOT = Symbol("RADIAL_PLOT");
 const BAR_PLOT = Symbol("BAR_PLOT");
+
+const ToggleButtonsContainer = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  width: 100%;
+  /* height: 3rem; */
+  justify-content: center;
+`;
+
+const VisButton = styled(Button)`
+  font-size: var(--font-size-sm);
+  height: 3.5ch;
+  width: 8ch;
+`;
+
+const Label = styled.span`
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+`;
 
 export function StationActivity({
   width = 400,
@@ -18,9 +40,7 @@ export function StationActivity({
   textFill = "var(--c-white)",
 }) {
   const [type, setType] = useState<Symbol>(BAR_PLOT);
-
   const currentHour = useRef<number>(0);
-
   currentHour.current = new Date().getHours();
 
   return (
@@ -28,19 +48,16 @@ export function StationActivity({
       <p>Average number of rides per hour:</p>
       {renderVisType(type)}
 
-      <div className={styles["toggleButtonsContainer"]}>
-        <Button className={styles["button"]} onClick={(e) => setType(BAR_PLOT)}>
+      <ToggleButtonsContainer>
+        <VisButton onClick={(e) => setType(BAR_PLOT)}>
           <FaChartBar />
-          <span className="sa-only">Bar</span>
-        </Button>
-        <Button
-          className={styles["button"]}
-          onClick={(e) => setType(RADIAL_PLOT)}
-        >
+          <Label>Bar</Label>
+        </VisButton>
+        <VisButton onClick={(e) => setType(RADIAL_PLOT)}>
           <FaClock />
-          <span className="sa-only">Radial</span>
-        </Button>
-      </div>
+          <Label>Radial</Label>
+        </VisButton>
+      </ToggleButtonsContainer>
     </StyledStationActivity>
   );
 }

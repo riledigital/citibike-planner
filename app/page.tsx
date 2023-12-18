@@ -6,7 +6,6 @@ import { Inspector } from "$components/Inspector/Inspector";
 export default function Page() {
   return (
     <>
-      hello
       <ReactMap />
       <Inspector />
     </>
